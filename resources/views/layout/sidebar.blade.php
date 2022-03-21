@@ -3,7 +3,7 @@
     /* para ma automatic na ang active na link based sa route */
     function is_path_match(String $path)
     {
-        return (request()->is($path)) ? 'active-link' : '';
+        return (request()->is($path)) ? 'active-link' : 'inactive-link';
     }
 ?>
 
@@ -27,8 +27,8 @@
             
             <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
             <!-- dashboard link group  -->
-            <ul class="li-group-override list-group list-group-flush mx-auto">
-                <li class="list-group-item-override list-group-item text-info {{ is_path_match('dashboard') }}">
+            <ul class="ul-group-override list-group list-group-flush mx-auto">
+                <li class="li-group-item-override list-group-item text-info {{ is_path_match('dashboard') }}">
                     <i class="list-icon fa fa-chart-line"></i><a class="list-label" href="/dashboard">Dashboard</a>
                 </li>
             </ul>
@@ -39,13 +39,19 @@
 
                 {{-- kung admin siya --}}
 
-                <ul class="li-group-override list-group list-group-flush mx-auto">
-                    <small class="py-3 text-info">COMPONENTS</small>
-                    <li class="list-group-item-override list-group-item-light text-info {{ is_path_match('users') }}">
-                        <i class="list-icon fa fa-users"></i><a class="list-label" href="/dashboard">Users</a>
+                <ul class="ul-group-override list-group list-group-flush mx-auto">
+                    <span class="py-3 text-info fw-bold" style="font-size: .7em;" role="text">COMPONENTS</span>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('users') }}">
+                        <i class="list-icon fa fa-users"></i><a class="list-label" href="#">Users</a>
                     </li>
-                    <li class="list-group-item-override list-group-item-light text-info {{ is_path_match('users') }}">
-                        <i class="list-icon fa fa-users"></i><a class="list-label" href="/dashboard">Item List</a>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                        <i class="list-icon fa fa-clipboard"></i><a class="list-label" href="#">Item List</a>
+                    </li>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                        <i class="list-icon fa fa-user"></i><a class="list-label" href="#">Requisitioner</a>
+                    </li>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                        <i class="list-icon fa fa-list"></i><a class="list-label" href="#">Purchase Request List</a>
                     </li>
                 </ul>
 
@@ -56,9 +62,29 @@
 
                 {{-- kung supply officer or similar level --}}
 
-                <span role="text">YEAH</span>
+                <ul class="ul-group-override list-group list-group-flush mx-auto">
+                    <span class="py-3 text-info fw-bold" style="font-size: .7em;" role="text">COMPONENTS</span>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('users') }}">
+                        <i class="list-icon fa fa-users"></i><a class="list-label" href="#">Users</a>
+                    </li>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                        <i class="list-icon fa fa-clipboard"></i><a class="list-label" href="#">Item List</a>
+                    </li>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                        <i class="list-icon fa fa-list"></i><a class="list-label" href="#">Purchase Request List</a>
+                    </li>
+                </ul>
 
             @endif
+
+            <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
+            <ul class="ul-group-override list-group list-group-flush mx-auto">
+                <span class="py-3 text-info fw-bold" style="font-size: .7em;" role="text">INTERFACE</span>
+                <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                    <i class="list-icon fa fa-wrench"></i><a class="list-label" href="/dashboard">Utilities</a>
+                </li>
+            </ul>
+            <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
 
         </div>
     </div>

@@ -1,0 +1,74 @@
+/* ========= SIDEBAR ========= */
+#sidebar {
+  height: 100%;
+}
+
+#sidebar-collapse {
+  height: 100%;
+}
+
+#sidebar-main {
+  width: 14.75em;
+  width: 236px;
+  height: 100%;
+}
+
+/* ========= NAVBAR BRAND ========= */
+#brand-icon {
+  width: auto;
+  min-width: 52px;
+  width: 30%;
+}
+
+#brand-label {
+  font-size: 1em;
+}
+
+/* ========= SEPARATOR ========= */
+.sidebar-separator {
+  width: 85%;
+}
+
+/* ========= LIST GROUP ========= */
+.ul-group-override {
+  width: 85%;
+}
+
+.ul-group-override > .li-group-item-override {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  background-color: initial;
+}
+
+.li-group-item-override {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  border: 0 !important;
+}
+
+.li-group-item-override:hover > * {
+  color: #ffffff;
+}
+
+.li-group-item-override > .list-icon {
+  font-size: 1.1em;
+}
+
+.li-group-item-override > .list-label {
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: .94em;
+}
+
+.inactive-link * {
+  color: #0dcaf0;
+}
+
+.active-link * {
+  color: #ffffff;
+}
+/*# sourceMappingURL=sidebar.css.map */

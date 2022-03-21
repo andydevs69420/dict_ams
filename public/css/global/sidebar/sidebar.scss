@@ -1,0 +1,78 @@
+@import '../appcolor';
+
+/* ========= SIDEBAR ========= */ 
+
+#sidebar
+{
+    height: 100%;
+}
+
+#sidebar-collapse
+{
+    height: 100%;
+}
+
+#sidebar-main
+{
+    width: 14.75em;
+    width: 236px;
+    height: 100%;
+}
+
+/* ========= NAVBAR BRAND ========= */ 
+#brand-icon
+{
+    width: auto;
+    min-width: 52px;
+    width: 30%;
+}
+
+#brand-label
+{
+    font-size: 1em;
+}
+
+/* ========= SEPARATOR ========= */ 
+.sidebar-separator
+{
+    width: 85%;
+}
+
+/* ========= LIST GROUP ========= */ 
+.ul-group-override
+{
+    width: 85%;
+    &>.li-group-item-override
+    {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        background-color: initial;
+    }
+}
+
+.li-group-item-override
+{
+    display: flex !important;
+    align-items: center !important;
+    border: 0 !important;
+
+    &:hover > *
+    {
+        color: $WHITE;
+    }
+    
+    &>.list-icon
+    {
+        font-size: 1.1em;
+    }
+    &>.list-label
+    {
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: .94em;
+    }
+}
+
+.inactive-link * { color: #0dcaf0; } // based on bs4 | bs5 text-info
+
+.active-link * { color: $WHITE; }

@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ asset('images/dict-transparent.png') }}" type="image/x-icon">
     <!-- page style -->
     <link rel="stylesheet" href="{{ asset('css/global/master/master.css') }}">
     <!-- bootstrap css -->
