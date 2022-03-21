@@ -1,0 +1,44 @@
+@import '../sizing';
+
+*
+{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html
+{
+    width: auto;
+    height: auto;
+}
+
+body
+{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-width: 280px;
+    min-height: 600px;
+    
+    @include onSM
+    {
+        min-width: 576px;
+    }
+    @include onMD
+    {
+        min-width: 768px;
+    }
+    @include onLG
+    {
+        min-width: 992px;
+    }
+    @include onXL
+    {
+        min-width: 1200px;
+    }
+    @include onXXL
+    {
+        min-width: 1400px;
+    }
+}
+

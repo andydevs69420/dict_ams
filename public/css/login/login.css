@@ -1,0 +1,61 @@
+/* Based on bootstrap breakpoints */
+/* on small devices and above */
+/* on medium devices and above */
+/* on large devices and above */
+/* on extra-large devices and above */
+/* on extra-extra large devices and above */
+body {
+  overflow: hidden auto;
+}
+
+#center-panel {
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  #center-panel {
+    width: 26.25%;
+    min-width: 420px;
+    height: auto;
+    border-radius: .3em;
+    -webkit-box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.4);
+  }
+}
+
+#app-brand {
+  position: absolute;
+  top: 2em;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 80%;
+}
+
+@media screen and (min-width: 768px) {
+  #app-brand {
+    position: initial;
+    inset: initial;
+    -webkit-transform: initial;
+            transform: initial;
+  }
+}
+
+#brand-icon {
+  width: auto;
+  max-width: 30%;
+}
+
+.page-form-0 {
+  width: 80%;
+  height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .page-form-0 {
+    height: auto;
+  }
+}
+/*# sourceMappingURL=login.css.map */
