@@ -23,69 +23,72 @@
                 </div>
             </div>
             
-            {{-- shared ra sa tanan access level ang dashboard na link --}}
-            
-            <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
-            <!-- dashboard link group  -->
-            <ul class="ul-group-override list-group list-group-flush mx-auto">
-                <li class="li-group-item-override list-group-item text-info {{ is_path_match('dashboard') }}">
-                    <i class="list-icon fa fa-chart-line"></i><a class="list-label" href="/dashboard">Dashboard</a>
-                </li>
-            </ul>
-            <!-- end dashboard -->
-            <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
+            <div id="sidebar-wrapper-scrollable" class="d-block">
 
-            @if     ($access_level_id === 1)
-
-                {{-- kung admin siya --}}
-
+                {{-- shared ra sa tanan access level ang dashboard na link --}}
+                
+                <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
+                <!-- dashboard link group  -->
                 <ul class="ul-group-override list-group list-group-flush mx-auto">
-                    <span class="py-3 text-info fw-bold" style="font-size: .7em;" role="text">COMPONENTS</span>
-                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('users') }}">
-                        <i class="list-icon fa fa-users"></i><a class="list-label" href="#">Users</a>
-                    </li>
-                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
-                        <i class="list-icon fa fa-clipboard"></i><a class="list-label" href="#">Item List</a>
-                    </li>
-                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
-                        <i class="list-icon fa fa-user"></i><a class="list-label" href="#">Requisitioner</a>
-                    </li>
-                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
-                        <i class="list-icon fa fa-list"></i><a class="list-label" href="#">Purchase Request List</a>
+                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('dashboard') }}">
+                        <i class="list-icon fa fa-chart-line"></i><a class="list-label" href="/dashboard">Dashboard</a>
                     </li>
                 </ul>
+                <!-- end dashboard -->
+                <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
 
-            @elseif (
-                        $access_level_id === 2 ||
-                        $access_level_id === 3
-                    )
+                @if     ($access_level_id === 1)
 
-                {{-- kung supply officer or similar level --}}
+                    {{-- kung admin siya --}}
 
+                    <ul class="ul-group-override list-group list-group-flush mx-auto">
+                        <span class="ul-group-label py-3 text-info fw-bold" role="text">COMPONENTS</span>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('users') }}">
+                            <i class="list-icon fa fa-users"></i><a class="list-label" href="#">Users</a>
+                        </li>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                            <i class="list-icon fa fa-clipboard"></i><a class="list-label" href="#">Item List</a>
+                        </li>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                            <i class="list-icon fa fa-user"></i><a class="list-label" href="#">Requisitioner</a>
+                        </li>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                            <i class="list-icon fa fa-list"></i><a class="list-label" href="#">Purchase Request List</a>
+                        </li>
+                    </ul>
+
+                @elseif (
+                            $access_level_id === 2 ||
+                            $access_level_id === 3
+                        )
+
+                    {{-- kung supply officer or similar level --}}
+
+                    <ul class="ul-group-override list-group list-group-flush mx-auto">
+                        <span class="ul-group-label py-3 text-info fw-bold" role="text">COMPONENTS</span>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                            <i class="list-icon fa fa-list"></i><a class="list-label" href="#">Purchase Request List</a>
+                        </li>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                            <i class="list-icon fa fa-clipboard"></i><a class="list-label" href="#">Item List</a>
+                        </li>
+                        <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
+                            <i class="list-icon fa fa-comment"></i><a class="list-label" href="#">Messages</a>
+                        </li>
+                    </ul>
+
+                @endif
+
+                <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
                 <ul class="ul-group-override list-group list-group-flush mx-auto">
-                    <span class="py-3 text-info fw-bold" style="font-size: .7em;" role="text">COMPONENTS</span>
-                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('users') }}">
-                        <i class="list-icon fa fa-users"></i><a class="list-label" href="#">Users</a>
-                    </li>
+                    <span class="ul-group-label py-3 text-info fw-bold" role="text">INTERFACE</span>
                     <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
-                        <i class="list-icon fa fa-clipboard"></i><a class="list-label" href="#">Item List</a>
-                    </li>
-                    <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
-                        <i class="list-icon fa fa-list"></i><a class="list-label" href="#">Purchase Request List</a>
+                        <i class="list-icon fa fa-wrench"></i><a class="list-label" href="/dashboard">Utilities</a>
                     </li>
                 </ul>
-
-            @endif
-
-            <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
-            <ul class="ul-group-override list-group list-group-flush mx-auto">
-                <span class="py-3 text-info fw-bold" style="font-size: .7em;" role="text">INTERFACE</span>
-                <li class="li-group-item-override list-group-item text-info {{ is_path_match('') }}">
-                    <i class="list-icon fa fa-wrench"></i><a class="list-label" href="/dashboard">Utilities</a>
-                </li>
-            </ul>
-            <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
-
+                <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
+               
+            </div>
         </div>
     </div>
 </nav>

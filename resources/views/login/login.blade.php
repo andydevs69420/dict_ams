@@ -27,14 +27,14 @@
             <form class="page-form-0 d-flex flex-column align-items-center justify-content-center mx-auto form-group" action="/dashboard" methd="POST">
                 <div class="input-group my-2">
                     <span class="input-group-text"><i class="text-dark fa fa-user"></i></span>
-                    <input class="form-control" type="text" placeholder="Username" required>
+                    <input class="form-control" type="text" name="username" placeholder="Username" required>
                 </div>
                 <div class="input-group my-2">
                     <span class="input-group-text"><i class="text-dark fa fa-lock"></i></span>
-                    <input class="form-control" type="password" placeholder="Password" required>
+                    <input class="form-control" type="password" name="password" placeholder="Password" required>
                 </div>
                 <div class="input-group">
-                    <input id="remember-me" class="form-check-input" type="checkbox">
+                    <input id="remember-me" class="form-check-input" type="checkbox" name="remember-me">
                     <label class="mx-1 text-dark" for="remember-me"><small class="text-muted" style="user-select:none;">Remember me</small></label>
                 </div>
                 <button class="btn btn-primary lead my-2 mt-md-2 mb-md-0 w-100" type="submit">Login</button>

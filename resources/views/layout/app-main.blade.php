@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="{{ asset('images/dict-transparent.png') }}" type="image/x-icon">
     <!-- page style -->
     <link rel="stylesheet" href="{{ asset('css/global/app-main/app-main.css') }}">
+    <!-- topbar style -->
+    <link rel="stylesheet" href="{{ asset('css/global/topbar/topbar.css') }}">
     <!-- sidebar style -->
     <link rel="stylesheet" href="{{ asset('css/global/sidebar/sidebar.css') }}">
     <!-- bootstrap css -->

@@ -1,6 +1,34 @@
 @import '../appcolor';
 
-/* ========= SIDEBAR ========= */ 
+
+
+/* ========= SIDEBAR CONTENT ========= */ 
+
+/* dapat parya silag color sa sidebar */ 
+$TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
+
+#sidebar-wrapper-scrollable
+{
+    width: 100%;
+    max-height: calc(100% - 66.2px);
+    overflow-y: auto !important;
+    &::-webkit-scrollbar
+    {
+        width: 20px;
+    }
+    &::-webkit-scrollbar-track
+    {
+        background-color: $WHITE;
+        border-left: 9px solid $TRACK-THUMB-BG;
+        border-right: 9px solid  $TRACK-THUMB-BG;
+    }
+    &::-webkit-scrollbar-thumb
+    {
+        background-color: $WHITE;
+        border-left: 7px solid $TRACK-THUMB-BG;
+        border-right: 7px solid $TRACK-THUMB-BG;
+    }
+}
 
 #sidebar
 {
@@ -50,11 +78,26 @@
     }
 }
 
+.ul-group-label { font-size: .7em; }
+
 .li-group-item-override
 {
     display: flex !important;
     align-items: center !important;
     border: 0 !important;
+
+    &:nth-child(even)
+    {
+        margin: 1em 0 !important;
+    }
+    &:nth-child(2)
+    {
+        margin-top: 0 !important;
+    }
+    &:last-child
+    {
+        margin-bottom: 0 !important;
+    }
 
     &:hover > *
     {
@@ -63,6 +106,8 @@
     
     &>.list-icon
     {
+        display: block;
+        width: 1.5em;
         font-size: 1.1em;
     }
     &>.list-label

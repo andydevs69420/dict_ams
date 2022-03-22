@@ -1,4 +1,27 @@
-/* ========= SIDEBAR ========= */
+/* ========= SIDEBAR CONTENT ========= */
+/* dapat parya silag color sa sidebar */
+#sidebar-wrapper-scrollable {
+  width: 100%;
+  max-height: calc(100% - 66.2px);
+  overflow-y: auto !important;
+}
+
+#sidebar-wrapper-scrollable::-webkit-scrollbar {
+  width: 20px;
+}
+
+#sidebar-wrapper-scrollable::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  border-left: 9px solid #0d6efd;
+  border-right: 9px solid #0d6efd;
+}
+
+#sidebar-wrapper-scrollable::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-left: 7px solid #0d6efd;
+  border-right: 7px solid #0d6efd;
+}
+
 #sidebar {
   height: 100%;
 }
@@ -40,6 +63,10 @@
   background-color: initial;
 }
 
+.ul-group-label {
+  font-size: .7em;
+}
+
 .li-group-item-override {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -50,11 +77,25 @@
   border: 0 !important;
 }
 
+.li-group-item-override:nth-child(even) {
+  margin: 1em 0 !important;
+}
+
+.li-group-item-override:nth-child(2) {
+  margin-top: 0 !important;
+}
+
+.li-group-item-override:last-child {
+  margin-bottom: 0 !important;
+}
+
 .li-group-item-override:hover > * {
   color: #ffffff;
 }
 
 .li-group-item-override > .list-icon {
+  display: block;
+  width: 1.5em;
   font-size: 1.1em;
 }
 
