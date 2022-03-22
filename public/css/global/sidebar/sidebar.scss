@@ -10,7 +10,7 @@ $TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
 #sidebar-wrapper-scrollable
 {
     width: 100%;
-    max-height: calc(100% - 66.2px);
+    max-height: auto;
     overflow-y: auto !important;
     &::-webkit-scrollbar
     {

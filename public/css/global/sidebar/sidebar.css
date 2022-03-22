@@ -2,7 +2,7 @@
 /* dapat parya silag color sa sidebar */
 #sidebar-wrapper-scrollable {
   width: 100%;
-  max-height: calc(100% - 66.2px);
+  max-height: auto;
   overflow-y: auto !important;
 }
 

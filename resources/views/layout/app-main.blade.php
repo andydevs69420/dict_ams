@@ -21,7 +21,6 @@
     @show
 </head>
 <body>
-    
     <noscript>
         <div class="d-flex flex-column align-items-center justify-content-center position-absolute w-100 h-100 bg-primary" style="z-index: 999999999;">
             <div class="d-block px-2 px-md-0">
@@ -31,38 +30,29 @@
         </div>
         <style>
             body > *:not(:first-child)
-            {
-                display: none !important;
-            }
+            { display: none !important; }
             body > *:not(:-moz-first-node)
-            {
-                display: none !important;
-            }
+            { display: none !important; }
         </style>
     </noscript>
-    
-    
     <div class="d-flex flex-row flex-nowrap w-100 h-100 overflow-hidden">
-       
         @include('layout.sidebar')
-      
-        <div class="d-block w-100 h-100 bg-light">
-            
+        <div id="content-root" class="d-block w-100 h-100 bg-light">
             @include('layout.topbar')
-            
-            <div class="container-fluid px-4">
+            <div id="content-wrapper" class="d-block w-100">
                 @section('content')
                 @show
             </div>
-            
         </div>
-
     </div>
-    
     <!-- jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- bootstrap js with popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- page js -->
+    <script type="text/javascript" src="{{ asset('js/global/app-main/app-main.js') }}"></script>
+    <!-- sidebar resizer -->
+    <script type="text/javascript" src="{{ asset('js/global/sidebar/sidebar-resizer.js') }}"></script>
     <!-- javascript dependencies -->
     @section('javascript')
         <!-- JS -->

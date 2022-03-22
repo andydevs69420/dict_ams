@@ -1,0 +1,44 @@
+@import '../global/sizing';
+
+
+.dashboard-tile
+{
+    width: 100%;
+    height: auto;
+
+    padding-top: 100%;
+
+    @include onMD
+    { 
+        width: 90%;
+        padding-top: 120px;
+    }
+}
+
+.tile-blue-variant
+{
+    border-left: .5em solid rgb(120, 48, 255);
+    border-right: .5em;
+    border-radius: .6em;
+}
+
+.tile-light-blue-variant
+{
+    border-left: .5em solid rgb(170, 125, 255);
+    border-right: .5em;
+    border-radius: .6em;
+}
+
+.tile-green-variant
+{
+    border-left: .5em solid rgb(127, 160, 37);
+    border-right: .5em;
+    border-radius: .6em;
+}
+
+.tile-light-green-variant
+{
+    border-left: .5em solid rgb(151, 177, 81);
+    border-right: .5em;
+    border-radius: .6em;
+}

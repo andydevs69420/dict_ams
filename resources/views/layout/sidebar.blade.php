@@ -10,7 +10,7 @@
 <nav id="sidebar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div id="sidebar-collapse" class="collapse collapse-horizontal show">
         <div id="sidebar-main">
-            <div class="navbar-brand">
+            <div id="navbar-brand-group" class="navbar-brand">
                 <div class="container-fluid p-0">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-4 p-0">
@@ -87,7 +87,7 @@
                     </li>
                 </ul>
                 <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
-               
+                
             </div>
         </div>
     </div>

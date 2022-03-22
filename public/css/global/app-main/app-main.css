@@ -52,4 +52,12 @@ body {
     min-width: 1400px;
   }
 }
+
+#content-root {
+  min-width: 280px;
+}
+
+#content-wrapper {
+  overflow-y: auto;
+}
 /*# sourceMappingURL=app-main.css.map */
