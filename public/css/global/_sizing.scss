@@ -1,0 +1,53 @@
+
+
+
+/* Based on bootstrap breakpoints */
+
+
+/* on small devices and above */ 
+@mixin onSM 
+{
+    @media screen and (min-width: 576px) 
+    {
+        @content;
+    }    
+}
+
+/* on medium devices and above */ 
+@mixin onMD 
+{
+    @media screen and (min-width: 768px) 
+    {
+        @content;
+    }    
+}
+
+/* on large devices and above */ 
+@mixin onLG 
+{
+    @media screen and (min-width: 992px) 
+    {
+        @content;
+    }    
+}
+
+/* on extra-large devices and above */ 
+@mixin onXL 
+{
+    @media screen and (min-width: 1200px) 
+    {
+        @content;
+    }    
+}
+
+/* on extra-extra large devices and above */ 
+@mixin onXXL 
+{
+    @media screen and (min-width: 1400px) 
+    {
+        @content;
+    }    
+}
+
+
+

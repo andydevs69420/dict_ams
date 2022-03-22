@@ -1,0 +1,57 @@
+#dict-logo{
+    width: 90px;
+    height: 70px;
+}
+
+body {
+    overflow: hidden auto;
+    min-height: 100vh;
+    background-color: #0275d8;
+}  
+
+.card{
+    width: 70%;
+    height: 92%;
+    margin: 30px auto 0 auto;
+    padding: 5px;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.register-button, .cancel-button{
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.cancel-button{
+    display: inline-flex;
+    align-items: center; 
+}
+
+.reg-notice{
+    font-size: 11px;
+}
+
+p, select:valid, option{
+    color: #707B7C;
+}
+
+@media screen and (max-width: 500px){
+    .reg-notice{
+        font-size: 10px;
+    }
+
+    .register-button, .cancel-button{
+        padding: 0px 12px;
+    }
+}
+
+@media screen and (min-width: 501px) and (max-width: 1000px) {
+    .register-button, .cancel-button{
+        padding: 0px 8px;
+    }
+}
