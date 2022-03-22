@@ -18,22 +18,24 @@
                 @if ($access_level_id === 1)
                     <!-- if admin -->
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
-                        <div class="dashboard-tile tile-blue-variant d-block position-relative my-0 mx-auto mx-lg-0 bg-light shadow-lg">
+                        <div class="dashboard-tile tile-blue-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
+                            <div class="d-block position-absolute w-100 h-100" style="inset: 0;">
+                                <span style="font-size: 1em;">FOOC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 m-0 p-2 p-md-0">
+                        <div class="dashboard-tile tile-green-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
 
                         </div>
                     </div>
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
-                        <div class="dashboard-tile tile-green-variant d-block position-relative my-0 mx-auto mx-lg-0 bg-light shadow-lg">
+                        <div class="dashboard-tile tile-light-blue-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
 
                         </div>
                     </div>
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
-                        <div class="dashboard-tile tile-light-blue-variant d-block position-relative my-0 mx-auto mx-lg-0 bg-light shadow-lg">
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3 m-0 p-2 p-md-0">
-                        <div class="dashboard-tile tile-light-green-variant d-block position-relative my-0 mx-auto mx-lg-0 bg-light shadow-lg">
+                        <div class="dashboard-tile tile-light-green-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
 
                         </div>
                     </div>

@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "AAEA,AAAA,aAAa,CAAC;EAAE,WAAW,EAAE,iBAAiB;CAAI;;AAElD,AAAA,kBAAkB,CAAC;EAAE,SAAS,EAAE,IAAI;CAAI;;AAExC,AAAA,YAAY,CAAC;EAAE,SAAS,EAAE,GAAG;CAAI",
+    "mappings": "AAEA,AAAA,aAAa,CAAC;EAAE,WAAW,EAAE,GAAG,CAAC,KAAK,CCOtB,OAAO;CDPiC;;AAExD,AAAA,kBAAkB,CAAC;EAAE,SAAS,EAAE,GAAG;CAAI;;AAEvC,AAAA,YAAY,CAAC;EAAE,SAAS,EAAE,GAAG;CAAI",
     "sources": [
-        "topbar.scss"
+        "topbar.scss",
+        "../_appcolor.scss"
     ],
     "names": [],
     "file": "topbar.css"
