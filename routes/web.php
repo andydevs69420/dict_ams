@@ -15,6 +15,9 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
+
+// OOOH NO!!
+
 // welcome
 Route::get('/', function () {
     return view('welcome');
