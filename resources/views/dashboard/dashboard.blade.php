@@ -1,3 +1,5 @@
+
+
 @extends('layout.app-main')
 
 @section('title', 'AMS | dashboard')
@@ -15,7 +17,7 @@
         <div class="container-fluid">
             <div class="row row-cols-2 row-cols-md-0 px-2 px-md-5 py-4">
                 <!-- trap user type here! -->
-                @if ($access_level_id === 1)
+                @if ($LoggedUserInfo['accesslevel'] === '1')
                     <!-- if admin -->
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
                         <div class="dashboard-tile tile-blue-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
@@ -39,7 +41,7 @@
 
                         </div>
                     </div>
-                @elseif ($access_level_id === 2)
+                @elseif ($LoggedUserInfo['accesslevel'] === '2')
                     <!-- if supply officer or others -->
                     <div class="col-md-3 bg-dark">A</div>
                     <div class="col-md-3 bg-primary">B</div>
@@ -55,3 +57,6 @@
     <!-- fontawesome -->
     <script type="text/javascript" src="https://kit.fontawesome.com/0ad786b032.js" crossorigin="anonymous"></script>
 @stop
+
+
+

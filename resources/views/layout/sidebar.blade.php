@@ -1,16 +1,8 @@
 
-<?php
-    /* para ma automatic na ang active na link based sa route */
-    function is_path_match(String $path)
-    {
-        return (request()->is($path)) ? 'active-link' : 'inactive-link';
-    }
-?>
-
 <nav id="sidebar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div id="sidebar-collapse" class="collapse collapse-horizontal show">
         <div id="sidebar-main">
-            <div id="navbar-brand-group" class="navbar-brand">
+            <div class="navbar-brand">
                 <div class="container-fluid p-0">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-4 p-0">
@@ -37,7 +29,7 @@
                 <!-- end dashboard -->
                 <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
 
-                @if     ($access_level_id === 1)
+                @if     ($LoggedUserInfo['accesslevel'] === '1')
 
                     {{-- kung admin siya --}}
 
@@ -58,8 +50,8 @@
                     </ul>
 
                 @elseif (
-                            $access_level_id === 2 ||
-                            $access_level_id === 3
+                            $LoggedUserInfo['accesslevel'] === '2' ||
+                            $LoggedUserInfo['accesslevel'] === '3'
                         )
 
                     {{-- kung supply officer or similar level --}}
@@ -87,7 +79,7 @@
                     </li>
                 </ul>
                 <hr class="sidebar-separator d-block mx-auto my-1 bg-light">
-                
+               
             </div>
         </div>
     </div>

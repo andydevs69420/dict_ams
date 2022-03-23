@@ -24,7 +24,8 @@
             <!-- element as spacing -->
             <div class="d-none d-md-block py-2"></div>
             <!-- form -->
-            <form class="page-form-0 d-flex flex-column align-items-center justify-content-center mx-auto form-group" action="/dashboard" methd="POST">
+            <form class="page-form-0 d-flex flex-column align-items-center justify-content-center mx-auto form-group" action="/login" method="POST">
+                @csrf
                 <div class="input-group my-2">
                     <span class="input-group-text"><i class="text-dark fa fa-user"></i></span>
                     <input class="form-control" type="text" name="username" placeholder="Username" required>
@@ -39,7 +40,7 @@
                 </div>
                 <button class="btn btn-primary lead my-2 mt-md-2 mb-md-0 w-100" type="submit">Login</button>
                 <hr class="my-1 my-md-3 w-100">
-                <a class="btn btn-primary lead my-2 my-md-0 w-100">Register</a>
+                <a class="btn btn-primary lead my-2 my-md-0 w-100" href="{{ '/register' }}">Register</a>
             </form>
         </div>
     </div>
