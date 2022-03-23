@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
 @stop
 
-
 @section('content')
     <div class="d-block w-100 h-100">
         <!-- label -->
@@ -22,23 +21,41 @@
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
                         <div class="dashboard-tile tile-blue-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
                             <div class="d-block position-absolute w-100 h-100" style="inset: 0;">
-                                <span style="font-size: 1em;">FOOC</span>
+                                <span class="display-6" role="text">
+                                    !! | <br>
+                                    <p class="lead text-muted">Ayha na ang dahboard pag humana ang request</p>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
                         <div class="dashboard-tile tile-green-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
-
+                            <div class="d-block position-absolute w-100 h-100" style="inset: 0;">
+                                <span class="display-6" role="text">
+                                    !! | <br>
+                                    <p class="lead text-muted">Ayha na ang dahboard pag humana ang request</p>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
                         <div class="dashboard-tile tile-light-blue-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
-
+                            <div class="d-block position-absolute w-100 h-100" style="inset: 0;">
+                                <span class="display-6" role="text">
+                                    !! | <br>
+                                    <p class="lead text-muted">Ayha na ang dahboard pag humana ang request</p>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 m-0 p-2 p-md-0">
                         <div class="dashboard-tile tile-light-green-variant d-block position-relative overflow-hidden my-0 mx-auto mx-lg-0 bg-light shadow-lg">
-
+                            <div class="d-block position-absolute w-100 h-100" style="inset: 0;">
+                                <span class="display-6" role="text">
+                                    !! | <br>
+                                    <p class="lead text-muted">Ayha na ang dahboard pag humana ang request</p>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 @elseif ($LoggedUserInfo['accesslevel'] === '2')
