@@ -17,14 +17,14 @@
     @include onXL
     { 
         width: 88%;
-        padding-top: 40%;
+        padding-top: 34%;
     }
 }
 
 .tile 
 {
     border: none;
-    border-radius: .6em;
+    border-radius: .5em;
     @include onLG
     {
         border-left: .5em solid transparent;

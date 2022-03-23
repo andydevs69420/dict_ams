@@ -11,6 +11,7 @@ $TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
 {
     width: 100%;
     max-height: auto;
+    overflow-x: hidden !important;
     overflow-y: auto !important;
     &::-webkit-scrollbar
     {
@@ -114,6 +115,7 @@ $TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
     {
         margin: 0 10px;
         text-decoration: none;
+        text-overflow: ellipsis;
         font-size: .94em;
     }
 }

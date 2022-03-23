@@ -20,13 +20,13 @@
 @media screen and (min-width: 1200px) {
   .dashboard-tile {
     width: 88%;
-    padding-top: 40%;
+    padding-top: 34%;
   }
 }
 
 .tile, .tile-blue-variant, .tile-light-blue-variant, .tile-green-variant, .tile-light-green-variant {
   border: none;
-  border-radius: .6em;
+  border-radius: .5em;
 }
 
 @media screen and (min-width: 992px) {

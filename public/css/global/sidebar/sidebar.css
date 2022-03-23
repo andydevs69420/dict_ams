@@ -3,6 +3,7 @@
 #sidebar-wrapper-scrollable {
   width: 100%;
   max-height: auto;
+  overflow-x: hidden !important;
   overflow-y: auto !important;
 }
 
@@ -102,6 +103,7 @@
 .li-group-item-override > .list-label {
   margin: 0 10px;
   text-decoration: none;
+  text-overflow: ellipsis;
   font-size: .94em;
 }
 
