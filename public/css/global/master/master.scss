@@ -10,6 +10,7 @@ html
 {
     width: auto;
     height: auto;
+    overflow-x: hidden;
 }
 
 body
@@ -21,24 +22,14 @@ body
     min-height: 600px;
     
     @include onSM
-    {
-        min-width: 576px;
-    }
+    { min-width: 576px;  }
     @include onMD
-    {
-        min-width: 768px;
-    }
+    { min-width: 768px;  }
     @include onLG
-    {
-        min-width: 992px;
-    }
+    { min-width: 992px;  }
     @include onXL
-    {
-        min-width: 1200px;
-    }
+    { min-width: 1200px; }
     @include onXXL
-    {
-        min-width: 1400px;
-    }
+    { min-width: 1400px; }
 }
 

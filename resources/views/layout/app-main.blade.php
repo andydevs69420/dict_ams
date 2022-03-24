@@ -38,9 +38,9 @@
     </noscript>
     <div class="d-flex flex-row flex-nowrap w-100 h-100 overflow-hidden">
         @include('layout.sidebar')
-        <div id="content-root" class="d-block w-100 h-100 bg-light">
+        <div id="content-root" class="d-block w-100 h-100 bg-light" style="min-width: 280px;">
             @include('layout.topbar')
-            <div id="content-wrapper" class="d-block w-100">
+            <div id="content-wrapper" class="d-block w-100" style="overflow: hidden auto;">
                 @section('content')
                 @show
             </div>
