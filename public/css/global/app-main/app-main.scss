@@ -33,3 +33,12 @@ body
     @include onXXL
     { min-width: 1400px; }
 }
+
+.app-main__noscript-content-wrapper
+{ z-index: 999999999; }
+
+.app-main__content-root
+{ min-width: 280px !important; }
+
+.app-main__content-wrapper
+{ overflow: hidden auto !important; }

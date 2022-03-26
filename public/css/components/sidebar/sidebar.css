@@ -1,0 +1,117 @@
+/* dapat parya silag color sa sidebar */
+/* ========= SIDEBAR CONTENT ========= */
+#sidebar {
+  height: 100%;
+}
+
+#sidebar-collapse {
+  height: 100%;
+}
+
+.sidebar__sidebar-main {
+  width: 14.75em;
+  width: 236px;
+  height: 100%;
+}
+
+/* ========= NAVBAR BRAND ========= */
+.sidebar__brand-icon {
+  width: auto;
+  min-width: 52px;
+  width: 30%;
+}
+
+.sidebar__brand-label {
+  font-size: 1em;
+}
+
+/* ========= SIDEBAR LINKS ========= */
+.sidebar__sidebar-wrapper-scrollable {
+  width: 100%;
+  max-height: auto;
+  overflow: hidden auto !important;
+}
+
+.sidebar__sidebar-wrapper-scrollable::-webkit-scrollbar {
+  width: 20px;
+}
+
+.sidebar__sidebar-wrapper-scrollable::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  border-left: 9px solid #0d6efd;
+  border-right: 9px solid #0d6efd;
+}
+
+.sidebar__sidebar-wrapper-scrollable::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-left: 7px solid #0d6efd;
+  border-right: 7px solid #0d6efd;
+}
+
+/* ========= SEPARATOR ========= */
+.sidebar__sidebar-separator {
+  width: 85%;
+}
+
+/* ========= LIST GROUP ========= */
+.sidebar__ul-group-override {
+  width: 85%;
+}
+
+.sidebar__ul-group-override > .sidebar__li-group-item-override {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  background-color: initial;
+}
+
+.sidebar__ul-group-label {
+  font-size: .7em;
+}
+
+.sidebar__li-group-item-override {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  border: 0 !important;
+}
+
+.sidebar__li-group-item-override:nth-child(even) {
+  margin: 1em 0 !important;
+}
+
+.sidebar__li-group-item-override:nth-child(2) {
+  margin-top: 0 !important;
+}
+
+.sidebar__li-group-item-override:last-child {
+  margin-bottom: 0 !important;
+}
+
+.sidebar__li-group-item-override:hover > * {
+  color: #ffffff;
+}
+
+.sidebar__li-group-item-override > .sidebar__list-icon {
+  display: block;
+  width: 1.5em;
+  font-size: 1.1em;
+}
+
+.sidebar__li-group-item-override > .sidebar__list-label {
+  margin: 0 10px;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  font-size: .94em;
+}
+
+.inactive-link * {
+  color: #0dcaf0;
+}
+
+.active-link * {
+  color: #ffffff;
+}
+/*# sourceMappingURL=sidebar.css.map */
