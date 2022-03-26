@@ -4,6 +4,7 @@
 /* on large devices and above */
 /* on extra-large devices and above */
 /* on extra-extra large devices and above */
+/* dapat parya silag color sa sidebar */
 * {
   margin: 0;
   -webkit-box-sizing: border-box;
@@ -52,5 +53,17 @@ body {
   body {
     min-width: 1400px;
   }
+}
+
+.app-main__noscript-content-wrapper {
+  z-index: 999999999;
+}
+
+.app-main__content-root {
+  min-width: 280px !important;
+}
+
+.app-main__content-wrapper {
+  overflow: hidden auto !important;
 }
 /*# sourceMappingURL=app-main.css.map */

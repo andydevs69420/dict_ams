@@ -4,15 +4,39 @@
 
 /* ========= SIDEBAR CONTENT ========= */ 
 
-/* dapat parya silag color sa sidebar */ 
-$TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
 
-#sidebar-wrapper-scrollable
+#sidebar
+{ height: 100%; }
+
+#sidebar-collapse
+{ height: 100%; }
+
+.sidebar__sidebar-main
+{
+    width: 14.75em;
+    width: 236px;
+    height: 100%;
+}
+
+/* ========= NAVBAR BRAND ========= */ 
+.sidebar__brand-icon
+{
+    width: auto;
+    min-width: 52px;
+    width: 30%;
+}
+
+.sidebar__brand-label
+{ font-size: 1em; }
+
+/* ========= SIDEBAR LINKS ========= */
+
+.sidebar__sidebar-wrapper-scrollable
 {
     width: 100%;
     max-height: auto;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow: hidden auto !important;
+  
     &::-webkit-scrollbar
     {
         width: 20px;
@@ -29,47 +53,17 @@ $TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
         border-left: 7px solid $TRACK-THUMB-BG;
         border-right: 7px solid $TRACK-THUMB-BG;
     }
-}
-
-#sidebar
-{
-    height: 100%;
-}
-
-#sidebar-collapse
-{
-    height: 100%;
-}
-
-#sidebar-main
-{
-    width: 14.75em;
-    width: 236px;
-    height: 100%;
-}
-
-/* ========= NAVBAR BRAND ========= */ 
-#brand-icon
-{
-    width: auto;
-    min-width: 52px;
-    width: 30%;
-}
-
-#brand-label
-{ font-size: 1em; }
+} 
 
 /* ========= SEPARATOR ========= */ 
-.sidebar-separator
-{
-    width: 85%;
-}
+.sidebar__sidebar-separator
+{ width: 85%; }
 
 /* ========= LIST GROUP ========= */ 
-.ul-group-override
+.sidebar__ul-group-override
 {
     width: 85%;
-    &>.li-group-item-override
+    &>.sidebar__li-group-item-override
     {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -77,39 +71,32 @@ $TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
     }
 }
 
-.ul-group-label { font-size: .7em; }
+.sidebar__ul-group-label
+{ font-size: .7em; }
 
-.li-group-item-override
+.sidebar__li-group-item-override
 {
     display: flex !important;
     align-items: center !important;
     border: 0 !important;
 
     &:nth-child(even)
-    {
-        margin: 1em 0 !important;
-    }
+    { margin: 1em 0 !important;    }
     &:nth-child(2)
-    {
-        margin-top: 0 !important;
-    }
+    { margin-top: 0 !important;    }
     &:last-child
-    {
-        margin-bottom: 0 !important;
-    }
+    { margin-bottom: 0 !important; }
 
     &:hover > *
-    {
-        color: $WHITE;
-    }
+    {color: $WHITE; }
     
-    &>.list-icon
+    &>.sidebar__list-icon
     {
         display: block;
         width: 1.5em;
         font-size: 1.1em;
     }
-    &>.list-label
+    &>.sidebar__list-label
     {
         margin: 0 10px;
         text-decoration: none;
@@ -118,6 +105,8 @@ $TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
     }
 }
 
-.inactive-link * { color: #0dcaf0; } // based on bs4 | bs5 text-info
+.inactive-link * 
+{ color: #0dcaf0; } // based on bs4 | bs5 text-info
 
-.active-link * { color: $WHITE; }
+.active-link * 
+{ color: $WHITE; }

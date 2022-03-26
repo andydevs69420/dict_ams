@@ -1,19 +1,17 @@
 
 
-@extends('layout.app-main')
+@extends('layout.app-main', ['accesslevelid' => $LoggedUserInfo['accesslevel'],'username' => $LoggedUserInfo['username']])
 
 @section('title', 'AMS | dashboard')
 
 @section('dependencies')
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <!-- fontawesome css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @stop
 
 @section('content')
     <div class="d-block w-100 h-100">
         <!-- label -->
-        <span class="d-block text-muted px-2 px-md-5 py-4" role="text" style="font-size: 1.6em;">Dashboard</span>
+        <span class="dashboard__dashboard-header-label d-block text-muted px-2 px-md-5 py-4" role="text">Dashboard</span>
         <!-- dahboard main content -->
         <div class="container-fluid px-2 px-md-5">
             <div class="row row-cols-2 row-cols-md-0">
@@ -53,8 +51,7 @@
 @stop
 
 @section('javascript')
-    <!-- fontawesome js -->
-    <script type="text/javascript" src="https://kit.fontawesome.com/0ad786b032.js" crossorigin="anonymous"></script>
+   
 @stop
 
 

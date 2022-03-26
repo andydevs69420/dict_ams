@@ -53,4 +53,8 @@ body {
     min-width: 1400px;
   }
 }
+
+.master__noscript-content-wrapper {
+  z-index: 999999999;
+}
 /*# sourceMappingURL=master.css.map */

@@ -6,7 +6,7 @@ body
     overflow: hidden auto;
 }
 
-#center-panel
+.login__center-panel
 {
 
     width: 100%;
@@ -24,7 +24,7 @@ body
 }
 
 
-#app-brand
+.login__app-brand
 {
     position: absolute;
     top: 2em;
@@ -42,14 +42,14 @@ body
 
 }
 
-#brand-icon
+.login__brand-icon
 {
     width: auto;
     // min-width: 112px;
     max-width: 30%;
 }
 
-.page-form-0
+.login__page-form-0
 {
     width: 80%;
     height: 100%;

@@ -8,14 +8,14 @@ body {
   overflow: hidden auto;
 }
 
-#center-panel {
+.login__center-panel {
   width: 100%;
   min-width: 100%;
   height: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  #center-panel {
+  .login__center-panel {
     width: 26.25%;
     min-width: 420px;
     height: auto;
@@ -25,7 +25,7 @@ body {
   }
 }
 
-#app-brand {
+.login__app-brand {
   position: absolute;
   top: 2em;
   left: 50%;
@@ -35,7 +35,7 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-  #app-brand {
+  .login__app-brand {
     position: initial;
     inset: initial;
     -webkit-transform: initial;
@@ -43,18 +43,18 @@ body {
   }
 }
 
-#brand-icon {
+.login__brand-icon {
   width: auto;
   max-width: 30%;
 }
 
-.page-form-0 {
+.login__page-form-0 {
   width: 80%;
   height: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  .page-form-0 {
+  .login__page-form-0 {
     height: auto;
   }
 }

@@ -1,0 +1,13 @@
+/* dapat parya silag color sa sidebar */
+.topbar__avatar-group {
+  border-left: 1px solid #dbdbdb;
+}
+
+.topbar__avatar-identifier {
+  font-size: 1em;
+}
+
+.topbar__avatar-icon {
+  max-width: 1em;
+}
+/*# sourceMappingURL=topbar.css.map */
