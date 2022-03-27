@@ -10,7 +10,7 @@ $(document)
 function fit__app_main__content__wrapper()
 {
     /* para mag fit ang content sa main app template kay automatic ang size sa top bar */ 
-    $('.topbar__topbar-group')
+    $('.topbar__topbar')
     .each((index_group_topbar, element_group_topbar) => {
 
         let topbar = $(element_group_topbar);

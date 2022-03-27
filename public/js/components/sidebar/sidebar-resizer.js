@@ -18,7 +18,7 @@ function fit__sidebar__sidebar_wrapper_scrollable()
 
         let resize_basis = $(this__group_0);
 
-        $('.sidebar__sidebar-wrapper-scrollable')
+        $('.sidebar__scrollable-wrapper')
         .each((index_group_1,this__group_1) => {
             $(this__group_1)
             .css('height', `calc(100% - ${resize_basis.outerHeight()}px)`);

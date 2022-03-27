@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CreateFormController;
+use App\Http\Controllers\NewPurchaseRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +33,5 @@ Route::post('/register', [RegisterController::class,'store']);
 // dashboard
 Route::match(['get', 'post'],'/dashboard', [DashboardController::class,'index']);
 
-// create form
-Route::match(['get','post'],'/createform', [CreateFormController::class,'index']);
+// purchase request
+Route::match(['get','post'],'/newpurchaserequest', [NewPurchaseRequestController::class,'index']);

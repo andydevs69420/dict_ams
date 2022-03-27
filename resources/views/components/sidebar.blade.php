@@ -1,6 +1,6 @@
 
-<nav id="sidebar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-    <div id="sidebar-collapse" class="collapse collapse-horizontal show">
+<nav class="sidebar__sidebar navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div id="sidebar-collapse-id" class="sidebar__sidebar-collapse collapse collapse-horizontal show">
         <div class="sidebar__sidebar-main">
             <div class="sidebar__navbar-brand-group navbar-brand">
                 <div class="container-fluid p-0">
@@ -15,13 +15,13 @@
                 </div>
             </div>
             
-            <div class="sidebar__sidebar-wrapper-scrollable d-block">
+            <div class="sidebar__scrollable-wrapper d-block">
 
                 {{-- shared ra sa tanan access level ang dashboard na link --}}
                 
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
-                <ul class="sidebar__ul-group-override list-group list-group-flush mx-auto">
-                    <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('dashboard') }}">
+                <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                    <li class="sidebar__li-item list-group-item {{ $is_path_match('dashboard') }}">
                         <i class="sidebar__list-icon fa fa-chart-line"></i><a class="sidebar__list-label" href="{{ url('/dashboard') }}">Dashboard</a>
                     </li>
                 </ul>
@@ -31,18 +31,18 @@
 
                     {{-- kung admin siya --}}
 
-                    <ul class="sidebar__ul-group-override list-group list-group-flush mx-auto">
-                        <span class="sidebar__ul-group-label d-block w-100 py-3 text-info fw-bold" role="text">COMPONENTS</span>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                    <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                        <span class="sidebar__ul-label d-block w-100 py-3 text-info fw-bold" role="text">COMPONENTS</span>
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-users"></i><a class="sidebar__list-label" href="#">Users</a>
                         </li>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="#">Item List</a>
                         </li>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-user"></i><a class="sidebar__list-label" href="#">Requisitioner</a>
                         </li>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-list"></i><a class="sidebar__list-label" href="#">Purchase Request List</a>
                         </li>
                     </ul>
@@ -54,18 +54,36 @@
 
                     {{-- kung requisitioner or similar level --}}
 
-                    <ul class="sidebar__ul-group-override list-group list-group-flush mx-auto">
-                        <span class="sidebar__ul-group-label py-3 text-info fw-bold" role="text">COMPONENTS</span>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('createform') }}">
-                            <i class="sidebar__list-icon fa fa-file"></i><a class="sidebar__list-label" href="{{ url('/createform') }}">Create Form</a>
+                    <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                        <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">COMPONENTS</span>
+                        <li class="sidebar__li-item list-group-item">
+                            <div class="sidebar__accordion accordion accordion-flush">
+                                <div class="sidebar__accordion-item accordion-item">
+                                    <div class="sidebar__accordion-header accordion-header">
+                                        <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
+                                            <i class="sidebar__accordion-button-icon fa fa-file"></i><span class="sidebar__accordion-button-label" role="text">Create Form</span>
+                                        </button>
+                                    </div>
+                                    <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                        <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $is_path_match('newpurchaserequest') }}">
+                                                <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url('/newpurchaserequest') }}">Purchase Request</a>
+                                            </li>
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $is_path_match('newjoborder') }}">
+                                                <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i><a class="sidebar__accordon-body-item-label" href="#">Job Order</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-list"></i><a class="sidebar__list-label" href="#">Form List</a>
                         </li>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="#">Item List</a>
                         </li>
-                        <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                        <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                             <i class="sidebar__list-icon fa fa-comment"></i><a class="sidebar__list-label" href="#">Messages</a>
                         </li>
                     </ul>
@@ -76,9 +94,9 @@
                 @endif
 
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
-                <ul class="sidebar__ul-group-override list-group list-group-flush mx-auto">
-                    <span class="sidebar__ul-group-label py-3 text-info fw-bold" role="text">INTERFACE</span>
-                    <li class="sidebar__li-group-item-override list-group-item text-info {{ $is_path_match('') }}">
+                <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                    <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">INTERFACE</span>
+                    <li class="sidebar__li-item list-group-item {{ $is_path_match('') }}">
                         <i class="sidebar__list-icon fa fa-wrench"></i><a class="sidebar__list-label" href="/dashboard">Utilities</a>
                     </li>
                 </ul>

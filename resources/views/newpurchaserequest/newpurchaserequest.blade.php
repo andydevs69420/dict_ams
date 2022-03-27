@@ -14,19 +14,16 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 col-lg-9">
                         <div class="card">
                             <div class="card-header bg-primary">
-                                <select class="form-select form-select-sm w-auto" form="request-form">
-                                    <option value="1" selected>Purchase Request Form</option>
-                                    <option value="2">Job Order Form</option>
-                                </select>
+                                <span class="text-light">NEW PURCHASE REQUEST FORM</span>
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12">
-                                            <ul class="list-group">
+                                            <ul id="item-list-id"class="list-group">
 
                                                 {{-- default item --}}
                                                 <li class="list-group-item rounded-0">
@@ -76,7 +73,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">
-                                                                <label class="text-dark py-1"><small>Total cost*</small></label>
+                                                                <label class="text-dark py-1"><small>Total cost</small></label>
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i class="fa-solid fa-peso-sign"></i></span>
                                                                     <input class="form-control bg-light" name="totalcost[]" type="number" placeholder="Total cost" required>
@@ -86,9 +83,9 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <button class="btn btn-primary float-end my-2" type="button">
+                                            <button class="btn btn-primary float-end my-2" type="button" onclick="javascript:add_item()">
                                                 <i class="fa fa-plus"></i>
-                                                Add Item
+                                                <span class="text-light" role="text">ADD ITEM</span>
                                             </button>
                                         </div>
                                         <!-- purpose group -->
@@ -106,15 +103,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-5">
+                    <div class="col-12 col-lg-3">
                         <div class="card">
                             <div class="card-header bg-primary">
                                 <span class="text-white" role="header">FILES</span>
                             </div>
-                            <div class="card-body"></div>
+                            <div class="card-body">
+                                <div id="file-content-id" class="d-flex"></div>
+                                <input id="file-pick-id" class="d-none" type="file" name="file[]">
+                                <button class="btn w-100 border border-primary text-primary" for="file-pick-id" type="button" onclick="javascript:$('#file-pick-id').click()">
+                                    <i class="fa fa-plus-circle"></i>
+                                    <span role="text">ADD FILE</span>
+                                </button>
+                            </div>
                             <div class="card-footer">
-                                <input id="file-pick" class="d-none" type="file" name="file[]">
-                                <button class="btn btn-primary text-light float-start" for="file-pick" type="button" onclick="javascript:document.getElementById('file-pick').click()">UPLOAD</button>
+                                <button class="btn btn-primary w-100 text-light" type="button">REQUEST</button>
                             </div>
                         </div>
                     </div>
@@ -125,9 +128,12 @@
 @stop
 
 @section('javascript')
+    <script src="{{ asset('js/components/pr-form/pr-form.js') }}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready((evt) => {
+
             $('[data-bs-toggle="tooltip"]').tooltip();
+
         });
     </script>
 @stop
