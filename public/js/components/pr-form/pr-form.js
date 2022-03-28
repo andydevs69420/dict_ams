@@ -17,7 +17,7 @@ function add_item()
         <li id="item-${nth_child}-id" class="list-group-item rounded-0">
             <div class="d-flex align-items-center justify-content-between">
                 <span class="fw-bold" role="text">Item ${nth_child}</span>
-                <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript: remove_item('#item-${nth_child}-id')">&times;</button>
+                <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove_item('#item-${nth_child}-id')">&times;</button>
             </div>
             <div class="container-fluid">
                 <div class="row">
@@ -76,19 +76,72 @@ function add_item()
 function remove_item(id_query_selector)
 { $(id_query_selector).remove(); }
 
+
 /**
  * 
- * File upload
+ * Generate Form 
+ * 
+ */
+function generate__pr_form()
+{
+    let fields = [
+        'stock[]', 'unit[]', 'description[]', 'qty[]', 'unitcost[]', 'totalcost[]'
+    ];
+    
+    /**
+      * Ingon ani siya tanawon ug e print
+      * [
+      *   [stock, unit, item description, qty, unit cost, total cost], item-0
+      *   .
+      *   .
+      *   .
+      *   [stock, unit, item description, qty, unit cost, total cost]  item-N
+      * ]
+      */
+    let arranged_data = [];
+
+    // row count
+    let rcount = $(`[name='${fields[0]}']`).length;
+
+    // rows
+    for (let i = 0; i < rcount; i++)
+    {   
+        // item_N: where N is the current Item number OR N == i.
+        let item_N = [];
+        // columns
+        for (let j = 0; j < fields.length; j++)
+        {
+            let col = $(`[name='${fields[j]}']`);
+            item_N.push($(col[i]).val());
+        }
+        arranged_data.push(item_N);
+    }
+    
+    let form_data = {
+        'items': arranged_data
+    };
+
+    window.location.href = `/login?data=${JSON.stringify(form_data)}`;
+}
+
+/**
+ * 
+ * File upload display
  *  
  */
-
-
 $('#file-pick-id')
 .change((e) => {
 
-    let file_name = e.target.files[0].name;
-    
-    $('#file-content-id')
-    .append($(`<a class="m-3 px-3 border rounded-pill bg-light text-decoration-none">${file_name}</a>`));
+    let file = e.target.files;
 
+    for (let idx = 0; idx < file.length; idx++)
+    {
+        let filereader = new FileReader();
+        filereader.readAsDataURL(file[idx]);
+        filereader.onloadend = (data) => {
+            $('#file-content-id')
+            .append($(`<a class="d-inline-block px-4 border rounded-pill bg-light text-nowrap text-truncate text-decoration-none" href="${data.currentTarget.result}" target="__blank" style="max-width: 100%;"><small>${file[idx].name}</small></a>`));
+        }
+    }
+    
 });

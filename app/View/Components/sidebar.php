@@ -4,15 +4,15 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class sidebar extends Component
+class Sidebar extends Component
 {
-    public $accessLevelId;
+    public String $accessLevelId;
     /**
      * Create a new component instance.
      * @param int $accessLevelId
      * @return void
      */
-    public function __construct($accessLevelId)
+    public function __construct(String $accessLevelId)
     {
         $this->accessLevelId = $accessLevelId;
     }
