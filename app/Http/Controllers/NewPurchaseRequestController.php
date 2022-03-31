@@ -11,7 +11,9 @@ class NewPurchaseRequestController extends Controller
     function index(Request $request)
     {
         // temporary data handler
-        $data = ['LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first()];
+        $data = [
+            'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first()
+        ];
         return view('newpurchaserequest/newpurchaserequest',$data);
     }
 }

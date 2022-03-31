@@ -8,15 +8,24 @@ class PrForm extends Component
 {
     public Array $items;
     public String $purpose;
+    public String $requester;
+    public String $requesterDesign;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Array $items = [], String $purpose = "")
+    public function __construct(
+        Array $items = [], 
+        String $purpose = "", 
+        String $requester = "",
+        String $requesterDesign = ""
+    )
     {
         $this->items = $items;
         $this->purpose = $purpose;
+        $this->requester = $requester;
+        $this->requesterDesign = $requesterDesign; 
     }
 
     /**
