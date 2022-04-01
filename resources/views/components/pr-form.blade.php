@@ -17,14 +17,14 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <!-- stock no group -->
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-12 col-sm-6">
                                         <label class="text-dark py-1"><small>Stock no*</small></label>
                                         <div  class="input-group">
                                             <input class="form-control bg-light" name="stock[]" type="number" placeholder="Stock no." required>
                                         </div>
                                     </div>
                                     <!-- unit group -->
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-12 col-sm-6">
                                         <label class="text-dark py-1"><small>Unit*</small></label>
                                         <div class="input-group">
                                             <input class="form-control bg-light" list="default-units" name="unit[]" type="text" placeholder="Unit" required>
@@ -43,18 +43,21 @@
                                             <textarea class="form-control bg-light" form="new-purchase-request-form" name="description[]" placeholder="Item description" rows="2" required style="resize: none;"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6">
+                                    <!-- quantity group -->
+                                    <div class="col-12 col-sm-6">
                                         <label class="text-dark py-1"><small>Qty*</small></label>
                                         <div class="input-group">
                                             <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6">
+                                    <!-- unit cost group -->
+                                    <div class="col-12 col-sm-6">
                                         <label class="text-dark py-1"><small>Unit cost*</small></label>
                                         <div class="input-group">
                                             <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost" required>
                                         </div>
                                     </div>
+                                    <!-- total cost group -->
                                     <div class="col-12">
                                         <label class="text-dark py-1"><small>Total cost</small></label>
                                         <div class="input-group">
@@ -75,8 +78,24 @@
                 <div class="col-12">
                     <label for="purpose-field" class="text-dark py-1"><small>Purpose*</small></label>
                     <div  class="input-group">
-                        <textarea id="purpose-field" class="form-control bg-light" form="new-purchase-request-form" name="purpose" placeholder="Purpose" rows="3" required style="resize: none;">{{ $purpose }}</textarea>
+                        <textarea id="purpose-field" class="form-control bg-light" form="new-purchase-request-form" name="purpose" placeholder="Purpose" rows="2" required style="resize: none;">{{ $purpose }}</textarea>
                     </div>
+                </div>
+                <!-- requester group -->
+                <div class="col-12 col-sm-6">
+                    <label class="text-dark py-1"><small>Requested by</small></label>
+                    <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $requester }}" placeholder="Lastname, Firstname MiddleInitial" disabled>
+                    <span  id="req-designation" class="form-text text-center text-truncate small">{{ $requesterDesign }}</span>
+                </div>
+                <div class="cil-12 col-sm-6">
+                    <label class="text-dark py-1"><small>Recommending Approval</small></label>
+                    <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text">
+                    <datalist id="recommending-approval-list">
+                        @for ($i = 0; $i < 20; $i++)
+                            <option value="PERSON-{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </datalist>
+                    <span  id="req-designation" class="form-text text-center text-truncate small">...</span>
                 </div>
             </div>
         </div>
@@ -87,7 +106,7 @@
                 <i class="fa fa-code"></i>
                 <span role="text">GENERATE FORM</span>
             </button>
-            <span class="float-end text-muted" role="text">Form v0.1</span>
+            <span class="float-end text-muted" role="text">Form v0.2</span>
         </div>
     </div>
 </div>

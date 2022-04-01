@@ -80,6 +80,9 @@ function remove_item(id_query_selector)
 /**
  * 
  * Generate Form 
+ * @param String requester kinsay nag buhat sa request
+ * @param String requester_designation unsay designation sa nag request
+ * @return void
  * 
  */
 function generate__pr_form()
@@ -116,12 +119,17 @@ function generate__pr_form()
         }
         arranged_data.push(item_N);
     }
+
+
     
     let form_data = {
-        'items': arranged_data
+        'requester'        : 2,
+        'requester-design' : 2,
+        'items'            : arranged_data,
+        ''                 : 3,
     };
 
-    window.location.href = `/login?data=${JSON.stringify(form_data)}`;
+    window.open(`http://127.0.0.1:5501/pr-template.html?data=${JSON.stringify(form_data)}`);
 }
 
 /**
