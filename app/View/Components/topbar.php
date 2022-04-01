@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class topbar extends Component
+class Topbar extends Component
 {
     public $username;
     /**

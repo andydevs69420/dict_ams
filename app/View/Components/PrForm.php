@@ -4,16 +4,19 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class PRForm extends Component
+class PrForm extends Component
 {
+    public Array $items;
+    public String $purpose;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Array $items = [], String $purpose = "")
     {
-        //
+        $this->items = $items;
+        $this->purpose = $purpose;
     }
 
     /**
