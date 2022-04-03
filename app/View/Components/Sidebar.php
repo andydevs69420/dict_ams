@@ -23,7 +23,7 @@ class Sidebar extends Component
      * @return String
      * 
      */
-    public function is_path_match(String $path)
+    public function isPathMatch(String $path)
     {
         return (request()->is($path)) ? 'active-link' : 'inactive-link';
     }

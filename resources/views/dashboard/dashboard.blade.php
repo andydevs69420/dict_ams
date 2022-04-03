@@ -16,15 +16,15 @@
         <div class="container-fluid px-2 px-md-5">
             <div class="row row-cols-2 row-cols-md-0">
                 <!-- trap user type here! -->
-                @if ($LoggedUserInfo['accesslevel'] === '3')
+                @if (strcmp($LoggedUserInfo['accesslevel'], '3') === 0)
                     {{-- kung admin or similar level --}}
                     <div class="col-6 col-md-3 bg-dark">A</div>
                     <div class="col-6 col-md-3 bg-primary">B</div>
                     <div class="col-6 col-md-3 bg-warning">C</div>
                     <div class="col-6 col-md-3 bg-secondary">D</div>
                 @elseif (
-                            $LoggedUserInfo['accesslevel'] === '4' ||
-                            $LoggedUserInfo['accesslevel'] === '5'
+                            strcmp($LoggedUserInfo['accesslevel'],'4') === 0 ||
+                            strcmp($LoggedUserInfo['accesslevel'],'5') === 0
                         )
                     {{-- kung requisitioner or similar level --}}
                     <div class="col-md-3 bg-dark">A</div>
@@ -34,7 +34,7 @@
                     {{-- debug pag walay access level --}}
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
-                            <h1 class="display-3">Invalid Accesslevel</h1>
+                            <h1 class="display-3">Invalid Accesslevel := {{ $LoggedUserInfo['accesslevel'] }}</h1>
                             <p class="lead">Wala pa na implement gooys!</p>
                             <hr class="my-2">
                             <p>TBD</p>

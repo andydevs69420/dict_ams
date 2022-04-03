@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('middleinitial');
@@ -22,12 +22,14 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('designation', [
-                1,2,3,4,5,6,7,8,9
-            ]);
-            $table->enum('accesslevel', [
-                1,2,3,4,5,6,7,8,9,10,11,12
-            ]);
+            // $table->enum('designation', [
+            //     1,2,3,4,5,6,7,8,9
+            // ]);
+            $table->bigInteger('designation')->unsigned();
+            // $table->enum('accesslevel', [
+            //     1,2,3,4,5,6,7,8,9,10,11,12
+            // ]);
+            $table->bigInteger('accesslevel')->unsigned();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -4,28 +4,41 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
+
+/*
+    reusable is pr-form
+*/
+
 class PrForm extends Component
 {
     public Array $items;
     public String $purpose;
     public String $requester;
     public String $requesterDesign;
+    public String $recommendingApproval;
+    public String $recommendingApprovalDesign;
     /**
      * Create a new component instance.
      *
      * @return void
      */
     public function __construct(
-        Array $items = [], 
+        // dapat naay default item
+        // mao ni si item 1
+        Array $items = [['', '', '', '', '', '']], 
         String $purpose = "", 
         String $requester = "",
-        String $requesterDesign = ""
+        String $requesterDesign = "",
+        String $recommendingApproval = "",
+        String $recommendingApprovalDesign = "",
     )
     {
         $this->items = $items;
         $this->purpose = $purpose;
         $this->requester = $requester;
         $this->requesterDesign = $requesterDesign; 
+        $this->recommendingApproval = $recommendingApproval; 
+        $this->recommendingApprovalDesign = $recommendingApprovalDesign; 
     }
 
     /**

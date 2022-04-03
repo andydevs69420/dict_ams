@@ -1,11 +1,11 @@
 
 /**
  * 
- * item addtion and removal 
+ * Item addtion and removal 
+ * @return void
  * 
  */
-
-function add_item()
+function add__item()
 {
     let item_list, nth_child;
 
@@ -17,19 +17,19 @@ function add_item()
         <li id="item-${nth_child}-id" class="list-group-item rounded-0">
             <div class="d-flex align-items-center justify-content-between">
                 <span class="fw-bold" role="text">Item ${nth_child}</span>
-                <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove_item('#item-${nth_child}-id')">&times;</button>
+                <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove__item('#item-${nth_child}-id')">&times;</button>
             </div>
             <div class="container-fluid">
                 <div class="row">
                     <!-- stock no group -->
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Stock no*</small></label>
                         <div  class="input-group">
                             <input class="form-control bg-light" name="stock[]" type="number" placeholder="Stock no." required>
                         </div>
                     </div>
                     <!-- unit group -->
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Unit*</small></label>
                         <div class="input-group">
                             <input class="form-control bg-light" list="default-units" name="unit[]" type="text" placeholder="Unit" required>
@@ -48,13 +48,13 @@ function add_item()
                             <textarea class="form-control bg-light" form="new-purchase-request-form" name="description[]" placeholder="Item description" rows="2" required style="resize: none;"></textarea>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Qty*</small></label>
                         <div class="input-group">
                             <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty" required>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Unit cost*</small></label>
                         <div class="input-group">
                             <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost" required>
@@ -73,38 +73,109 @@ function add_item()
     `));
 }
 
-function remove_item(id_query_selector)
+/**
+ * 
+ * Remove Item N
+ * @param String id_query_selector mao ning id sa <li> nga nag hawid sa item
+ * @return void
+ * 
+ */
+function remove__item(id_query_selector)
 { $(id_query_selector).remove(); }
 
 
 /**
  * 
+ * Search recommending approval
+ * @param Object rec_approval_name_input
+ * @return void
+ * 
+ */
+async function search__recommending_approval(rec_approval_name_input)
+{
+    let input_Field, rec_approval_list;
+
+    // mao ning input sa user(recommending appoval)
+    input_Field = $(rec_approval_name_input);
+
+    // diri ibutang ang mga serch result based sa input
+    rec_approval_list = $('#recommending-approval-list');
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    // $.ajax lang instead sa .load() para naa tay control sa child
+    await $.ajax({
+        url: '/newpurchaserequest/searchforapproval',
+        type: 'POST',
+        data: {'search': input_Field.val()},
+        dataType: 'json',
+        success: (response, status, request) => {
+
+            if  (input_Field.val().length > 0 && status === 'success')
+            {
+                rec_approval_list.empty();
+
+                let data = response,
+                    id,
+                    fullname;
+
+                data.forEach((element) => {
+
+                    id = element['id'];
+                    fullname = `${element['lastname']}, ${element['firstname']} ${element['middleinitial']}`;
+
+                    rec_approval_list.append(
+                        $(`<option data-id=${id} value="${fullname}"></option>`)
+                    );
+
+                });
+            }
+            else
+                rec_approval_list.empty();
+
+        }
+    });
+}
+
+
+/**
+ * 
  * Generate Form 
- * @param String requester kinsay nag buhat sa request
- * @param String requester_designation unsay designation sa nag request
  * @return void
  * 
  */
 function generate__pr_form()
-{
-    let fields = [
+{   
+    let item_fields , 
+        req_A , 
+        req_B ,
+        rec_A , 
+        rec_B ;
+    
+    item_fields = [
         'stock[]', 'unit[]', 'description[]', 'qty[]', 'unitcost[]', 'totalcost[]'
     ];
     
+    
     /**
+      * 
       * Ingon ani siya tanawon ug e print
       * [
       *   [stock, unit, item description, qty, unit cost, total cost], item-0
       *   .
       *   .
-      *   .
       *   [stock, unit, item description, qty, unit cost, total cost]  item-N
       * ]
+      * 
       */
     let arranged_data = [];
 
     // row count
-    let rcount = $(`[name='${fields[0]}']`).length;
+    let rcount = $(`[name='${item_fields[0]}']`).length;
 
     // rows
     for (let i = 0; i < rcount; i++)
@@ -112,21 +183,30 @@ function generate__pr_form()
         // item_N: where N is the current Item number OR N == i.
         let item_N = [];
         // columns
-        for (let j = 0; j < fields.length; j++)
+        for (let j = 0; j < item_fields.length; j++)
         {
-            let col = $(`[name='${fields[j]}']`);
+            let col = $(`[name='${item_fields[j]}']`);
             item_N.push($(col[i]).val());
         }
         arranged_data.push(item_N);
     }
 
+    // kinsay nag requqest sa form
+    req_A = $('#req-name').val();
+    // unsay designation sa nag request
+    req_B = $('#req-designation').val();
 
+    // kinsay ge recommend mag approve
+    rec_A = $('#rec-approval-name').val();
+    // unsay designation sa mag approve
+    rec_B = $('#rec-designation').val();
     
     let form_data = {
-        'requester'        : 2,
-        'requester-design' : 2,
-        'items'            : arranged_data,
-        ''                 : 3,
+        'items' : arranged_data,
+        'req_A' : req_A ,
+        'req_B' : req_B ,
+        'rec_A' : rec_A ,
+        'rec_B' : rec_B ,
     };
 
     window.open(`http://127.0.0.1:5501/pr-template.html?data=${JSON.stringify(form_data)}`);

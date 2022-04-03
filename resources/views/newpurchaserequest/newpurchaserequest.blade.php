@@ -15,45 +15,49 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-9">
+                        
                         <?php
                             $requester = $LoggedUserInfo['lastname'].', '. $LoggedUserInfo['firstname']. ' '.$LoggedUserInfo['middleinitial']; 
                             $requester_design = null;
+
                             // temporary, wala pa na edit ang registration form
-                            /*
-                                <option value=1>ITO 1</option>
-                                <option value=2>ITO 2</option>
-                                <option value=3>Enginner 1</option>
-                                <option value=4>Enginner 2</option>
-                                <option value=5>ISA 1</option>
-                                <option value=6>PDO 1</option>
-                                <option value=7>Regional Director</option>
-                                <option value=8>Assistant Director</option>
-                                <option value=9>Chief Admin</option>
-                            */
                             switch ($LoggedUserInfo['designation']) {
                                 case '1':
-                                    $requester_design = 'ITO1 1';break;
+                                    $requester_design = 'ITO 1';
+                                    break;
                                 case '2':
-                                    $requester_design = 'ITO2 1';break;
+                                    $requester_design = 'ITO 2';
+                                    break;
                                 case '3':
-                                    $requester_design = 'Engineer 1';break;
+                                    $requester_design = 'Engineer 1';
+                                    break;
                                 case '4':
-                                    $requester_design = 'Engineer 2';break;
+                                    $requester_design = 'Engineer 2';
+                                    break;
                                 case '5':
-                                    $requester_design = 'ISA 1';break;
+                                    $requester_design = 'ISA 1';
+                                    break;
                                 case '6':
-                                    $requester_design = 'PDO 1';break;
+                                    $requester_design = 'PDO 1';
+                                    break;
                                 case '7':
-                                    $requester_design = 'Regional Director';break;
+                                    $requester_design = 'Regional Director';
+                                    break;
                                 case '8':
-                                    $requester_design = 'Assistant Director';break;
+                                    $requester_design = 'Assistant Director';
+                                    break;
                                 case '9':
-                                    $requester_design = 'Chief Admin';break;
+                                    $requester_design = 'Chief Admin';
+                                    break;
                                 default:
-                                    $requester_design = 'UNKNOWN';break;
+                                    $requester_design = 'UNKNOWN';
+                                    break;
                             }
                         ?>
-                        <x-pr-form requester="{{ $requester }}" requester-design="{{ $requester_design }}" ></x-pr-form>
+
+                        <x-pr-form 
+                            requester="{{ $requester }}" 
+                            requester-design="{{ $requester_design }}"></x-pr-form>
 
                     </div>
                     <div class="col-12 col-lg-3">

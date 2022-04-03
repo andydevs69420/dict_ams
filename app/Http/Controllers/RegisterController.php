@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Designation;
+use App\Models\Accesslevel;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -11,7 +13,14 @@ class RegisterController extends Controller
     //
     function index()
     {
-        return view('register/register');   
+        // akong ge edit part kay naay need naku sa akong task
+
+        $params = [
+            'designations' => Designation::all(),
+            'accesslevels' => Accesslevel::all()
+        ];
+
+        return view('register/register', $params);   
     }
 
 

@@ -9,67 +9,82 @@
                     <ul id="item-list-id"class="list-group">
 
                         {{-- default item --}}
-                        <li class="list-group-item rounded-0">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span class="fw-bold" role="text">Item 1</span>
-                                <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
-                            </div>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <!-- stock no group -->
-                                    <div class="col-12 col-sm-6">
-                                        <label class="text-dark py-1"><small>Stock no*</small></label>
-                                        <div  class="input-group">
-                                            <input class="form-control bg-light" name="stock[]" type="number" placeholder="Stock no." required>
+
+                        @foreach ($items as $itm)
+
+                            {{-- 
+
+                                $itm[0] para sa stock
+                                $itm[1] para sa unit
+                                $itm[2] para sa description
+                                $itm[3] para sa Quanity
+                                $itm[4] para sa Unit cost
+                                $itm[5] para sa Total cost
+
+                            --}}
+
+                            <li class="list-group-item rounded-0">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="fw-bold" role="text">Item 1</span>
+                                    <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <!-- stock no group -->
+                                        <div class="col-12 col-sm-6">
+                                            <label class="text-dark py-1"><small>Stock no*</small></label>
+                                            <div  class="input-group">
+                                                <input class="form-control bg-light" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="Stock no." required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- unit group -->
-                                    <div class="col-12 col-sm-6">
-                                        <label class="text-dark py-1"><small>Unit*</small></label>
-                                        <div class="input-group">
-                                            <input class="form-control bg-light" list="default-units" name="unit[]" type="text" placeholder="Unit" required>
-                                            <datalist id="default-units">
-                                                <option value="pcs">
-                                                <option value="in">
-                                                <option value="mm">
-                                                <option value="cm">
-                                            </datalist>
+                                        <!-- unit group -->
+                                        <div class="col-12 col-sm-6">
+                                            <label class="text-dark py-1"><small>Unit*</small></label>
+                                            <div class="input-group">
+                                                <input class="form-control bg-light" list="default-units" name="unit[]" type="text" value="{{ $itm[1] }}" placeholder="Unit" required>
+                                                <datalist id="default-units">
+                                                    <option value="pcs">
+                                                    <option value="in">
+                                                    <option value="mm">
+                                                    <option value="cm">
+                                                </datalist>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- item dscription group -->
-                                    <div class="col-12">
-                                        <label class="text-dark py-1"><small>Item description*</small></label>
-                                        <div  class="input-group">
-                                            <textarea class="form-control bg-light" form="new-purchase-request-form" name="description[]" placeholder="Item description" rows="2" required style="resize: none;"></textarea>
+                                        <!-- item dscription group -->
+                                        <div class="col-12">
+                                            <label class="text-dark py-1"><small>Item description*</small></label>
+                                            <div  class="input-group">
+                                                <textarea class="form-control bg-light" form="new-purchase-request-form" name="description[]" type="text" placeholder="Item description" rows="2" required style="resize: none;">{{ $itm[2] }}</textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- quantity group -->
-                                    <div class="col-12 col-sm-6">
-                                        <label class="text-dark py-1"><small>Qty*</small></label>
-                                        <div class="input-group">
-                                            <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty" required>
+                                        <!-- quantity group -->
+                                        <div class="col-12 col-sm-6">
+                                            <label class="text-dark py-1"><small>Qty*</small></label>
+                                            <div class="input-group">
+                                                <input class="form-control bg-light" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="Qty" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- unit cost group -->
-                                    <div class="col-12 col-sm-6">
-                                        <label class="text-dark py-1"><small>Unit cost*</small></label>
-                                        <div class="input-group">
-                                            <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost" required>
+                                        <!-- unit cost group -->
+                                        <div class="col-12 col-sm-6">
+                                            <label class="text-dark py-1"><small>Unit cost*</small></label>
+                                            <div class="input-group">
+                                                <input class="form-control bg-light" name="unitcost[]" type="number" value="{{ $itm[4] }}" placeholder="Unit cost" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- total cost group -->
-                                    <div class="col-12">
-                                        <label class="text-dark py-1"><small>Total cost</small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fa-solid fa-peso-sign"></i></span>
-                                            <input class="form-control bg-light" name="totalcost[]" type="number" placeholder="Total cost" required>
+                                        <!-- total cost group -->
+                                        <div class="col-12">
+                                            <label class="text-dark py-1"><small>Total cost</small></label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fa-solid fa-peso-sign"></i></span>
+                                                <input class="form-control bg-light" name="totalcost[]" type="number" value="{{ $itm[5] }}" placeholder="Total cost" required>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
                     </ul>
-                    <button class="btn btn-primary float-end my-2" type="button" onclick="javascript:add_item()">
+                    <button class="btn btn-primary float-end my-2" type="button" onclick="javascript:add__item()">
                         <i class="fa fa-plus"></i>
                         <span class="text-light" role="text">ADD ITEM</span>
                     </button>
@@ -84,18 +99,15 @@
                 <!-- requester group -->
                 <div class="col-12 col-sm-6">
                     <label class="text-dark py-1"><small>Requested by</small></label>
-                    <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $requester }}" placeholder="Lastname, Firstname MiddleInitial" disabled>
+                    <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $requester }}" placeholder="Lastname, Firstname Middle Initial" disabled>
                     <span  id="req-designation" class="form-text text-center text-truncate small">{{ $requesterDesign }}</span>
                 </div>
+                <!-- recommending approval group -->
                 <div class="cil-12 col-sm-6">
                     <label class="text-dark py-1"><small>Recommending Approval</small></label>
-                    <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text">
-                    <datalist id="recommending-approval-list">
-                        @for ($i = 0; $i < 20; $i++)
-                            <option value="PERSON-{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </datalist>
-                    <span  id="req-designation" class="form-text text-center text-truncate small">...</span>
+                    <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $recommendingApproval }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval(this)">
+                    <datalist id="recommending-approval-list"></datalist>
+                    <span  id="rec-designation" class="form-text text-center text-truncate small"> {{ strlen($recommendingApprovalDesign) === 0 ? '...' : $recommendingApprovalDesign }} </span>
                 </div>
             </div>
         </div>

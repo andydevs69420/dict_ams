@@ -113,7 +113,7 @@
                             <div class="col-lg-6 p-2">
                                 <select class="form-control form-select w-100 @error('designation') is-invalid @enderror" name="designation" id="designation" required>
                                     <option selected disabled>Select Designation</option>
-                                    <option value=1>ITO 1</option>
+                                    {{-- <option value=1>ITO 1</option>
                                     <option value=2>ITO 2</option>
                                     <option value=3>Enginner 1</option>
                                     <option value=4>Enginner 2</option>
@@ -121,7 +121,12 @@
                                     <option value=6>PDO 1</option>
                                     <option value=7>Regional Director</option>
                                     <option value=8>Assistant Director</option>
-                                    <option value=9>Chief Admin</option>
+                                    <option value=9>Chief Admin</option> --}}
+
+                                    @foreach ($designations as $d)
+                                        <option value={{ $d['id'] }}>{{ $d['designation'] }}</option>
+                                    @endforeach
+
                                 </select>
                                 @error('designation')
                                     <span class="invalid-feedback" role="alert">
@@ -132,7 +137,8 @@
                             <div class="col-lg-6 p-2">
                                 <select class="form-control form-select w-100 @error('accesslevel') is-invalid @enderror" name="accesslevel" id="accesslevel" required>
                                     <option selected disabled>Select Access Level</option>
-                                    <option value=1>Regional Director</option>
+                                    
+                                    {{-- <option value=1>Regional Director</option>
                                     <option value=2>Assistant Regional Director</option>
                                     <option value=3>Chief Admin Officer</option>
                                     <option value=4>Provincial Officer</option>
@@ -143,7 +149,12 @@
                                     <option value=9>Canvasser</option>
                                     <option value=10>Supply Officer</option>
                                     <option value=11>Budget Officer</option>
-                                    <option value=12>Chief TOD</option>
+                                    <option value=12>Chief TOD</option> --}}
+
+                                    @foreach ($accesslevels as $als)
+                                        <option value={{ $als['id'] }}>{{ $als['accesslevel'] }}</option>
+                                    @endforeach
+
                                 </select>
 
                                 @error('accesslevel')
