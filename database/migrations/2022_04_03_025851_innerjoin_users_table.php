@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function(Blueprint $table) {
-            $table->foreign('designation')->references('id')->on('designations');
-            $table->foreign('accesslevel')->references('id')->on('accesslevels');
-        });
+        try
+        {
+            Schema::table('users', function(Blueprint $table) {
+                $table->foreign('designation')->references('id')->on('designations');
+                $table->foreign('accesslevel')->references('id')->on('accesslevels');
+            });
+        }catch(Exception $err)
+        { /* on duplicate */ }
     }
 
     /**
