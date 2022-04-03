@@ -15,13 +15,17 @@
         <!-- dahboard main content -->
         <div class="container-fluid px-2 px-md-5">
             <div class="row row-cols-2 row-cols-md-0">
-                <!-- trap user type here! -->
+                
+                {{-- trap user type here! --}}
+
+                {{-- TODO: Implement!! --}}
                 @if (strcmp($LoggedUserInfo['accesslevel'], '3') === 0)
                     {{-- kung admin or similar level --}}
                     <div class="col-6 col-md-3 bg-dark">A</div>
                     <div class="col-6 col-md-3 bg-primary">B</div>
                     <div class="col-6 col-md-3 bg-warning">C</div>
                     <div class="col-6 col-md-3 bg-secondary">D</div>
+                {{-- TODO: Implement!! --}}
                 @elseif (
                             strcmp($LoggedUserInfo['accesslevel'],'4') === 0 ||
                             strcmp($LoggedUserInfo['accesslevel'],'5') === 0

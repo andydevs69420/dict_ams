@@ -39,13 +39,14 @@ class GenerateFormController extends Controller
     // ========================== JO ==========================
     function jobOrder(Request $request)
     {
-
+        // TODO: e restrict pag dili rquisitioner |  e redirect sa login
     }
 
     // ========================== PR ==========================
 
     function purchaseRequest(Request $request)
     {
+        // TODO: e restrict pag dili rquisitioner |  e redirect sa login
         // temporary data handler
         $data = [
             'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first()
