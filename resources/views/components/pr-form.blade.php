@@ -105,7 +105,7 @@
                 <!-- recommending approval group -->
                 <div class="cil-12 col-sm-6">
                     <label class="text-dark py-1"><small>Recommending Approval</small></label>
-                    <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $recommendingApproval }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval(this)">
+                    <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $recommendingApproval }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval(this)" onchange="javascript:onchange__search_approval()">
                     <datalist id="recommending-approval-list"></datalist>
                     <span  id="rec-designation" class="form-text text-center text-truncate small"> {{ strlen($recommendingApprovalDesign) === 0 ? '...' : $recommendingApprovalDesign }} </span>
                 </div>

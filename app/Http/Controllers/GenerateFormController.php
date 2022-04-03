@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -14,13 +13,6 @@ class GenerateFormController extends Controller
     function searchForApproval(Request $request)
     {
         
-        /*
-            mao ni sila ang access level na pwede maka approve
-        */
-        $valid_access_levels = [
-            11, // BO
-        ];
-
         $search = $request->input('search');
 
         $result = User::where(
@@ -30,7 +22,12 @@ class GenerateFormController extends Controller
         )
         ->whereIn(
             'accesslevel',
-            $valid_access_levels
+            [
+                /**
+                 * Mao ni sila ang access level na pwede maka approve 
+                 */
+                11, // Budget Officer
+            ]
         )->get();
     
         return json_encode($result);
@@ -39,19 +36,28 @@ class GenerateFormController extends Controller
     // ========================== JO ==========================
     function jobOrder(Request $request)
     {
-        // TODO: e restrict pag dili rquisitioner |  e redirect sa login
+        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
     }
 
     // ========================== PR ==========================
 
     function purchaseRequest(Request $request)
     {
-        // TODO: e restrict pag dili rquisitioner |  e redirect sa login
-        // temporary data handler
-        $data = [
-            'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first()
-        ];
-        return view('newpurchaserequest/newpurchaserequest',$data);
+        $data = ['LoggedUserInfo' => getUserInfoById(session('LoggedUser'))];
+
+        /*
+            REFER to accesslevels table for id
+            | Mao rani sila requisitioner
+            ;
+
+            4 := Project Officer
+            5 := Focal
+        */
+
+        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5']))
+            return redirect('/logout');
+
+        return view('newpurchaserequest/newpurchaserequest', $data);
     }
 
 }

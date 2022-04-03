@@ -124,7 +124,7 @@ async function search__recommending_approval(rec_approval_name_input)
                     fullname;
 
                 data.forEach((element) => {
-
+                    console.log(element);
                     id = element['id'];
                     fullname = `${element['lastname']}, ${element['firstname']} ${element['middleinitial']}`;
 
@@ -141,6 +141,8 @@ async function search__recommending_approval(rec_approval_name_input)
     });
 }
 
+function onchange__search_approval()
+{ console.log('changed'); }
 
 /**
  * 
@@ -233,3 +235,8 @@ $('#file-pick-id')
     }
     
 });
+
+
+
+
+
