@@ -1,6 +1,12 @@
 
 
-@extends('layout.app-main', ['accesslevelid' => $LoggedUserInfo['accesslevel'],'username' => $LoggedUserInfo['username']])
+@extends(
+    'layout.app-main', 
+    [
+        'accesslevelid' => $LoggedUserInfo['accesslevel_id'], // para sa sidebar
+        'username'      => $LoggedUserInfo['username']        // para sa topbar
+    ]
+)
 
 @section('title', 'AMS | dashboard')
 
@@ -15,16 +21,20 @@
         <!-- dahboard main content -->
         <div class="container-fluid px-2 px-md-5">
             <div class="row row-cols-2 row-cols-md-0">
-                <!-- trap user type here! -->
-                @if (strcmp($LoggedUserInfo['accesslevel'], '3') === 0)
+                
+                {{-- trap user type here! --}}
+                
+                {{-- TODO: Implement!! --}}
+                @if (strcmp($LoggedUserInfo['accesslevel_id'], '3') === 0)
                     {{-- kung admin or similar level --}}
                     <div class="col-6 col-md-3 bg-dark">A</div>
                     <div class="col-6 col-md-3 bg-primary">B</div>
                     <div class="col-6 col-md-3 bg-warning">C</div>
                     <div class="col-6 col-md-3 bg-secondary">D</div>
+                {{-- TODO: Implement!! --}}
                 @elseif (
-                            strcmp($LoggedUserInfo['accesslevel'],'4') === 0 ||
-                            strcmp($LoggedUserInfo['accesslevel'],'5') === 0
+                            strcmp($LoggedUserInfo['accesslevel_id'],'4') === 0 ||
+                            strcmp($LoggedUserInfo['accesslevel_id'],'5') === 0
                         )
                     {{-- kung requisitioner or similar level --}}
                     <div class="col-md-3 bg-dark">A</div>
@@ -34,7 +44,7 @@
                     {{-- debug pag walay access level --}}
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
-                            <h1 class="display-3">Invalid Accesslevel := {{ $LoggedUserInfo['accesslevel'] }}</h1>
+                            <h1 class="display-3">Invalid Accesslevel := {{ $LoggedUserInfo['accesslevel_id'] }}</h1>
                             <p class="lead">Wala pa na implement gooys!</p>
                             <hr class="my-2">
                             <p>TBD</p>

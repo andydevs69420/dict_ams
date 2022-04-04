@@ -10,7 +10,7 @@
 @stop
 
 @section('body')
-    <div class="d-block d-md-flex align-items-center justify-content-center w-100 h-100 bg-primary">
+    <main class="d-block d-md-flex align-items-center justify-content-center w-100 h-100 bg-primary">
         <div class="login__center-panel d-block position-relative py-4 bg-white">
             <!-- app brand -->
             <div class="login__app-brand d-block mx-auto">
@@ -47,7 +47,7 @@
                 <a class="btn btn-primary lead my-2 my-md-0 w-100" href="{{ '/register' }}">Register</a>
             </form>
         </div>
-    </div>
+    </main>
 @stop
 
 

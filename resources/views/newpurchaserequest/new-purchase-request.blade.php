@@ -1,4 +1,12 @@
-@extends('layout.app-main', ['accesslevelid' => $LoggedUserInfo['accesslevel'],'username' => $LoggedUserInfo['username']])
+
+
+@extends(
+    'layout.app-main', 
+    [
+        'accesslevelid' => $LoggedUserInfo['accesslevel_id'], // para sa sidebar
+        'username'      => $LoggedUserInfo['username']        // para sa topbar
+    ]
+)
 
 @section('title', 'AMS | purchase request')
 
@@ -15,49 +23,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-9">
-                        
-                        <?php
-                            $requester = $LoggedUserInfo['lastname'].', '. $LoggedUserInfo['firstname']. ' '.$LoggedUserInfo['middleinitial']; 
-                            $requester_design = null;
-
-                            // temporary, wala pa na edit ang registration form
-                            switch ($LoggedUserInfo['designation']) {
-                                case '1':
-                                    $requester_design = 'ITO 1';
-                                    break;
-                                case '2':
-                                    $requester_design = 'ITO 2';
-                                    break;
-                                case '3':
-                                    $requester_design = 'Engineer 1';
-                                    break;
-                                case '4':
-                                    $requester_design = 'Engineer 2';
-                                    break;
-                                case '5':
-                                    $requester_design = 'ISA 1';
-                                    break;
-                                case '6':
-                                    $requester_design = 'PDO 1';
-                                    break;
-                                case '7':
-                                    $requester_design = 'Regional Director';
-                                    break;
-                                case '8':
-                                    $requester_design = 'Assistant Director';
-                                    break;
-                                case '9':
-                                    $requester_design = 'Chief Admin';
-                                    break;
-                                default:
-                                    $requester_design = 'UNKNOWN';
-                                    break;
-                            }
-                        ?>
 
                         <x-pr-form 
-                            requester="{{ $requester }}" 
-                            requester-design="{{ $requester_design }}"></x-pr-form>
+                            requester="{{ $LoggedUserInfo['lastname'] . ', ' . $LoggedUserInfo['firstname'] . ' ' . $LoggedUserInfo['middleinitial'] }}" 
+                            requester-design="{{ $LoggedUserInfo['designation_name'] }}"></x-pr-form>
 
                     </div>
                     <div class="col-12 col-lg-3">

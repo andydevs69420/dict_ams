@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 
 // e usa lang ang generate pr ug jo nga form
+
+/*
+    Makita si "getUserInfoById" , "findUserByName"  sa "app/Helpers/DatabaseHelpers"
+*/
 
 class GenerateFormController extends Controller
 {   
@@ -14,43 +18,56 @@ class GenerateFormController extends Controller
     function searchForApproval(Request $request)
     {
         
-        /*
-            mao ni sila ang access level na pwede maka approve
-        */
-        $valid_access_levels = [
-            11, // BO
-        ];
-
         $search = $request->input('search');
+        $search = (!$search)? '' : $search;
 
-        $result = User::where(
-            User::raw("CONCAT(lastname, ',', ' ', firstname, ' ', middleinitial)"),
-            'like',
-            '%'.$search.'%'
-        )
-        ->whereIn(
-            'accesslevel',
-            $valid_access_levels
-        )->get();
+        $result = findUserByName(
+            $search,
+            [
+                /**
+                 * Mao ni sila ang access level na pwede maka approve 
+                 */
+                11, // Budget Officer
+            ]
+        );
     
-        return json_encode($result);
+        return $result;
     }
 
     // ========================== JO ==========================
     function jobOrder(Request $request)
     {
-
+        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
     }
 
     // ========================== PR ==========================
 
     function purchaseRequest(Request $request)
     {
-        // temporary data handler
+        $data = ['LoggedUserInfo' => getUserInfoById(session('LoggedUser'))];
+
+        /*
+            REFER to accesslevels table for id
+            | Mao rani sila requisitioner
+            ;
+
+            4 := Project Officer
+            5 := Focal
+        */
+
+        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5']))
+            return redirect('/logout');
+
+        return view('newpurchaserequest/new-purchase-request', $data);
+    }
+
+    function viewPRForm(Request $request)
+    {
         $data = [
-            'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first()
+            'PrFormData' => json_decode($request->input('data'),true)
         ];
-        return view('newpurchaserequest/newpurchaserequest',$data);
+
+        return view('newpurchaserequest/view-pr-form', $data);
     }
 
 }
