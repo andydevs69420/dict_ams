@@ -93,13 +93,16 @@ function remove__item(id_query_selector)
  */
 async function search__recommending_approval(rec_approval_name_input)
 {
-    let input_Field, rec_approval_list;
+    let input_Field, rec_approval_list, rec_approval_design;
 
     // mao ning input sa user(recommending appoval)
     input_Field = $(rec_approval_name_input);
 
     // diri ibutang ang mga serch result based sa input
     rec_approval_list = $('#recommending-approval-list');
+
+    // diri ibutangang designation sa selected approver
+    rec_approval_design = $('#rec-designation');
 
     $.ajaxSetup({
         headers: {
@@ -120,29 +123,35 @@ async function search__recommending_approval(rec_approval_name_input)
                 rec_approval_list.empty();
 
                 let data = response,
-                    id,
-                    fullname;
-
-                data.forEach((element) => {
-                    console.log(element);
-                    id = element['id'];
-                    fullname = `${element['lastname']}, ${element['firstname']} ${element['middleinitial']}`;
+                    user_identf,
+                    user_design,
+                    user_fullnm;
+              
+                data.forEach((user) => {
+                   
+                    user_identf = user['id'];
+                    user_design = user['designation_name'];
+                    user_fullnm = `${user['lastname']}, ${user['firstname']} ${user['middleinitial']}`;
 
                     rec_approval_list.append(
-                        $(`<option data-id=${id} value="${fullname}"></option>`)
+                        $(`<option value="${user_fullnm}"></option>`)
                     );
+
+                    input_Field.change((evt) => {
+                        rec_approval_design.text(user_design);
+                    });
 
                 });
             }
             else
+            {
                 rec_approval_list.empty();
+                rec_approval_design.text('...');
+            }
 
         }
     });
 }
-
-function onchange__search_approval()
-{ console.log('changed'); }
 
 /**
  * 
@@ -153,6 +162,7 @@ function onchange__search_approval()
 function generate__pr_form()
 {   
     let item_fields , 
+        purps ,
         req_A , 
         req_B ,
         rec_A , 
@@ -193,25 +203,29 @@ function generate__pr_form()
         arranged_data.push(item_N);
     }
 
+    // purpose sa pag purchase
+    purps = $('#purpose-field').val();
+
     // kinsay nag requqest sa form
     req_A = $('#req-name').val();
     // unsay designation sa nag request
-    req_B = $('#req-designation').val();
+    req_B = $('#req-designation').text();
 
     // kinsay ge recommend mag approve
     rec_A = $('#rec-approval-name').val();
     // unsay designation sa mag approve
-    rec_B = $('#rec-designation').val();
+    rec_B = $('#rec-designation').text();
     
     let form_data = {
         'items' : arranged_data,
+        'purps' : purps ,
         'req_A' : req_A ,
         'req_B' : req_B ,
         'rec_A' : rec_A ,
         'rec_B' : rec_B ,
     };
 
-    window.open(`http://127.0.0.1:5501/pr-template.html?data=${JSON.stringify(form_data)}`);
+    window.open(`/newpurchaserequest/viewprform?data=${JSON.stringify(form_data)}`);
 }
 
 /**

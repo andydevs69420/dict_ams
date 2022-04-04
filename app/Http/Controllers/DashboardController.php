@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 
 /*
-    Makita si "get__user_info_by_id" sa "app/Helpers/DatabaseHelpers"
+    Makita si "getUserInfoById" sa "app/Helpers/DatabaseHelpers"
 */
 
 

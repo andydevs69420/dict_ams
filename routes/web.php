@@ -35,4 +35,5 @@ Route::match(['get', 'post'],'/dashboard', [DashboardController::class,'index'])
 
 // purchase request
 Route::get('/newpurchaserequest', [GenerateFormController::class,'purchaseRequest']);
+Route::get('/newpurchaserequest/viewprform', [GenerateFormController::class,'viewPRForm']);
 Route::post('/newpurchaserequest/searchforapproval', [GenerateFormController::class,'searchForApproval']);

@@ -56,5 +56,47 @@
             true
         );
     }
+
+    /**
+     * 
+     * Find users by name  
+     * @return Array[JSON] 
+     * 
+     */
+    function findUserByName(String $name, Array $access_level_filter = [1,2,3,4,5,6,7,8,9,10,11,12] /* include all access level by default! */)
+    {
+        return json_decode(
+            json_encode(
+                DB::table('users')
+                ->select(
+                    'users.id', 
+                    'users.firstname', 
+                    'users.lastname', 
+                    'users.middleinitial',
+                    'users.username', 
+                    'users.email', 
+                    'designations.id AS designation_id', 
+                    'designations.designation AS designation_name', 
+                    'accesslevels.id AS accesslevel_id', 
+                    'accesslevels.accesslevel AS accesslevel_name', 
+                )
+                ->join('designations', 'users.designation', '=', 'designations.id')
+                ->join('accesslevels', 'users.accesslevel', '=', 'accesslevels.id')
+                ->where(
+                    User::raw("CONCAT(users.lastname, ',', ' ', users.firstname, ' ', users.middleinitial)"),
+                    'like',
+                    '%'.$name.'%'
+                )
+                ->whereIn(
+                    'accesslevels.id',
+                    $access_level_filter
+                )
+                ->limit(5)
+                ->get(),
+                true
+            ), 
+            true
+        );
+    }
 ?>
 

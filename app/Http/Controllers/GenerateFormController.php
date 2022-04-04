@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 
 // e usa lang ang generate pr ug jo nga form
+
+/*
+    Makita si "getUserInfoById" , "findUserByName"  sa "app/Helpers/DatabaseHelpers"
+*/
 
 class GenerateFormController extends Controller
 {   
@@ -14,23 +19,19 @@ class GenerateFormController extends Controller
     {
         
         $search = $request->input('search');
+        $search = (!$search)? '' : $search;
 
-        $result = User::where(
-            User::raw("CONCAT(lastname, ',', ' ', firstname, ' ', middleinitial)"),
-            'like',
-            '%'.$search.'%'
-        )
-        ->whereIn(
-            'accesslevel',
+        $result = findUserByName(
+            $search,
             [
                 /**
                  * Mao ni sila ang access level na pwede maka approve 
                  */
                 11, // Budget Officer
             ]
-        )->get();
+        );
     
-        return json_encode($result);
+        return $result;
     }
 
     // ========================== JO ==========================
@@ -57,7 +58,16 @@ class GenerateFormController extends Controller
         if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5']))
             return redirect('/logout');
 
-        return view('newpurchaserequest/newpurchaserequest', $data);
+        return view('newpurchaserequest/new-purchase-request', $data);
+    }
+
+    function viewPRForm(Request $request)
+    {
+        $data = [
+            'PrFormData' => json_decode($request->input('data'),true)
+        ];
+
+        return view('newpurchaserequest/view-pr-form', $data);
     }
 
 }
