@@ -117,7 +117,7 @@
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-center justify-content-lg-between align-items-center">
-                <button class="pr-form__generate-pr-form-btn btn btn-success rounded-pill text-light float-start" type="submit" form="validation-form" onclick="javascript:generate__pr_form()">
+                <button class="pr-form__generate-pr-form-btn btn btn-primary text-light float-start" type="submit" form="validation-form" onclick="javascript:generate__pr_form()">
                     <i class="fa fa-file"></i>
                     <span role="text">GENERATE FORM</span>
                 </button>

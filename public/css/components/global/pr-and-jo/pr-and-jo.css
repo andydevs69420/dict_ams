@@ -45,5 +45,11 @@ input[type=number] {
   }
 }
 
+@media screen and (min-width: 0px) and (max-width: 991px) {
+  .pr-form__generate-pr-form-btn {
+    border-radius: 1000px !important;
+  }
+}
+
 /* ====================== Job Order ====================== */
 /*# sourceMappingURL=pr-and-jo.css.map */
