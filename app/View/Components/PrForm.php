@@ -6,40 +6,91 @@ use Illuminate\View\Component;
 
 
 /*
-    reusable is pr-form
+    ****** reusable pr-form ******
+    | IMPLEMENT encapsulation
+    ;
 */
 
 class PrForm extends Component
 {
-    public Array $items;
-    public String $purpose;
-    public String $requester;
-    public String $requesterDesign;
-    public String $recommendingApproval;
-    public String $recommendingApprovalDesign;
+    private Array $items;
+    private String $purpose;
+    private Array $budgetOfficer;
+    private Array $requisitioner;
+    private Array $recommendingApproval;
     /**
      * Create a new component instance.
      *
      * @return void
      */
     public function __construct(
-        // dapat naay default item
-        // mao ni si item 1
-        Array $items = [['', '', '', '', '', '']], 
-        String $purpose = "", 
-        String $requester = "",
-        String $requesterDesign = "",
-        String $recommendingApproval = "",
-        String $recommendingApprovalDesign = "",
+        Array $items = [
+            /***
+             * dapat naay default item
+             * mao ni si item 1
+             */
+            ['', '', '', '', '', '']
+        ], 
+        String $purpose              = "", 
+        Array  $budgetOfficer        = [], 
+        Array  $requisitioner        = [], 
+        Array  $recommendingApproval = [],
     )
     {
-        $this->items = $items;
-        $this->purpose = $purpose;
-        $this->requester = $requester;
-        $this->requesterDesign = $requesterDesign; 
-        $this->recommendingApproval = $recommendingApproval; 
-        $this->recommendingApprovalDesign = $recommendingApprovalDesign; 
+        $this->items                = $items;
+        $this->purpose              = $purpose;
+        $this->budgetOfficer        = $budgetOfficer;
+        $this->requisitioner        = $requisitioner;
+        $this->recommendingApproval = $recommendingApproval;
     }
+
+    // =============== REQUISITIONER METHODS ===============
+     /**
+     * Returns Array of items
+     * @return Array
+     */
+    public function getItems() : Array
+    { return $this->items; }
+
+    /**
+     * Returns PR-Form Purpose
+     * @return String
+     */
+    public function getPurpose() : String
+    { return $this->purpose; }
+
+    /** 
+     * Returns requisitioner id
+     * @return Int
+     */
+    public function getRequisitionerAccessLevelId() : Int
+    { return (Int) $this->requisitioner['accesslevel_id']; }
+
+    /**
+     * Returns requisitioner name eg: LN, FN MN
+     * @return String
+     */
+    public function getRequisitionerName() : String 
+    {
+        if (!(array) $this->requisitioner)
+            return "...";
+
+        return $this->requisitioner['lastname'] . ", " . $this->requisitioner['firstname'] . " " . $this->requisitioner['middleinitial'];
+    }
+
+    /**
+     * Returns requisitioner designation eg: designation, Accesslevel
+     * @return String
+     */
+    public function getRequisitionerDesignation() : String
+    {
+        if (!(array) $this->requisitioner)
+            return "...";
+
+        return $this->requisitioner['designation_name'] . ", " . $this->requisitioner['accesslevel_name'];
+    }
+
+    // =============== RECOMMENDING APPROVAL METHODS ===============
 
     /**
      * Get the view / contents that represent the component.

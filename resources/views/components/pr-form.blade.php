@@ -13,7 +13,7 @@
 
                             {{-- default item --}}
 
-                            @foreach ($items as $itm)
+                            @foreach ($getItems() as $itm)
 
                                 {{-- 
 
@@ -31,7 +31,7 @@
                                         <span class="fw-bold" role="text">Item 1</span>
                                         <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
                                     </div>
-                                    <div class="container-fluid">
+                                    <div class="container-fluid p-0">
                                         <div class="row">
                                             <!-- stock no group -->
                                             <div class="col-12 col-sm-6">
@@ -87,41 +87,41 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <button class="btn btn-primary float-end my-2" type="button" onclick="javascript:add__item()">
+                        <button class="pr-form__add-new-item-btn btn my-2 text-light" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add New Item" onclick="javascript:add__item()">
                             <i class="fa fa-plus"></i>
-                            <span class="text-light" role="text">ADD ITEM</span>
+                            <span class="text-light" role="text">ADD NEW ITEM</span>
                         </button>
                     </div>
                     <!-- purpose group -->
                     <div class="col-12">
                         <label for="purpose-field" class="text-dark py-1"><small>Purpose*</small></label>
                         <div  class="input-group">
-                            <textarea id="purpose-field" class="form-control bg-light" name="purpose" placeholder="Purpose" rows="2" required style="resize: none;">{{ $purpose }}</textarea>
+                            <textarea id="purpose-field" class="form-control bg-light" name="purpose" placeholder="Purpose" rows="2" required style="resize: none;">{{ $getPurpose() }}</textarea>
                         </div>
                     </div>
                     <!-- requester group -->
                     <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Requested by</small></label>
-                        <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $requester }}" placeholder="Lastname, Firstname Middle Initial" disabled>
-                        <span  id="req-designation" class="form-text text-center text-truncate small">{{ $requesterDesign }}</span>
+                        <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" disabled>
+                        <span  id="req-designation" class="form-text text-center text-truncate small">{{ $getRequisitionerDesignation() }}</span>
                     </div>
                     <!-- recommending approval group -->
                     <div class="cil-12 col-sm-6">
                         <label class="text-dark py-1"><small>Recommending Approval</small></label>
-                        <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $recommendingApproval }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval(this)">
+                        <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval('{{ $getRequisitionerAccessLevelId() }}',this)">
                         <datalist id="recommending-approval-list"></datalist>
-                        <span  id="rec-designation" class="form-text text-center text-truncate small"> {{ strlen($recommendingApprovalDesign) === 0 ? '...' : $recommendingApprovalDesign }} </span>
+                        <span  id="rec-designation" class="form-text text-center text-truncate small"> ... </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer">
-            <div class="d-flex justify-content-center justify-content-lg-between align-items-center">
-                <button class="pr-form__generate-pr-form-btn btn btn-primary text-light float-start" type="submit" form="validation-form" onclick="javascript:generate__pr_form()">
+            <div class="d-flex justify-content-center justify-content-lg-between align-items-center px-0 px-lg-4">
+                <button class="pr-form__generate-pr-form-btn btn btn-primary text-light" type="submit" form="validation-form" data-bs-toggle="tooltip" data-bs-placement="left" title="Generate Form" onclick="javascript:generate__pr_form()">
                     <i class="fa fa-file"></i>
                     <span role="text">GENERATE FORM</span>
                 </button>
-                <span class="float-end text-muted" role="text">Form v0.2</span>
+                <span class="text-muted" role="text">Form v0.2</span>
             </div>
         </div>
     </div>

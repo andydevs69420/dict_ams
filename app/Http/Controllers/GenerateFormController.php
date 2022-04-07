@@ -9,7 +9,7 @@ use App\Models\User;
 // e usa lang ang generate pr ug jo nga form
 
 /*
-    Makita si "getUserInfoById" , "findUserByName"  sa "app/Helpers/DatabaseHelpers"
+    Makita si "getUserById" , "getUsersByName"  sa "app/Helpers/DatabaseHelpers"
 */
 
 class GenerateFormController extends Controller
@@ -17,18 +17,31 @@ class GenerateFormController extends Controller
     // ======================== GLOBAL ========================
     function searchForApproval(Request $request)
     {
-        
+        $valid_approval = [];
+
+        $reqrid = $request->input('requisitionerid');
         $search = $request->input('search');
+
+        switch ((Int) $reqrid)
+        {
+            case 4:
+            case 5:
+                $valid_approval = [
+                    12 // ID sa Chief TOD
+                ];
+                break;
+        }
+        
         $search = (!$search)? '' : $search;
 
-        $result = findUserByName(
+        error_log("searchForApproval: ====================> " . $reqrid);
+
+        $result = getUsersByName(
             $search,
-            [
-                /**
-                 * Mao ni sila ang access level na pwede maka approve 
-                 */
-                11, // Budget Officer
-            ]
+            /**
+             * Mao ni sila ang access level na pwede maka approve 
+             */
+            $valid_approval
         );
     
         return $result;
@@ -44,7 +57,7 @@ class GenerateFormController extends Controller
 
     function purchaseRequest(Request $request)
     {
-        $data = ['LoggedUserInfo' => getUserInfoById(session('LoggedUser'))];
+        $data = ['LoggedUserInfo' => getUserById(session('LoggedUser'))];
 
         /*
             REFER to accesslevels table for id
@@ -58,7 +71,7 @@ class GenerateFormController extends Controller
         if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5']))
             return redirect('/logout');
 
-        return view('newpurchaserequest/new-purchase-request', $data);
+        return view('new-purchase-request/new-purchase-request', $data);
     }
 
     function viewPRForm(Request $request)
@@ -67,7 +80,7 @@ class GenerateFormController extends Controller
             'PrFormData' => json_decode($request->input('data'),true)
         ];
 
-        return view('newpurchaserequest/view-pr-form', $data);
+        return view('new-purchase-request/view-pr-form', $data);
     }
 
 }

@@ -91,7 +91,7 @@ function remove__item(id_query_selector)
  * @return void
  * 
  */
-async function search__recommending_approval(rec_approval_name_input)
+async function search__recommending_approval(requisitionerid,rec_approval_name_input)
 {
     let input_Field, rec_approval_list, rec_approval_design;
 
@@ -114,7 +114,7 @@ async function search__recommending_approval(rec_approval_name_input)
     await $.ajax({
         url: '/newpurchaserequest/searchforapproval',
         type: 'POST',
-        data: {'search': input_Field.val()},
+        data: {'requisitionerid': requisitionerid,'search': input_Field.val()},
         dataType: 'json',
         success: (response, status, request) => {
 
@@ -131,6 +131,7 @@ async function search__recommending_approval(rec_approval_name_input)
                    
                     user_identf = user['id'];
                     user_design = user['designation_name'];
+                    user_access = user['accesslevel_name'];
                     user_fullnm = `${user['lastname']}, ${user['firstname']} ${user['middleinitial']}`;
 
                     rec_approval_list.append(
@@ -138,7 +139,7 @@ async function search__recommending_approval(rec_approval_name_input)
                     );
 
                     input_Field.change((evt) => {
-                        rec_approval_design.text(user_design);
+                        rec_approval_design.text(user_design + ', ' + user_access);
                     });
 
                 });

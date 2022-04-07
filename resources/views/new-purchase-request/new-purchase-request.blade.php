@@ -23,13 +23,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-9">
-
+                        
                         <x-pr-form 
-                            requester="{{ $LoggedUserInfo['lastname'] . ', ' . $LoggedUserInfo['firstname'] . ' ' . $LoggedUserInfo['middleinitial'] }}" 
-                            requester-design="{{ $LoggedUserInfo['designation_name'] }}"></x-pr-form>
+                            :requisitioner="$LoggedUserInfo"></x-pr-form>
 
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-3 mt-4 mt-lg-0">
                         <div class="card">
                             <div class="card-header bg-primary">
                                 <span class="text-white" role="header">FILES</span>
@@ -45,7 +44,7 @@
                             <div class="card-footer">
                                 <button class="btn btn-primary w-100 text-light" type="button">
                                     <i class="fa fa-paper-plane"></i>
-                                    <span role="text">SEND REQUEST</span>
+                                    <span role="text">SEND REQUEST </span>
                                 </button>
                             </div>
                         </div>
