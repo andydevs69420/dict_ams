@@ -91,7 +91,7 @@ function remove__item(id_query_selector)
  * @return void
  * 
  */
-async function search__recommending_approval(rec_approval_name_input)
+async function search__recommending_approval(requisitionerid,rec_approval_name_input)
 {
     let input_Field, rec_approval_list, rec_approval_design;
 
@@ -114,7 +114,7 @@ async function search__recommending_approval(rec_approval_name_input)
     await $.ajax({
         url: '/newpurchaserequest/searchforapproval',
         type: 'POST',
-        data: {'search': input_Field.val()},
+        data: {'requisitionerid': requisitionerid,'search': input_Field.val()},
         dataType: 'json',
         success: (response, status, request) => {
 

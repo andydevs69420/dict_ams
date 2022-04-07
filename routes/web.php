@@ -31,7 +31,7 @@ Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
 
 // dashboard
-Route::match(['get', 'post'],'/dashboard', [DashboardController::class,'index']);
+Route::get('/dashboard', [DashboardController::class,'index']);
 
 // purchase request
 Route::get('/newpurchaserequest', [GenerateFormController::class,'purchaseRequest']);

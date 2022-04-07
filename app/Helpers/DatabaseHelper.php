@@ -31,7 +31,7 @@
      * @return JSON 
      * 
      */
-    function getUserInfoById(int $uid)
+    function getUserById(int $uid)
     {
         return json_decode(
             json_encode(
@@ -63,7 +63,7 @@
      * @return Array[JSON] 
      * 
      */
-    function findUserByName(String $name, Array $access_level_filter = [1,2,3,4,5,6,7,8,9,10,11,12] /* include all access level by default! */)
+    function getUsersByName(String $name, Array $access_level_filter = [1,2,3,4,5,6,7,8,9,10,11,12] /* include all access level by default! */)
     {
         return json_decode(
             json_encode(

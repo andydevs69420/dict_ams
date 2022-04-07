@@ -11,8 +11,9 @@ use Illuminate\View\Component;
 
 class PrForm extends Component
 {
-    public Array $items;
+    public Array  $items;
     public String $purpose;
+    public Int    $requesterId;
     public String $requester;
     public String $requesterDesign;
     public String $recommendingApproval;
@@ -27,6 +28,7 @@ class PrForm extends Component
         // mao ni si item 1
         Array $items = [['', '', '', '', '', '']], 
         String $purpose = "", 
+        Int $requesterId = 0,
         String $requester = "",
         String $requesterDesign = "",
         String $recommendingApproval = "",
@@ -35,6 +37,7 @@ class PrForm extends Component
     {
         $this->items = $items;
         $this->purpose = $purpose;
+        $this->requesterId = $requesterId;
         $this->requester = $requester;
         $this->requesterDesign = $requesterDesign; 
         $this->recommendingApproval = $recommendingApproval; 
