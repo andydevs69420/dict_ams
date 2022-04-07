@@ -131,6 +131,7 @@ async function search__recommending_approval(requisitionerid,rec_approval_name_i
                    
                     user_identf = user['id'];
                     user_design = user['designation_name'];
+                    user_access = user['accesslevel_name'];
                     user_fullnm = `${user['lastname']}, ${user['firstname']} ${user['middleinitial']}`;
 
                     rec_approval_list.append(
@@ -138,7 +139,7 @@ async function search__recommending_approval(requisitionerid,rec_approval_name_i
                     );
 
                     input_Field.change((evt) => {
-                        rec_approval_design.text(user_design);
+                        rec_approval_design.text(user_design + ', ' + user_access);
                     });
 
                 });

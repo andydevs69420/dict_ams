@@ -13,7 +13,7 @@
 
                             {{-- default item --}}
 
-                            @foreach ($items as $itm)
+                            @foreach ($getItems() as $itm)
 
                                 {{-- 
 
@@ -96,27 +96,27 @@
                     <div class="col-12">
                         <label for="purpose-field" class="text-dark py-1"><small>Purpose*</small></label>
                         <div  class="input-group">
-                            <textarea id="purpose-field" class="form-control bg-light" name="purpose" placeholder="Purpose" rows="2" required style="resize: none;">{{ $purpose }}</textarea>
+                            <textarea id="purpose-field" class="form-control bg-light" name="purpose" placeholder="Purpose" rows="2" required style="resize: none;">{{ $getPurpose() }}</textarea>
                         </div>
                     </div>
                     <!-- requester group -->
                     <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Requested by</small></label>
-                        <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $requester }}" placeholder="Lastname, Firstname Middle Initial" disabled>
-                        <span  id="req-designation" class="form-text text-center text-truncate small">{{ $requesterDesign }}</span>
+                        <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" disabled>
+                        <span  id="req-designation" class="form-text text-center text-truncate small">{{ $getRequisitionerDesignation() }}</span>
                     </div>
                     <!-- recommending approval group -->
                     <div class="cil-12 col-sm-6">
                         <label class="text-dark py-1"><small>Recommending Approval</small></label>
-                        <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $recommendingApproval }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval({{ $requesterId }},this)">
+                        <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval('{{ $getRequisitionerAccessLevelId() }}',this)">
                         <datalist id="recommending-approval-list"></datalist>
-                        <span  id="rec-designation" class="form-text text-center text-truncate small"> {{ strlen($recommendingApprovalDesign) === 0 ? '...' : $recommendingApprovalDesign }} </span>
+                        <span  id="rec-designation" class="form-text text-center text-truncate small"> ... </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer">
-            <div class="d-flex justify-content-center justify-content-lg-between align-items-center px-4">
+            <div class="d-flex justify-content-center justify-content-lg-between align-items-center px-0 px-lg-4">
                 <button class="pr-form__generate-pr-form-btn btn btn-primary text-light" type="submit" form="validation-form" data-bs-toggle="tooltip" data-bs-placement="left" title="Generate Form" onclick="javascript:generate__pr_form()">
                     <i class="fa fa-file"></i>
                     <span role="text">GENERATE FORM</span>
