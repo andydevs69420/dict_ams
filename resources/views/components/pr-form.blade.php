@@ -128,7 +128,7 @@
                     <label class="text-dark py-1"><small>Recommending Approval*</small></label>
                     <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $getRecommendingApprovalName() }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval('{{ $getRequisitionerAccessLevelId() }}',this)">
                     <datalist id="recommending-approval-list"></datalist>
-                    <span  id="rec-designation" class="form-text text-center text-truncate small">{{ $getRecommendingApprovalDesignation() }}</span>
+                    <span id="rec-designation" class="form-text text-center text-truncate small">{{ $getRecommendingApprovalDesignation() }}</span>
                 </div>
             </div>
         </div>
