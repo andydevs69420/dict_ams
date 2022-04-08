@@ -19,7 +19,7 @@ function add__item()
                 <span class="fw-bold" role="text">Item ${nth_child}</span>
                 <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove__item('#item-${nth_child}-id')">&times;</button>
             </div>
-            <div class="container-fluid">
+            <div class="container-fluid p-0">
                 <div class="row">
                     <!-- stock no group -->
                     <div class="col-12 col-sm-6">
@@ -45,21 +45,24 @@ function add__item()
                     <div class="col-12">
                         <label class="text-dark py-1"><small>Item description*</small></label>
                         <div  class="input-group">
-                            <textarea class="form-control bg-light" form="new-purchase-request-form" name="description[]" placeholder="Item description" rows="2" required style="resize: none;"></textarea>
+                            <textarea class="form-control bg-light" name="description[]" type="text" placeholder="Item description" rows="2" required style="resize: none;"></textarea>
                         </div>
                     </div>
+                    <!-- quantity group -->
                     <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Qty*</small></label>
                         <div class="input-group">
                             <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty" required>
                         </div>
                     </div>
+                    <!-- unit cost group -->
                     <div class="col-12 col-sm-6">
                         <label class="text-dark py-1"><small>Unit cost*</small></label>
                         <div class="input-group">
                             <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost" required>
                         </div>
                     </div>
+                    <!-- total cost group -->
                     <div class="col-12">
                         <label class="text-dark py-1"><small>Total cost</small></label>
                         <div class="input-group">
@@ -199,7 +202,9 @@ function generate__pr_form()
         for (let j = 0; j < item_fields.length; j++)
         {
             let col = $(`[name='${item_fields[j]}']`);
-            item_N.push($(col[i]).val());
+            let column_value = $(col[i]).val();
+
+            item_N.push(column_value);
         }
         arranged_data.push(item_N);
     }
@@ -226,7 +231,30 @@ function generate__pr_form()
         'rec_B' : rec_B ,
     };
 
-    window.open(`/newpurchaserequest/viewprform?data=${JSON.stringify(form_data)}`);
+    (function(){
+
+        let hasInvalid = false;
+
+        arranged_data.forEach((row) => {
+            row.forEach((col) => {
+                hasInvalid = (col.length <= 0)? true: false;
+            });
+        });
+
+        if (
+            hasInvalid        ||
+            purps.length <= 0 ||
+            req_A.length <= 0 ||
+            req_B.length <= 0 ||
+            rec_A.length <= 0 ||
+            rec_B.length <= 0
+        )
+            return $('#onErrorModal').modal('show');
+        else
+            return window.open(`/newpurchaserequest/viewprform?data=${JSON.stringify(form_data)}`);
+
+    })();
+   
 }
 
 /**

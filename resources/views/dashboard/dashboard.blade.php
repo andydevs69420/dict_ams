@@ -33,8 +33,9 @@
                     <div class="col-6 col-md-3 bg-secondary">D</div>
                 {{-- TODO: Implement!! --}}
                 @elseif (
-                            strcmp($LoggedUserInfo['accesslevel_id'],'4') === 0 ||
-                            strcmp($LoggedUserInfo['accesslevel_id'],'5') === 0
+                            strcmp($LoggedUserInfo['accesslevel_id'],'4')  === 0 ||
+                            strcmp($LoggedUserInfo['accesslevel_id'],'5')  === 0 ||
+                            strcmp($LoggedUserInfo['accesslevel_id'],'13') === 0
                         )
                     {{-- kung requisitioner or similar level --}}
                     <div class="col-md-3 bg-dark">A</div>

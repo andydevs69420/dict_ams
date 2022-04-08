@@ -16,7 +16,7 @@
 
 @section('content')
     <div class="d-block py-5">
-        <form id="request-form" action="">
+        <form id="request-pr-form" action="">
 
             @csrf
 
@@ -42,7 +42,7 @@
                                 </button>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary w-100 text-light" type="button">
+                                <button class="btn btn-primary w-100 text-light" type="submit">
                                     <i class="fa fa-paper-plane"></i>
                                     <span role="text">SEND REQUEST </span>
                                 </button>
@@ -56,13 +56,11 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
     <script type="text/javascript" src="{{ asset('js/components/pr-form/pr-form.js') }}"></script>
-    <script>
+    <script defer>
         $(document).ready((evt) => {
-
             $('[data-bs-toggle="tooltip"]').tooltip();
-
         });
     </script>
 @stop

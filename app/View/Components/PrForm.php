@@ -73,7 +73,7 @@ class PrForm extends Component
     public function getRequisitionerName() : String 
     {
         if (!(array) $this->requisitioner)
-            return "...";
+            return "";
 
         return $this->requisitioner['lastname'] . ", " . $this->requisitioner['firstname'] . " " . $this->requisitioner['middleinitial'];
     }
@@ -91,6 +91,37 @@ class PrForm extends Component
     }
 
     // =============== RECOMMENDING APPROVAL METHODS ===============
+
+    /** 
+     * Returns recommending approval id
+     * @return Int
+     */
+    public function getRecommendingApprovalAccessLevelId() : Int
+    { return (Int) $this->recommendingApproval['accesslevel_id']; }
+
+    /**
+     * Returns reccomending approval name eg: LN, FN MN
+     * @return String
+     */
+    public function getRecommendingApprovalName() : String 
+    {
+        if (!(array) $this->recommendingApproval)
+            return "";
+
+        return $this->recommendingApproval['lastname'] . ", " . $this->recommendingApproval['firstname'] . " " . $this->recommendingApproval['middleinitial'];
+    }
+
+    /**
+     * Returns recommending designation eg: designation, Accesslevel
+     * @return String
+     */
+    public function getRecommendingApprovalDesignation() : String
+    {
+        if (!(array) $this->recommendingApproval)
+            return "...";
+
+        return $this->recommendingApproval['designation_name'] . ", " . $this->recommendingApproval['accesslevel_name'];
+    }
 
     /**
      * Get the view / contents that represent the component.

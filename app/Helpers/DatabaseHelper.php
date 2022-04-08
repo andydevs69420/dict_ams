@@ -16,22 +16,22 @@
     /**
      * 
      * Check if user has an access to a route
-     * @param int uid user's id
+     * @param Int uid user's id
      * @param Array valid_access list of vaid access levels
      * @return bool
      * 
      */
-    function isValidAccess(int $uid, Array $valid_access)
+    function isValidAccess(Int $uid, Array $valid_access)
     { return in_array($uid,$valid_access); }
 
     /**
      * 
      * Get's userinfo by id
-     * @param int uid user's id
+     * @param Int uid user's id
      * @return JSON 
      * 
      */
-    function getUserById(int $uid)
+    function getUserById(Int $uid)
     {
         return json_decode(
             json_encode(
@@ -60,10 +60,11 @@
     /**
      * 
      * Find users by name  
+     * @param Array $access_level_filter | default: 1 - 13 (all access levels)
      * @return Array[JSON] 
      * 
      */
-    function getUsersByName(String $name, Array $access_level_filter = [1,2,3,4,5,6,7,8,9,10,11,12] /* include all access level by default! */)
+    function getUsersByName(String $name, Array $access_level_filter = [1,2,3,4,5,6,7,8,9,10,11,12,13] /* include all access level by default! */)
     {
         return json_decode(
             json_encode(
@@ -91,7 +92,6 @@
                     'accesslevels.id',
                     $access_level_filter
                 )
-                ->limit(5)
                 ->get(),
                 true
             ), 

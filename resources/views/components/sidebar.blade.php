@@ -49,8 +49,9 @@
                     </ul>
                 
                 @elseif (
-                            strcmp($accessLevelId,'4') === 0 ||
-                            strcmp($accessLevelId,'5') === 0
+                            strcmp($accessLevelId,'4')  === 0 ||
+                            strcmp($accessLevelId,'5')  === 0 ||
+                            strcmp($accessLevelId,'13') === 0
                         )
 
                     {{-- kung requisitioner or similar level --}}
