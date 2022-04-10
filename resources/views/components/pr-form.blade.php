@@ -21,7 +21,7 @@
 
 <div class="card">
     <div class="card-header bg-primary">
-        <span class="text-light">NEW PURCHASE REQUEST FORM</span>
+        <span class="text-light" role="text">NEW PURCHASE REQUEST FORM</span>
     </div>
     <div class="card-body">
         <div class="container-fluid px-0 px-lg-4">
@@ -105,7 +105,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <button class="pr-form__add-new-item-btn btn my-2 text-light" type="button" onclick="javascript:add__item()">
+                    <button class="pr-form__add-new-item-btn btn my-2 text-light" type="button" name="add-item-btn" onclick="javascript:add__item()">
                         <i class="fa fa-plus"></i>
                         <span class="text-light" role="text">ADD NEW ITEM</span>
                     </button>
@@ -124,7 +124,7 @@
                     <span  id="req-designation" class="form-text text-center text-truncate small">{{ $getRequisitionerDesignation() }}</span>
                 </div>
                 <!-- recommending approval group -->
-                <div class="cil-12 col-sm-6">
+                <div class="col-12 col-sm-6">
                     <label class="text-dark py-1"><small>Recommending Approval*</small></label>
                     <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $getRecommendingApprovalName() }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval('{{ $getRequisitionerAccessLevelId() }}',this)">
                     <datalist id="recommending-approval-list"></datalist>
@@ -135,7 +135,7 @@
     </div>
     <div class="card-footer">
         <div class="d-flex justify-content-center justify-content-lg-between align-items-center px-0 px-lg-4">
-            <button class="pr-form__generate-pr-form-btn btn btn-primary text-light" type="submit" form="validation-form" onclick="javascript:generate__pr_form()">
+            <button class="pr-form__generate-pr-form-btn btn btn-primary text-light" type="submit" name="generate-form-btn" form="validation-form" onclick="javascript:generate__pr_form()">
                 <i class="fa fa-file"></i>
                 <span role="text">GENERATE FORM</span>
             </button>

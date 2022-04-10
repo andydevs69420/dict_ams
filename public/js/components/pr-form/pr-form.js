@@ -1,7 +1,7 @@
 
 /**
  * 
- * Item addtion and removal 
+ * Item addtion
  * @return void
  * 
  */
@@ -84,7 +84,37 @@ function add__item()
  * 
  */
 function remove__item(id_query_selector)
-{ $(id_query_selector).remove(); }
+{ 
+    let item_list, id;
+
+    item_list = $('#item-list-id');
+  
+    //    0      1     2
+    // ['item', 'N', 'id']
+    id = $(id_query_selector).attr('id').split('-');
+
+    // re-number the item list
+    for (let idx = parseInt(id[1]); idx < item_list.children().length; idx++)
+    {
+        let childRef = $(item_list.children()[idx]);
+        let childIDN = `item-${idx}-id`; 
+
+        childRef
+        .attr('id', childIDN);
+
+        $(childRef.find('span')[0])
+        .text(`Item ${idx}`);
+
+        $(childRef.find('button')[0])
+        .attr('title', `Remove item ${idx}`)
+        .attr('onclick', `javascript:remove__item('#${childIDN}')`);
+    }
+
+    $(id_query_selector)
+    .attr('id', `item-${id[1]}-id-delete`)
+    .remove(); 
+    
+}
 
 
 /**
@@ -223,11 +253,11 @@ function generate__pr_form()
     rec_B = $('#rec-designation').text();
     
     let form_data = {
-        'items' : arranged_data,
-        'purps' : purps ,
-        'req_A' : req_A ,
-        'req_B' : req_B ,
-        'rec_A' : rec_A ,
+        'items' : arranged_data , 
+        'purps' : purps , 
+        'req_A' : req_A , 
+        'req_B' : req_B , 
+        'rec_A' : rec_A , 
         'rec_B' : rec_B ,
     };
 
@@ -237,7 +267,7 @@ function generate__pr_form()
 
         arranged_data.forEach((row) => {
             row.forEach((col) => {
-                hasInvalid = (col.length <= 0)? true: false;
+                hasInvalid = (col.length <= 0)
             });
         });
 
