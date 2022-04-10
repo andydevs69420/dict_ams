@@ -50,12 +50,6 @@ class GenerateFormController extends Controller
         return $result;
     }
 
-    // ========================== JO ==========================
-    function jobOrder(Request $request)
-    {
-        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
-    }
-
     // ========================== PR ==========================
 
     function purchaseRequest(Request $request)
@@ -67,8 +61,8 @@ class GenerateFormController extends Controller
             | Mao rani sila requisitioner
             ;
 
-            4  := Project Officer
-            5  := Focal
+             4 := Project Officer
+             5 := Focal
             13 := Staff
         */
 
@@ -76,6 +70,17 @@ class GenerateFormController extends Controller
             return redirect('/logout');
 
         return view('new-purchase-request/new-purchase-request', $data);
+    }
+
+    function saveForm(Request $request)
+    {
+
+    }
+
+    // ========================== JO ==========================
+    function jobOrder(Request $request)
+    {
+        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
     }
 
     function viewPRForm(Request $request)

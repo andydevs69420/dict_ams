@@ -53,9 +53,9 @@
                                     <div class="row">
                                         <!-- stock no group -->
                                         <div class="col-12 col-sm-6">
-                                            <label class="text-dark py-1"><small>Stock no*</small></label>
+                                            <label class="text-dark py-1"><small>Stock no</small></label>
                                             <div  class="input-group">
-                                                <input class="form-control bg-light" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="Stock no." required>
+                                                <input class="form-control bg-light" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="Stock no.">
                                             </div>
                                         </div>
                                         <!-- unit group -->
@@ -80,16 +80,16 @@
                                         </div>
                                         <!-- quantity group -->
                                         <div class="col-12 col-sm-6">
-                                            <label class="text-dark py-1"><small>Qty*</small></label>
+                                            <label class="text-dark py-1"><small>Qty</small></label>
                                             <div class="input-group">
-                                                <input class="form-control bg-light" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="Qty" required>
+                                                <input class="form-control bg-light" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="Qty">
                                             </div>
                                         </div>
                                         <!-- unit cost group -->
                                         <div class="col-12 col-sm-6">
-                                            <label class="text-dark py-1"><small>Unit cost*</small></label>
+                                            <label class="text-dark py-1"><small>Unit cost</small></label>
                                             <div class="input-group">
-                                                <input class="form-control bg-light" name="unitcost[]" type="number" value="{{ $itm[4] }}" placeholder="Unit cost" required>
+                                                <input class="form-control bg-light" name="unitcost[]" type="number" value="{{ $itm[4] }}" placeholder="Unit cost">
                                             </div>
                                         </div>
                                         <!-- total cost group -->
@@ -97,7 +97,7 @@
                                             <label class="text-dark py-1"><small>Total cost</small></label>
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="fa-solid fa-peso-sign"></i></span>
-                                                <input class="form-control bg-light" name="totalcost[]" type="number" value="{{ $itm[5] }}" placeholder="Total cost" required>
+                                                <input class="form-control bg-light" name="totalcost[]" type="number" value="{{ $itm[5] }}" placeholder="Total cost">
                                             </div>
                                         </div>
                                     </div>
@@ -121,14 +121,14 @@
                 <div class="col-12 col-sm-6">
                     <label class="text-dark py-1"><small>Requested by*</small></label>
                     <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" disabled>
-                    <span  id="req-designation" class="form-text text-center text-truncate small">{{ $getRequisitionerDesignation() }}</span>
+                    <span  id="req-designation" class="form-text text-center text-truncate small" role="text">{{ $getRequisitionerDesignation() }}</span>
                 </div>
                 <!-- recommending approval group -->
                 <div class="col-12 col-sm-6">
                     <label class="text-dark py-1"><small>Recommending Approval*</small></label>
                     <input id="rec-approval-name" class="form-control form-control-disabled text-truncate" list="recommending-approval-list" name="requester-designation" type="text" value="{{ $getRecommendingApprovalName() }}" placeholder="Lastname, Firstname Middle Initial" required onkeyup="javascript:search__recommending_approval('{{ $getRequisitionerAccessLevelId() }}',this)">
                     <datalist id="recommending-approval-list"></datalist>
-                    <span id="rec-designation" class="form-text text-center text-truncate small">{{ $getRecommendingApprovalDesignation() }}</span>
+                    <span id="rec-designation" class="form-text text-center text-truncate small" role="text">{{ $getRecommendingApprovalDesignation() }}</span>
                 </div>
             </div>
         </div>

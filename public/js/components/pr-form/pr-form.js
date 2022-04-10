@@ -23,9 +23,9 @@ function add__item()
                 <div class="row">
                     <!-- stock no group -->
                     <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Stock no*</small></label>
+                        <label class="text-dark py-1"><small>Stock no</small></label>
                         <div  class="input-group">
-                            <input class="form-control bg-light" name="stock[]" type="number" placeholder="Stock no." required>
+                            <input class="form-control bg-light" name="stock[]" type="number" placeholder="Stock no.">
                         </div>
                     </div>
                     <!-- unit group -->
@@ -50,16 +50,16 @@ function add__item()
                     </div>
                     <!-- quantity group -->
                     <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Qty*</small></label>
+                        <label class="text-dark py-1"><small>Qty</small></label>
                         <div class="input-group">
-                            <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty" required>
+                            <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty">
                         </div>
                     </div>
                     <!-- unit cost group -->
                     <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Unit cost*</small></label>
+                        <label class="text-dark py-1"><small>Unit cost</small></label>
                         <div class="input-group">
-                            <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost" required>
+                            <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost">
                         </div>
                     </div>
                     <!-- total cost group -->
@@ -67,7 +67,7 @@ function add__item()
                         <label class="text-dark py-1"><small>Total cost</small></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa-solid fa-peso-sign"></i></span>
-                            <input class="form-control bg-light" name="totalcost[]" type="number" placeholder="Total cost" required>
+                            <input class="form-control bg-light" name="totalcost[]" type="number" placeholder="Total cost">
                         </div>
                     </div>
                 </div>
@@ -120,13 +120,16 @@ function remove__item(id_query_selector)
 /**
  * 
  * Search recommending approval
+ * @param Number requisitionerid
  * @param Object rec_approval_name_input
  * @return void
  * 
  */
-function search__recommending_approval(requisitionerid,rec_approval_name_input)
+async function search__recommending_approval(requisitionerid,rec_approval_name_input)
 {
-    let input_Field, rec_approval_list, rec_approval_design;
+    let input_Field, 
+        rec_approval_list, 
+        rec_approval_design;
 
     // mao ning input sa user(recommending appoval)
     input_Field = $(rec_approval_name_input);
@@ -144,10 +147,13 @@ function search__recommending_approval(requisitionerid,rec_approval_name_input)
     });
 
     // $.ajax lang instead sa .load() para naa tay control sa child
-    $.ajax({
+    await $.ajax({
         url: '/newpurchaserequest/searchforapproval',
         type: 'POST',
-        data: {'requisitionerid': requisitionerid,'search': input_Field.val()},
+        data: {
+            'requisitionerid': requisitionerid,
+            'search': input_Field.val()
+        },
         dataType: 'json',
         success: (response, status, request) => {
 
@@ -172,15 +178,22 @@ function search__recommending_approval(requisitionerid,rec_approval_name_input)
                     );
 
                     input_Field.change((evt) => {
-                        rec_approval_design.text(user_design + ', ' + user_access);
+                        if (input_Field.val().length <= 0)
+                        { rec_approval_design.text(''); }
+                        else
+                        { rec_approval_design.text(user_design + ', ' + user_access); }
+                        input_Field.off('change');
                     });
 
                 });
             }
             else
             {
-                rec_approval_list.empty();
-                rec_approval_design.text('...');
+                rec_approval_list
+                .empty();
+
+                rec_approval_design
+                .text('');
             }
 
         }
@@ -266,8 +279,25 @@ function generate__pr_form()
         let hasInvalid = false;
 
         arranged_data.forEach((row) => {
+            let idx = 0;
             row.forEach((col) => {
-                hasInvalid = (col.length <= 0)
+
+                /** 
+                 * Not required fields 
+                 * 0 := stock
+                 * 1 := unit
+                 * 2 := item description
+                 * 3 := qty
+                 * 4 := unit cost
+                 * 5 := total cost
+                 * 
+                 */ 
+
+                if (!hasInvalid && [1, 2].includes(idx))
+                    hasInvalid = (col.length <= 0 || col.trim().length <= 0);
+                
+                idx++;
+
             });
         });
 
