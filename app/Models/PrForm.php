@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class PrForm extends Model
+{
+    use HasFactory;
+
+    public $timestamps = true;
+    
+    protected $fillable = [
+        'prnumber',
+        'sainumber',
+        'purpose',
+        'requisitioner',
+        'recommendingapprover',
+    ];
+}

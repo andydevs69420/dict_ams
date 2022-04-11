@@ -34,7 +34,8 @@ return new class extends Migration
                 'Canvasser',
                 'Supply Officer',
                 'Budget Officer',
-                'Chief TOD'
+                'Chief TOD',
+                'Staff'
             ];
 
             foreach ($accesslevels as $als)

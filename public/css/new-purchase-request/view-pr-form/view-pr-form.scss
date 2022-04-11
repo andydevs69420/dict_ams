@@ -574,7 +574,7 @@ tbody
 
 .x-purpose-slot 
 {
-//   text-decoration: underline;
+  //   text-decoration: underline;
   font-family: Calibri, sans-serif;
   vertical-align: middle;
   border-top: 2.0pt double black;
@@ -582,6 +582,8 @@ tbody
   border-bottom: none;
   border-left: none;
   white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ===================== ITEMS ===================== */

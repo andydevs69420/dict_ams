@@ -24,17 +24,20 @@ class GenerateFormController extends Controller
 
         switch ((Int) $reqrid)
         {
-            case 4:
-            case 5:
+            case 4: // PO
+            case 5: // FOCAL
                 $valid_approval = [
-                    12 // ID sa Chief TOD
+                    12 // Accesslevel id sa Chief TOD
+                ];
+                break;
+            case 13: // STAFF,
+                $valid_approval = [
+                    4 // Accesslevel id sa PO
                 ];
                 break;
         }
         
         $search = (!$search)? '' : $search;
-
-        error_log("searchForApproval: ====================> " . $reqrid);
 
         $result = getUsersByName(
             $search,
@@ -45,12 +48,6 @@ class GenerateFormController extends Controller
         );
     
         return $result;
-    }
-
-    // ========================== JO ==========================
-    function jobOrder(Request $request)
-    {
-        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
     }
 
     // ========================== PR ==========================
@@ -64,14 +61,26 @@ class GenerateFormController extends Controller
             | Mao rani sila requisitioner
             ;
 
-            4 := Project Officer
-            5 := Focal
+             4 := Project Officer
+             5 := Focal
+            13 := Staff
         */
 
-        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5']))
+        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5', '13']))
             return redirect('/logout');
 
         return view('new-purchase-request/new-purchase-request', $data);
+    }
+
+    function saveForm(Request $request)
+    {
+
+    }
+
+    // ========================== JO ==========================
+    function jobOrder(Request $request)
+    {
+        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
     }
 
     function viewPRForm(Request $request)

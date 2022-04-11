@@ -13,6 +13,7 @@ use Illuminate\View\Component;
 
 class PrForm extends Component
 {
+    private String $warningMessage;
     private Array $items;
     private String $purpose;
     private Array $budgetOfficer;
@@ -24,6 +25,7 @@ class PrForm extends Component
      * @return void
      */
     public function __construct(
+        String $warningMessage = null,
         Array $items = [
             /***
              * dapat naay default item
@@ -37,6 +39,7 @@ class PrForm extends Component
         Array  $recommendingApproval = [],
     )
     {
+        $this->warningMessage       = $warningMessage;
         $this->items                = $items;
         $this->purpose              = $purpose;
         $this->budgetOfficer        = $budgetOfficer;
@@ -45,7 +48,15 @@ class PrForm extends Component
     }
 
     // =============== REQUISITIONER METHODS ===============
-     /**
+    
+    /**
+     * Returns Waring message
+     * @return String
+     */
+    public function getWarningMessage()
+    { return $this->warningMessage; }
+
+    /**
      * Returns Array of items
      * @return Array
      */
@@ -73,9 +84,9 @@ class PrForm extends Component
     public function getRequisitionerName() : String 
     {
         if (!(array) $this->requisitioner)
-            return "...";
+            return "";
 
-        return $this->requisitioner['lastname'] . ", " . $this->requisitioner['firstname'] . " " . $this->requisitioner['middleinitial'];
+        return $this->requisitioner['lastname'] . ', ' . $this->requisitioner['firstname'] . ' ' . $this->requisitioner['middleinitial'];
     }
 
     /**
@@ -85,12 +96,43 @@ class PrForm extends Component
     public function getRequisitionerDesignation() : String
     {
         if (!(array) $this->requisitioner)
-            return "...";
+            return "";
 
-        return $this->requisitioner['designation_name'] . ", " . $this->requisitioner['accesslevel_name'];
+        return $this->requisitioner['designation_name'] . ', ' . $this->requisitioner['accesslevel_name'];
     }
 
     // =============== RECOMMENDING APPROVAL METHODS ===============
+
+    /** 
+     * Returns recommending approval id
+     * @return Int
+     */
+    public function getRecommendingApprovalAccessLevelId() : Int
+    { return (Int) $this->recommendingApproval['accesslevel_id']; }
+
+    /**
+     * Returns reccomending approval name eg: LN, FN MN
+     * @return String
+     */
+    public function getRecommendingApprovalName() : String 
+    {
+        if (!(array) $this->recommendingApproval)
+            return '';
+
+        return $this->recommendingApproval['lastname'] . ', ' . $this->recommendingApproval['firstname'] . ' ' . $this->recommendingApproval['middleinitial'];
+    }
+
+    /**
+     * Returns recommending designation eg: designation, Accesslevel
+     * @return String
+     */
+    public function getRecommendingApprovalDesignation() : String
+    {
+        if (!(array) $this->recommendingApproval)
+            return '';
+
+        return $this->recommendingApproval['designation_name'] . ', ' . $this->recommendingApproval['accesslevel_name'];
+    }
 
     /**
      * Get the view / contents that represent the component.

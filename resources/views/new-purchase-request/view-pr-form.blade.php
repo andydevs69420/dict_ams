@@ -90,6 +90,14 @@
                             <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'>{{ $item[5] }}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td class=x-col-1 style='border-top:none;max-width: 50pt;'></td>
+                        <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;' colspan=2>***** Nothing Follows *****</td>
+                        <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'></td>
+                        <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
+                        <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
+                    </tr>
                 </div>
 
                 <!-- LAST ITEM -->
