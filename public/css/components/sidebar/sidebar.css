@@ -1,7 +1,9 @@
+/* ================= LOGIN COLORS   ================= */
 /* ================= SIDEBAR COLORS ================= */
+/* ================= NEW PR FORM COLORS ============= */
 /* ================= PR FORM COLORS ================= */
 .sidebar__sidebar {
-  background-color: #0020EC;
+  background-color: #0020EC !important;
 }
 
 .sidebar__sidebar,
@@ -36,15 +38,15 @@
 }
 
 .sidebar__scrollable-wrapper::-webkit-scrollbar-track {
-  background-color: #FFFFFF;
-  border-left: 9px solid #0020EC;
-  border-right: 9px solid #0020EC;
+  background-color: #FFFFFF !important;
+  border-left: 9px solid #0020EC !important;
+  border-right: 9px solid #0020EC !important;
 }
 
 .sidebar__scrollable-wrapper::-webkit-scrollbar-thumb {
-  background-color: #FFFFFF;
-  border-left: 7px solid #0020EC;
-  border-right: 7px solid #0020EC;
+  background-color: #FFFFFF !important;
+  border-left: 7px solid #0020EC !important;
+  border-right: 7px solid #0020EC !important;
 }
 
 .sidebar__sidebar-separator,
@@ -70,7 +72,7 @@
 }
 
 .sidebar__li-item:hover > * {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .sidebar__li-item:nth-child(even) {
@@ -99,7 +101,7 @@
 .sidebar__accordion-header >
 .sidebar__accordion-button {
   padding: 0;
-  color: #0DCAF0;
+  color: #0DCAF0 !important;
   background-color: initial;
   -webkit-box-shadow: initial;
           box-shadow: initial;
@@ -109,7 +111,7 @@
 .sidebar__accordion-item >
 .sidebar__accordion-header >
 .sidebar__accordion-button:not(.collapsed) {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .sidebar__accordion >
@@ -125,7 +127,7 @@
 .sidebar__accordion-item >
 .sidebar__accordion-header >
 .sidebar__accordion-button:not(.collapsed)::after {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 }
 
@@ -140,7 +142,7 @@
 }
 
 .sidebar__accordion-body-item:hover > * {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .sidebar__accordion-body-item:nth-child(even) {
@@ -178,10 +180,10 @@
 }
 
 .active-link * {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .inactive-link * {
-  color: #0DCAF0;
+  color: #0DCAF0 !important;
 }
 /*# sourceMappingURL=sidebar.css.map */

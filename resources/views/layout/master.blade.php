@@ -16,7 +16,7 @@
   
     <noscript>
 
-        <div class="master__noscript-content-wrapper d-flex flex-column align-items-center justify-content-center position-absolute w-100 h-100 bg-primary">
+        <div class="master__noscript-content-wrapper d-flex flex-column align-items-center justify-content-center position-absolute w-100 h-100">
             <div class="d-block px-2 px-md-0">
                 <p class="lead h6 text-light">DICT Accounting Management System |</p>
                 <h3 class="display-3 text-light">This app works best with Javascript.</h3>

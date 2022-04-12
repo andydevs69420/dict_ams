@@ -1,3 +1,7 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
 /* Based on bootstrap breakpoints */
 /* on small devices and above */
 /* on medium devices and above */
@@ -55,6 +59,7 @@ body {
 }
 
 .master__noscript-content-wrapper {
+  background-color: #0020EC !important;
   z-index: 999999999;
 }
 /*# sourceMappingURL=master.css.map */

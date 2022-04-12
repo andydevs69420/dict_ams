@@ -10,7 +10,7 @@
 @stop
 
 @section('body')
-    <main class="d-block d-md-flex align-items-center justify-content-center w-100 h-100 bg-primary">
+    <main class="login__main d-block d-md-flex align-items-center justify-content-center w-100 h-100 bg-primary">
         <div class="login__center-panel d-block position-relative py-4 bg-white">
             <!-- app brand -->
             <div class="login__app-brand d-block mx-auto">
@@ -42,9 +42,9 @@
                     <input id="remember-me" class="form-check-input" type="checkbox" name="remember-me">
                     <label class="mx-1 text-dark" for="remember-me"><small class="text-muted" style="user-select:none;">Remember me</small></label>
                 </div>
-                <button class="btn btn-primary lead my-2 mt-md-2 mb-md-0 w-100" type="submit">Login</button>
+                <button class="login__login-btn btn text-light lead my-2 mt-md-2 mb-md-0 w-100" type="submit">Login</button>
                 <hr class="my-1 my-md-3 w-100">
-                <a class="btn btn-primary lead my-2 my-md-0 w-100" href="{{ '/register' }}">Register</a>
+                <a class="login__register-btn btn text-light lead my-2 my-md-0 w-100" href="{{ '/register' }}">Register</a>
             </form>
         </div>
     </main>

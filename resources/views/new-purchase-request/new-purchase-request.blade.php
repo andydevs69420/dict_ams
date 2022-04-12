@@ -11,6 +11,7 @@
 @section('title', 'AMS | purchase request')
 
 @section('dependencies')
+    <link rel="stylesheet" href="{{ asset('css/new-purchase-request/new-purchase-request/new-purchase-request.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/global/pr-and-jo/pr-and-jo.css') }}">
 @stop
 
@@ -30,19 +31,19 @@
                     </div>
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
                         <div class="card">
-                            <div class="card-header bg-primary">
+                            <div class="new-purchase-request__card-header card-header">
                                 <span class="text-white" role="text">FILES</span>
                             </div>
                             <div class="card-body">
                                 <div id="file-content-id" class="d-block"></div>
                                 <input id="file-pick-id" class="d-none" type="file" name="file[]" accept="image/.jpeg,.png,.pdf" multiple>
-                                <button class="btn w-100 border border-primary text-primary" for="file-pick-id" type="button" onclick="javascript:$('#file-pick-id').click()">
+                                <button class="new-purchase-request__upload-files-btn btn w-100 border" for="file-pick-id" type="button" onclick="javascript:$('#file-pick-id').click()">
                                     <i class="fa fa-upload"></i>
                                     <span role="text">UPLOAD FILES</span>
                                 </button>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary w-100 text-light" type="submit">
+                                <button class="new-purchase-request__submit-btn btn w-100 text-light" type="submit">
                                     <i class="fa fa-paper-plane"></i>
                                     <span role="text">SEND REQUEST </span>
                                 </button>
