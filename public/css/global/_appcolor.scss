@@ -11,7 +11,17 @@ $LIGHT-GRAY-1 : #dbdbdb;
 $DARK-GRAY    : #999393;
 $VIOLET       : #12021c;
 
-$CYAN : #0dcaf0; // based on bs4 | bs5 cyan;
 
-/* dapat parya silag color sa sidebar */ 
-$TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
+$PRIMARY : #0020EC;
+
+
+/* ================= SIDEBAR COLORS ================= */
+
+$SIDEBAR-BG            : $PRIMARY;
+$SIDEBAR-SCROLL-THUMB  : #FFFFFF;
+
+$SIDEBAR-HOVER         : #FFFFFF;
+$SIDEBAR-ACTIVE-LINK   : #FFFFFF;
+$SIDEBAR-INACTIVE-LINK : #0DCAF0;
+
+/* ================= PR FORM COLORS ================= */
