@@ -1,0 +1,44 @@
+@import '../sizing';
+@import '../appcolor';
+
+*
+{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html
+{
+    width: auto;
+    height: auto;
+    overflow-x: hidden;
+}
+
+body
+{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-width: 280px;
+    min-height: 600px;
+    
+    @include onSM
+    { min-width: 576px;  }
+    @include onMD
+    { min-width: 768px;  }
+    @include onLG
+    { min-width: 992px;  }
+    @include onXL
+    { min-width: 1200px; }
+    @include onXXL
+    { min-width: 1400px; }
+}
+
+.app-main__noscript-content-wrapper
+{ z-index: 999999999; }
+
+.app-main__content-root
+{ min-width: 280px !important; }
+
+.app-main__content-wrapper
+{ overflow: hidden auto !important; }
