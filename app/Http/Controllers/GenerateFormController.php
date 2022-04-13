@@ -38,7 +38,6 @@ class GenerateFormController extends Controller
         }
         
         $search = (!$search)? '' : $search;
-
         $result = getUsersByName(
             $search,
             /**

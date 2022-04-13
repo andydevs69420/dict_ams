@@ -11,7 +11,27 @@ $LIGHT-GRAY-1 : #dbdbdb;
 $DARK-GRAY    : #999393;
 $VIOLET       : #12021c;
 
-$CYAN : #0dcaf0; // based on bs4 | bs5 cyan;
 
-/* dapat parya silag color sa sidebar */ 
-$TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
+$PRIMARY : #0020EC;
+
+/* ================= LOGIN COLORS   ================= */
+$LOGIN-BG              : $PRIMARY;
+$LOGIN-LOGIN-BTN-BG    : $PRIMARY;
+$LOGIN-REGISTER-BTN-BG : $PRIMARY;
+
+/* ================= SIDEBAR COLORS ================= */
+$SIDEBAR-BG            : $PRIMARY;
+$SIDEBAR-SCROLL-THUMB  : #FFFFFF;
+$SIDEBAR-HOVER-LINK    : #FFFFFF;
+$SIDEBAR-ACTIVE-LINK   : #FFFFFF;
+$SIDEBAR-INACTIVE-LINK : #0DCAF0;
+
+/* ================= NEW PR FORM COLORS ============= */
+$NPR-CARD-HEADER        : $PRIMARY;
+$NPR-UPLOAD-FILE-BDC    : $PRIMARY;
+$NPR-SUBMIT-FORM-BTN    : $PRIMARY;
+
+/* ================= PR FORM COLORS ================= */
+$PR-CARD-HEADER        : $PRIMARY;
+$PR-ADD-NEW-ITEM-BTN   : #238636;
+$PR-GENERATE-PR-BTN    : $PRIMARY

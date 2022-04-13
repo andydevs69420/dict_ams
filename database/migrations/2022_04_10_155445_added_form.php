@@ -13,26 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('prforms'))
+        if (!Schema::hasTable('forms'))
         {
-            Schema::create('prforms',function(Blueprint $table) {
+            Schema::create('forms',function(Blueprint $table) {
                 $table->id()->uniqe();
                 $table->string('prnumber');
                 $table->string('sainumber');
                 $table->string('purpose');
-                $table->bigInteger('requisitioner')->unsigned();
-                $table->bigInteger('recommendingapprover')->unsigned();
+                $table->bigInteger('formrequiredpersonel')->unsigned();
             });
-
         }
-        try
-        {
-            Schema::table('prforms', function(Blueprint $table) {
-                $table->foreign('requisitioner')->references('id')->on('users');
-                $table->foreign('recommendingapprover')->references('id')->on('users');
-            });
-        }catch(Exception $err)
-        { /* on duplicate */ }
     }
 
     /**

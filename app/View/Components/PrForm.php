@@ -25,7 +25,7 @@ class PrForm extends Component
      * @return void
      */
     public function __construct(
-        String $warningMessage = null,
+        String $warningMessage = '',
         Array $items = [
             /***
              * dapat naay default item
@@ -33,7 +33,7 @@ class PrForm extends Component
              */
             ['', '', '', '', '', '']
         ], 
-        String $purpose              = "", 
+        String $purpose              = '', 
         Array  $budgetOfficer        = [], 
         Array  $requisitioner        = [], 
         Array  $recommendingApproval = [],

@@ -35,7 +35,10 @@ body
 }
 
 .app-main__noscript-content-wrapper
-{ z-index: 999999999; }
+{ 
+    background-color: $PRIMARY !important;
+    z-index: 999999999; 
+}
 
 .app-main__content-root
 { min-width: 280px !important; }

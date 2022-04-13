@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACgBA,wDAAwD;AAKxD,wDAAwD;AAOxD,wDAAwD;AAKxD,wDAAwD;AD7BxD,AAAA,kCAAkC,CAClC;EAAE,gBAAgB,ECSP,OAAO,CDTmB,UAAU;CAAI;;AAEnD,AAAA,uCAAuC,CAAC,CAAC,CACzC;EACI,KAAK,ECKE,OAAO,CDLc,UAAU;EACtC,YAAY,ECIL,OAAO,CDJqB,UAAU;CAChD;;AAED,AAAA,iCAAiC,CACjC;EAAE,gBAAgB,ECAP,OAAO,CDAuB,UAAU;CAAI",
+    "sources": [
+        "new-purchase-request.scss",
+        "../../global/_appcolor.scss"
+    ],
+    "names": [],
+    "file": "new-purchase-request.css"
+}

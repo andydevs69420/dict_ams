@@ -1,3 +1,7 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
 /* Based on bootstrap breakpoints */
 /* on small devices and above */
 /* on medium devices and above */
@@ -6,6 +10,10 @@
 /* on extra-extra large devices and above */
 body {
   overflow: hidden auto;
+}
+
+.login__main {
+  background-color: #0020EC !important;
 }
 
 .login__center-panel {
@@ -44,8 +52,8 @@ body {
 }
 
 .login__brand-icon {
-  width: auto;
-  max-width: 30%;
+  width: 30%;
+  max-width: 162px;
 }
 
 .login__page-form-0 {
@@ -57,5 +65,13 @@ body {
   .login__page-form-0 {
     height: auto;
   }
+}
+
+.login__login-btn {
+  background-color: #0020EC !important;
+}
+
+.login__register-btn {
+  background-color: #0020EC !important;
 }
 /*# sourceMappingURL=login.css.map */

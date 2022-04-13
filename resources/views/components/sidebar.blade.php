@@ -1,5 +1,5 @@
 
-<nav class="sidebar__sidebar navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="sidebar__sidebar navbar navbar-expand-lg navbar-dark shadow-sm">
     <div id="sidebar-collapse-id" class="sidebar__sidebar-collapse collapse collapse-horizontal show">
         <div class="sidebar__sidebar-main">
             <div class="sidebar__navbar-brand-group navbar-brand">
