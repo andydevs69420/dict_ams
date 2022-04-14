@@ -11,7 +11,10 @@
 @section('title', 'AMS | dashboard')
 
 @section('dependencies')
+
+    {{-- DASHBOARD css --}}
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
+
 @stop
 
 @section('content')
@@ -62,6 +65,9 @@
 @stop
 
 @section('javascript')
+
+    {{-- DASHBOARD js --}}
+    <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
    
 @stop
 

@@ -1,11 +1,14 @@
 /* ================= LOGIN COLORS   ================= */
 /* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= PROGRESSBAR COLORS ============= */
 /* ================= NEW PR FORM COLORS ============= */
 /* ================= PR FORM COLORS ================= */
 .new-purchase-request__card-header {
   background-color: #0020EC !important;
 }
 
+.new-purchase-request__upload-files-btn,
 .new-purchase-request__upload-files-btn * {
   color: #0020EC !important;
   border-color: #0020EC !important;

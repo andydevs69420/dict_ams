@@ -6,16 +6,25 @@ use Illuminate\View\Component;
 
 class Topbar extends Component
 {
-    public $username;
+    private String $username;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct(String $username)
     {
         $this->username = $username;
     }
+
+    /**
+     * 
+     * @return String
+     *  
+     */
+    public function getUsername()
+    { return $this->username; }
 
     /**
      * Get the view / contents that represent the component.

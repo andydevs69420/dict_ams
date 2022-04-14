@@ -1,4 +1,5 @@
 
+
 <nav class="sidebar__sidebar navbar navbar-expand-lg navbar-dark shadow-sm">
     <div id="sidebar-collapse-id" class="sidebar__sidebar-collapse collapse collapse-horizontal show">
         <div class="sidebar__sidebar-main">
@@ -28,7 +29,7 @@
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
 
                 {{-- TODO: Implement!! --}}
-                @if     (strcmp($accessLevelId,'3') === 0)
+                @if     (strcmp($getAccesslevelId(),'3') === 0)
 
                     {{-- kung admin siya --}}
 
@@ -49,9 +50,9 @@
                     </ul>
                 
                 @elseif (
-                            strcmp($accessLevelId,'4')  === 0 ||
-                            strcmp($accessLevelId,'5')  === 0 ||
-                            strcmp($accessLevelId,'13') === 0
+                            strcmp($getAccesslevelId(),'4')  === 0 ||
+                            strcmp($getAccesslevelId(),'5')  === 0 ||
+                            strcmp($getAccesslevelId(),'13') === 0
                         )
 
                     {{-- kung requisitioner or similar level --}}
@@ -92,7 +93,7 @@
                     
                 @else
                     {{-- debug: pag walay access level --}}
-                    <h3 class="d-block mx-auto lead">Invalid Accesslevel => "{{$accessLevelId}}"</h3>
+                    <h3 class="d-block mx-auto lead">Invalid Accesslevel => "{{$getAccesslevelId()}}"</h3>
                 @endif
 
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
@@ -108,5 +109,3 @@
         </div>
     </div>
 </nav>
-
-

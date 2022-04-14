@@ -11,8 +11,13 @@
 @section('title', 'AMS | purchase request')
 
 @section('dependencies')
+
+    {{-- NEW PURCHASE REQUEST css --}}
     <link rel="stylesheet" href="{{ asset('css/new-purchase-request/new-purchase-request/new-purchase-request.css') }}">
+
+    {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset('css/components/global/pr-and-jo/pr-and-jo.css') }}">
+
 @stop
 
 @section('content')
@@ -30,7 +35,8 @@
 
                     </div>
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
-                        <div class="card">
+
+                        <div class="card shadow">
                             <div class="new-purchase-request__card-header card-header">
                                 <span class="text-white" role="text">FILES</span>
                             </div>
@@ -49,6 +55,7 @@
                                 </button>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -57,13 +64,19 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+
+    {{-- NEW PURCHASE REQUEST js --}}
+    <script type="text/javascript" src="{{ asset('js/new-purchase-request/new-purchase-request.js') }}"></script>
+
+    {{-- PR js --}}
     <script type="text/javascript" src="{{ asset('js/components/pr-form/pr-form.js') }}"></script>
-    <script defer>
+
+    <script type="text/javascript">
         $(document).ready((evt) => {
             $('[data-bs-toggle="tooltip"]').tooltip();
         });
     </script>
+
 @stop
 
 

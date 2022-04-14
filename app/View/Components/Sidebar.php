@@ -6,13 +6,13 @@ use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
-    public String $accessLevelId;
+    private int $accessLevelId;
     /**
      * Create a new component instance.
      * @param int $accessLevelId
      * @return void
      */
-    public function __construct(String $accessLevelId)
+    public function __construct(int $accessLevelId)
     {
         $this->accessLevelId = $accessLevelId;
     }
@@ -27,6 +27,14 @@ class Sidebar extends Component
     {
         return (request()->is($path)) ? 'active-link' : 'inactive-link';
     }
+
+    /**
+     *
+     * @return int
+     *  
+     */
+    public function getAccesslevelId()
+    { return $this->accessLevelId; }
 
     /**
      * Get the view / contents that represent the component.

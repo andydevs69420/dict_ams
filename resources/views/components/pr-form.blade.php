@@ -1,7 +1,6 @@
 
 
-
-<!-- Modal -->
+{{-- MODAL --}}
 <div id="onErrorModal" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -19,7 +18,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card shadow-lg">
     <div class="pr-form__card-header card-header">
         <span class="text-light" role="text">NEW PURCHASE REQUEST FORM</span>
     </div>
@@ -27,6 +26,9 @@
         <div class="container-fluid px-0 px-lg-4">
             <div class="row">
                 <div class="col-12">
+
+                    <x-progressbar id="pr-progress"></x-progressbar>
+
                     <ul id="item-list-id"class="list-group">
 
                         {{-- default item --}}
@@ -47,7 +49,7 @@
                             <li class="list-group-item rounded-0">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <span class="fw-bold" role="text">Item 1</span>
-                                    <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
+                                    <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
                                 </div>
                                 <div class="container-fluid p-0">
                                     <div class="row">

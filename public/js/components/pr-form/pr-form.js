@@ -17,7 +17,7 @@ function add__item()
         <li id="item-${nth_child}-id" class="list-group-item rounded-0">
             <div class="d-flex align-items-center justify-content-between">
                 <span class="fw-bold" role="text">Item ${nth_child}</span>
-                <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove__item('#item-${nth_child}-id')">&times;</button>
+                <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove__item('#item-${nth_child}-id')">&times;</button>
             </div>
             <div class="container-fluid p-0">
                 <div class="row">
