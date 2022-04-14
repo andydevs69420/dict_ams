@@ -3,10 +3,15 @@
 @section('title', 'AMS | Login')
 
 @section('dependencies')
+
+    {{-- PAGE FONT dependency --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+    {{-- LOGIN css --}}
     <link rel="stylesheet" href="{{ asset('css/login/login.css') }}">
+    
 @stop
 
 @section('body')
@@ -51,4 +56,10 @@
 @stop
 
 
+@section('javascript')
+
+    {{-- LOGIN js --}}
+    <script type="text/javascript" src="{{ asset('js/login/login.js') }}"></script>
+
+@stop 
 
