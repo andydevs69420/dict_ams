@@ -1,0 +1,43 @@
+.page-title {
+    margin: 0px;
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0 0 20px 0;
+    width: 100%;
+}
+.table th,
+.table td {
+    vertical-align: middle;
+}
+.box.box-success {
+     border-top-color: white;
+}
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    /* border-top: 3px solid #d2d6de; */
+    margin-bottom: 20px;
+    width: 100%;
+    /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); */
+    border: 1px solid #e6ecf5;
+}
+.box-content {
+    padding: 20px;
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+}
+.box-body.table {
+    padding: 0px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}

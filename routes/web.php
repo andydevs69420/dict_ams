@@ -37,3 +37,9 @@ Route::match(['get', 'post'],'/dashboard', [DashboardController::class,'index'])
 Route::get('/newpurchaserequest', [GenerateFormController::class,'purchaseRequest']);
 Route::get('/newpurchaserequest/viewprform', [GenerateFormController::class,'viewPRForm']);
 Route::post('/newpurchaserequest/searchforapproval', [GenerateFormController::class,'searchForApproval']);
+
+// Budget Officer
+Route::get('BO', 'BOController@index')->name('BO');
+Route::get('edit-ors/{id}', 'BOController@edit');
+Route::get('edit-ors/delete/{id}', 'BOController@delete');
+Route::post('edit-ors/update', 'BOController@update');
