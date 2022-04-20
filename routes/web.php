@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\GenerateFormController;
+use App\Http\Controllers\BOController;
 use App\Http\Controllers\AppController;
 
 /*

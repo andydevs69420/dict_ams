@@ -21,16 +21,15 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.input-group-text {
-  min-width: 3em;
-  background-color: #0020EC;
-}
-
-.input-group-text i {
-  margin: 0 auto !important;
-}
-
 /* ====================== Purchase Request ====================== */
+.pr-form__card-header {
+  background-color: #F7F7F7 !important;
+}
+
+.input-group-text {
+  background-color: #0020EC !important;
+}
+
 .pr-form__add-new-item-btn {
   position: fixed;
   right: 15px;

@@ -16,6 +16,9 @@ input[type=number] {
 .pr-form__card-header
 { background-color: $PR-CARD-HEADER !important }
 
+.input-group-text
+{ background-color: $PR-INPUT-ICON-BG  !important; }
+
 .pr-form__add-new-item-btn
 {
   position: fixed;
