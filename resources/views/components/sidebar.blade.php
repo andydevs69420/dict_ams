@@ -84,8 +84,11 @@
                         <ul class="sidebar__ul list-group list-group-flush mx-auto">
                             <span class="sidebar__ul-label d-block w-100 py-3 text-info fw-bold" role="text">COMPONENTS</span>
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch('users') }}">
-                                <i class="sidebar__list-icon fa fa-users"></i><a class="sidebar__list-label" href="{{ url('/users') }}">Users</a>
-                            </li>
+                                <i class="sidebar__list-icon fa fa-users"></i>
+                                <a class="sidebar__list-label" href="{{ url('/users') }}">
+                                    {{ __('Users') }}
+                                    <span class="badge bg-danger align-self-end">2+</span>
+                                </a>
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch('') }}">
                                 <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="#">Item List</a>
                             </li>
