@@ -36,6 +36,7 @@ Route::get('/newpurchaserequest/viewprform', [GenerateFormController::class,'vie
 Route::post('/newpurchaserequest/searchforapproval', [GenerateFormController::class,'searchForApproval']);
 
 
+// group routes
 Route::controller(AppController::class)->group(function () {
 
     // dashboard
