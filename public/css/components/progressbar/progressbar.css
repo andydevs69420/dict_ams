@@ -1,0 +1,16 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+.progressbar__progressbar {
+  background-color: #E9ECEF !important;
+}
+
+.progressbar__progressbar >
+.progressbar__progress-bar {
+  background-color: #0020EC !important;
+}
+/*# sourceMappingURL=progressbar.css.map */

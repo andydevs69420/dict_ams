@@ -1,0 +1,142 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+/* Based on bootstrap breakpoints */
+/* on small devices and above */
+/* on medium devices and above */
+/* on large devices and above */
+/* on extra-large devices and above */
+/* on extra-extra large devices and above */
+.dashboard__dashboard-header-label {
+  font-size: 1.6em;
+}
+
+.dashboard__dashboard-tile {
+  padding-top: 100%;
+  width: 100%;
+  min-width: 120px;
+  border-radius: 0.4em;
+  overflow: hidden;
+  color: #F7F7F7 !important;
+}
+
+.dashboard__dashboard-tile .dashboard__dashboard-tile-title {
+  font-size: .7em;
+  font-weight: 700;
+  z-index: 1;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__dashboard-tile .dashboard__dashboard-tile-title {
+    overflow-wrap: normal;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.dashboard__dashboard-tile .dashboard__dashboard-tile-value {
+  font-size: 2.2em;
+  z-index: 1;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__dashboard-tile .dashboard__dashboard-tile-value {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #6c757d !important;
+  }
+}
+
+.dashboard__dashboard-tile .dashboard__tile-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 0;
+  font-size: 3em;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__dashboard-tile .dashboard__tile-icon {
+    position: initial;
+    inset: initial;
+    -webkit-transform: initial;
+            transform: initial;
+    font-size: 1.4em;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__dashboard-tile {
+    padding-top: initial;
+    height: 7em;
+    background-color: #F7F7F7 !important;
+  }
+}
+
+.dashboard__tile-blue {
+  background-color: #0020EC !important;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__tile-blue {
+    border-left: 0.3em solid #0020EC !important;
+    color: #0020EC !important;
+    background-color: #F7F7F7 !important;
+  }
+}
+
+.dashboard__tile-green {
+  background-color: #09B77C !important;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__tile-green {
+    border-left: 0.3em solid #09B77C !important;
+    color: #09B77C !important;
+    background-color: #F7F7F7 !important;
+  }
+}
+
+.dashboard__tile-purple {
+  background-color: #6c5ad3 !important;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__tile-purple {
+    border-left: 0.3em solid #6c5ad3 !important;
+    color: #6c5ad3 !important;
+    background-color: #F7F7F7 !important;
+  }
+}
+
+.dashboard__tile-light-green {
+  background-color: #F7CC5D !important;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__tile-light-green {
+    border-left: 0.3em solid #F7CC5D !important;
+    color: #F7CC5D !important;
+    background-color: #F7F7F7 !important;
+  }
+}
+
+.dashboard__tile-pink {
+  background-color: #a8327b !important;
+}
+
+@media screen and (min-width: 992px) {
+  .dashboard__tile-pink {
+    border-left: 0.3em solid #a8327b !important;
+    color: #a8327b !important;
+    background-color: #F7F7F7 !important;
+  }
+}
+/*# sourceMappingURL=dashboard.css.map */

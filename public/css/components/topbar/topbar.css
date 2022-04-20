@@ -1,0 +1,15 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+.topbar__avatar-identifier {
+  font-size: 1em;
+}
+
+.topbar__avatar-icon {
+  max-width: 1em;
+}
+/*# sourceMappingURL=topbar.css.map */

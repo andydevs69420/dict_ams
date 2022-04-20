@@ -1,0 +1,47 @@
+
+
+$PRIMARY : #0020EC;
+
+/* ================= LOGIN COLORS   ================= */
+$LOGIN-BG              : $PRIMARY;
+$LOGIN-LOGIN-BTN-BG    : $PRIMARY;
+$LOGIN-REGISTER-BTN-BG : $PRIMARY;
+
+/* ================= SIDEBAR COLORS ================= */
+$SIDEBAR-BG            : $PRIMARY;
+$SIDEBAR-SCROLL-THUMB  : #F7F7F7;
+$SIDEBAR-HOVER-LINK    : #F7F7F7;
+$SIDEBAR-ACTIVE-LINK   : #F7F7F7;
+$SIDEBAR-INACTIVE-LINK : #0DCAF0;
+
+/* ================= TOPBAR COLORS ================== */
+// add or create (optional)
+
+/* ================= DASHBOARD COLORS =============== */
+$DASHBOARD-TILE-LG-BG  : #F7F7F7;
+$DASHBOARD-TILE-LG-FG  : #F7F7F7;
+$DASHBOARD-TILE-BLUE   : $PRIMARY;
+$DASHBOARD-TILE-GREEN  : #09B77C;
+$DASHBOARD-TILE-PURPLE : #6c5ad3;
+$DASHBOARD-TILE-LIGHT-GREEN : #F7CC5D;
+$DASHBOARD-TILE-PINK   : #a8327b;
+
+$DASHBOARD-TILE-VALUE-MD : #6c757d;
+
+/* ================= PROGRESSBAR COLORS ============= */
+$PROGRESSBAR-BG        : #E9ECEF;
+$PROGRESSBAR-PROGRESS  : $PRIMARY;
+
+/* ================= NEW PR FORM COLORS ============= */
+$NPR-CARD-HEADER       : $PRIMARY;
+$NPR-UPLOAD-FILE-BDC   : $PRIMARY;
+$NPR-SUBMIT-FORM-BTN   : $PRIMARY;
+
+/* ================= PR FORM COLORS ================= */
+$PR-CARD-HEADER        : #F7F7F7;
+$PR-INPUT-ICON-BG      : $PRIMARY;
+$PR-ADD-NEW-ITEM-BTN   : $PRIMARY;
+$PR-GENERATE-PR-BTN    : $PRIMARY;
+
+
+//#09B77C

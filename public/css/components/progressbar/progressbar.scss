@@ -1,0 +1,11 @@
+@import '../../global/appcolor';
+
+
+.progressbar__progressbar
+{ background-color: $PROGRESSBAR-BG !important; }
+
+.progressbar__progressbar > 
+.progressbar__progress-bar
+{ background-color: $PROGRESSBAR-PROGRESS !important; }
+
+

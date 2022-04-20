@@ -1,0 +1,129 @@
+@import '../global/appcolor';
+@import '../global/sizing';
+
+.dashboard__dashboard-header-label
+{ font-size: 1.6em; }
+
+
+.dashboard__dashboard-tile
+{
+    padding-top: 100%;
+    width: 100%;
+    min-width: 120px;
+    border-radius: 0.4em;
+    overflow: hidden;
+    color: $DASHBOARD-TILE-LG-FG !important; 
+
+    & .dashboard__dashboard-tile-title
+    { 
+        font-size: .7em;
+        font-weight: 700;
+        z-index: 1;
+        
+        @include onLG()
+        {
+            overflow-wrap: normal;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    & .dashboard__dashboard-tile-value
+    { 
+        font-size: 2.2em; 
+        z-index: 1;
+
+        @include onLG()
+        { 
+            font-weight: bold;
+            font-size: 1.2em; 
+            color: $DASHBOARD-TILE-VALUE-MD !important;
+        }
+    }
+
+    & .dashboard__tile-icon
+    { 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        font-size: 3em;
+
+        @include onLG()
+        { 
+            position: initial;
+            inset: initial;
+            transform: initial;
+            font-size: 1.4em; 
+        }
+    }
+ 
+    @include onLG()
+    { 
+        padding-top: initial; 
+        height: 7em;
+        background-color: $DASHBOARD-TILE-LG-BG !important;
+    }
+}
+
+.dashboard__tile-blue
+{ 
+    background-color: $DASHBOARD-TILE-BLUE !important; 
+
+    @include onLG()
+    { 
+        border-left: .3em solid $DASHBOARD-TILE-BLUE !important; 
+        color: $DASHBOARD-TILE-BLUE !important; 
+        background-color: $DASHBOARD-TILE-LG-BG !important; 
+    } 
+}
+
+.dashboard__tile-green
+{ 
+    background-color: $DASHBOARD-TILE-GREEN !important;
+
+    @include onLG()
+    { 
+        border-left: .3em solid $DASHBOARD-TILE-GREEN !important;
+        color: $DASHBOARD-TILE-GREEN !important; 
+        background-color: $DASHBOARD-TILE-LG-BG !important; 
+    } 
+}
+
+.dashboard__tile-purple
+{ 
+    background-color: $DASHBOARD-TILE-PURPLE !important;
+    
+    @include onLG()
+    { 
+        border-left: .3em solid $DASHBOARD-TILE-PURPLE !important; 
+        color: $DASHBOARD-TILE-PURPLE !important; 
+        background-color: $DASHBOARD-TILE-LG-BG !important;
+    } 
+}
+
+.dashboard__tile-light-green
+{
+    background-color: $DASHBOARD-TILE-LIGHT-GREEN !important;
+    
+    @include onLG()
+    { 
+        border-left: .3em solid $DASHBOARD-TILE-LIGHT-GREEN !important; 
+        color: $DASHBOARD-TILE-LIGHT-GREEN !important; 
+        background-color: $DASHBOARD-TILE-LG-BG !important;
+    } 
+}
+
+.dashboard__tile-pink
+{
+    background-color: $DASHBOARD-TILE-PINK !important;
+    
+    @include onLG()
+    { 
+        border-left: .3em solid $DASHBOARD-TILE-PINK !important; 
+        color: $DASHBOARD-TILE-PINK !important; 
+        background-color: $DASHBOARD-TILE-LG-BG !important;
+    } 
+}
