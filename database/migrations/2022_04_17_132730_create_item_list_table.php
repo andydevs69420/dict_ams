@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('forms'))
-        {
-            Schema::create('forms',function(Blueprint $table) {
-                $table->id()->uniqe();
-                $table->string('prnumber');
-                $table->string('sainumber');
-                $table->string('purpose');
-                $table->bigInteger('formrequiredpersonel')->unsigned();
-            });
-        }
+        Schema::create('item_list', function (Blueprint $table) {
+            $table->id('itemlist_id')->unique();
+            $table->string('itemname');
+            $table->string('itemdescription');
+        });
     }
 
     /**
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('item_list');
     }
 };

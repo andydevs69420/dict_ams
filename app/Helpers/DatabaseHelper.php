@@ -31,26 +31,14 @@
      * @return JSON 
      * 
      */
-    function getUserById(Int $uid)
+    function getVerifiedUserById(Int $uid)
     {
         return json_decode(
             json_encode(
-                DB::table('users')
-                ->select(
-                    'users.id', 
-                    'users.firstname', 
-                    'users.lastname',
-                    'users.middleinitial',
-                    'users.username',
-                    'users.email',
-                    'designations.id AS designation_id',
-                    'designations.designation AS designation_name',
-                    'accesslevels.id AS accesslevel_id',
-                    'accesslevels.accesslevel AS accesslevel_name',
-                )
-                ->join('designations', 'users.designation', '=', 'designations.id')
-                ->join('accesslevels', 'users.accesslevel', '=', 'accesslevels.id')
-                ->where('users.id', '=', $uid)->first(), 
+                DB::table('user')
+                ->join('designation', 'user.designation_id', '=', 'designation.designation_id')
+                ->join('accesslevel', 'user.accesslevel_id', '=', 'accesslevel.accesslevel_id')
+                ->where('user.user_id', '=', $uid)->first(), 
                 true
             ), 
             true
@@ -60,7 +48,7 @@
     /**
      * 
      * Find users by name  
-     * @param Array $access_level_filter | default: 1 - 13 (all access levels)
+     * @param Array $access_level_filter | default: 1 - 13 (all access levels except admin (14))
      * @return Array[JSON] 
      * 
      */
@@ -68,7 +56,7 @@
     {
         return json_decode(
             json_encode(
-                DB::table('users')
+                DB::table('user')
                 ->select(
                     'users.id', 
                     'users.firstname', 
@@ -98,5 +86,17 @@
             true
         );
     }
+
+    function countTruncate(Int $num)
+    {
+        if ($num > 1000)
+            return number_format(($num / 1000), 1) . 'k';
+        else if ($num > 1000000)
+            return number_format(($num / 1000000), 1) . 'M';
+        else if ($num > 1000000000)
+            return number_format(($num / 1000000000), 1) . 'B';
+        return $num;
+    }
+
 ?>
 

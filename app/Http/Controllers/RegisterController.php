@@ -11,13 +11,16 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     //
-    function index()
+    function index(Request $request)
     {
         // akong ge edit part kay naay need naku sa akong task
 
         $params = [
             'designations' => Designation::all(),
-            'accesslevels' => Accesslevel::all()
+            'accesslevels' => (strcmp($request->input('admin'), 'true') === 0)?
+                                Accesslevel::all()
+                                : // ang 14 kay accesslevel_id ni admin
+                                Accesslevel::all()->where('accesslevel_id', '!=', '14')
         ];
 
         return view('register/register', $params);   

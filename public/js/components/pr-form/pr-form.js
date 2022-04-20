@@ -1,4 +1,6 @@
 
+var progressBar = new Progressbar('#pr-progress');
+
 /**
  * 
  * Item addtion
@@ -7,73 +9,45 @@
  */
 function add__item()
 {
-    let item_list, nth_child;
+    let item_list, nth_child, new_itmID, clone_itm;
 
     item_list = $('#item-list-id');
     nth_child = (item_list.children().length + 1);
 
-    item_list
-    .append($(`
-        <li id="item-${nth_child}-id" class="list-group-item rounded-0">
-            <div class="d-flex align-items-center justify-content-between">
-                <span class="fw-bold" role="text">Item ${nth_child}</span>
-                <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove__item('#item-${nth_child}-id')">&times;</button>
-            </div>
-            <div class="container-fluid p-0">
-                <div class="row">
-                    <!-- stock no group -->
-                    <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Stock no</small></label>
-                        <div  class="input-group">
-                            <input class="form-control bg-light" name="stock[]" type="number" placeholder="Stock no.">
-                        </div>
-                    </div>
-                    <!-- unit group -->
-                    <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Unit*</small></label>
-                        <div class="input-group">
-                            <input class="form-control bg-light" list="default-units" name="unit[]" type="text" placeholder="Unit" required>
-                            <datalist id="default-units">
-                                <option value="pcs">
-                                <option value="in">
-                                <option value="mm">
-                                <option value="cm">
-                            </datalist>
-                        </div>
-                    </div>
-                    <!-- item dscription group -->
-                    <div class="col-12">
-                        <label class="text-dark py-1"><small>Item description*</small></label>
-                        <div  class="input-group">
-                            <textarea class="form-control bg-light" name="description[]" type="text" placeholder="Item description" rows="2" required style="resize: none;"></textarea>
-                        </div>
-                    </div>
-                    <!-- quantity group -->
-                    <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Qty</small></label>
-                        <div class="input-group">
-                            <input class="form-control bg-light" name="qty[]" type="number" placeholder="Qty">
-                        </div>
-                    </div>
-                    <!-- unit cost group -->
-                    <div class="col-12 col-sm-6">
-                        <label class="text-dark py-1"><small>Unit cost</small></label>
-                        <div class="input-group">
-                            <input class="form-control bg-light" name="unitcost[]" type="number" placeholder="Unit cost">
-                        </div>
-                    </div>
-                    <!-- total cost group -->
-                    <div class="col-12">
-                        <label class="text-dark py-1"><small>Total cost</small></label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fa-solid fa-peso-sign"></i></span>
-                            <input class="form-control bg-light" name="totalcost[]" type="number" placeholder="Total cost">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    `));
+    clone_itm = $('#pr-form__item-template-default')
+                .clone();
+    
+    // modify item id
+    new_itmID = `item-${nth_child}-id`;
+
+    clone_itm
+    .attr('id', new_itmID);
+
+    // prepend hr
+    clone_itm
+    .prepend('<hr class="bg-info">');
+
+    // modify item number
+    $(clone_itm.find('span')[0])
+    .text(`Item ${nth_child}`);
+
+    // modify remove event
+    $(clone_itm.find('button')[0])
+    .attr('title', `Remove item ${nth_child}`)
+    .attr('onclick', `javascript:remove__item('#${new_itmID}')`);
+
+    // clear fields
+    $(clone_itm.find('input'))
+    .each((index,element) => {
+        $(element).val('');
+    });
+
+    // finally append item
+    item_list.append(clone_itm);
+
+    $('[data-bs-toggle="tooltip"]').tooltip();
+    $('[data-bs-toggle="popover"]').popover();
+    progressBar.update();
 }
 
 /**
@@ -110,9 +84,15 @@ function remove__item(id_query_selector)
         .attr('onclick', `javascript:remove__item('#${childIDN}')`);
     }
 
+    $('[data-bs-toggle="tooltip"]')
+    .tooltip('dispose')
+    .tooltip();
+
     $(id_query_selector)
     .attr('id', `item-${id[1]}-id-delete`)
-    .remove(); 
+    .remove();
+
+    progressBar.update();
     
 }
 
@@ -182,7 +162,7 @@ async function search__recommending_approval(requisitionerid,rec_approval_name_i
                         { rec_approval_design.text(''); }
                         else
                         { rec_approval_design.text(user_design + ', ' + user_access); }
-                        input_Field.off('change');
+                        progressBar.update();
                     });
 
                 });
@@ -309,7 +289,7 @@ function generate__pr_form()
             rec_A.length <= 0 ||
             rec_B.length <= 0
         )
-            return $('#onErrorModal').modal('show');
+            return $('#pr-form__on-error-modal').modal('show');
         else
             return window.open(`/newpurchaserequest/viewprform?data=${JSON.stringify(form_data)}`);
 

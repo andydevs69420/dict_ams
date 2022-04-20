@@ -1,13 +1,10 @@
 /* ================= LOGIN COLORS   ================= */
 /* ================= SIDEBAR COLORS ================= */
 /* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
 /* ================= PROGRESSBAR COLORS ============= */
 /* ================= NEW PR FORM COLORS ============= */
 /* ================= PR FORM COLORS ================= */
-.topbar__avatar {
-  border-left: 1px solid #DBDBDB;
-}
-
 .topbar__avatar-identifier {
   font-size: 1em;
 }

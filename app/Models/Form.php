@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Form extends Model
 {
     use HasFactory;
+    protected $table = 'form';
+
 
     public $timestamps = true;
     
@@ -15,6 +17,6 @@ class Form extends Model
         'prnumber',
         'sainumber',
         'purpose',
-        'formrequiredpersonel',
+        'formrequiredpersonel_id',
     ];
 }

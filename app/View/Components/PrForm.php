@@ -70,6 +70,40 @@ class PrForm extends Component
     public function getPurpose() : String
     { return $this->purpose; }
 
+    // =============== BUDGET OFFICER METHODS===============
+    /** 
+     * Returns requisitioner id
+     * @return Int
+     */
+    public function getBudgetOfficerAccessLevelId() : Int
+    { return (Int) $this->budgetOfficer['accesslevel_id']; }
+
+    /**
+     * Returns requisitioner name eg: LN, FN MN
+     * @return String
+     */
+    public function getBudgetOfficerName() : String 
+    {
+        if (!(array) $this->budgetOfficer)
+            return "";
+
+        return $this->budgetOfficer['lastname'] . ', ' . $this->budgetOfficer['firstname'] . ' ' . $this->budgetOfficer['middleinitial'];
+    }
+
+    /**
+     * Returns requisitioner designation eg: designation, Accesslevel
+     * @return String
+     */
+    public function getBudgetOfficerDesignation() : String
+    {
+        if (!(array) $this->budgetOfficer)
+            return "";
+
+        return $this->budgetOfficer['designation_name'] . ', ' . $this->budgetOfficer['accesslevel_name'];
+    }
+
+    // =============== REQUISITIONER METHODS ===============
+
     /** 
      * Returns requisitioner id
      * @return Int

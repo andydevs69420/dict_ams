@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenerateFormController;
+use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,16 +30,32 @@ Route::post('/login', [LoginController::class,'check']);
 Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
 
-// dashboard
-Route::get('/dashboard', [DashboardController::class,'index']);
-
-// purchase request
-Route::get('/newpurchaserequest', [GenerateFormController::class,'purchaseRequest']);
-Route::get('/newpurchaserequest/viewprform', [GenerateFormController::class,'viewPRForm']);
-Route::post('/newpurchaserequest/searchforapproval', [GenerateFormController::class,'searchForApproval']);
-
 // Budget Officer
 Route::get('BO', 'BOController@index')->name('BO');
 Route::get('edit-ors/{id}', 'BOController@edit');
 Route::get('edit-ors/delete/{id}', 'BOController@delete');
 Route::post('edit-ors/update', 'BOController@update');
+
+// purchase request
+Route::get('/newpurchaserequest/viewprform', [GenerateFormController::class,'viewPRForm']);
+Route::post('/newpurchaserequest/searchforapproval', [GenerateFormController::class,'searchForApproval']);
+
+
+Route::controller(AppController::class)->group(function () {
+
+    // dashboard
+    Route::get('/dashboard', 'dashboard');
+
+    // create form
+        // pr
+        Route::get('/newpurchaserequest', 'purchaseRequest');
+        // jo
+        Route::get('/newjoborder', 'jobOrder');
+    
+    // users
+    Route::get('/users', 'users');
+        // accept
+        // decline
+        // delete
+    
+});

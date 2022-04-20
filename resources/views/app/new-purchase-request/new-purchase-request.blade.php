@@ -15,6 +15,9 @@
     {{-- NEW PURCHASE REQUEST css --}}
     <link rel="stylesheet" href="{{ asset('css/new-purchase-request/new-purchase-request/new-purchase-request.css') }}">
 
+    {{-- PROGRESS BAR css --}}
+    <link rel="stylesheet" href="{{ asset('css/components/progressbar/progressbar.css') }}">
+
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset('css/components/global/pr-and-jo/pr-and-jo.css') }}">
 
@@ -68,12 +71,16 @@
     {{-- NEW PURCHASE REQUEST js --}}
     <script type="text/javascript" src="{{ asset('js/new-purchase-request/new-purchase-request.js') }}"></script>
 
+    {{-- PROGRESS BAR js --}}
+    <script type="text/javascript" src="{{ asset('js/components/progressbar/progressbar.js') }}"></script>
+
     {{-- PR js --}}
     <script type="text/javascript" src="{{ asset('js/components/pr-form/pr-form.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready((evt) => {
             $('[data-bs-toggle="tooltip"]').tooltip();
+            $('[data-bs-toggle="popover"]').popover();
         });
     </script>
 

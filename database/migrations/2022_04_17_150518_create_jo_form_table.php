@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        try
-        {
-            Schema::table('users', function(Blueprint $table) {
-                $table->foreign('designation')->references('id')->on('designations');
-                $table->foreign('accesslevel')->references('id')->on('accesslevels');
-            });
-        }catch(Exception $err)
-        { /* on duplicate */ }
+        Schema::create('jo_form', function (Blueprint $table) {
+            $table->id()->unique();
+            $table->bigInteger('form_id')->unsigned();
+        });
+
+        Schema::table('jo_form', function (Blueprint $table) {
+            $table->foreign('form_id')->references('form_id')->on('form');
+        });
     }
 
     /**
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('jo_form');
     }
 };

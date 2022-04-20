@@ -1,6 +1,6 @@
 try
 {
-    global.$      = global.jQuery = require('jquery');
+    global.$ = global.jQuery = require('jquery');
     global.Popper = require('@popperjs/core');
     require('bootstrap');
 }
