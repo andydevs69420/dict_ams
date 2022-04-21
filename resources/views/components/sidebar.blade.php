@@ -87,13 +87,17 @@
                                 <i class="sidebar__list-icon fa fa-users"></i>
                                 <a class="sidebar__list-label" href="{{ url('/users') }}">
                                     {{ __('Users') }}
-                                    <span class="badge bg-danger align-self-end">2+</span>
+                                    @if (($result = App\Models\UserVerificationDetails::countUserByVerificationStatusId('1')) > 0)
+                                        <span class="badge bg-danger">
+                                            +{{ $result }}
+                                        </span>
+                                    @endif
                                 </a>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch('') }}">
-                                <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="#">Item List</a>
+                            <li class="sidebar__li-item list-group-item {{ $isPathMatch('itemlist') }}">
+                                <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="{{ url('/itemlist') }}">{{ __('Item List') }}</a>
                             </li>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch('') }}">
-                                <i class="sidebar__list-icon fa fa-user"></i><a class="sidebar__list-label" href="#">Requisitioner</a>
+                            <li class="sidebar__li-item list-group-item {{ $isPathMatch('requisitioner') }}">
+                                <i class="sidebar__list-icon fa fa-user"></i><a class="sidebar__list-label" href="{{ url('/requisitioner') }}">{{ __('Requisitioner') }}</a>
                             </li>
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch('') }}">
                                 <div class="sidebar__accordion accordion accordion-flush">

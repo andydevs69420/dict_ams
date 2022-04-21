@@ -1,4 +1,4 @@
-@extends('layout.app-main', ['accesslevelid' => $LoggedUserInfo['accesslevel'],'username' => $LoggedUserInfo['username']])
+@extends('layout.app-main', ['accesslevelid' => $LoggedUserInfo['accesslevel_id'],'username' => $LoggedUserInfo['username']])
 
 @section('title', 'AMS | Obligation Request')
 

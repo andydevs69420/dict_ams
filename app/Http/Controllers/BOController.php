@@ -12,8 +12,8 @@ class BOController extends Controller
     {
         //if (permission::permitted('BO')=='fail'){ return redirect()->route('denied'); }
         //$empl = table::people()->get();
-        $form = table::ORS()->get();
-        return view('Budgetofficer.BO', $form);
+        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+        return view('Budgetofficer.BO', $data);
     }
 
     public function edit($id, Request $request) 
