@@ -17,10 +17,16 @@ class ItemList extends Model
         'itemdescription',
     ];
 
-    /*
-        E count lang niya pila ka rows ang table
-    */
+    /**
+     * E count lang niya pila ka rows ang table
+     */
     public static function countRows()
     { return countTruncate(count(self::all())); }
+
+    /**
+     * Kuhaon lang niya tanan item sa table 
+     */
+    public static function getAllItems()
+    { return self::all(); }
 
 }

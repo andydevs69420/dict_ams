@@ -32,7 +32,7 @@ Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
 
 // Budget Officer
-Route::get('BO', 'BOController@index')->name('BO');
+Route::get('/BO', [BOController::class, 'index']);
 Route::get('edit-ors/{id}', 'BOController@edit');
 Route::get('edit-ors/delete/{id}', 'BOController@delete');
 Route::post('edit-ors/update', 'BOController@update');
@@ -56,8 +56,15 @@ Route::controller(AppController::class)->group(function () {
     
     // users
     Route::get('/users', 'users');
-        // accept
-        // decline
+        // accept or decline
+        Route::post('/user/updateverificationstatus', 'updateVerificationStatus');
         // delete
+        Route::post('/user/deleteuser', 'deleteuser');
+
+    // item list
+    Route::get('/itemlist', 'itemlist');
+
+    // requisitioner
+    Route::get('/requisitioner', 'requisitioner');
     
 });

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Models\UserVerificationDetails;
+use App\Models\ItemList;
+
 class AppController extends Controller
 {
     // DASHBOARD
@@ -69,5 +73,57 @@ class AppController extends Controller
             return redirect('/logout');
 
         return view('app.users.users', $data);
+    }
+        // accept or decline user
+        public function updateVerificationStatus(Request $request)
+        {
+            $user_id   = $request->input('user_id');
+            $status_id = $request->input('status_id');
+            
+            $signal = UserVerificationDetails::where('user_id', '=', $user_id)
+                        ->update(['verificationstatus_id' => $status_id]);
+            return !(!$signal);
+        }
+        // delete user
+        public function deleteUser(Request $request)
+        {
+            $user_id = $request->input('user_id');
+            
+            $signal = UserVerificationDetails::where('user_id', '=', $user_id)
+                        ->delete();
+            return !(!$signal);
+        }
+    
+    // item list
+    public function itemlist(Request $request)
+    {
+        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+
+        return view('app.item-list.item-list', $data);
+    }
+        // delete item
+        public function deleteItem()
+        {
+            $itemlist_id = $request->input('itemlist_id');
+            
+            $signal = ItemList::where('itemlist_id', '=', $itemlist_id)
+                        ->delete();
+            return !(!$signal);
+        }
+    
+    public function requisitioner(Request $request)
+    {
+        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+        /*
+            REFER to accesslevels table for id
+            | Mao rani and admin
+            ;
+
+            14 := admin
+        */
+        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
+            return redirect('/logout');
+
+        return view('app.requisitioner.requisitioner', $data);
     }
 }
