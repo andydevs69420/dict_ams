@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\UserVerificationDetails;
+use App\Models\ItemList;
 
 class AppController extends Controller
 {
@@ -89,6 +90,23 @@ class AppController extends Controller
             $user_id = $request->input('user_id');
             
             $signal = UserVerificationDetails::where('user_id', '=', $user_id)
+                        ->delete();
+            return !(!$signal);
+        }
+    
+    // item list
+    public function itemlist(Request $request)
+    {
+        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+
+        return view('app.item-list.item-list', $data);
+    }
+        // delete item
+        public function deleteItem()
+        {
+            $itemlist_id = $request->input('itemlist_id');
+            
+            $signal = ItemList::where('itemlist_id', '=', $itemlist_id)
                         ->delete();
             return !(!$signal);
         }

@@ -14,9 +14,6 @@
 
 @section('dependencies')
 
-    {{-- users css --}}
-    <link rel="stylesheet" href="{{ asset('css/components/global/pr-and-jo/pr-and-jo.css') }}">
-
     {{-- datatable css --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     
@@ -38,7 +35,7 @@
                         <th class="text-center" scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody style="max-height: 400px !important; overflow-y: auto !important;">
+                <tbody>
                     @foreach(App\Models\UserVerificationDetails::getAllUsers() as $user)
                         <tr>
                             <td data-order="{{ $user['verificationstatus_id'] }}" style="vertical-align: middle !important;">{{ $user['lastname'] .', ' . $user['firstname'] . ' ' .$user['middleinitial'] }}</td>
@@ -83,9 +80,6 @@
 
 @section('javascript')
 
-    {{-- users js --}}
-    <script type="text/javascript" src="{{ asset('js/users/users.js') }}"></script>
-
     {{-- datatable js --}}
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
@@ -95,6 +89,7 @@
             $('#users__user-table').DataTable();
         });
     </script>
+    
 @stop
 
 

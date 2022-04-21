@@ -14,9 +14,6 @@
 
 @section('dependencies')
 
-    {{-- users css --}}
-    <link rel="stylesheet" href="{{ asset('css/components/global/pr-and-jo/pr-and-jo.css') }}">
-
     {{-- datatable css --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     
@@ -25,7 +22,7 @@
 @section('content')
     <div class="d-block py-5">
         <div class="container py-2 rounded-2 shadow-lg">
-            <table id="users__user-table" class="table table-striped w-100">
+            <table id="requisitioner__requisitioner-table" class="table table-striped w-100">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">Name</th>
@@ -33,7 +30,7 @@
                         <th class="text-center" scope="col">Accesslevel</th>
                     </tr>
                 </thead>
-                <tbody style="max-height: 400px !important; overflow-y: auto !important;">
+                <tbody>
                     @foreach(App\Models\UserVerificationDetails::getAllRequisitioner() as $user)
                         <tr>
                             <td data-order="{{ $user['verificationstatus_id'] }}" style="vertical-align: middle !important;">{{ $user['lastname'] .', ' . $user['firstname'] . ' ' .$user['middleinitial'] }}</td>
@@ -49,16 +46,14 @@
 
 @section('javascript')
 
-    {{-- users js --}}
-    <script type="text/javascript" src="{{ asset('js/users/users.js') }}"></script>
-
     {{-- datatable js --}}
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         $(document).ready(() => {
-            $('#users__user-table').DataTable();
+            $('#requisitioner__requisitioner-table').DataTable();
         });
     </script>
+
 @stop

@@ -60,7 +60,10 @@ Route::controller(AppController::class)->group(function () {
         Route::post('/user/updateverificationstatus', 'updateVerificationStatus');
         // delete
         Route::post('/user/deleteuser', 'deleteuser');
-    
+
+    // item list
+    Route::get('/itemlist', 'itemlist');
+
     // requisitioner
     Route::get('/requisitioner', 'requisitioner');
     
