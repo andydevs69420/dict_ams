@@ -7,11 +7,11 @@
     <a href="https://github.com/andydevs69420/dict_ams.git"><img src="public/images/license-info.svg" alt="License"></a>
 </p>
 
-### About AMS
+### ❓ About AMS
 
 A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHASING GOODS/SERVICES
 
-### Developers 
+### 👦 Developers 
 
 <br>
 <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
@@ -39,6 +39,6 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 </div>
 <br>
 
-### Contributors
+### 👪 Contributors
 
 - <span><a href="https://github.com/ellmarieee" style="font-size: 1em;">ellmarieee</a> (database)</span>
