@@ -33,8 +33,8 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
     <img src="https://avatars.githubusercontent.com/u/96167471?v=4" width="92" style="border-radius: 50%;" /> 
     <div>
-        <span role="text" style="display: block; font-size: 1.5em;">Bryner Sinalan Bodollo</span>
-        <a href="https://github.com/bsbodollo01" style="display: block; font-size: 1em;">(bsbodollo01)</a>
+        <div role="text" style="font-size: 1.5em;">Bryner Sinalan Bodollo</div>
+        <div><a href="https://github.com/bsbodollo01" style="display: block; font-size: 1em;">(bsbodollo01)</a></div>
     </div>
 </div>
 <br>
