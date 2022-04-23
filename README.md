@@ -1,5 +1,3 @@
-<style>h1{border-bottom: 0px;}</style>
-
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/dict-temporary.png" width="400"></a></p>
 
 <p align="center">
@@ -9,7 +7,7 @@
     <a href="https://github.com/andydevs69420/dict_ams.git"><img src="public/images/license-info.svg" alt="License"></a>
 </p>
 
-# ❓ About AMS
+## ❓ About AMS
 
 A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHASING GOODS/SERVICES
 
