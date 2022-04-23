@@ -16,7 +16,7 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 <br>
 <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
     <img src="https://avatars.githubusercontent.com/u/58409313?v=4" width="92" style="border-radius: 1000px;" /> 
-    <div style="margin-left: 20px;">
+    <div style="display: block; margin-left: 20px;">
         <span role="text" style="display: block; font-size: 1.5em;">Philipp Andrew Roa Redondo</span>
         <a href="https://github.com/andydevs69420" style="font-size: 1em;">(andydevs69420)</a>
     </div>
@@ -24,7 +24,7 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 <br>
 <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
     <img src="https://avatars.githubusercontent.com/u/40266802?v=4" width="92" style="border-radius: 1000px;" /> 
-    <div style="margin-left: 20px;">
+    <div style="display: block; margin-left: 20px;">
         <span role="text" style="display: block; font-size: 1.5em;">Erwin Canoy Amper</span>
         <a href="https://github.com/iuwin" style="font-size: 1em;">(iuwin)</a>
     </div>
@@ -32,7 +32,7 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 <br>
 <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
     <img src="https://avatars.githubusercontent.com/u/96167471?v=4" width="92" style="border-radius: 1000px;" /> 
-    <div style="margin-left: 20px;">
+    <div style="display: block; margin-left: 20px;">
         <span role="text" style="display: block; font-size: 1.5em;">Bryner Sinalan Bodollo</span>
         <a href="https://github.com/bsbodollo01" style="font-size: 1em;">(bsbodollo01)</a>
     </div>
