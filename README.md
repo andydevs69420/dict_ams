@@ -14,13 +14,13 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 ## Developers 
 
 <br>
-<div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
+<p style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
     <img src="https://avatars.githubusercontent.com/u/58409313?v=4" width="92" style="border-radius: 1000px;" /> 
     <p style="display: block; margin-left: 20px;">
         <p role="text" style="display: block; font-size: 1.5em;">Philipp Andrew Roa Redondo</p>
         <a href="https://github.com/andydevs69420" style="font-size: 1em;">(andydevs69420)</a>
     </p>
-</div>
+</p>
 <br>
 <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;">
     <img src="https://avatars.githubusercontent.com/u/40266802?v=4" width="92" style="border-radius: 1000px;" /> 
