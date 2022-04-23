@@ -8,21 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Designation extends Model
 {
     use HasFactory;
-    protected $table = 'designation';
+    protected $table = "designation";
 
     public $timestamps = false;
     
     protected $fillable = [
-        'designation'
+        "designation"
     ];
 
-    /*
-        E return lang niya ang designation name base sa id na ge pass
-    */ 
+    /**
+     * Returns designation name using $id parameter
+     * @param Int $id accesslevel_id
+     * @return String
+     * @example
+     *     Designation::getDesignationById("69" | 69);
+     * 
+     **/ 
     public static function getDesignationById(Int $id)
     {
-        return self::select('designation')
-                    ->where('designation_id', '=', $id)
-                    ->first()['designation'];
+        return self::select("designation")
+                    ->where("designation_id", "=", $id)
+                    ->first()["designation"];
     }
 }

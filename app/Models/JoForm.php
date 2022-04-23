@@ -15,9 +15,14 @@ class JoForm extends Model
         // dungagi
     ];
 
-    /*
-        E count lang niya pila ka rows ang table
-    */
+   
+    /**
+     * Counts number of rows
+     * @return String
+     * @example
+     *     JoForm::countRows();
+     * 
+     **/
     public static function countRows()
     { return countTruncate(count(self::all())); }
 

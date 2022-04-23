@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "ACIA,wDAAwD;AAKxD,wDAAwD;AAOxD,wDAAwD;AAGxD,wDAAwD;AAWxD,wDAAwD;AAIxD,wDAAwD;AAKxD,wDAAwD;ADrCxD,AAAA,0BAA0B,CAC1B;EAAE,SAAS,EAAE,GAAG;CAAI;;AAEpB,AAAA,oBAAoB,CACpB;EAAE,SAAS,EAAE,GAAG;CAAI",
+    "mappings": "ACIA,wDAAwD;AAMxD,wDAAwD;AAOxD,wDAAwD;AAGxD,wDAAwD;AAWxD,wDAAwD;AAIxD,wDAAwD;AAKxD,wDAAwD;ADtCxD,AAAA,0BAA0B,CAC1B;EAAE,SAAS,EAAE,GAAG;CAAI;;AAEpB,AAAA,oBAAoB,CACpB;EAAE,SAAS,EAAE,GAAG;CAAI",
     "sources": [
         "topbar.scss",
         "../../global/_appcolor.scss"

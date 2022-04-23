@@ -7,7 +7,7 @@
     <div class="hstack gap-1">
         <div class="vr"></div>
         <span class="topbar__avatar-identifier text-muted ms-3" role="text">{{ $getUsername() }}</span>
-        <img class="topbar__avatar-icon ms-3" src="{{ asset('images/dict-transparent.png') }}" alt="avatar-icon">
+        <img class="topbar__avatar-icon ms-3" src="{{ asset("images/dict-transparent.png") }}" alt="avatar-icon">
     </div>
 </nav>
 

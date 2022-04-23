@@ -20,10 +20,14 @@ class PrForm extends Model
         'totalcost',
     ];
 
-    /*
-        E count lang niya pila ka rows ang table
-    */
+    
+    /**
+     * Counts number of rows
+     * @return String
+     * @example
+     *     PrForm::countRows();
+     * 
+     **/
     public static function countRows()
     { return countTruncate(count(self::all())); }
-
 }

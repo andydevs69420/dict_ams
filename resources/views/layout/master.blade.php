@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>@yield("title")</title>
     <link rel="shortcut icon" href="{{ asset('images/dict-transparent.png') }}" type="image/x-icon">
 
     {{-- MASTER layout css --}}
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/global/master/master.css') }}">
 
     {{-- OTHER CSS|JS dependencies (from extended) --}}
-    @yield('dependencies')
+    @yield("dependencies")
 
 </head>
 <body>
@@ -37,14 +37,14 @@
 
     </noscript>
 
-    @yield('body')
+    @yield("body")
     
     {{-- MASTER layout js --}}
     <script type="text/javascript" src="{{ asset('js/webpack/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/global/master/master.js') }}"></script>
 
     {{-- OTHER JS dependencies (from extended) --}}
-    @yield('javascript')
+    @yield("javascript")
 
 </body>
 </html>

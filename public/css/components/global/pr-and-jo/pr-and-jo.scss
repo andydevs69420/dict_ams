@@ -9,7 +9,11 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
+
+input
+{ overflow: hidden !important; }
 
 /* ====================== Purchase Request ====================== */
 
@@ -17,7 +21,11 @@ input[type=number] {
 { background-color: $PR-CARD-HEADER !important }
 
 .input-group-text
-{ background-color: $PR-INPUT-ICON-BG  !important; }
+{ 
+  display: block !important;
+  min-width: 3em !important;
+  background-color: $PR-INPUT-ICON-BG  !important; 
+}
 
 .pr-form__add-new-item-btn
 {

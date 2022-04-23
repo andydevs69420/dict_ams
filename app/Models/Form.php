@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Form extends Model
 {
     use HasFactory;
-    protected $table = 'form';
+    protected $table = "form";
 
 
     public $timestamps = true;
     
     protected $fillable = [
-        'prnumber',
-        'sainumber',
-        'purpose',
-        'formrequiredpersonel_id',
+        "prnumber",
+        "sainumber",
+        "purpose",
+        "formrequiredpersonel_id",
     ];
 }

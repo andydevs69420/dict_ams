@@ -10,8 +10,13 @@ use App\Models\ItemList;
 
 class AppController extends Controller
 {
-    // DASHBOARD
-    public function dashboard()
+    /**
+     * Dashboard -> index
+     * @param Request $request request
+     * @return View
+     * 
+     **/
+    public function dashboard(Request $request)
     {
         $data = [
             'LoggedUserInfo' => getVerifiedUserById(session('LoggedUser')),
@@ -19,18 +24,21 @@ class AppController extends Controller
         return view('app.dashboard.dashboard', $data);
     }
 
-    // PURCHASE REQUEST
+
+    /**
+     * Purchase Request -> index
+     * @param Request $request request
+     * @return View
+     * @example
+     *     Only "requisitioner" has access to this page
+     *          Accesslevel table
+     *              4 := Project Officer
+     *              5 := Focal
+     *             13 := Staff
+     **/
     function purchaseRequest(Request $request)
     {
         $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-        /*
-            | Mao rani sila requisitioner
-            ;
-
-             4 := Project Officer
-             5 := Focal
-            13 := Staff
-        */
 
         if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5', '13']))
             return redirect('/logout');
@@ -38,19 +46,21 @@ class AppController extends Controller
         return view('app.new-purchase-request.new-purchase-request', $data);
     }
 
-    // JOB ORDER
+
+    /**
+     * Job Order -> index
+     * @param Request $request request
+     * @return View
+     * @example
+     *     Only "requisitioner" has access to this page
+     *          Accesslevel table
+     *              4 := Project Officer
+     *              5 := Focal
+     *             13 := Staff
+     **/
     function jobOrder(Request $request)
     {
         $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-        /*
-            REFER to accesslevels table for id
-            | Mao rani sila requisitioner
-            ;
-
-             4 := Project Officer
-             5 := Focal
-            13 := Staff
-        */
 
         if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5', '13']))
             return redirect('/logout');
@@ -58,72 +68,129 @@ class AppController extends Controller
         return view('app.new-job-order.new-job-order', $data);
     }
 
-    // USERS
-    public function users()
+
+    /**
+     * Users -> index
+     * @param Request $request request
+     * @return View
+     * @example
+     *     Only "admin" has access to this page
+     *          Accesslevel table
+     *             14 := admin
+     **/
+    public function users(Request $request)
     {
         $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-        /*
-            REFER to accesslevels table for id
-            | Mao rani and admin
-            ;
 
-            14 := admin
-        */
         if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
             return redirect('/logout');
 
         return view('app.users.users', $data);
     }
-        // accept or decline user
-        public function updateVerificationStatus(Request $request)
-        {
-            $user_id   = $request->input('user_id');
-            $status_id = $request->input('status_id');
-            
-            $signal = UserVerificationDetails::where('user_id', '=', $user_id)
-                        ->update(['verificationstatus_id' => $status_id]);
-            return !(!$signal);
-        }
-        // delete user
-        public function deleteUser(Request $request)
-        {
-            $user_id = $request->input('user_id');
-            
-            $signal = UserVerificationDetails::where('user_id', '=', $user_id)
-                        ->delete();
-            return !(!$signal);
-        }
+
+    /* user subdir ----> */
+
+                /**
+                 * Update new users verification status -> users/updateverificationstatus
+                 * @param Request $request request
+                 * @return bool
+                 * @example
+                 *     Only "admin" has access to this page
+                 *         Accesslevel table
+                 *             14 := admin
+                 **/
+                public function user__updateVerificationStatus(Request $request)
+                {
+                    $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+
+                    if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
+                        return redirect('/logout');
+                    
+                    $user_id   = $request->input('user_id');
+                    $status_id = $request->input('status_id');
+                        
+                    $signal = UserVerificationDetails::where('user_id', '=', $user_id)
+                            ->update(['verificationstatus_id' => $status_id]);
+                    return (bool) !(!$signal);
+                }
+
+
+                /**
+                 * Delete verified user -> users/deleteuser
+                 * @param Request $request request
+                 * @return bool
+                 * @example
+                 *     Only "admin" has access to this page
+                 *         Accesslevel table
+                 *             14 := admin
+                 **/
+                public function deleteUser(Request $request)
+                {
+                    $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+
+                    if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
+                        return redirect('/logout');
+
+                    $user_id = $request->input('user_id');
+                    
+                    $signal = UserVerificationDetails::where('user_id', '=', $user_id)
+                                ->delete();
+                    return (bool) !(!$signal);
+                }
     
-    // item list
+
+    /**
+     * Item List -> index 
+     * @param Request $request request
+     * @return View
+     * 
+     **/ 
     public function itemlist(Request $request)
     {
         $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
 
-        return view('app.item-list.item-list', $data);
-    }
-        // delete item
-        public function deleteItem()
-        {
-            $itemlist_id = $request->input('itemlist_id');
-            
-            $signal = ItemList::where('itemlist_id', '=', $itemlist_id)
-                        ->delete();
-            return !(!$signal);
-        }
-    
-    public function requisitioner(Request $request)
-    {
-        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-        /*
-            REFER to accesslevels table for id
-            | Mao rani and admin
-            ;
-
-            14 := admin
-        */
         if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
             return redirect('/logout');
+        
+        return view('app.item-list.item-list', $data);
+    }
 
+    /* item list subdir ----> */
+
+                /**
+                 * Delete item -> itemlist/deleteitem
+                 * @param Request $request request
+                 * @return bool
+                 * @example
+                 *     Only "admin" has access to this page
+                 *         Accesslevel table
+                 *             14 := admin
+                 **/ 
+                public function deleteItem(Request $request)
+                {
+                    $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+
+                    if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
+                        return redirect('/logout');
+
+                    $itemlist_id = $request->input('itemlist_id');
+                    
+                    $signal = ItemList::where('itemlist_id', '=', $itemlist_id)
+                                ->delete();
+                    return (bool) !(!$signal);
+                }
+
+    
+    /**
+     * Requisitioner -> index
+     * @param Request $request request
+     * @return View
+     **/
+    public function requisitioner(Request $request)
+    {
+        $data = [
+            'LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))
+        ];
         return view('app.requisitioner.requisitioner', $data);
     }
 }

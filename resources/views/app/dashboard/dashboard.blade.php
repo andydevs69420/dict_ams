@@ -1,34 +1,34 @@
 
 
 @extends(
-    'layout.app-main', 
+    "layout.app-main", 
     [
-        'accesslevelid' => $LoggedUserInfo['accesslevel_id'], // para sa sidebar
-        'username'      => $LoggedUserInfo['username']        // para sa topbar
+        "accesslevelid" => $LoggedUserInfo["accesslevel_id"], // para sa sidebar
+        "username"      => $LoggedUserInfo["username"]        // para sa topbar
     ]
 )
 
-@section('title', 'AMS | dashboard')
+@section("title", "AMS | dashboard")
 
-@section('dependencies')
+@section("dependencies")
 
     {{-- DASHBOARD css --}}
-    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset("css/dashboard/dashboard.css") }}">
 
 @stop
 
-@section('content')
+@section("content")
     <div class="d-block w-100 h-100">
         <!-- dahboard main content -->
         <div class="container-fluid">
             <!-- label -->
-            <span class="dashboard__dashboard-header-label d-block px-0 py-3 text-muted" role="text">{{ __('Dashboard') }}</span>
+            <span class="dashboard__dashboard-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Dashboard") }}</span>
             
             <div class="row row-cols-2 row-cols-sm-0 g-3">
                 
                 {{-- TODO: Implement!! --}}
                 
-                @switch($LoggedUserInfo['accesslevel_id'])
+                @switch($LoggedUserInfo["accesslevel_id"])
                     @case(1)
                         @break
                     @case(4)
@@ -45,7 +45,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-blue d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __('MESSAGES') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("MESSAGES") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
                                                 0
@@ -61,7 +61,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-pink d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __('PR LIST') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("PR LIST") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
                                                 {{ App\Models\PrForm::countRows() }}
@@ -77,7 +77,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-green d-block position-relative shadow-lg bg-light">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __('ITEMS LIST') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("ITEMS LIST") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
                                                 {{ App\Models\ItemList::countRows() }}
@@ -100,7 +100,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-blue d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __('TOTAL NUMBER OF USERS') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("TOTAL NUMBER OF USERS") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
                                                 {{ App\Models\UserVerificationDetails::countVerifiedUsers() }}
@@ -116,7 +116,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-pink d-block position-relative shadow-lg bg-light">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __('TOTAL NUMBER OF ITEMS') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("TOTAL NUMBER OF ITEMS") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
                                                 {{ App\Models\ItemList::countRows() }}
@@ -132,7 +132,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-green d-block position-relative shadow-lg bg-light">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __('TOTAL NUMBER OF REQUISITIONER') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("TOTAL NUMBER OF REQUISITIONER") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
                                                 {{ App\Models\UserVerificationDetails::countRequisitioner() }}
@@ -148,7 +148,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-light-green d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __('TOTAL NUMBER OF PR FORM') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("TOTAL NUMBER OF PR FORM") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
                                                 {{ App\Models\PrForm::countRows() }}
@@ -164,7 +164,7 @@
                             <div class="dashboard__dashboard-tile dashboard__tile-purple d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __('TOTAL NUMBER OF JO FORM') }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("TOTAL NUMBER OF JO FORM") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                             <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
                                                 {{ App\Models\JoForm::countRows() }}
@@ -180,12 +180,12 @@
                         {{-- debug pag walay access level --}}
                         <div class="jumbotron jumbotron-fluid">
                             <div class="container">
-                                <h1 class="display-3">Invalid Accesslevel := {{ $LoggedUserInfo['accesslevel_id'] }}</h1>
+                                <h1 class="display-3">Invalid Accesslevel := {{ $LoggedUserInfo["accesslevel_id"] }}</h1>
                                 <p class="lead">Wala pa na implement gooys!</p>
                                 <hr class="my-2">
                                 <p>TBD</p>
                                 <p class="lead">
-                                    <a class="btn btn-primary btn-lg" href="{{ url('/login') }}" role="button">Login</a>
+                                    <a class="btn btn-primary btn-lg" href="{{ url("/login") }}" role="button">{{ __("Login") }}</a>
                                 </p>
                             </div>
                         </div>
@@ -198,10 +198,10 @@
     </div>
 @stop
 
-@section('javascript')
+@section("javascript")
 
     {{-- DASHBOARD js --}}
-    <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
+    <script type="text/javascript" src="{{ asset("js/dashboard/dashboard.js") }}"></script>
    
 @stop
 

@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ItemList extends Model
 {
     use HasFactory;
-    protected $table = 'item_list';
+    protected $table = "item_list";
 
     public $timestamps = false;
     
     protected $fillable = [
-        'itemname',
-        'itemdescription',
+        "itemname",
+        "itemdescription",
     ];
 
     /**

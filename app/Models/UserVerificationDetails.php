@@ -17,41 +17,62 @@ class UserVerificationDetails extends Model
         'verificationstatus_id',
     ];
 
+    
     /**
-     *  E count lang niya ang user na verified ni admin
-
-     *      verification_status table
-     *           1 := PENDING
-     *           2 := ACCEPTED
-     *           3 := DECLINED
-     */
+     * Counts the user which is already verified by the admin
+     * @return String
+     * @example
+     *     verification_status table
+     *         1 := PENDING
+     *         2 := ACCEPTED
+     *         3 := DECLINED
+     *     UserVerificationDetails::countVerifiedUsers();
+     **/
     public static function countVerifiedUsers()
     { return countTruncate(count(self::all()->where('verificationstatus_id', '=', '2'))); }
 
-    /**
-     * E count lang niya ang user na pwede requisitioner
-     *
-     *   accesslevel table
-     *        4 := PO
-     *        5 := FOCAL
-     *       13 := STAFF
-     */
-    public static function countRequisitioner()
-    {
-        return countTruncate(
-            count(
-                self::join(
-                    'user', 'user_verification_details.user_id', '=', 'user.user_id'
-                )
-                ->whereIn('user.accesslevel_id', ['4', '5', '13'])
-                ->get()
-            )
-        );
-    }
 
     /**
-     *  Kuhaon lang niya tanan user
+     * Counts user based on verificationtatus_id
+     * @param Int $statusid verificationstatus_id
+     * @return String
+     * @example
+     *     verification_status table
+     *         1 := PENDING
+     *         2 := ACCEPTED
+     *         3 := DECLINED
+     *     UserVerificationDetails::countUserByVerificationStatusId("69" | 69);
      */ 
+    public static function countUserByVerificationStatusId(Int $statusid)
+    {
+        return countTruncate(count(
+            self::where('verificationstatus_id', '=', $statusid)
+            ->get()
+        ));
+    }
+
+
+    /**
+     * Counts all user which is also requisitioner
+     * @return String
+     * @example
+     *     accesslevel table
+     *          4 := PO
+     *          5 := FOCAL
+     *         13 := STAFF
+     *     UserVerificationDetails::countRequisitioner();
+     */
+    public static function countRequisitioner()
+    { return countTruncate(count(self::getAllRequisitioner())); }
+
+
+    /**
+     * Gets all user
+     * @return Array
+     * @example
+     *     UserVerificationDetails::getALlUsers();
+     * 
+     **/ 
     public static function getAllUsers()
     {
         return self::join(
@@ -64,9 +85,14 @@ class UserVerificationDetails extends Model
         ->get();
     }
 
+
     /**
-     *  Kuhaon lang niya tanan user
-     */ 
+     * Gets all user which is also requisitioner
+     * @return Array
+     * @example
+     *      UserVerificationDetails::getAllRequisitioner();
+     * 
+     **/ 
     public static function getAllRequisitioner()
     {
         return self::join(
@@ -79,16 +105,4 @@ class UserVerificationDetails extends Model
         ->orderBy('user_verification_details.verificationstatus_id', 'desc')
         ->get();
     }
-
-    /**
-     * E count lang niya pila ka user base sa ge pass na verification status id
-     */ 
-    public static function countUserByVerificationStatusId(Int $statusid)
-    {
-        return countTruncate(count(
-            self::where('verificationstatus_id', '=', $statusid)
-            ->get()
-        ));
-    }
-
 }
