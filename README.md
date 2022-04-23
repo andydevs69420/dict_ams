@@ -1,8 +1,4 @@
-<style>
-    h1 {
-        border-bottom: 0px;
-    }
-</style>
+<style>h1{border-bottom: 0px;}</style>
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/dict-temporary.png" width="400"></a></p>
 
