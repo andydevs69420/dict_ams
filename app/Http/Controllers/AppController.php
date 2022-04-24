@@ -105,8 +105,8 @@ class AppController extends Controller
                  **/
                 public function user__updateVerificationStatus(Request $request)
                 {
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-                        return redirect()->to("/logout");
+                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return false;
                     
                     $user_id   = $request->input("user_id");
                     $status_id = $request->input("status_id");
@@ -128,8 +128,8 @@ class AppController extends Controller
                  **/
                 public function user__deleteUser(Request $request)
                 {
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-                        return redirect()->to("/logout");
+                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return false;
 
                     $userid = $request->input("user_id");
                     $signal = UserVerificationDetails::where("user_id", "=", $userid)
@@ -146,13 +146,40 @@ class AppController extends Controller
      **/ 
     public function itemlist(Request $request)
     {
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-            return redirect()->to("/logout");
+        if  (!Auth::check())
+            return redirect()->to("/login");
         
         return view("app.item-list.item-list");
     }
 
     /* item list subdir ----> */
+                /**
+                 * Add item -> itemlist/additem
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "admin" has access to this page
+                 *         Accesslevel table
+                 *             14 := admin
+                 * 
+                 **/ 
+                public function itemlist__additem(Request $request)
+                {
+                    $this->validate(request(),[
+                        'item_number'       => 'required|integer|min:8',
+                        'item_name'         => 'required|string|max:100',
+                        'item_description'  => 'required|string|max:100',
+                    ]);
+
+                    $item = new ItemList();
+
+                    // $item->item_number = $request->input("item_number");
+                    $item->itemname = $request->input("item_name");
+                    $item->itemdescription = $request->input("item_description");
+                    $item->save();
+
+                    return back();
+                }
 
                 /**
                  * Delete item -> itemlist/deleteitem
@@ -165,15 +192,12 @@ class AppController extends Controller
                  **/ 
                 public function itemlist__deleteItem(Request $request)
                 {
-                    $data = ["LoggedUserInfo" => getVerifiedUserById(session("LoggedUser"))];
-
-                    if (!isValidAccess($data["LoggedUserInfo"]["accesslevel_id"], ["14"]))
-                        return redirect("/logout");
+                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return false;
 
                     $itemlist_id = $request->input("itemlist_id");
-                    
-                    $signal = ItemList::where("itemlist_id", "=", $itemlist_id)
-                                ->delete();
+                    $signal      = ItemList::where("itemlist_id", "=", $itemlist_id)
+                                    ->delete();
                     return (bool) !(!$signal);
                 }
 

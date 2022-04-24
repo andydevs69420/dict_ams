@@ -21,7 +21,8 @@
      * 
      *     window.updateUserVerificationStatus("69", "3");
      **/
-    window.updateUserVerificationStatus = async function(user_id,status_id) {
+    window.updateUserVerificationStatus = async function(user_id,status_id)
+    {
         await $.ajax({
             url: "/user/updateverificationstatus",
             type: "POST",
