@@ -2,7 +2,10 @@
 
 (function(){
 
-    jQuery(()=> $("#users__user-table").DataTable({ responsive:true }));
+    jQuery(()=> $("#users__user-table").DataTable({
+        "responsive" : true ,
+        "autoWidth"  : false
+    }));
 
     $.ajaxSetup({
         headers: { "X-CSRF-TOKEN": $("meta[name=\"csrf-token\"]").attr("content") }

@@ -3,7 +3,9 @@
 (function(){
 
     jQuery(() => {
-        $("#item-list__item-list-table").DataTable();
+        $("#item-list__item-list-table").DataTable({
+            "autoWidth": false
+        });
         $("[data-bs-toggle='popover']").popover();
     });
 
@@ -14,7 +16,11 @@
     });
 
     /**
-     * 
+     * Delete Item
+     * @param Number itemlist_id itemid
+     * @return null
+     * @example 
+     *     window.deleteItem("69");
      **/
     window.deleteItem = async function(itemlist_id)
     {

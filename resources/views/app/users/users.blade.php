@@ -17,7 +17,7 @@
 
         <div class="users__table-wrapper container py-2 rounded-2 shadow-lg">
 
-            <table id="users__user-table" class="table table-striped w-100">
+            <table id="users__user-table" class="table table-striped table-bordered w-100">
                 <thead>
                     <tr>
                         <th class="text-left" scope="col">{{ __("Name") }}</th>
@@ -40,11 +40,12 @@
                                     <ul class="dropdown-menu" aria-labelledby="action-user-{{ $user["user_id"] }}">
                                         @switch($user["verificationstatus_id"])
                                             @case(1)
-                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.updateUserVerificationStatus('{{ $user["user_id"] }}', '2')">{{ __("accept") }}</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.updateUserVerificationStatus('{{ $user["user_id"] }}', '3')">{{ __("decline") }}</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick='javascript:window.updateUserVerificationStatus("{{ $user["user_id"] }}", "2")'>{{ __("accept") }}</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick='javascript:window.updateUserVerificationStatus("{{ $user["user_id"] }}", "3")'>{{ __("decline") }}</a></li>
                                                 @break
                                             @default
-                                                <li><a class="dropdown-item @if(strcmp($user["user_id"], Auth::user()->user_id) === 0) disabled @endif" href="#" onclick="javascript:window.deleteUser('{{ $user["user_id"] }}')">{{ __("delete") }}</a></li>
+                                                <li><a class="dropdown-item" href="#">{{ __("view profile") }}</a></li>
+                                                <li><a class="dropdown-item @if(strcmp($user["user_id"], Auth::user()->user_id) === 0) disabled @endif" href="#" onclick='javascript:window.deleteUser("{{ $user["user_id"] }}")'>{{ __("delete") }}</a></li>
                                                 @break
                                         @endswitch
                                     </ul>

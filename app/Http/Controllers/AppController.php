@@ -165,20 +165,24 @@ class AppController extends Controller
                  **/ 
                 public function itemlist__additem(Request $request)
                 {
-                    $this->validate(request(),[
-                        'item_number'       => 'required|integer|min:8',
-                        'item_name'         => 'required|string|max:100',
-                        'item_description'  => 'required|string|max:100',
+                    $request->validate([
+                        'itemnumber'       => 'required|unique:item_list|integer|digits:8',
+                        'itemname'         => 'required|string|min:4|max:100',
+                        'itemdescription'  => 'required|string|min:4|max:100',
                     ]);
 
                     $item = new ItemList();
 
-                    // $item->item_number = $request->input("item_number");
-                    $item->itemname = $request->input("item_name");
-                    $item->itemdescription = $request->input("item_description");
-                    $item->save();
+                    $item->itemnumber      = $request->input("itemnumber");
+                    $item->itemname        = $request->input("itemname");
+                    $item->itemdescription = $request->input("itemdescription");
+                    $signal = $item->save();
+                    
+                    if  (!$signal)
+                        // debug
+                        return back()->with("message", "Item addition failed!");
 
-                    return back();
+                    return back()->with("message", "Item added successfully!");
                 }
 
                 /**
@@ -209,9 +213,9 @@ class AppController extends Controller
      **/
     public function requisitioner(Request $request)
     {
-        $data = [
-            "LoggedUserInfo" => getVerifiedUserById(session("LoggedUser"))
-        ];
-        return view("app.requisitioner.requisitioner", $data);
+        if  (!Auth::check())
+            return redirect()->to("/login");
+        
+        return view("app.requisitioner.requisitioner");
     }
 }

@@ -5,6 +5,8 @@
 /* ================= PROGRESSBAR COLORS ============= */
 /* ================= NEW PR FORM COLORS ============= */
 /* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= ITEM LIST COLORS =============== */
 /* Based on bootstrap breakpoints */
 /* on small devices and above */
 /* on medium devices and above */
@@ -30,7 +32,50 @@ input {
 .input-group-text {
   display: block !important;
   min-width: 3em !important;
-  background-color: #0020EC !important;
+}
+
+.dataTables_length {
+  text-align: left !important;
+}
+
+.dataTables_length > label > select {
+  margin-left: 14px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .dataTables_length > label > select {
+    margin-left: initial !important;
+  }
+}
+
+.dataTables_filter {
+  margin-top: .5em !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+
+.dataTables_filter > label {
+  width: 100% !important;
+}
+
+.dataTables_filter > label > input {
+  width: calc(100% - 57.8px) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .dataTables_filter {
+    margin: 0 !important;
+    width: auto !important;
+    text-align: right !important;
+  }
+  .dataTables_filter > label, .dataTables_filter input {
+    width: auto !important;
+  }
+}
+
+.page-item.active .page-link {
+  border-color: #198754 !important;
+  background-color: #198754 !important;
 }
 
 .item-list__add-new-item-btn {
