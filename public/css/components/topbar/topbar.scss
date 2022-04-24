@@ -32,7 +32,7 @@
     z-index: 2;
     padding: .5em 0;
     list-style-type: none;
-    background-color: #F7F7F7;
+    background-color: $TOPBAR-DROPDOWN-BG !important;
     border-radius: .1em;
     box-shadow: 0px 0px 8px -2px rgba(0,0,0,0.2);
 }
@@ -46,7 +46,7 @@
     padding: 0 .4em;
     white-space: nowrap;
     &:hover
-    { background-color: #eeeeee; }
+    { background-color: $TOPBAR-ITEM-HOVER-BG !important; }
     & > a
     {  text-decoration: none; }
 }

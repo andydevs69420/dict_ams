@@ -68,8 +68,8 @@
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
                                 <i class="sidebar__list-icon fa fa-list"></i><a class="sidebar__list-label" href="#">{{ __("Form List") }}</a>
                             </li>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
-                                <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="#">{{ __("Item List") }}</a>
+                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("itemlist") }}">
+                                <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="{{ url("/itemlist") }}">{{ __("Item List") }}</a>
                             </li>
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
                                 <i class="sidebar__list-icon fa fa-comment"></i><a class="sidebar__list-label" href="#">{{ __("Messages") }}</a>

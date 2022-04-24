@@ -5,15 +5,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="staticBackdropLabel">{{ __("Warning") }}</h5>
+                <button type="button" class="btn-close rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Required field(s) cannot be nullified!
             </div>
             <div class="modal-footer">
                 <div class="mx-auto shadow">
-                    <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Ok</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
                                                 </datalist>
                                             </div>
                                         </div>
-                                        <!-- item dscription group -->
+                                        <!-- item description group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>

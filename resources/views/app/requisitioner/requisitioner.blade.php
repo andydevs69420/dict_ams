@@ -15,9 +15,9 @@
             <table id="requisitioner__requisitioner-table" class="table table-striped w-100">
                 <thead>
                     <tr>
-                        <th class="text-center" scope="col">{{ __("Name") }}</th>
-                        <th class="text-center" scope="col">{{ __("Designation") }}</th>
-                        <th class="text-center" scope="col">{{ __("Accesslevel") }}</th>
+                        <th class="text-left" scope="col">{{ __("Name") }}</th>
+                        <th class="text-left" scope="col">{{ __("Designation") }}</th>
+                        <th class="text-left" scope="col">{{ __("Accesslevel") }}</th>
                     </tr>
                 </thead>
                 <tbody>
