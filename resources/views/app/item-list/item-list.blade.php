@@ -1,16 +1,4 @@
-
-
-
-
-
-
-@extends(
-    "layout.app-main", 
-    [
-        "accesslevelid" => $LoggedUserInfo["accesslevel_id"], // para sa sidebar
-        "username"      => $LoggedUserInfo["username"]        // para sa topbar
-    ]
-)
+@extends("layout.app-main")
 
 @section("title", "AMS | requisitioner")
 

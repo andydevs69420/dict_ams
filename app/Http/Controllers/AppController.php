@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
 use App\Models\ItemList;
+use Auth;
 
 class AppController extends Controller
 {
@@ -18,10 +19,10 @@ class AppController extends Controller
      **/
     public function dashboard(Request $request)
     {
-        $data = [
-            'LoggedUserInfo' => getVerifiedUserById(session('LoggedUser')),
-        ];
-        return view('app.dashboard.dashboard', $data);
+        if  (!Auth::check()) 
+            return redirect()->to("/login");
+        
+        return view("app.dashboard.dashboard");
     }
 
 
@@ -38,12 +39,13 @@ class AppController extends Controller
      **/
     function purchaseRequest(Request $request)
     {
-        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+        if  (!Auth::check()) 
+            return redirect()->to("/login");
+        
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+            return redirect()->to("/logout");
 
-        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5', '13']))
-            return redirect('/logout');
-
-        return view('app.new-purchase-request.new-purchase-request', $data);
+        return view("app.new-purchase-request.new-purchase-request");
     }
 
 
@@ -60,12 +62,13 @@ class AppController extends Controller
      **/
     function jobOrder(Request $request)
     {
-        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+        if  (!Auth::check()) 
+            return redirect()->to("/login");
 
-        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5', '13']))
-            return redirect('/logout');
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+            return redirect()->to("/logout");
 
-        return view('app.new-job-order.new-job-order', $data);
+        return view("app.new-job-order.new-job-order");
     }
 
 
@@ -80,12 +83,13 @@ class AppController extends Controller
      **/
     public function users(Request $request)
     {
-        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+        if  (!Auth::check())
+            return redirect()->to("/login");
 
-        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
-            return redirect('/logout');
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+            return redirect()->to("/logout");
 
-        return view('app.users.users', $data);
+        return view("app.users.users");
     }
 
     /* user subdir ----> */
@@ -101,16 +105,14 @@ class AppController extends Controller
                  **/
                 public function user__updateVerificationStatus(Request $request)
                 {
-                    $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-
-                    if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
-                        return redirect('/logout');
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return redirect()->to("/logout");
                     
-                    $user_id   = $request->input('user_id');
-                    $status_id = $request->input('status_id');
+                    $user_id   = $request->input("user_id");
+                    $status_id = $request->input("status_id");
                         
-                    $signal = UserVerificationDetails::where('user_id', '=', $user_id)
-                            ->update(['verificationstatus_id' => $status_id]);
+                    $signal = UserVerificationDetails::where("user_id", "=", $user_id)
+                            ->update(["verificationstatus_id" => $status_id]);
                     return (bool) !(!$signal);
                 }
 
@@ -124,17 +126,14 @@ class AppController extends Controller
                  *         Accesslevel table
                  *             14 := admin
                  **/
-                public function deleteUser(Request $request)
+                public function user__deleteUser(Request $request)
                 {
-                    $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return redirect()->to("/logout");
 
-                    if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
-                        return redirect('/logout');
-
-                    $user_id = $request->input('user_id');
-                    
-                    $signal = UserVerificationDetails::where('user_id', '=', $user_id)
-                                ->delete();
+                    $userid = $request->input("user_id");
+                    $signal = UserVerificationDetails::where("user_id", "=", $userid)
+                            ->delete();
                     return (bool) !(!$signal);
                 }
     
@@ -147,12 +146,10 @@ class AppController extends Controller
      **/ 
     public function itemlist(Request $request)
     {
-        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-
-        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
-            return redirect('/logout');
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+            return redirect()->to("/logout");
         
-        return view('app.item-list.item-list', $data);
+        return view("app.item-list.item-list");
     }
 
     /* item list subdir ----> */
@@ -166,16 +163,16 @@ class AppController extends Controller
                  *         Accesslevel table
                  *             14 := admin
                  **/ 
-                public function deleteItem(Request $request)
+                public function itemlist__deleteItem(Request $request)
                 {
-                    $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+                    $data = ["LoggedUserInfo" => getVerifiedUserById(session("LoggedUser"))];
 
-                    if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['14']))
-                        return redirect('/logout');
+                    if (!isValidAccess($data["LoggedUserInfo"]["accesslevel_id"], ["14"]))
+                        return redirect("/logout");
 
-                    $itemlist_id = $request->input('itemlist_id');
+                    $itemlist_id = $request->input("itemlist_id");
                     
-                    $signal = ItemList::where('itemlist_id', '=', $itemlist_id)
+                    $signal = ItemList::where("itemlist_id", "=", $itemlist_id)
                                 ->delete();
                     return (bool) !(!$signal);
                 }
@@ -189,8 +186,8 @@ class AppController extends Controller
     public function requisitioner(Request $request)
     {
         $data = [
-            'LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))
+            "LoggedUserInfo" => getVerifiedUserById(session("LoggedUser"))
         ];
-        return view('app.requisitioner.requisitioner', $data);
+        return view("app.requisitioner.requisitioner", $data);
     }
 }

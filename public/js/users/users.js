@@ -39,7 +39,7 @@
                     alert("Something went wrong!");
             },
             error: function(response, status, request) 
-            { console.error(response); }
+            { console.error("errresponse: " + response); }
         });
     };
 
@@ -64,7 +64,7 @@
                     alert("Something went wrong!");
             },
             error: function(response, status, request) 
-            { console.error(response); }
+            { console.error("errresponse: " + response); }
         });
     };
 

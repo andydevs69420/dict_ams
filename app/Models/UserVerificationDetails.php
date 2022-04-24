@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UserVerificationDetails extends Model
 {
     use HasFactory;
-    protected $table = 'user_verification_details';
+    protected $table = "user_verification_details";
 
     public $timestamps = false;
     
     protected $fillable = [
-        'user_id',
-        'verificationstatus_id',
+        "user_id",
+        "verificationstatus_id",
     ];
 
     
@@ -29,7 +29,7 @@ class UserVerificationDetails extends Model
      *     UserVerificationDetails::countVerifiedUsers();
      **/
     public static function countVerifiedUsers()
-    { return countTruncate(count(self::all()->where('verificationstatus_id', '=', '2'))); }
+    { return countTruncate(count(self::all()->where("verificationstatus_id", "=", "2"))); }
 
 
     /**
@@ -46,7 +46,7 @@ class UserVerificationDetails extends Model
     public static function countUserByVerificationStatusId(Int $statusid)
     {
         return countTruncate(count(
-            self::where('verificationstatus_id', '=', $statusid)
+            self::where("verificationstatus_id", "=", $statusid)
             ->get()
         ));
     }
@@ -76,12 +76,12 @@ class UserVerificationDetails extends Model
     public static function getAllUsers()
     {
         return self::join(
-            'user', 'user_verification_details.user_id', '=', 'user.user_id',
+            "user", "user_verification_details.user_id", "=", "user.user_id",
         )
         ->join(
-            'verification_status', 'user_verification_details.verificationstatus_id', '=', 'verification_status.verificationstatus_id'
+            "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
         )
-        ->orderBy('user_verification_details.verificationstatus_id', 'desc')
+        ->orderBy("user_verification_details.verificationstatus_id", "desc")
         ->get();
     }
 
@@ -96,13 +96,20 @@ class UserVerificationDetails extends Model
     public static function getAllRequisitioner()
     {
         return self::join(
-            'user', 'user_verification_details.user_id', '=', 'user.user_id',
+            "user", "user_verification_details.user_id", "=", "user.user_id",
         )
         ->join(
-            'verification_status', 'user_verification_details.verificationstatus_id', '=', 'verification_status.verificationstatus_id'
+            "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
         )
-        ->whereIn('user.accesslevel_id', ['4', '5', '13'])
-        ->orderBy('user_verification_details.verificationstatus_id', 'desc')
+        ->whereIn("user.accesslevel_id", ["4", "5", "13"])
+        ->orderBy("user_verification_details.verificationstatus_id", "desc")
         ->get();
+    }
+
+    public static function isVerified(Int $userid)
+    {
+        return self::where("user_id", "=", $userid)
+        ->where("verificationstatus_id", "=", "2")
+        ->exists();
     }
 }
