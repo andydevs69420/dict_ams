@@ -44,11 +44,11 @@
     
     <main class="d-flex flex-row flex-nowrap w-100 h-100 overflow-hidden">
         
-        <x-sidebar access-level-id="{{ $accesslevelid }}"></x-sidebar>
+        <x-sidebar access-level-id="{{ Auth::user()->accesslevel_id }}"></x-sidebar>
 
         <div class="app-main__content-root d-block w-100 h-100 bg-light">
 
-            <x-topbar username="{{ $username }}"></x-topbar>
+            <x-topbar username="{{ Auth::user()->username }}"></x-topbar>
 
             <div class="app-main__content-wrapper d-block w-100">
                 @yield("content")

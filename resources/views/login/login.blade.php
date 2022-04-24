@@ -28,13 +28,16 @@
             <div class="d-none d-md-block py-2"></div>
             <!-- form -->
             <form class="login__page-form-0 d-flex flex-column align-items-center justify-content-center mx-auto form-group" action="/login" method="POST">
+            
                 @error("error")
                     <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
                         <small class="text-danger">{{ __($message) }}</small>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @enderror
+
                 @csrf
+
                 <div class="input-group my-2">
                     <span class="input-group-text text-white"><i class="fa fa-user"></i></span>
                     <input class="form-control" type="text" name="username" placeholder="{{ __("Username") }}" required>
@@ -44,12 +47,12 @@
                     <input class="form-control" type="password" name="password" placeholder="{{ __("Password") }}" required>
                 </div>
                 <div class="input-group">
-                    <input id="remember-me" class="form-check-input" type="checkbox" name="remember-me">
+                    <input id="remember-me" class="form-check-input" type="checkbox" name="remember">
                     <label class="mx-1 text-dark" for="remember-me"><small class="text-muted" style="user-select:none;">{{ __("Remember me") }}</small></label>
                 </div>
-                <button class="login__login-btn btn text-light lead my-2 mt-md-2 mb-md-0 w-100" type="submit">{{ __("Login") }}</button>
+                <button class="login__login-btn btn text-white lead my-2 mt-md-2 mb-md-0 w-100" type="submit">{{ __("Login") }}</button>
                 <hr class="my-1 my-md-3 w-100">
-                <a class="login__register-btn btn text-light lead my-2 my-md-0 w-100" href="{{ url("/register") }}">{{ __("Register") }}</a>
+                <a class="login__register-btn btn text-white lead my-2 my-md-0 w-100" href="{{ url("/register") }}">{{ __("Register") }}</a>
             </form>
         </div>
     </main>

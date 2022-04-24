@@ -1,12 +1,4 @@
-
-
-@extends(
-    "layout.app-main", 
-    [
-        "accesslevelid" => $LoggedUserInfo["accesslevel_id"], // para sa sidebar
-        "username"      => $LoggedUserInfo["username"]        // para sa topbar
-    ]
-)
+@extends("layout.app-main")
 
 @section("title", "AMS | purchase request")
 
@@ -34,7 +26,7 @@
                     <div class="col-12 col-lg-9">
                         
                         <x-pr-form 
-                            :requisitioner="$LoggedUserInfo"></x-pr-form>
+                            :requisitioner="json_decode(json_encode(Auth::user()),true)"></x-pr-form>
 
                     </div>
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
@@ -79,8 +71,8 @@
 
     <script type="text/javascript">
         $(document).ready((evt) => {
-            $("[data-bs-toggle="tooltip"]").tooltip();
-            $("[data-bs-toggle="popover"]").popover();
+            $("[data-bs-toggle='tooltip']").tooltip();
+            $("[data-bs-toggle='popover']").popover();
         });
     </script>
 

@@ -1,14 +1,4 @@
-
-
-
-
-@extends(
-    "layout.app-main", 
-    [
-        "accesslevelid" => $LoggedUserInfo["accesslevel_id"], // para sa sidebar
-        "username"      => $LoggedUserInfo["username"]        // para sa topbar
-    ]
-)
+@extends("layout.app-main")
 
 @section("title", "AMS | users")
 
@@ -60,11 +50,11 @@
                                     <ul class="dropdown-menu" aria-labelledby="action-user-{{ $user["user_id"] }}">
                                         @switch($user["verificationstatus_id"])
                                             @case(1)
-                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.updateUserVerificationStatus("{{ $user["user_id"] }}", "2")">{{ __("accept") }}</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.updateUserVerificationStatus("{{ $user["user_id"] }}", "3")">{{ __("decline") }}</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.updateUserVerificationStatus('{{ $user["user_id"] }}', '2')">{{ __("accept") }}</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.updateUserVerificationStatus('{{ $user["user_id"] }}', '3')">{{ __("decline") }}</a></li>
                                                 @break
                                             @default
-                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.deleteUser("{{ $user["user_id"] }}")">{{ __("delete") }}</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="javascript:window.deleteUser('{{ $user["user_id"] }}')">{{ __("delete") }}</a></li>
                                                 @break
                                         @endswitch
                                     </ul>
