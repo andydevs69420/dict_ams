@@ -13,6 +13,7 @@ class ItemList extends Model
     public $timestamps = false;
     
     protected $fillable = [
+        "itemnumber",
         "itemname",
         "itemdescription",
     ];

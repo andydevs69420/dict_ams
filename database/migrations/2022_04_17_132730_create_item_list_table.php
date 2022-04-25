@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('item_list', function (Blueprint $table) {
             $table->id('itemlist_id')->unique();
+            $table->bigInteger('itemnumber');
             $table->string('itemname');
             $table->string('itemdescription');
         });
