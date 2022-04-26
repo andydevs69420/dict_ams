@@ -2,10 +2,13 @@
 
 (function(){
 
-    jQuery(()=> $("#users__user-table").DataTable({
-        "responsive" : true ,
-        "autoWidth"  : false
-    }));
+    jQuery(()=> {
+        window.messageModal = new MessageModal("#users__message-modal");
+        $("#users__user-table").DataTable({
+            "responsive" : true ,
+            "autoWidth"  : false
+        });
+    });
 
     $.ajaxSetup({
         headers: { "X-CSRF-TOKEN": $("meta[name=\"csrf-token\"]").attr("content") }
@@ -27,9 +30,9 @@
     window.updateUserVerificationStatus = async function(user_id,status_id)
     {
         await $.ajax({
-            url: "/user/updateverificationstatus",
-            type: "POST",
-            data: 
+            url  : "/user/updateverificationstatus",
+            type : "POST",
+            data : 
             {
                 "user_id": user_id,
                 "status_id": status_id
@@ -37,13 +40,15 @@
             dataType: "json",
             success: function(response, status, request) 
             {
-                if  (status === "success" && (response  == true))
-                    window.location.reload();
-                else
-                    alert("Something went wrong!");
+                if  (!(status === "success" && (response  == true)))
+                    // debug
+                    somethingWentWrong();
+                
+                window.location.reload();
             },
             error: function(response, status, request) 
-            { console.error("errresponse: " + response); }
+            // debug
+            { somethingWentWrong(); }
         });
     };
 
@@ -56,20 +61,32 @@
     window.deleteUser = async function(user_id) 
     {
         await $.ajax({
-            url: "/user/deleteuser",
-            type: "POST",
-            data: { "user_id": user_id },
+            url  : "/user/deleteuser",
+            type : "POST",
+            data : { "user_id": user_id },
             dataType: "json",
             success: function(response, status, request) 
             {
-                if  (status === "success" && (response  == true))
-                    window.location.reload();
-                else
-                    alert("Something went wrong!");
+                if  (!(status === "success" && (response  == true)))
+                    // debug
+                    somethingWentWrong();
+                
+                window
+                .messageModal
+                ?.show("Info", "User deleted successfully!");
             },
             error: function(response, status, request) 
-            { console.error("errresponse: " + response); }
+            // debug
+            { somethingWentWrong(); }
         });
     };
 
 })();
+
+
+function somethingWentWrong()
+{
+    return window
+    .messageModal
+    ?.show("Error", "Something went wrong!");
+}

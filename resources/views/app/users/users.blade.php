@@ -13,6 +13,10 @@
 @stop
 
 @section("content")
+
+    {{-- message modal --}}
+    <x-message-modal id="users__message-modal"></x-message-modal>
+
     <div class="d-block py-5">
 
         <div class="users__table-wrapper container py-2 rounded-2 shadow-lg">
@@ -65,6 +69,9 @@
     {{-- datatable js --}}
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+    {{-- message modal js --}}
+    <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
     {{-- users js --}}
     <script type="text/javascript" src="{{ asset("js/users/users.js") }}"></script>

@@ -14,9 +14,16 @@
 
 @section("content")
 
+    {{-- 
+        accesslevel table
+            14 := ADMIN    
+    --}}
     @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
 
         {{-- add "add new item" feature if admin --}}
+
+        {{-- message modal --}}
+        <x-message-modal id="item-list__message-modal"></x-message-modal>
 
         {{-- add item modal --}}
         <div id="item-list__add-item-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -67,10 +74,6 @@
             </div>
         </div>
 
-        {{-- message modal --}}
-
-        <x-message-modal id="item-list__message-modal"></x-message-modal>
-
         <button class="item-list__add-new-item-btn btn btn-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#item-list__add-item-modal">
             <i class="fa-solid fa-plus"></i>
         </button>
@@ -95,6 +98,10 @@
                             <td style="vertical-align: middle !important;">{{ $item["itemname"] }}</td>
                             <td style="vertical-align: middle !important;">{{ $item["itemdescription"] }}</td>
                             
+                            {{-- 
+                                accesslevel table
+                                    14 := ADMIN    
+                            --}}
                             @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
                                 <td class="text-center" style="vertical-align: middle !important;">
                                     <div class="dropdown">
@@ -128,15 +135,6 @@
 
     {{-- itemlist js --}}
     <script type="text/javascript" src="{{ asset("js/item-list/item-list.js") }}"></script>
-
-    {{-- if has message or error on submit validation --}}
-    @if($errors->any())
-        <script>
-            $(document).ready(()=>{
-                $("#item-list__add-item-modal").modal("show");
-            });
-        </script>
-    @endif
-
+    
 @stop
 

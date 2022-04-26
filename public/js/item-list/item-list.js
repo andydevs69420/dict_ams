@@ -1,9 +1,8 @@
 
 (function(){
 
-    window.messageModal = new MessageModal("#item-list__message-modal");
-
     jQuery(() => {
+        window.messageModal = new MessageModal("#item-list__message-modal");
         $("#item-list__item-list-table").DataTable({
             "autoWidth": false
         });
@@ -35,14 +34,15 @@
         });
 
         await $.ajax({ 
-            url: "/itemlist/additem", 
-            type: "POST",
-            data: pdata, 
+            url  : "/itemlist/additem", 
+            type : "POST",
+            data : pdata, 
             dataType: "json",
             success: function(response, status, request)
             {
                 if  (status !== "success")
-                    return alert("Something went wrong!");
+                    // debug
+                    somethingWentWrong();
 
                 if  (response.hasOwnProperty("errors"))
                 {
@@ -67,11 +67,14 @@
                     $("#item-list__add-item-modal")
                     .modal("toggle");
 
-                    window.messageModal.show("Info", response["message"]);
+                    window
+                    .messageModal
+                    ?.show("Info", response["message"]);
                 }
             },
             error: function(response, status, request)
-            { console.error("errresponse: " + response); }
+            // debug
+            { somethingWentWrong(); }
         });
     }
 
@@ -85,25 +88,30 @@
     window.deleteItem = async function(itemlist_id)
     {
         await $.ajax({
-            url: "/itemlist/deleteitem",
-            type: "POST",
-            data: { "itemlist_id": itemlist_id },
+            url  : "/itemlist/deleteitem",
+            type : "POST",
+            data : { "itemlist_id": itemlist_id },
             dataType: "json",
             success: function(response, status, request)
             {
-                if  (status === "success" && (response == true))
-                    window.location.reload();
-                else
-                    alert("Something went wrong!");
+                if  (!(status === "success" && (response == true)))
+                    // debug
+                    somethingWentWrong();
+                
+                window.location.reload();
             },
             error: function(response, status, request) 
-                { console.error("errresponse: " + response); }
+            // debug
+            { somethingWentWrong(); }
         });
     }
 
 })();
 
-async function item_list__updateItem()
-{
 
+function somethingWentWrong()
+{
+    return window
+    .messageModal
+    ?.show("Error", "Something went wrong!");
 }
