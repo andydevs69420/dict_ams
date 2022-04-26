@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-
 use App\Models\User;
 use App\Models\UserVerificationDetails;
 use App\Models\ItemList;
@@ -165,11 +165,14 @@ class AppController extends Controller
                  **/ 
                 public function itemlist__additem(Request $request)
                 {
-                    $request->validate([
+                    $validator = Validator::make($request->all(),[
                         'itemnumber'       => 'required|unique:item_list|integer|digits:8',
                         'itemname'         => 'required|string|min:4|max:100',
                         'itemdescription'  => 'required|string|min:4|max:100',
                     ]);
+
+                    if  ($validator->fails())
+                        return response()->json(["errors" => $validator->errors()]);
 
                     $item = new ItemList();
 
@@ -180,9 +183,9 @@ class AppController extends Controller
                     
                     if  (!$signal)
                         // debug
-                        return back()->with("message", "Item addition failed!");
+                        return response()->json(["message" => "Item addition failed!"]);
 
-                    return back()->with("message", "Item added successfully!");
+                    return response()->json(["message" => "Item added successfully!"]);
                 }
 
                 /**

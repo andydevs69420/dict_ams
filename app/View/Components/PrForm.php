@@ -21,15 +21,20 @@ class PrForm extends Component
     private Array $recommendingApproval;
     /**
      * Create a new component instance.
-     *
+     * @param String warningMessage
+     * @param Array items
+     * @param String purpose
+     * @param Array budgetOfficer
+     * @param Array requisitioner
+     * @param Array recommendingApproval
      * @return void
-     */
+     **/
     public function __construct(
         String $warningMessage = '',
         Array $items = [
-            /***
-             * dapat naay default item
-             * mao ni si item 1
+            /*
+                dapat naay default item
+                mao ni si item 1
              */
             ['', '', '', '', '', '']
         ], 
@@ -52,37 +57,42 @@ class PrForm extends Component
     /**
      * Returns Waring message
      * @return String
-     */
+     **/
     public function getWarningMessage()
     { return $this->warningMessage; }
+
 
     /**
      * Returns Array of items
      * @return Array
-     */
-    public function getItems() : Array
+     **/
+    public function getItems()
     { return $this->items; }
+
 
     /**
      * Returns PR-Form Purpose
      * @return String
-     */
+     **/
     public function getPurpose() : String
     { return $this->purpose; }
 
     // =============== BUDGET OFFICER METHODS===============
+
+
     /** 
      * Returns requisitioner id
      * @return Int
-     */
-    public function getBudgetOfficerAccessLevelId() : Int
+     **/
+    public function getBudgetOfficerAccessLevelId()
     { return (Int) $this->budgetOfficer['accesslevel_id']; }
+
 
     /**
      * Returns requisitioner name eg: LN, FN MN
      * @return String
-     */
-    public function getBudgetOfficerName() : String 
+     **/
+    public function getBudgetOfficerName()
     {
         if (!(array) $this->budgetOfficer)
             return "";
@@ -90,11 +100,12 @@ class PrForm extends Component
         return $this->budgetOfficer['lastname'] . ', ' . $this->budgetOfficer['firstname'] . ' ' . $this->budgetOfficer['middleinitial'];
     }
 
+
     /**
      * Returns requisitioner designation eg: designation, Accesslevel
      * @return String
-     */
-    public function getBudgetOfficerDesignation() : String
+     **/
+    public function getBudgetOfficerDesignation()
     {
         if (!(array) $this->budgetOfficer)
             return "";
@@ -104,18 +115,20 @@ class PrForm extends Component
 
     // =============== REQUISITIONER METHODS ===============
 
+
     /** 
      * Returns requisitioner id
      * @return Int
-     */
-    public function getRequisitionerAccessLevelId() : Int
+     **/
+    public function getRequisitionerAccessLevelId()
     { return (Int) $this->requisitioner['accesslevel_id']; }
+
 
     /**
      * Returns requisitioner name eg: LN, FN MN
      * @return String
-     */
-    public function getRequisitionerName() : String 
+     **/
+    public function getRequisitionerName()
     {
         if (!(array) $this->requisitioner)
             return "";
@@ -123,11 +136,12 @@ class PrForm extends Component
         return $this->requisitioner['lastname'] . ', ' . $this->requisitioner['firstname'] . ' ' . $this->requisitioner['middleinitial'];
     }
 
+
     /**
      * Returns requisitioner designation eg: designation, Accesslevel
      * @return String
-     */
-    public function getRequisitionerDesignation() : String
+     **/
+    public function getRequisitionerDesignation()
     {
         if (!(array) $this->requisitioner)
             return "";
@@ -137,18 +151,20 @@ class PrForm extends Component
 
     // =============== RECOMMENDING APPROVAL METHODS ===============
 
+
     /** 
      * Returns recommending approval id
      * @return Int
-     */
-    public function getRecommendingApprovalAccessLevelId() : Int
+     **/
+    public function getRecommendingApprovalAccessLevelId()
     { return (Int) $this->recommendingApproval['accesslevel_id']; }
+
 
     /**
      * Returns reccomending approval name eg: LN, FN MN
      * @return String
-     */
-    public function getRecommendingApprovalName() : String 
+     **/
+    public function getRecommendingApprovalName()
     {
         if (!(array) $this->recommendingApproval)
             return '';
@@ -156,10 +172,11 @@ class PrForm extends Component
         return $this->recommendingApproval['lastname'] . ', ' . $this->recommendingApproval['firstname'] . ' ' . $this->recommendingApproval['middleinitial'];
     }
 
+
     /**
      * Returns recommending designation eg: designation, Accesslevel
      * @return String
-     */
+     **/
     public function getRecommendingApprovalDesignation() : String
     {
         if (!(array) $this->recommendingApproval)
@@ -168,11 +185,11 @@ class PrForm extends Component
         return $this->recommendingApproval['designation_name'] . ', ' . $this->recommendingApproval['accesslevel_name'];
     }
 
+    
     /**
      * Get the view / contents that represent the component.
-     *
      * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+     **/
     public function render()
     {
         return view('components.pr-form');

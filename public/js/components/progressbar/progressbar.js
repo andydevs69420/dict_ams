@@ -14,6 +14,9 @@ class Progressbar
      */
     constructor(id)
     {
+        if  (!id.startsWith("#") || typeof(id) !== "string")
+            throw "Invalid query selector for \"ID\"";
+
         this.elid = id;
         this.pbar = $(this.elid);
         this.rfld = this.__getRequiredFields();
