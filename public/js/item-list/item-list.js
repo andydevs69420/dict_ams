@@ -1,9 +1,19 @@
+/*
+
+    item-list.js - andydevs69420 - April 21 2022
+    | submit issue if error found!!
+    ;
+
+    @brief - Item related functions
+        ex: add, remove, edit, etc. item
+
+*/
+
 
 (function(){
 
-    window.messageModal = new MessageModal("#item-list__message-modal");
-
     jQuery(() => {
+        window.messageModal = new MessageModal("#item-list__message-modal");
         $("#item-list__item-list-table").DataTable({
             "autoWidth": false
         });
@@ -15,6 +25,7 @@
             "X-CSRF-TOKEN": $("meta[name=\"csrf-token\"]").attr("content")
         }
     });
+
 
     /**
      * Add new item -> itemlst/addnewitem
@@ -35,14 +46,14 @@
         });
 
         await $.ajax({ 
-            url: "/itemlist/additem", 
-            type: "POST",
-            data: pdata, 
+            url  : "/itemlist/additem", 
+            type : "POST",
+            data : pdata, 
             dataType: "json",
             success: function(response, status, request)
             {
                 if  (status !== "success")
-                    return alert("Something went wrong!");
+                    return somethingWentWrong();
 
                 if  (response.hasOwnProperty("errors"))
                 {
@@ -67,13 +78,15 @@
                     $("#item-list__add-item-modal")
                     .modal("toggle");
 
-                    window.messageModal.show("Info", response["message"]);
+                    clearErrors();
+                    window.messageModal?.show("Info", response["message"]);
                 }
             },
             error: function(response, status, request)
-            { console.error("errresponse: " + response); }
+            { somethingWentWrong(); }
         });
     }
+
 
     /**
      * Delete Item
@@ -85,25 +98,64 @@
     window.deleteItem = async function(itemlist_id)
     {
         await $.ajax({
-            url: "/itemlist/deleteitem",
-            type: "POST",
-            data: { "itemlist_id": itemlist_id },
+            url  : "/itemlist/deleteitem",
+            type : "POST",
+            data : { "itemlist_id": itemlist_id },
             dataType: "json",
             success: function(response, status, request)
             {
-                if  (status === "success" && (response == true))
-                    window.location.reload();
-                else
-                    alert("Something went wrong!");
+                if  (!(status === "success" && (response == true)))
+                    return somethingWentWrong();
+                
+                window.messageModal?.show("Info", "Item deleted successfully!");
+
+                $("#item-list__row-item-"+itemlist_id)
+                .remove();
             },
             error: function(response, status, request) 
-                { console.error("errresponse: " + response); }
+            { somethingWentWrong(); }
+        });
+    }
+
+
+    /**
+     * Show something went wrong msg
+     * @returns null
+     * @example
+     *    somethingWentWrong();
+     **/
+    function somethingWentWrong()
+    {
+        return window
+        .messageModal
+        ?.show("Error", "Something went wrong!");
+    }
+
+
+    /**
+     * Removes error messages
+     * @return null
+     * @example
+     *     clearErrors();
+     **/
+    function clearErrors()
+    {
+        input = $("#item-list__add-item-modal")
+                .find("input[required]:visible");
+        input.each((idx, element) => {
+
+            el = $(element);
+            p2 = $(el.parent());
+            p1 = $(p2.parent());
+
+            if (p1.children().length <= 1)
+                return;
+            
+            ref = p1.children();
+            for (let idx = 0; idx < (ref.length - 1 ); idx++)
+            { $(ref[idx]).remove(); }
+
         });
     }
 
 })();
-
-async function item_list__updateItem()
-{
-
-}
