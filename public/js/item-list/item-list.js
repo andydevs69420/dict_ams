@@ -78,6 +78,7 @@
                     $("#item-list__add-item-modal")
                     .modal("toggle");
 
+                    clearErrors();
                     window.messageModal?.show("Info", response["message"]);
                 }
             },
@@ -132,13 +133,29 @@
 
 
     /**
-     * 
+     * Removes error messages
+     * @return null
+     * @example
+     *     clearErrors();
      **/
     function clearErrors()
     {
         input = $("#item-list__add-item-modal")
                 .find("input[required]:visible");
-        
+        input.each((idx, element) => {
+
+            el = $(element);
+            p2 = $(el.parent());
+            p1 = $(p2.parent());
+
+            if (p1.children().length <= 1)
+                return;
+            
+            ref = p1.children();
+            for (let idx = 0; idx < (ref.length - 1 ); idx++)
+            { $(ref[idx]).remove(); }
+
+        });
     }
 
 })();
