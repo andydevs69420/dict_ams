@@ -82,7 +82,7 @@
 
     <div class="d-block py-5">
         <div class="container py-2 rounded-2 shadow-lg">
-            <table id="item-list__item-list-table" class="table table-striped table-bordered w-100">
+            <table id="item-list__item-list-table" class="table table-striped w-100">
                 <thead>
                     <tr>
                         <th class="text-left" scope="col">{{ __("Item No") }}</th>
@@ -93,7 +93,8 @@
                 </thead>
                 <tbody>
                     @foreach(App\Models\ItemList::getAllItems() as $item)
-                        <tr>
+
+                        <tr id="item-list__row-item-{{ $item["itemlist_id"] }}">
                             <td data-order="{{ $item["itemlist_id"] }}" style="vertical-align: middle !important;">{{ $item["itemnumber"] }}</td>
                             <td style="vertical-align: middle !important;">{{ $item["itemname"] }}</td>
                             <td style="vertical-align: middle !important;">{{ $item["itemdescription"] }}</td>
@@ -117,6 +118,7 @@
                             @endif
 
                         </tr>
+
                     @endforeach
                 </tbody>
             </table>

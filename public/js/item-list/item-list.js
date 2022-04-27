@@ -1,3 +1,14 @@
+/*
+
+    item-list.js - andydevs69420 - April 21 2022
+    | submit issue if error found!!
+    ;
+
+    @brief - Item related functions
+        ex: add, remove, edit, etc. item
+
+*/
+
 
 (function(){
 
@@ -14,6 +25,7 @@
             "X-CSRF-TOKEN": $("meta[name=\"csrf-token\"]").attr("content")
         }
     });
+
 
     /**
      * Add new item -> itemlst/addnewitem
@@ -41,8 +53,7 @@
             success: function(response, status, request)
             {
                 if  (status !== "success")
-                    // debug
-                    somethingWentWrong();
+                    return somethingWentWrong();
 
                 if  (response.hasOwnProperty("errors"))
                 {
@@ -67,16 +78,14 @@
                     $("#item-list__add-item-modal")
                     .modal("toggle");
 
-                    window
-                    .messageModal
-                    ?.show("Info", response["message"]);
+                    window.messageModal?.show("Info", response["message"]);
                 }
             },
             error: function(response, status, request)
-            // debug
             { somethingWentWrong(); }
         });
     }
+
 
     /**
      * Delete Item
@@ -95,23 +104,41 @@
             success: function(response, status, request)
             {
                 if  (!(status === "success" && (response == true)))
-                    // debug
-                    somethingWentWrong();
+                    return somethingWentWrong();
                 
-                window.location.reload();
+                window.messageModal?.show("Info", "Item deleted successfully!");
+
+                $("#item-list__row-item-"+itemlist_id)
+                .remove();
             },
             error: function(response, status, request) 
-            // debug
             { somethingWentWrong(); }
         });
     }
 
+
+    /**
+     * Show something went wrong msg
+     * @returns null
+     * @example
+     *    somethingWentWrong();
+     **/
+    function somethingWentWrong()
+    {
+        return window
+        .messageModal
+        ?.show("Error", "Something went wrong!");
+    }
+
+
+    /**
+     * 
+     **/
+    function clearErrors()
+    {
+        input = $("#item-list__add-item-modal")
+                .find("input[required]:visible");
+        
+    }
+
 })();
-
-
-function somethingWentWrong()
-{
-    return window
-    .messageModal
-    ?.show("Error", "Something went wrong!");
-}
