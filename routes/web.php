@@ -73,9 +73,11 @@ Route::controller(AppController::class)->group(function () {
     // item list
     Route::get("/itemlist", "itemlist");
         // add item
-        Route::post("/itemlist/additem", "itemlist__additem");
+        Route::post("/itemlist/additem", "itemlist__addItem");
+        // update item
+        Route::post("/itemlist/updateitem", "itemlist__updateItem");
         // delete item
-        Route::post("/itemlist/deleteitem", "itemlist__deleteitem");
+        Route::post("/itemlist/deleteitem", "itemlist__deleteItem");
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
