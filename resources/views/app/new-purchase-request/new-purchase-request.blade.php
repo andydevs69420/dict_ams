@@ -13,6 +13,9 @@
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
 
+    {{-- bootstrap-select css  --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
 @stop
 
 @section("content")
@@ -69,10 +72,16 @@
     {{-- PR js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
+    {{-- bootstrap-select js --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready((evt) => {
             $("[data-bs-toggle='tooltip']").tooltip();
             $("[data-bs-toggle='popover']").popover();
+            $("select").selectpicker({
+                search : true
+            });
         });
     </script>
 

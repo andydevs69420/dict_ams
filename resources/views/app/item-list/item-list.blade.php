@@ -26,12 +26,12 @@
         <x-message-modal id="item-list__message-modal"></x-message-modal>
 
         {{-- add item modal --}}
-        <div id="item-list__add-item-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div id="item-list__add-update-item-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ __("Add New Item") }}</h5>
-                        <button type="button" class="btn-close rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close rounded-circle" data-bs-dismiss="modal" aria-label="Close" onclick="javascript: window.resetModal()"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -66,7 +66,7 @@
                                 <button type="button" class="btn btn-primary" onclick="javascript: window.addNewItem()">Add Item</button>
                             </div>
                             <div class="mx-2 shadow">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="javascript: window.resetModal()">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <button class="item-list__add-new-item-btn btn btn-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#item-list__add-item-modal">
+        <button class="item-list__add-new-item-btn btn btn-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#item-list__add-update-item-modal">
             <i class="fa-solid fa-plus"></i>
         </button>
 
@@ -110,7 +110,7 @@
                                             {{ __("action") }}
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="action-user-{{ $item["itemlist_id"] }}">
-                                            <li><a class="dropdown-item" href="#" onclick='javascript: item_list__updateItem("{{ $item["itemlist_id"] }}", "2")'>{{ __("edit") }}</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick='javascript: window.updateCandidate( {{ $item }} )'>{{ __("edit") }}</a></li>
                                             <li><a class="dropdown-item" href="#" onclick='javascript: window.deleteItem("{{ $item["itemlist_id"] }}", "3")'>{{ __("delete") }}</a></li>
                                         </ul>
                                     </div>

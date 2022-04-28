@@ -12,7 +12,7 @@
 @section("content")
     <div class="d-block py-5">
         <div class="container py-2 rounded-2 shadow-lg">
-            <table id="requisitioner__requisitioner-table" class="table table-striped table-bordered w-100">
+            <table id="requisitioner__requisitioner-table" class="table table-striped w-100">
                 <thead>
                     <tr>
                         <th class="text-left" scope="col">{{ __("Name") }}</th>

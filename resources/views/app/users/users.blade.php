@@ -21,7 +21,7 @@
 
         <div class="users__table-wrapper container py-2 rounded-2 shadow-lg">
 
-            <table id="users__user-table" class="table table-striped table-bordered w-100">
+            <table id="users__user-table" class="table table-striped w-100">
                 <thead>
                     <tr>
                         <th class="text-left" scope="col">{{ __("Name") }}</th>

@@ -136,10 +136,19 @@
                 <!-- budget officer group -->
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
+                        {{-- <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
+                        <input id="budget-officer-name" class="form-control border-0 bg-white text-truncate" list="budget-officer-list" name="budget-officer-name" type="text" value="{{ $getBudgetOfficerName() }}" placeholder="{{ __("Budget Officer") }}" required onkeyup=""> --}}
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
-                        <input id="budget-officer-name" class="form-control border-0 bg-white text-truncate" list="budget-officer-list" name="budget-officer-name" type="text" value="{{ $getBudgetOfficerName() }}" placeholder="{{ __("Budget Officer") }}" required onkeyup="">
+                        <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                            @if(strlen($getBudgetOfficerName()) > 0)
+                                <option selected disabled> {{ $getBudgetOfficerName() }}</option>
+                            @endif
+                            <option>Name1</option>
+                            <option>Name2</option>
+                            <option>Name3</option>
+                        </select>
                     </div>
-                    <datalist id="budget-officer-list"></datalist>
+                    {{-- <datalist id="budget-officer-list"></datalist> --}}
                 </div>
                 <!-- recommending approval group -->
                 <div class="col-12">

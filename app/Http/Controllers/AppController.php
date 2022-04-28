@@ -165,11 +165,14 @@ class AppController extends Controller
                  **/ 
                 public function itemlist__additem(Request $request)
                 {
+                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return response()->json(["errors" => "Invalid access!"]);
+
                     $validator = Validator::make($request->all(),[
                         'itemnumber'       => 'required|unique:item_list|integer|digits:8',
                         'itemname'         => 'required|string|min:4|max:100',
                         'itemdescription'  => 'required|string|min:4|max:100',
-                    ]);
+                    ],["itemnumber.unique" => "An Item with the same item number already exists."]);
 
                     if  ($validator->fails())
                         return response()->json(["errors" => $validator->errors()]);
@@ -183,10 +186,57 @@ class AppController extends Controller
                     
                     if  (!$signal)
                         // debug
-                        return response()->json(["message" => "Item addition failed!"]);
+                        return response()->json(["message" => "Item addition failed!", "successful" => false]);
 
-                    return response()->json(["message" => "Item added successfully!"]);
+                    // TODO: Fix this
+                    return response()->json([
+                        "message"     => "Item added successfully!", 
+                        "successful"  => true, 
+                        "itemlist_id" => $item->id]);
                 }
+
+
+                /**
+                 * Update item -> itemlist/updateitem
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "admin" has access to this page
+                 *         Accesslevel table
+                 *             14 := admin
+                 * 
+                 **/ 
+                public function itemlist__updateItem(Request $request)
+                {
+                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return response()->json(["errors" => "Invalid access!"]);
+
+                    $validator = Validator::make($request->all(),[
+                        'itemnumber'       => 'required|unique:item_list|integer|digits:8',
+                        'itemname'         => 'required|string|min:4|max:100',
+                        'itemdescription'  => 'required|string|min:4|max:100',
+                    ],["itemnumber.unique" => "An Item with the same item number already exists."]);
+
+                    if  ($validator->fails())
+                        return response()->json(["errors" => $validator->errors()]);
+
+                    $signal = ItemList::where("itemlist_id", "=", $request->input("itemlist_id"))
+                        ->update([
+                            "itemnumber" => $request->input("itemnumber"),
+                            "itemname"   => $request->input("itemname"),
+                            "itemdescription" => $request->input("itemdescription"),
+                        ]);
+                    
+                    if  (!$signal)
+                        // debug
+                        return response()->json(["message" => "Update failed!", "successful" => false]);
+
+                    return response()->json([
+                        "message"    => "Item was updated successfully!", 
+                        "successful" => true
+                    ]);
+                }
+
 
                 /**
                  * Delete item -> itemlist/deleteitem
