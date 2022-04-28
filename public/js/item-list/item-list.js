@@ -12,6 +12,7 @@
 
 (function(){
 
+    // @brief - Loads the item list
     jQuery(() => {
         window.messageModal = new MessageModal("#item-list__message-modal");
         window.itemListTable = $("#item-list__item-list-table").DataTable({
@@ -20,6 +21,8 @@
         $("[data-bs-toggle='popover']").popover();
     });
 
+
+    // @brief - Setup ajax
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $("meta[name=\"csrf-token\"]").attr("content")
@@ -35,10 +38,10 @@
      **/
     window.addNewItem = async function()
     {
+        pdata = {};
+
         input = $("#item-list__add-update-item-modal")
                 .find("input[required]");
-
-        pdata = {};
         input
         .each(function(idx, element) {
             element = $(element);
@@ -85,6 +88,7 @@
 
                     pdata["itemlist_id"] = response["itemlist_id"];
                     appendNewItem(pdata);
+
                     return window.messageModal?.show("Info", response["message"]);
                 }
             },
@@ -93,11 +97,20 @@
         });
     }
 
-
+    /**
+     * Append item to item list table (dynamic)
+     * @param Map item item info
+     * @eturn JqueryObject
+     * @example
+     *    appendNewItem({itemnumber: 69, itemname: "Item Name", itemdescription: "Item Description"});
+     **/
     function appendNewItem(item)
     {
+        if (($("tbody").children().length == 1) && !(((_this = $($("tbody").children()[0])).attr("id") != undefined)? _this.attr("id").toString() : "").startsWith("item-list__row"))
+            $("tbody").empty();
+
         return $("tbody").append(
-            $("<tr></tr>").append([
+            $(`<tr id="item-list__row-item-${ item["itemlist_id"] }"></tr>`).append([
                 $(`<td data-order="${ item["itemlist_id"] }" style="vertical-align: middle !important;"></td>`).text(item["itemnumber"]),
                 $('<td style="vertical-align: middle !important;"></td>').text(item["itemname"]),
                 $('<td style="vertical-align: middle !important;"></td>').text(item["itemdescription"]),
@@ -144,7 +157,6 @@
         
         input.each((idx, element) => {
             element = $(element);
-            console.log(element);
             element.val(itemlist[element.attr("name")]);
         });
     }
@@ -206,6 +218,7 @@
                     if (response["successful"] == false)
                         return window.messageModal?.show("Error", response["message"]);
 
+                    updateRow(pdata);
                     return window.messageModal?.show("Info", response["message"]);
                 }
             },
@@ -214,6 +227,22 @@
         });
     }
 
+
+    /**
+     * Update item in item list table (dynamic)
+     * @param Map item item info
+     * @return null
+     * @example
+     *     updateRow({ itemlist_id : 69, itemnumber: 69420, itemname: "Item Name", itemdescription: "Item Description" });
+     **/
+    function updateRow(item)
+    {
+        row = $(`#item-list__row-item-${ item["itemlist_id"] }`);
+
+        row.children()[0].innerHTML = item["itemnumber"];
+        row.children()[1].innerHTML = item["itemname"];
+        row.children()[2].innerHTML = item["itemdescription"];
+    }
 
     /**
      * Delete Item -> itemlst/deleteitem
@@ -238,6 +267,10 @@
 
                 $("#item-list__row-item-"+itemlist_id)
                 .remove();
+
+                if ($("tbody").children().length <= 0)
+                    window.location.reload();
+                    
             },
             error: function(response, status, request) 
             { somethingWentWrong(); }

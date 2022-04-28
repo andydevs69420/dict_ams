@@ -231,7 +231,10 @@ class AppController extends Controller
                         // debug
                         return response()->json(["message" => "Update failed!", "successful" => false]);
 
-                    return response()->json(["message" => "Item was updated successfully!", "successful" => true]);
+                    return response()->json([
+                        "message"    => "Item was updated successfully!", 
+                        "successful" => true
+                    ]);
                 }
 
 

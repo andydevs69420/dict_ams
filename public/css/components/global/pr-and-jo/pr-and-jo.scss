@@ -15,6 +15,9 @@ input[type=number] {
 input
 { overflow: hidden !important; }
 
+button[aria-owns="bs-select-1"] 
+{ outline: none !important; }
+
 /* ====================== Purchase Request ====================== */
 
 .pr-form__card-header

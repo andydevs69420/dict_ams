@@ -29,6 +29,10 @@ input {
   overflow: hidden !important;
 }
 
+button[aria-owns="bs-select-1"] {
+  outline: none !important;
+}
+
 /* ====================== Purchase Request ====================== */
 .pr-form__card-header {
   background-color: #F7F7F7 !important;

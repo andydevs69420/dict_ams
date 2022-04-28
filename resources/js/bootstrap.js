@@ -2,7 +2,7 @@ try
 {
     global.$ = global.jQuery = require('jquery');
     global.Popper = require('@popperjs/core');
-    require('bootstrap');
+    global.bootstrap = require('bootstrap');
 }
 catch(err)
 {
