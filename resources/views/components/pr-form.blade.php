@@ -79,17 +79,19 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                @if(strlen($itm[2]) > 0)
-                                                    <input class="form-control border-0 bg-white" name="description[]" type="text" value="{{ $itm[2] }}" placeholder="{{ __("Item description") }}" required>
-                                                @else
-                                                    <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                                                <select class="selectPicker form-select p-0 border-0 bg-white" name="description[]" data-live-search="true" required>
+                                                    @if(strlen($itm[2]) > 0)
+                                                        <option value="-1" selected>
+                                                            {{ $itm[2] }}
+                                                        </option>
+                                                    @else
                                                         @foreach(App\Models\ItemList::getAllitems() as $item)
                                                             <option value="{{ $item->itemlist_id }}">
                                                                 {{ $item->itemname }}
                                                             </option>
                                                         @endforeach
-                                                    </select>
-                                                @endif
+                                                    @endif
+                                                </select>
                                             </div>
                                         </div>
                                         <!-- quantity group -->
@@ -142,7 +144,7 @@
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Requisitioner" data-bs-content="Purchase requisitioner"><i class="fa-solid fa-user"></i></a>
                         <select id="req-name" class="selectPicker form-select p-0 border-0 bg-white" name="requester-name" data-live-search="true" required>
                             @if(strlen($getRequisitionerName()) > 0)
-                                <option value="{{ $getRequisitionerId() }}" selected disabled>
+                                <option value="{{ $getRequisitionerId() }}" selected>
                                     {{ $getRequisitionerName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getRequisitionerAccessLevelId()) }})
                                 </option>
                             @else
@@ -161,7 +163,7 @@
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
                         <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
                             @if(strlen($getBudgetOfficerName()) > 0)
-                                <option value="{{ $getBudgetOfficerId() }}" selected disabled>
+                                <option value="{{ $getBudgetOfficerId() }}" selected>
                                     {{ $getBudgetOfficerName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getBudgetOfficerAccessLevelId()) }})
                                 </option>
                             @else
@@ -180,7 +182,7 @@
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Recommending approval" data-bs-content="Target recommending approval"><i class="fa-solid fa-user"></i></a>
                         <select id="rec-approval-name" class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" data-live-search="true" required>
                             @if(strlen($getRecommendingApprovalName()) > 0)
-                                <option value="{{ $getRecommendingApprovalId() }}" selected disabled>
+                                <option value="{{ $getRecommendingApprovalId() }}" selected>
                                     {{ $getRecommendingApprovalName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getRecommendingApprovalAccessLevelId()) }})
                                 </option>
                             @else

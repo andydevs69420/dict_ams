@@ -146,6 +146,7 @@ function generate__pr_form()
     purps = $('#purpose-field').val();
     // kinsay nag requqest sa form
     req_A = $('#req-name').val();
+    console.log(req_A);
     // kinsay ge recommend mag approve
     rec_A = $('#rec-approval-name').val();
     
@@ -187,9 +188,7 @@ function generate__pr_form()
             hasInvalid        ||
             purps.length <= 0 ||
             req_A.length <= 0 ||
-            req_B.length <= 0 ||
-            rec_A.length <= 0 ||
-            rec_B.length <= 0
+            rec_A.length <= 0
         )
             return $('#pr-form__on-error-modal').modal('show');
         else
