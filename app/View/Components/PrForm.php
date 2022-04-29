@@ -84,6 +84,14 @@ class PrForm extends Component
      * Returns requisitioner id
      * @return Int
      **/
+    public function getBudgetOfficerId()
+    { return (Int) $this->budgetOfficer['user_id']; }
+
+
+    /** 
+     * Returns requisitioner id
+     * @return Int
+     **/
     public function getBudgetOfficerAccessLevelId()
     { return (Int) $this->budgetOfficer['accesslevel_id']; }
 
@@ -115,9 +123,16 @@ class PrForm extends Component
 
     // =============== REQUISITIONER METHODS ===============
 
-
     /** 
      * Returns requisitioner id
+     * @return Int
+     **/
+    public function getRequisitionerId()
+    { return (Int) $this->requisitioner['user_id']; }
+
+
+    /** 
+     * Returns requisitioner access level id
      * @return Int
      **/
     public function getRequisitionerAccessLevelId()
@@ -153,7 +168,7 @@ class PrForm extends Component
 
 
     /** 
-     * Returns recommending approval id
+     * Returns recommending approval accesslevel id
      * @return Int
      **/
     public function getRecommendingApprovalAccessLevelId()

@@ -59,14 +59,14 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Stock number" data-bs-content="Item stock number"><i class="fa-solid fa-barcode"></i></a>
-                                                <input class="form-control border-0 bg-white" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="Stock no.">
+                                                <input class="form-control border-0 bg-white" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="{{ __("Stock no.") }}">
                                             </div>
                                         </div>
                                         <!-- unit group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit" data-bs-content="Item Unit ex: pcs, in, mm, cm"><i class="fa-solid fa-scale-balanced"></i></a>
-                                                <input class="form-control border-0 bg-white" list="default-units" name="unit[]" type="text" value="{{ $itm[1] }}" placeholder="Unit" required>
+                                                <input class="form-control border-0 bg-white" list="default-units" name="unit[]" type="text" value="{{ $itm[1] }}" placeholder="{{ __("Unit") }}" required>
                                                 <datalist id="default-units">
                                                     <option value="pcs">
                                                     <option value="in">
@@ -79,28 +79,38 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                <input class="form-control border-0 bg-white" name="description[]" type="text" value="{{ $itm[2] }}" placeholder="Item description" required>
+                                                @if(strlen($itm[2]) > 0)
+                                                    <input class="form-control border-0 bg-white" name="description[]" type="text" value="{{ $itm[2] }}" placeholder="{{ __("Item description") }}" required>
+                                                @else
+                                                    <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                                                        @foreach(App\Models\ItemList::getAllitems() as $item)
+                                                            <option value="{{ $item->itemlist_id }}">
+                                                                {{ $item->itemname }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                @endif
                                             </div>
                                         </div>
                                         <!-- quantity group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
-                                                <input class="form-control border-0 bg-white" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="Qty">
+                                                <input class="form-control border-0 bg-white" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="{{ __("Qty") }}">
                                             </div>
                                         </div>
                                         <!-- unit cost group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit cost" data-bs-content="Item cost per unit"><i class="fa-solid fa-coins"></i></a>
-                                                <input class="form-control border-0 bg-white" name="unitcost[]" type="number" value="{{ $itm[4] }}" placeholder="Unit cost">
+                                                <input class="form-control border-0 bg-white" name="unitcost[]" type="number" value="{{ $itm[4] }}" placeholder="{{ __("Unit cost") }}">
                                             </div>
                                         </div>
                                         <!-- total cost group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Total cost" data-bs-content="Item total cost"><i class="fa-solid fa-peso-sign"></i></a>
-                                                <input class="form-control border-0 bg-white" name="totalcost[]" type="number" value="{{ $itm[5] }}" placeholder="Total cost">
+                                                <input class="form-control border-0 bg-white" name="totalcost[]" type="number" value="{{ $itm[5] }}" placeholder="{{ __("Total cost") }}">
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +123,7 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Purpose" data-bs-content="Purpose for purchasing"><i class="fa-solid fa-rocket"></i></a>
-                        <input id="purpose-field" class="form-control border-0 bg-white" name="purpose" value="{{ $getPurpose() }}" placeholder="Purpose" required>
+                        <input id="purpose-field" class="form-control border-0 bg-white" name="purpose" value="{{ $getPurpose() }}" placeholder="{{ __("Purpose") }}" required>
                     </div>
                 </div>
                 <!-- add item -->
@@ -130,24 +140,38 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Requisitioner" data-bs-content="Purchase requisitioner"><i class="fa-solid fa-user"></i></a>
-                        <input id="req-name" class="form-control border-0 bg-white text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="{{ __("Requisitioner") }}" required disabled>
+                        <select id="req-name" class="selectPicker form-select p-0 border-0 bg-white" name="requester-name" data-live-search="true" required>
+                            @if(strlen($getRequisitionerName()) > 0)
+                                <option value="{{ $getRequisitionerId() }}" selected disabled>
+                                    {{ $getRequisitionerName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getRequisitionerAccessLevelId()) }})
+                                </option>
+                            @else
+                                @foreach(App\Models\UserVerificationDetails::getAllRequisitioner() as $requisitioner)
+                                    <option value="{{ $requisitioner->user_id }}">
+                                        {{ $requisitioner->lastname }}, {{ $requisitioner->firstname }} {{ $requisitioner->middleinitial }} - ({{ App\Models\Accesslevel::getAccesslevelById($requisitioner->accesslevel_id) }})
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
                     </div>
                 </div>
                 <!-- budget officer group -->
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
-                        @if(strlen($getBudgetOfficerName()) > 0)
-                            <input id="budget-officer-name" class="form-control border-0 bg-white text-truncate" list="budget-officer-list" name="budget-officer-name" type="text" value="{{ $getBudgetOfficerName() }}" placeholder="{{ __("Budget Officer") }}" required disabled>
-                        @else
-                            <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                        <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                            @if(strlen($getBudgetOfficerName()) > 0)
+                                <option value="{{ $getBudgetOfficerId() }}" selected disabled>
+                                    {{ $getBudgetOfficerName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getBudgetOfficerAccessLevelId()) }})
+                                </option>
+                            @else
                                 @foreach(App\Models\UserVerificationDetails::getAllBudgetOfficer() as $budgetOfficer)
                                     <option value="{{ $budgetOfficer->user_id }}">
-                                        {{ $budgetOfficer->lastname }}, {{ $budgetOfficer->firstname }} {{ $budgetOfficer->middleinitial }}
+                                        {{ $budgetOfficer->lastname }}, {{ $budgetOfficer->firstname }} {{ $budgetOfficer->middleinitial }} - ({{ App\Models\Accesslevel::getAccesslevelById($budgetOfficer->accesslevel_id) }})
                                     </option>
                                 @endforeach
-                            </select>
-                        @endif
+                            @endif
+                        </select>
                     </div>
                 </div>
                 <!-- recommending approval group -->
@@ -159,8 +183,8 @@
                         @else
                             <select id="rec-approval-name" class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" data-live-search="true" required>
                                 @foreach(App\Models\UserVerificationDetails::getAllRecommendingApprovalByAccesslevelId(Auth::user()->accesslevel_id) as $recommendingApprover)
-                                    <option value="{{ $budgetOfficer->user_id }}">
-                                        {{ $recommendingApprover->lastname }}, {{ $recommendingApprover->firstname }} {{ $recommendingApprover->middleinitial }}
+                                    <option value="{{ $recommendingApprover->user_id }}">
+                                        {{ $recommendingApprover->lastname }}, {{ $recommendingApprover->firstname }} {{ $recommendingApprover->middleinitial }} - ({{ App\Models\Accesslevel::getAccesslevelById($recommendingApprover->accesslevel_id) }})
                                     </option>
                                 @endforeach
                             </select>

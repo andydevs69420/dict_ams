@@ -4,8 +4,8 @@
 
     /**
      * Item addtion
-     * @return void
-     */
+     * @return null
+     **/
     window.add__item = function()
     {
         let item_list, nth_child, new_itmID, clone_itm;
@@ -52,8 +52,8 @@
     /**
      * Remove Item N
      * @param String id_query_selector mao ning id sa <li> nga nag hawid sa item
-     * @return void
-     */
+     * @return null
+     **/
     window.remove__item = function(id_query_selector)
     { 
         item_list = $('#item-list-id');
@@ -94,8 +94,8 @@
 
 /**
  * Generate Form 
- * @return void
- */
+ * @return null
+ **/
 function generate__pr_form()
 {   
     let item_fields , 
@@ -144,24 +144,16 @@ function generate__pr_form()
 
     // purpose sa pag purchase
     purps = $('#purpose-field').val();
-
     // kinsay nag requqest sa form
     req_A = $('#req-name').val();
-    // unsay designation sa nag request
-    req_B = $('#req-designation').text();
-
     // kinsay ge recommend mag approve
     rec_A = $('#rec-approval-name').val();
-    // unsay designation sa mag approve
-    rec_B = $('#rec-designation').text();
     
     let form_data = {
         'items' : arranged_data , 
         'purps' : purps , 
-        'req_A' : req_A , 
-        'req_B' : req_B , 
+        'req_A' : req_A ,  
         'rec_A' : rec_A , 
-        'rec_B' : rec_B ,
     };
 
     (function(){
@@ -181,7 +173,7 @@ function generate__pr_form()
                  * 4 := unit cost
                  * 5 := total cost
                  * 
-                 */ 
+                 **/ 
 
                 if (!hasInvalid && [1, 2].includes(idx))
                     hasInvalid = (col.length <= 0 || col.trim().length <= 0);
@@ -190,7 +182,7 @@ function generate__pr_form()
 
             });
         });
-
+        console.log(form_data)
         if (
             hasInvalid        ||
             purps.length <= 0 ||
