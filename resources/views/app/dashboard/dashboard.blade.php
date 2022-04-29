@@ -192,7 +192,7 @@
                         {{-- debug pag walay access level --}}
                         <div class="jumbotron jumbotron-fluid">
                             <div class="container">
-                                <h1 class="display-3">Invalid Accesslevel := {{ $LoggedUserInfo["accesslevel_id"] }}</h1>
+                                <h1 class="display-3">Invalid Accesslevel := {{ Auth::user()->accesslevel_id }}</h1>
                                 <p class="lead">Wala pa na implement gooys!</p>
                                 <hr class="my-2">
                                 <p>TBD</p>

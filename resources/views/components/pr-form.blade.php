@@ -136,27 +136,36 @@
                 <!-- budget officer group -->
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
-                        {{-- <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
-                        <input id="budget-officer-name" class="form-control border-0 bg-white text-truncate" list="budget-officer-list" name="budget-officer-name" type="text" value="{{ $getBudgetOfficerName() }}" placeholder="{{ __("Budget Officer") }}" required onkeyup=""> --}}
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
-                        <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
-                            @if(strlen($getBudgetOfficerName()) > 0)
-                                <option selected disabled> {{ $getBudgetOfficerName() }}</option>
-                            @endif
-                            <option>Name1</option>
-                            <option>Name2</option>
-                            <option>Name3</option>
-                        </select>
+                        @if(strlen($getBudgetOfficerName()) > 0)
+                            <input id="budget-officer-name" class="form-control border-0 bg-white text-truncate" list="budget-officer-list" name="budget-officer-name" type="text" value="{{ $getBudgetOfficerName() }}" placeholder="{{ __("Budget Officer") }}" required disabled>
+                        @else
+                            <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                                @foreach(App\Models\UserVerificationDetails::getAllBudgetOfficer() as $budgetOfficer)
+                                    <option value="{{ $budgetOfficer->user_id }}">
+                                        {{ $budgetOfficer->lastname }}, {{ $budgetOfficer->firstname }} {{ $budgetOfficer->middleinitial }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
                     </div>
-                    {{-- <datalist id="budget-officer-list"></datalist> --}}
                 </div>
                 <!-- recommending approval group -->
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Recommending approval" data-bs-content="Target recommending approval"><i class="fa-solid fa-user"></i></a>
-                        <input id="rec-approval-name" class="form-control border-0 bg-white text-truncate" list="recommending-approval-list" name="recommending-approval" type="text" value="{{ $getRecommendingApprovalName() }}" placeholder="Recommending Approval" required onkeyup="">
+                        @if(strlen($getRecommendingApprovalName()) > 0)
+                            <input id="rec-approval-name" class="form-control border-0 bg-white text-truncate"  name="recommending-approval" type="text" value="{{ $getRecommendingApprovalName() }}" placeholder="{{ __("Recommending Approval") }}" required disabled>
+                        @else
+                            <select id="rec-approval-name" class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" data-live-search="true" required>
+                                @foreach(App\Models\UserVerificationDetails::getAllRecommendingApprovalByAccesslevelId(Auth::user()->accesslevel_id) as $recommendingApprover)
+                                    <option value="{{ $budgetOfficer->user_id }}">
+                                        {{ $recommendingApprover->lastname }}, {{ $recommendingApprover->firstname }} {{ $recommendingApprover->middleinitial }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
                     </div>
-                    <datalist id="recommending-approval-list"></datalist>
                 </div>
             </div>
         </div>
