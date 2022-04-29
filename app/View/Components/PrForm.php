@@ -81,7 +81,7 @@ class PrForm extends Component
 
 
     /** 
-     * Returns requisitioner id
+     * Returns budget officer id
      * @return Int
      **/
     public function getBudgetOfficerId()
@@ -165,6 +165,14 @@ class PrForm extends Component
     }
 
     // =============== RECOMMENDING APPROVAL METHODS ===============
+
+
+    /** 
+     * Returns recommending approval id
+     * @return Int
+     **/
+    public function getRecommendingApprovalId()
+    { return (Int) $this->recommendingApproval['user_id']; }
 
 
     /** 

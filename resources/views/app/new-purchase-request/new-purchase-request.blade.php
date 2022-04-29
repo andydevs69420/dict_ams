@@ -29,7 +29,7 @@
                     <div class="col-12 col-lg-9">
                         
                         <x-pr-form 
-                            :recomending-approver="json_decode(json_encode(Auth::user()),true)"></x-pr-form>
+                            :requisitioner="json_decode(json_encode(Auth::user()),true)"></x-pr-form>
 
                     </div>
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">

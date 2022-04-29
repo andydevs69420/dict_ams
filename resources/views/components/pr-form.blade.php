@@ -178,17 +178,19 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Recommending approval" data-bs-content="Target recommending approval"><i class="fa-solid fa-user"></i></a>
-                        @if(strlen($getRecommendingApprovalName()) > 0)
-                            <input id="rec-approval-name" class="form-control border-0 bg-white text-truncate"  name="recommending-approval" type="text" value="{{ $getRecommendingApprovalName() }}" placeholder="{{ __("Recommending Approval") }}" required disabled>
-                        @else
-                            <select id="rec-approval-name" class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" data-live-search="true" required>
+                        <select id="rec-approval-name" class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" data-live-search="true" required>
+                            @if(strlen($getRecommendingApprovalName()) > 0)
+                                <option value="{{ $getRecommendingApprovalId() }}" selected disabled>
+                                    {{ $getRecommendingApprovalName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getRecommendingApprovalAccessLevelId()) }})
+                                </option>
+                            @else
                                 @foreach(App\Models\UserVerificationDetails::getAllRecommendingApprovalByAccesslevelId(Auth::user()->accesslevel_id) as $recommendingApprover)
                                     <option value="{{ $recommendingApprover->user_id }}">
                                         {{ $recommendingApprover->lastname }}, {{ $recommendingApprover->firstname }} {{ $recommendingApprover->middleinitial }} - ({{ App\Models\Accesslevel::getAccesslevelById($recommendingApprover->accesslevel_id) }})
                                     </option>
                                 @endforeach
-                            </select>
-                        @endif
+                            @endif
+                        </select>
                     </div>
                 </div>
             </div>
