@@ -1,3 +1,4 @@
+@import '../global/appcolor';
 @import '../global/sizing';
 
 
@@ -5,6 +6,9 @@ body
 {
     overflow: hidden auto;
 }
+
+.login__main
+{ background-color: $LOGIN-BG !important; }
 
 .login__center-panel
 {
@@ -44,9 +48,9 @@ body
 
 .login__brand-icon
 {
-    width: auto;
+    width: 30%;
     // min-width: 112px;
-    max-width: 30%;
+    max-width: 162px;
 }
 
 .login__page-form-0
@@ -58,4 +62,17 @@ body
     {
         height: auto;
     }
+}
+
+.login__login-btn
+{ background-color: $LOGIN-LOGIN-BTN-BG !important; }
+
+.login__register-btn
+{ background-color: $LOGIN-REGISTER-BTN-BG !important; }
+
+.input-group-text
+{ 
+    display: block !important;
+    min-width: 3em !important;
+    background-color: $LOGIN-INPUT-ICON-BG !important; 
 }

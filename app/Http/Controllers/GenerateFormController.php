@@ -9,7 +9,7 @@ use App\Models\User;
 // e usa lang ang generate pr ug jo nga form
 
 /*
-    Makita si "getUserInfoById" , "findUserByName"  sa "app/Helpers/DatabaseHelpers"
+    Makita si "getUserById" , "getUsersByName"  sa "app/Helpers/DatabaseHelpers"
 */
 
 class GenerateFormController extends Controller
@@ -17,57 +17,36 @@ class GenerateFormController extends Controller
     // ======================== GLOBAL ========================
     function searchForApproval(Request $request)
     {
-        
-        $search = $request->input('search');
-        $search = (!$search)? '' : $search;
+        $valid_approval = [];
 
-        $result = findUserByName(
+        $reqrid = $request->input('requisitionerid');
+        $search = $request->input('search');
+
+        switch ((Int) $reqrid)
+        {
+            case 4: // PO
+            case 5: // FOCAL
+                $valid_approval = [
+                    12 // Accesslevel id sa Chief TOD
+                ];
+                break;
+            case 13: // STAFF,
+                $valid_approval = [
+                    4 // Accesslevel id sa PO
+                ];
+                break;
+        }
+        
+        $search = (!$search)? '' : $search;
+        $result = getUsersByName(
             $search,
-            [
-                /**
-                 * Mao ni sila ang access level na pwede maka approve 
-                 */
-                11, // Budget Officer
-            ]
+            /**
+             * Mao ni sila ang access level na pwede maka approve 
+             */
+            $valid_approval
         );
     
         return $result;
-    }
-
-    // ========================== JO ==========================
-    function jobOrder(Request $request)
-    {
-        // TODO: e restrict pag dili rquisitioner |  e redirect sa logout
-    }
-
-    // ========================== PR ==========================
-
-    function purchaseRequest(Request $request)
-    {
-        $data = ['LoggedUserInfo' => getUserInfoById(session('LoggedUser'))];
-
-        /*
-            REFER to accesslevels table for id
-            | Mao rani sila requisitioner
-            ;
-
-            4 := Project Officer
-            5 := Focal
-        */
-
-        if (!isValidAccess($data['LoggedUserInfo']['accesslevel_id'], ['4', '5']))
-            return redirect('/logout');
-
-        return view('newpurchaserequest/new-purchase-request', $data);
-    }
-
-    function viewPRForm(Request $request)
-    {
-        $data = [
-            'PrFormData' => json_decode($request->input('data'),true)
-        ];
-
-        return view('newpurchaserequest/view-pr-form', $data);
     }
 
 }

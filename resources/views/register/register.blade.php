@@ -27,7 +27,7 @@
                     {{-- <div class="row border-bottom mb-4 separator">
                     </div> --}}
 
-                    <form method="POST" action="/register" class="row pb-5 px-4 justify-content-center">
+                    <form method="POST" action="{{ url('/register') }}" class="row pb-5 px-4 justify-content-center">
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-5 p-2">
@@ -124,7 +124,7 @@
                                     <option value=9>Chief Admin</option> --}}
 
                                     @foreach ($designations as $d)
-                                        <option value={{ $d['id'] }}>{{ $d['designation'] }}</option>
+                                        <option value={{ $d['designation_id'] }}>{{ $d['designation'] }}</option>
                                     @endforeach
 
                                 </select>
@@ -152,7 +152,7 @@
                                     <option value=12>Chief TOD</option> --}}
 
                                     @foreach ($accesslevels as $als)
-                                        <option value={{ $als['id'] }}>{{ $als['accesslevel'] }}</option>
+                                        <option value={{ $als['accesslevel_id'] }}>{{ $als['accesslevel'] }}</option>
                                     @endforeach
 
                                 </select>

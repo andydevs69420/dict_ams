@@ -30,7 +30,7 @@ div[class="form__view"] {
 img[alt="form-header"] {
   display: block;
   margin: auto;
-  width: 100%;
+  width: 60%;
 }
 
 table {
@@ -522,6 +522,8 @@ tbody {
   border-bottom: none;
   border-left: none;
   white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ===================== ITEMS ===================== */

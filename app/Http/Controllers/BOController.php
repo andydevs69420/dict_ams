@@ -8,8 +8,7 @@ use App\Models\User;
 class BOController extends Controller
 {
     public function index(){
-        //table::ORS()->get();
-        $data = ['LoggedUserInfo' => getUserInfoById(session('LoggedUser'))];
+        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
         return view('Budgetofficer.BO', $data);
     }
 

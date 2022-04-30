@@ -4,7 +4,15 @@
 /* on large devices and above */
 /* on extra-large devices and above */
 /* on extra-extra large devices and above */
-/* dapat parya silag color sa sidebar */
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= ITEM LIST COLORS =============== */
 * {
   margin: 0;
   -webkit-box-sizing: border-box;
@@ -56,6 +64,7 @@ body {
 }
 
 .app-main__noscript-content-wrapper {
+  background-color: #0020EC !important;
   z-index: 999999999;
 }
 

@@ -1,14 +1,52 @@
 @import '../../global/appcolor';
 
-.topbar__avatar
-{ border-left: 1px solid $LIGHT-GRAY-1; }
-
 .topbar__avatar-identifier
 { font-size: 1em; }
 
 .topbar__avatar-icon
-{ max-width: 1em; }
+{ max-width: 1.4em; }
+
+.topbar__dropdown
+{
+    display: block;
+    position: relative;
+    overflow: visible;
+    &:hover
+    {
+        & > .topbar__dropdown-dropper
+        { display: block; }
+    }
+}
+
+.topbar__dropdown > 
+.topbar__dropdown-trigger-icon
+{ margin: 0 .5em; }
 
 
+.topbar__dropdown > 
+.topbar__dropdown-dropper
+{
+    display: none;
+    position: absolute;
+    right: 0 !important;
+    z-index: 2;
+    padding: .5em 0;
+    list-style-type: none;
+    background-color: $TOPBAR-DROPDOWN-BG !important;
+    border-radius: .1em;
+    box-shadow: 0px 0px 8px -2px rgba(0,0,0,0.2);
+}
 
-
+.topbar__dropdown-dropper > 
+.topbar__dropdown-dropper-item
+{
+    text-align: left;
+    line-height: 1.6em;
+    vertical-align: middle;
+    padding: 0 .4em;
+    white-space: nowrap;
+    &:hover
+    { background-color: $TOPBAR-ITEM-HOVER-BG !important; }
+    & > a
+    {  text-decoration: none; }
+}

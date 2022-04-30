@@ -11,13 +11,16 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     //
-    function index()
+    function index(Request $request)
     {
         // akong ge edit part kay naay need naku sa akong task
 
         $params = [
             'designations' => Designation::all(),
-            'accesslevels' => Accesslevel::all()
+            'accesslevels' => (strcmp($request->input('admin'), 'true') === 0)?
+                                Accesslevel::all()
+                                : // ang 14 kay accesslevel_id ni admin
+                                Accesslevel::all()->where('accesslevel_id', '!=', '14')
         ];
 
         return view('register/register', $params);   
@@ -29,7 +32,7 @@ class RegisterController extends Controller
         // validate requests
         $this->validate(request(), [
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:user'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'firstname' => ['required', 'string', 'max:25'],
             'lastname' => ['required', 'string', 'max:25'],
@@ -46,8 +49,8 @@ class RegisterController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->middleinitial = $request->middleinitial;
-        $user->designation = $request->designation;
-        $user->accesslevel = $request->accesslevel;
+        $user->designation_id = $request->designation;
+        $user->accesslevel_id = $request->accesslevel;
         $save = $user->save();
        
         if($save){

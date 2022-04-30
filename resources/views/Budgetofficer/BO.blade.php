@@ -5,7 +5,6 @@
         'username'      => $LoggedUserInfo['username']        // para sa topbar
     ]
 )
-
 @section('title', 'AMS | Obligation Request')
 
 @section('dependencies')

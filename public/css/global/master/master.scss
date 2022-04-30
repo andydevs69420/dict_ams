@@ -1,3 +1,4 @@
+@import '../appcolor';
 @import '../sizing';
 
 *
@@ -34,4 +35,8 @@ body
 }
 
 .master__noscript-content-wrapper
-{ z-index: 999999999; }
+{   
+    background-color: $PRIMARY !important;
+    z-index: 999999999; 
+}
+

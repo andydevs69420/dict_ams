@@ -1,17 +1,54 @@
 
 
+$PRIMARY : #0020EC;
 
+/* ================= LOGIN COLORS   ================= */
+$LOGIN-BG              : $PRIMARY;
+$LOGIN-INPUT-ICON-BG   : $PRIMARY;
+$LOGIN-LOGIN-BTN-BG    : $PRIMARY;
+$LOGIN-REGISTER-BTN-BG : $PRIMARY;
 
+/* ================= SIDEBAR COLORS ================= */
+$SIDEBAR-BG            : $PRIMARY;
+$SIDEBAR-SCROLL-THUMB  : #F7F7F7;
+$SIDEBAR-HOVER-LINK    : #F7F7F7;
+$SIDEBAR-ACTIVE-LINK   : #F7F7F7;
+$SIDEBAR-INACTIVE-LINK : #0DCAF0;
 
-$BLACK        : #131310;
-$GREEN        : #eb9534;
-$WHITE        : #ffffff;
-$LIGHT-GRAY   : #eeeeee; 
-$LIGHT-GRAY-1 : #dbdbdb; 
-$DARK-GRAY    : #999393;
-$VIOLET       : #12021c;
+/* ================= TOPBAR COLORS ================== */
+$TOPBAR-DROPDOWN-BG    : #F7F7F7;
+$TOPBAR-ITEM-HOVER-BG  : #EEEEEE;
 
-$CYAN : #0dcaf0; // based on bs4 | bs5 cyan;
+/* ================= DASHBOARD COLORS =============== */
+$DASHBOARD-TILE-LG-BG  : #F7F7F7;
+$DASHBOARD-TILE-LG-FG  : #F7F7F7;
+$DASHBOARD-TILE-BLUE   : $PRIMARY;
+$DASHBOARD-TILE-GREEN  : #09B77C;
+$DASHBOARD-TILE-PURPLE : #6c5ad3;
+$DASHBOARD-TILE-LIGHT-GREEN : #F7CC5D;
+$DASHBOARD-TILE-PINK   : #a8327b;
 
-/* dapat parya silag color sa sidebar */ 
-$TRACK-THUMB-BG: #0d6efd; // based on bs4 | bs5 bg-primary;
+$DASHBOARD-TILE-VALUE-MD : #6c757d;
+
+/* ================= PROGRESSBAR COLORS ============= */
+$PROGRESSBAR-BG        : #E9ECEF;
+$PROGRESSBAR-PROGRESS  : $PRIMARY;
+
+/* ================= NEW PR FORM COLORS ============= */
+$NPR-CARD-HEADER       : $PRIMARY;
+$NPR-UPLOAD-FILE-BDC   : $PRIMARY;
+$NPR-SUBMIT-FORM-BTN   : $PRIMARY;
+
+/* ================= PR FORM COLORS ================= */
+$PR-CARD-HEADER        : #F7F7F7;
+$PR-INPUT-ICON-BG      : $PRIMARY;
+$PR-ADD-NEW-ITEM-BTN   : $PRIMARY;
+$PR-GENERATE-PR-BTN    : $PRIMARY;
+
+/* ================= USER LIST COLORS =============== */
+$USER-LIST-ACTIVE-LIBK-BG : #198754;
+
+/* ================= ITEM LIST COLORS =============== */
+$ITEM-LIST-ACTIVE-LIBK-BG : #198754;
+
+//#09B77C
