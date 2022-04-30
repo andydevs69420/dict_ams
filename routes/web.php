@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenerateFormController;
+use App\Http\Controllers\BOController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,5 @@ Route::get('/newpurchaserequest/viewprform', [GenerateFormController::class,'vie
 Route::post('/newpurchaserequest/searchforapproval', [GenerateFormController::class,'searchForApproval']);
 
 // Budget Officer
-Route::get('BO', 'BOController@index')->name('BO');
-Route::get('edit-ors/{id}', 'BOController@edit');
-Route::get('edit-ors/delete/{id}', 'BOController@delete');
-Route::post('edit-ors/update', 'BOController@update');
+Route::get('/BO',[BOController::class,'index']);
+Route::get('/edit-ors',[BOController::class,'edit']);

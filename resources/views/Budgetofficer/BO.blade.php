@@ -1,4 +1,10 @@
-@extends('layout.app-main', ['accesslevelid' => $LoggedUserInfo['accesslevel'],'username' => $LoggedUserInfo['username']])
+@extends(
+    'layout.app-main', 
+    [
+        'accesslevelid' => $LoggedUserInfo['accesslevel_id'], // para sa sidebar
+        'username'      => $LoggedUserInfo['username']        // para sa topbar
+    ]
+)
 
 @section('title', 'AMS | Obligation Request')
 
@@ -7,7 +13,7 @@
 @stop
 
 @section('content')
-    <div class="container-fluid">
+    <div class = "container-fluid">
         <div class="row">
             <h2 class="page-title">{{ __('Obligation Request/Status') }}</h2>
         </div>
@@ -54,10 +60,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script type="text/javascript">
-    $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: true,ordering: true});
-    </script>
-@endsection
+@stop
