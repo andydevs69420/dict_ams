@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\GenerateFormController;
 use App\Http\Controllers\BOController;
 
 /*
@@ -41,17 +40,8 @@ Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
 // Budget Officer
-Route::get("/BO", [BOController::class, "index"]);
-Route::get("edit-ors/{id}", "BOController@edit");
-Route::get("edit-ors/delete/{id}", "BOController@delete");
-Route::post("edit-ors/update", "BOController@update");
-
-// purchase request
-Route::get("/newpurchaserequest/viewprform", [GenerateFormController::class,"viewPRForm"]);
-Route::post("/newpurchaserequest/searchforapproval", [GenerateFormController::class,"searchForApproval"]);
-
-// job order
-Route::get('/newjoborder/viewjoform', [GenerateFormController::class,'viewJOForm']);
+Route::get('/BO',[BOController::class,'index']);
+Route::get('/edit-ors',[BOController::class,'edit']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
@@ -62,9 +52,12 @@ Route::controller(AppController::class)->group(function () {
     // create form
         // pr
         Route::get("/newpurchaserequest", "purchaseRequest");
+            // view pr form
+                Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
         // jo
         Route::get("/newjoborder", "jobOrder");
-    
+            // view jo form
+                Route::get('/newjoborder/viewjoform', [AppController::class,'viewJOForm']);
     // users
     Route::get("/users", "users");
         // accept or decline
@@ -83,5 +76,5 @@ Route::controller(AppController::class)->group(function () {
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
-    
+
 });

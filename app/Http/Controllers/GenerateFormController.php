@@ -49,13 +49,4 @@ class GenerateFormController extends Controller
         return $result;
     }
 
-
-    function viewJOForm(Request $request)
-    {
-        $data = [
-            'JoFormData' => json_decode($request->input('data'),true)
-        ];
-
-        return view('app/new-job-order/view-jo-form', $data);
-    }
 }

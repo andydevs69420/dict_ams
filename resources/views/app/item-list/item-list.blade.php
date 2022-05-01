@@ -88,7 +88,11 @@
                         <th class="text-left" scope="col">{{ __("Item No") }}</th>
                         <th class="text-left" scope="col">{{ __("Item Name") }}</th>
                         <th class="text-left" scope="col">{{ __("Item Description") }}</th>
-                        <th class="text-center" scope="col">{{ __("Action") }}</th>
+
+                        @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
+                            <th class="text-center" scope="col">{{ __("Action") }}</th>
+                        @endif
+                        
                     </tr>
                 </thead>
                 <tbody>
