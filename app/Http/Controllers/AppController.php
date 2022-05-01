@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
+use App\Models\Designation;
 use App\Models\ItemList;
 use Auth;
 
@@ -15,13 +17,13 @@ class AppController extends Controller
      * Dashboard -> index
      * @param Request $request request
      * @return View
-     * 
+     *
      **/
     public function dashboard(Request $request)
     {
-        if  (!Auth::check()) 
+        if  (!Auth::check())
             return redirect()->to("/login");
-        
+
         return view("app.dashboard.dashboard");
     }
 
@@ -39,13 +41,60 @@ class AppController extends Controller
      **/
     function purchaseRequest(Request $request)
     {
-        if  (!Auth::check()) 
+        if  (!Auth::check())
             return redirect()->to("/login");
-        
+
         if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
             return redirect()->to("/logout");
 
         return view("app.new-purchase-request.new-purchase-request");
+    }
+
+
+    /**
+     * View pr form -> index
+     * @param Request $request request
+     * @return View
+     **/
+    function viewPrForm(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+            return redirect()->to("/logout");
+        
+        if 
+        (
+            !$request->has("items")          ||
+            !$request->has("purpose")        ||
+            !$request->has("requester")      ||
+            !$request->has("budget-officer") ||
+            !$request->has("recommending-approval")
+        )
+            return abort(403);
+        
+        $items = json_decode($request->input("items"),true);
+
+        for ($i = 0; $i < count($items); $i++)
+        {   
+            $items[$i][2] = ItemList::getItemByID($items[$i][2])->itemname;
+        }
+
+        error_log("RESULT: ".json_encode($items));
+
+        $requisitioner = UserVerificationDetails::getUserByID($request->input("requester"));
+        
+        $data = [
+            "items"   => $items,
+            "purpose" => $request->input("purpose"),
+            "requester_name" => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
+            "requester_designation" => Designation::getDesignationByID($requisitioner->designation_id),
+            "recommending_approval_name" => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
+            "recommending_approval_designation" => Designation::getDesignationByID($requisitioner->designation_id),
+        ];
+
+        return view("app.new-purchase-request.view-pr-form", $data);
     }
 
 
@@ -62,7 +111,7 @@ class AppController extends Controller
      **/
     function jobOrder(Request $request)
     {
-        if  (!Auth::check()) 
+        if  (!Auth::check())
             return redirect()->to("/login");
 
         if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
@@ -107,10 +156,10 @@ class AppController extends Controller
                 {
                     if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
                         return false;
-                    
+
                     $user_id   = $request->input("user_id");
                     $status_id = $request->input("status_id");
-                        
+
                     $signal = UserVerificationDetails::where("user_id", "=", $user_id)
                             ->update(["verificationstatus_id" => $status_id]);
                     return (bool) !(!$signal);
@@ -136,19 +185,19 @@ class AppController extends Controller
                             ->delete();
                     return (bool) !(!$signal);
                 }
-    
+
 
     /**
-     * Item List -> index 
+     * Item List -> index
      * @param Request $request request
      * @return View
-     * 
-     **/ 
+     *
+     **/
     public function itemlist(Request $request)
     {
         if  (!Auth::check())
             return redirect()->to("/login");
-        
+
         return view("app.item-list.item-list");
     }
 
@@ -161,8 +210,8 @@ class AppController extends Controller
                  *     Only "admin" has access to this page
                  *         Accesslevel table
                  *             14 := admin
-                 * 
-                 **/ 
+                 *
+                 **/
                 public function itemlist__additem(Request $request)
                 {
                     if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
@@ -183,15 +232,15 @@ class AppController extends Controller
                     $item->itemname        = $request->input("itemname");
                     $item->itemdescription = $request->input("itemdescription");
                     $signal = $item->save();
-                    
+
                     if  (!$signal)
                         // debug
                         return response()->json(["message" => "Item addition failed!", "successful" => false]);
 
                     // TODO: Fix this
                     return response()->json([
-                        "message"     => "Item added successfully!", 
-                        "successful"  => true, 
+                        "message"     => "Item added successfully!",
+                        "successful"  => true,
                         "itemlist_id" => $item->id]);
                 }
 
@@ -204,8 +253,8 @@ class AppController extends Controller
                  *     Only "admin" has access to this page
                  *         Accesslevel table
                  *             14 := admin
-                 * 
-                 **/ 
+                 *
+                 **/
                 public function itemlist__updateItem(Request $request)
                 {
                     if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
@@ -226,13 +275,13 @@ class AppController extends Controller
                             "itemname"   => $request->input("itemname"),
                             "itemdescription" => $request->input("itemdescription"),
                         ]);
-                    
+
                     if  (!$signal)
                         // debug
                         return response()->json(["message" => "Update failed!", "successful" => false]);
 
                     return response()->json([
-                        "message"    => "Item was updated successfully!", 
+                        "message"    => "Item was updated successfully!",
                         "successful" => true
                     ]);
                 }
@@ -246,7 +295,7 @@ class AppController extends Controller
                  *     Only "admin" has access to this page
                  *         Accesslevel table
                  *             14 := admin
-                 **/ 
+                 **/
                 public function itemlist__deleteItem(Request $request)
                 {
                     if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
@@ -258,7 +307,7 @@ class AppController extends Controller
                     return (bool) !(!$signal);
                 }
 
-    
+
     /**
      * Requisitioner -> index
      * @param Request $request request
@@ -268,7 +317,7 @@ class AppController extends Controller
     {
         if  (!Auth::check())
             return redirect()->to("/login");
-        
+
         return view("app.requisitioner.requisitioner");
     }
 }

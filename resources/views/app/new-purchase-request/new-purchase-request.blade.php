@@ -4,17 +4,17 @@
 
 @section("dependencies")
 
+    {{-- bootstrap-select css  --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
     {{-- NEW PURCHASE REQUEST css --}}
     <link rel="stylesheet" href="{{ asset("css/new-purchase-request/new-purchase-request/new-purchase-request.css") }}">
-
-    {{-- PROGRESS BAR css --}}
-    <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
 
-    {{-- bootstrap-select css  --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    {{-- PROGRESS BAR css --}}
+    <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
 @stop
 
@@ -27,16 +27,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-9">
-                        
-                        <x-pr-form 
+
+                        <x-pr-form
                             :requisitioner="json_decode(json_encode(Auth::user()),true)"></x-pr-form>
 
                     </div>
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
 
                         <div class="card shadow">
-                            <div class="new-purchase-request__card-header card-header">
-                                <span class="text-white" role="text">{{ __("FILES") }}</span>
+                            {{-- new-purchase-request__card-header --}}
+                            <div class="card-header py-3 border-0 bg-white">
+                                <span class="text-black fw-bolder" role="text">{{ __("FILES") }}</span>
                             </div>
                             <div class="card-body">
                                 <div id="file-content-id" class="d-block"></div>
@@ -46,14 +47,22 @@
                                     <span role="text">{{ __("UPLOAD FILES") }}</span>
                                 </button>
                             </div>
-                            <div class="card-footer">
-                                <button class="new-purchase-request__submit-btn btn w-100 text-light" type="submit">
-                                    <i class="fa fa-paper-plane"></i>
-                                    <span role="text">{{ __("SEND REQUEST") }}</span>
-                                </button>
+                            <div class="card-footer py-2 py-lg-3 border-0 bg-white">
+
+                                <div class="input-group mb-2">
+                                    <input id="new-purchasse-request__confirm-signature" class="form-check-input rounded-1" type="checkbox" name="remember">
+                                    <label class="ms-2 text-dark" for="new-purchasse-request__confirm-signature"><small class="text-muted" style="user-select:none;">{{ __("Confirm signature") }}</small></label>
+                                </div>
+
+                                <div class="shadow">
+                                    <button class="new-purchase-request__submit-btn btn w-100 text-light" type="submit" disabled>
+                                        <i class="fa fa-paper-plane"></i>
+                                        <span role="text">{{ __("SEND REQUEST") }}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -63,27 +72,19 @@
 
 @section("javascript")
 
+    {{-- bootstrap-select js --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
     {{-- NEW PURCHASE REQUEST js --}}
     <script type="text/javascript" src="{{ asset("js/new-purchase-request/new-purchase-request.js") }}"></script>
 
-    {{-- PROGRESS BAR js --}}
-    <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
     {{-- PR js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
-    {{-- bootstrap-select js --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+    {{-- PROGRESS BAR js --}}
+    <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
-    <script type="text/javascript">
-        $(document).ready((evt) => {
-            $("[data-bs-toggle='tooltip']").tooltip();
-            $("[data-bs-toggle='popover']").popover();
-            $("select").selectpicker({
-                search : true
-            });
-        });
-    </script>
 
 @stop
 

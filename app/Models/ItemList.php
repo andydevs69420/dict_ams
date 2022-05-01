@@ -19,14 +19,32 @@ class ItemList extends Model
     ];
 
     /**
-     * E count lang niya pila ka rows ang table
-     */
+     * Counts all row in table
+     * @return String
+     * @example
+     *     ItemList::countRows();
+     **/
     public static function countRows()
     { return countTruncate(count(self::all())); }
 
+
     /**
-     * Kuhaon lang niya tanan item sa table 
-     */
+     * Get's item by id
+     * @param Int $itemnumber item id
+     * @return Array[Array]
+     **/
+    public static function getItemByID(Int $itemnumber)
+    {
+        return self::where("itemlist_id", "=", $itemnumber)
+        ->first();
+    }
+
+    /**
+     * Gets all item in table
+     * @return Array[Array]
+     * @example
+     *     ItemList::getAllItems();
+     **/
     public static function getAllItems()
     { return self::all(); }
 
