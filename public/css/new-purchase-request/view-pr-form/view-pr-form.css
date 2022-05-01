@@ -37,12 +37,11 @@ table {
   display: block;
   table-layout: fixed;
   border-collapse: collapse;
-  background-color: green;
 }
 
 table, tbody {
   display: block !important;
-  width: 100% !important;
+  width: 640px !important;
 }
 
 .xl119 {

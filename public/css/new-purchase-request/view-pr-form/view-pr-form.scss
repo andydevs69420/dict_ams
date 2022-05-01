@@ -41,16 +41,15 @@ img[alt="form-header"]
 
 table
 { 
-    display: block;
-    table-layout: fixed;
-    border-collapse: collapse;
-    background-color: green
+  display: block;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 table, tbody 
 { 
   display: block !important; 
-  width: 100% !important; 
+  width: 640px !important; 
 }
 
 

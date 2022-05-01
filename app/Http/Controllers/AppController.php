@@ -66,8 +66,8 @@ class AppController extends Controller
         
         if 
         (
-            !$request->has("items")               ||
-            !$request->has("purpose")             ||
+            !$request->has("items")          ||
+            !$request->has("purpose")        ||
             !$request->has("requester")      ||
             !$request->has("budget-officer") ||
             !$request->has("recommending-approval")
@@ -75,6 +75,13 @@ class AppController extends Controller
             return abort(403);
         
         $items = json_decode($request->input("items"),true);
+
+        for ($i = 0; $i < count($items); $i++)
+        {   
+            $items[$i][2] = ItemList::getItemByID($items[$i][2])->itemname;
+        }
+
+        error_log("RESULT: ".json_encode($items));
 
         $requisitioner = UserVerificationDetails::getUserByID($request->input("requester"));
         

@@ -83,7 +83,7 @@ class UserVerificationDetails extends Model
     /**
      * Get user by user_id
      * @param Request $request request
-     * @return Array[Array]
+     * @return Array
      * @example
      *    UserVerificationDetails::getUserByUserId(69);
      **/
