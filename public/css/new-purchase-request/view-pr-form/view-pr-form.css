@@ -35,13 +35,14 @@ img[alt="form-header"] {
 
 table {
   display: block;
-  width: 640px;
   table-layout: fixed;
   border-collapse: collapse;
+  background-color: green;
 }
 
-tbody {
-  width: 100%;
+table, tbody {
+  display: block !important;
+  width: 100% !important;
 }
 
 .xl119 {
@@ -515,6 +516,9 @@ tbody {
 }
 
 .x-purpose-slot {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   font-family: Calibri, sans-serif;
   vertical-align: middle;
   border-top: 2.0pt double black;
@@ -522,7 +526,7 @@ tbody {
   border-bottom: none;
   border-left: none;
   white-space: normal;
-  word-wrap: break-word;
+  word-wrap: break-word !important;
   overflow-wrap: break-word;
 }
 

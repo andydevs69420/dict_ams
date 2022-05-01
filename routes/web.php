@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\GenerateFormController;
 use App\Http\Controllers\BOController;
 
 /*
@@ -46,8 +45,7 @@ Route::get("edit-ors/{id}", "BOController@edit");
 Route::get("edit-ors/delete/{id}", "BOController@delete");
 Route::post("edit-ors/update", "BOController@update");
 
-// purchase request
-Route::get("/newpurchaserequest/viewprform", [GenerateFormController::class,"viewPRForm"]);
+
 Route::post("/newpurchaserequest/searchforapproval", [GenerateFormController::class,"searchForApproval"]);
 
 
@@ -60,9 +58,11 @@ Route::controller(AppController::class)->group(function () {
     // create form
         // pr
         Route::get("/newpurchaserequest", "purchaseRequest");
+            // view pr form
+                Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
         // jo
         Route::get("/newjoborder", "jobOrder");
-    
+
     // users
     Route::get("/users", "users");
         // accept or decline
@@ -81,5 +81,5 @@ Route::controller(AppController::class)->group(function () {
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
-    
+
 });

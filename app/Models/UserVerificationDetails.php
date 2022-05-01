@@ -79,6 +79,26 @@ class UserVerificationDetails extends Model
     { return countTruncate(count(self::getAllRequisitioner())); }
 
 
+
+    /**
+     * Get user by user_id
+     * @param Request $request request
+     * @return Array[Array]
+     * @example
+     *    UserVerificationDetails::getUserByUserId(69);
+     **/
+    public static function getUserByID(Int $userid)
+    {
+        return self::join(
+            "user", "user_verification_details.user_id", "=", "user.user_id",
+        )
+        ->join(
+            "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
+        )
+        ->where("user.user_id", "=", $userid)
+        ->first();
+    }
+
     /**
      * Gets all user
      * @return Array

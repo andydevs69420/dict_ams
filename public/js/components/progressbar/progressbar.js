@@ -3,7 +3,7 @@
  * | requires jquery
  * ; 
  * 
- */
+ **/
 
 class Progressbar
 {
@@ -11,7 +11,7 @@ class Progressbar
      * Make progressbar instance
      * @param String id_query 
      * @return self
-     */
+     **/
     constructor(id)
     {
         if  (!id.startsWith("#") || typeof(id) !== "string")
@@ -19,23 +19,25 @@ class Progressbar
 
         this.elid = id;
         this.pbar = $(this.elid);
-        this.rfld = this.__getRequiredFields();
-        this.__paint();
+        jQuery(() => {
+            this.rfld = this.__getRequiredFields();
+            this.__paint();
+        })
     }
 
 
     /**
      * Gets input|textarea with required attribute
      * @return null 
-     */
+     **/
     __getRequiredFields()
-    { return $('input[required]:visible, textarea[required]:visible'); }
+    { return $('input[required]:visible, select[required], textarea[required]:visible'); }
 
 
     /**
      * Paints progress 
      * @return null
-     */
+     **/
     __paint()
     {
         if (!(this.rfld !== null || this.rfld !== undefined))
@@ -51,8 +53,7 @@ class Progressbar
             if ($(child).val().trim().length > 0)
                 actual_count++;
             else
-                $(child)
-                .change((evt) => {
+                $(child).change((evt) => {
                     this.__paint();
                 });
                 
@@ -69,7 +70,7 @@ class Progressbar
     /**
      * Updates progress
      * @return null
-    */
+     **/
     update()
     { 
         this.rfld = this.__getRequiredFields();

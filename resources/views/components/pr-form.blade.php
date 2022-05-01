@@ -1,24 +1,5 @@
 
 
-{{-- MODAL --}}
-<div id="pr-form__on-error-modal" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">{{ __("Warning") }}</h5>
-                <button type="button" class="btn-close rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Required field(s) cannot be nullified!
-            </div>
-            <div class="modal-footer">
-                <div class="mx-auto shadow">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="card border-0 shadow-lg">
     <div class="card-header py-3 border-0 bg-white">
@@ -37,7 +18,7 @@
 
                         @foreach ($getItems() as $itm)
 
-                            {{-- 
+                            {{--
 
                                 $itm[0] para sa stock
                                 $itm[1] para sa unit
@@ -79,18 +60,14 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                <select class="selectPicker form-select p-0 border-0 bg-white" name="description[]" data-live-search="true" required>
-                                                    @if(strlen($itm[2]) > 0)
-                                                        <option value="-1" selected>
-                                                            {{ $itm[2] }}
-                                                        </option>
-                                                    @else
-                                                        @foreach(App\Models\ItemList::getAllitems() as $item)
+                                                <select class="selectPicker form-select p-0 border-0 bg-white" name="description[]" placeholder="{{ __("Item description") }}" data-live-search="true" required>
+
+                                                    @foreach(App\Models\ItemList::getAllitems() as $item)
                                                             <option value="{{ $item->itemlist_id }}">
                                                                 {{ $item->itemname }}
                                                             </option>
-                                                        @endforeach
-                                                    @endif
+                                                    @endforeach
+
                                                 </select>
                                             </div>
                                         </div>
@@ -119,18 +96,19 @@
                                 </div>
                             </li>
                         @endforeach
+
                     </ul>
                 </div>
                 <!-- purpose group -->
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Purpose" data-bs-content="Purpose for purchasing"><i class="fa-solid fa-rocket"></i></a>
-                        <input id="purpose-field" class="form-control border-0 bg-white" name="purpose" value="{{ $getPurpose() }}" placeholder="{{ __("Purpose") }}" required>
+                        <input class="form-control border-0 bg-white" name="purpose" value="{{ old("purpose")? old("purpose") : $getPurpose() }}" placeholder="{{ __("Purpose") }}" required>
                     </div>
                 </div>
                 <!-- add item -->
                 <div class="col-12">
-                    <div class="my-3 shadow">
+                    <div class="d-inline-block my-3 shadow float-end">
                         <button class="pr-form__add-new-item-btn btn text-light" type="button" name="add-item-btn" onclick="javascript:window.add__item()">
                             <i class="fa fa-plus"></i>
                             <span class="text-light" role="text">{{ __("ADD NEW ITEM") }}</span>
@@ -142,7 +120,8 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Requisitioner" data-bs-content="Purchase requisitioner"><i class="fa-solid fa-user"></i></a>
-                        <select id="req-name" class="selectPicker form-select p-0 border-0 bg-white" name="requester-name" data-live-search="true" required>
+                        <select class="selectPicker form-select p-0 border-0 bg-white" name="requester" placeholder="{{ __("Requisitioner") }}" data-live-search="true" required>
+
                             @if(strlen($getRequisitionerName()) > 0)
                                 <option value="{{ $getRequisitionerId() }}" selected>
                                     {{ $getRequisitionerName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getRequisitionerAccessLevelId()) }})
@@ -154,6 +133,7 @@
                                     </option>
                                 @endforeach
                             @endif
+
                         </select>
                     </div>
                 </div>
@@ -161,7 +141,8 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
-                        <select id="budget-officer-name" class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer-name" data-live-search="true" required>
+                        <select class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer" placeholder="{{ __("Budget officer") }}" data-live-search="true" required>
+
                             @if(strlen($getBudgetOfficerName()) > 0)
                                 <option value="{{ $getBudgetOfficerId() }}" selected>
                                     {{ $getBudgetOfficerName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getBudgetOfficerAccessLevelId()) }})
@@ -173,6 +154,7 @@
                                     </option>
                                 @endforeach
                             @endif
+
                         </select>
                     </div>
                 </div>
@@ -180,7 +162,8 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Recommending approval" data-bs-content="Target recommending approval"><i class="fa-solid fa-user"></i></a>
-                        <select id="rec-approval-name" class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" data-live-search="true" required>
+                        <select class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" placeholder="{{ __("Recommending approval") }}" data-live-search="true" required>
+
                             @if(strlen($getRecommendingApprovalName()) > 0)
                                 <option value="{{ $getRecommendingApprovalId() }}" selected>
                                     {{ $getRecommendingApprovalName() }} - ({{ App\Models\Accesslevel::getAccesslevelById($getRecommendingApprovalAccessLevelId()) }})
@@ -192,6 +175,7 @@
                                     </option>
                                 @endforeach
                             @endif
+
                         </select>
                     </div>
                 </div>
@@ -201,12 +185,12 @@
     <div class="card-footer py-2 py-lg-3 border-0 bg-white">
         <div class="d-flex align-items-center justify-content-center justify-content-lg-between px-2">
             <span class="shadow">
-                <button class="pr-form__generate-pr-form-btn btn text-light" type="submit" name="generate-form-btn" form="validation-form" onclick="javascript:generate__pr_form()">
+                <button class="pr-form__generate-pr-form-btn btn text-light" type="button" name="generate-form-btn" onclick="javascript: generate__pr_form()">
                     <i class="fa fa-file"></i>
                     <span role="text">{{ __("GENERATE FORM") }}</span>
                 </button>
             </span>
-            <span class="small text-muted" role="text">{{ __("Form v0.4") }}</span>
+            <span class="small text-muted" role="text">{{ __("Form v0.5") }}</span>
         </div>
     </div>
 </div>

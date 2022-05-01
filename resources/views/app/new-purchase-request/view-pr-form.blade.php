@@ -80,7 +80,7 @@
                 
                 <!-- ITEM TEMPLATE -->
                 <div id="pr-template__item-list">
-                    @foreach ($PrFormData['items'] as $item)
+                    @foreach ($items as $item)
                         <tr>
                             <td class=x-col-1 style='border-top:none;max-width: 50pt;'>{{ $item[0] }}</td>
                             <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'>{{ $item[1] }}</td>
@@ -93,7 +93,7 @@
                     <tr>
                         <td class=x-col-1 style='border-top:none;max-width: 50pt;'></td>
                         <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
-                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;' colspan=2>***** Nothing Follows *****</td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;' colspan=2>*************************************************************************** Nothing Follows *****</td>
                         <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'></td>
                         <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
                         <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
@@ -111,9 +111,10 @@
                     <td class=xl337 style='border-top:none;border-left:none;'></td>
                 </tr>
 
-                <tr height=34 style='height:25.5pt;'>
+                {{-- <tr height=34 style='height:25.5pt;'> --}}
+                <tr>
                     <td class=xl297 height=34 style='height:25.5pt;border-top:none;text-align:center;'>Purpose:</td>
-                    <td id="pr-template__purpose-value-id" class=x-purpose-slot colspan=6 rowspan=2 width=569 style='border-right:2.0pt double black;width:428pt;'>{{ $PrFormData['purps'] }}</td>
+                    <td id="pr-template__purpose-value-id" class=x-purpose-slot colspan=6 rowspan=2 style='border-right:2.0pt double black;'>{{ $purpose }}</td>
                 </tr>
 
                 <tr height=30 style='height:22.5pt;'>
@@ -159,15 +160,15 @@
 
                 <tr height=22 style='height:16.5pt'>
                     <td class=xl346 height=22 style='height:16.5pt;'>Printed Name:</td>
-                    <td id="pr-template__requested-name-value-id" class=x-personel-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:90pt;'>{{ $PrFormData['req_A'] }}</td>
-                    <td id="pr-template__recommending-approval-value-id" class=x-personel-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:119.7pt;'>{{ $PrFormData['rec_A'] }}</td>
+                    <td id="pr-template__requested-name-value-id" class=x-personel-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:90pt;'>{{ $requester_name }}</td>
+                    <td id="pr-template__recommending-approval-value-id" class=x-personel-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:119.7pt;'>{{ $recommending_approval_name }}</td>
                     <td id="pr-template__approver-name-value-id" class=x-personel-slot colspan=2 style='border-right:2.0pt double black;border-left:none;max-width:80pt;'>Sittie Rahma Alawi</td>
                 </tr>
 
                 <tr height=22 style='height:16.5pt;'>
                     <td class=xl349  height=22 style='height:16.5pt;'>Designation:</td>
-                    <td id="pr-template__requested-designation-value-id" class=x-designation-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:90pt;'>{{ $PrFormData['req_B'] }}</td>
-                    <td id="pr-template__recommending-approval-designation-value-id" class=x-designation-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:119.7pt;'>{{ $PrFormData['rec_B'] }}</td>
+                    <td id="pr-template__requested-designation-value-id" class=x-designation-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:90pt;'>{{ $requester_designation }}</td>
+                    <td id="pr-template__recommending-approval-designation-value-id" class=x-designation-slot colspan=2 style='border-right:.5pt solid black;border-left:none;max-width:119.7pt;'>{{ $recommending_approval_designation }}</td>
                     <td id="pr-template__approver-designation-value-id" class=x-designation-slot colspan=2 style='border-right:2.0pt double black;border-left:none;max-width:80pt;'>Regional Director</td>
                 </tr>
 
