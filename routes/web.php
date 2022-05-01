@@ -40,16 +40,13 @@ Route::controller(AuthController::class)->group(function () {
 Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
-// Budget Officer
-Route::get("/BO", [BOController::class, "index"]);
-Route::get("edit-ors/{id}", "BOController@edit");
-Route::get("edit-ors/delete/{id}", "BOController@delete");
-Route::post("edit-ors/update", "BOController@update");
-
 // purchase request
 Route::get("/newpurchaserequest/viewprform", [GenerateFormController::class,"viewPRForm"]);
 Route::post("/newpurchaserequest/searchforapproval", [GenerateFormController::class,"searchForApproval"]);
 
+// Budget Officer
+Route::get('/BO',[BOController::class,'index']);
+Route::get('/edit-ors',[BOController::class,'edit']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {

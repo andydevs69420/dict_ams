@@ -1,22 +1,30 @@
 .page-title {
-    margin: 0px;
+    margin: 20px;
+    font-family: 'Verdana';
     font-size: 45px;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
     padding: 0 0 20px 0;
     width: 100%;
+    color: #3f3d3d;
 }
 .table th,
 .table td {
     vertical-align: middle;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.table.nobordertop thead tr th {
+    border-top: none;
 }
 .box.box-success {
      border-top-color: white;
 }
 .box {
+    margin-left: 10px;
+    margin-right: 10px;
     position: relative;
-    border-radius: 3px;
+    border-radius: 5px;
     background: #ffffff;
     /* border-top: 3px solid #d2d6de; */
     margin-bottom: 20px;
@@ -25,7 +33,7 @@
     border: 1px solid #e6ecf5;
 }
 .box-content {
-    padding: 20px;
+    padding: 100px;
 }
 .box-body {
     border-top-left-radius: 0;
@@ -37,7 +45,83 @@
 .box-body.table {
     padding: 0px;
 }
-
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+input, label {
+    display: block;
+}
+label{
+    font-family: 'Verdana';
+    font-size: 20px;;
+}
+.ui.form {
+    width: 100%;
+    position: relative;
+    display: block;
+}
+.ui.form .field>label {
+    margin: 0 0 1px 0;
+    font-weight: 400;
+}
+.ui.form .field {
+    margin: 0 0 100px 0;
+}
+.ui.form .field {
+    margin: 0 0 25px 0;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+input.notempty,
+textarea.notempty,
+.ui.selection.dropdown.notempty {
+    border: 1px solid #A5D6A7 !important;
+    background: #E8F5E9 !important;
+}
+input.readonly,
+textarea.readonly,
+select.readonly {
+    background: #EEEEEE !important;
+    border: 1px solid #E0E0E0 !important;
+}
+
+.ui.form input:not([type]),
+.ui.form input[type=text] {
+    width: 100%;
+    padding: 15px;
+    padding-top: 50px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #e4e4e4;
+    color: white;
+  }
+.ui.form .ui.selection.dropdown,
+.ui.form .ui.dropdown {
+    border-radius: 2px;
+    border: 1px solid #d2d6de;
+}
+.ui.error.message {
+    margin-bottom: 15px;
+    width: 100%;
+}
+.ui.dropdown{
+    width: 100%;
+    background-color: rgb(178, 248, 210);
+}
+.ui.button {
+    margin: 0 .25em .25em 0;
+}
+.box-footer {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 1px solid #ffffff;
+    padding: 10px 20px;
+    background-color: #FAFAFA;
+    text-align: right;
 }
