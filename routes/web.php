@@ -40,14 +40,8 @@ Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
 // Budget Officer
-Route::get("/BO", [BOController::class, "index"]);
-Route::get("edit-ors/{id}", "BOController@edit");
-Route::get("edit-ors/delete/{id}", "BOController@delete");
-Route::post("edit-ors/update", "BOController@update");
-
-
-Route::post("/newpurchaserequest/searchforapproval", [GenerateFormController::class,"searchForApproval"]);
-
+Route::get('/BO',[BOController::class,'index']);
+Route::get('/edit-ors',[BOController::class,'edit']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
