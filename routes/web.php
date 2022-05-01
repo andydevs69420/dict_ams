@@ -50,6 +50,8 @@ Route::post("edit-ors/update", "BOController@update");
 Route::get("/newpurchaserequest/viewprform", [GenerateFormController::class,"viewPRForm"]);
 Route::post("/newpurchaserequest/searchforapproval", [GenerateFormController::class,"searchForApproval"]);
 
+// job order
+Route::get('/newjoborder/viewjoform', [GenerateFormController::class,'viewJOForm']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
