@@ -36,7 +36,7 @@
                 </tr>
                 <tr height=20 style='height:15.0pt;'>
                     <td class=xl300 height=20 style='height:15.0pt;'>Division</td>
-                    <td id="pr-template__division-value-id" class=x-division-slot colspan=2 style='border-right:2.0pt double black;max-width: 112pt;'>LOADING...</td>
+                    <td id="pr-template__division-value-id" class=x-division-slot colspan=2 style='border-right:2.0pt double black;max-width: 112pt;'>Cagayan de Oro City</td>
                     <td class=xl66>PR Number</td>
                     <td id="pr-template__pr-number-value-id" class=x-pr-number-slot style="max-width:25pt;"></td>
                     <td class=xl119>Date</td>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr height=21 style='height:15.75pt;'>
                     <td class=xl302 height=21 style='height:15.75pt;'>Office</td>
-                    <td id="pr-template__office-value-id" class=x-office-slot colspan=2 style='border-right:2.0pt double black;max-width:112pt;'>LOADING...</td>
+                    <td id="pr-template__office-value-id" class=x-office-slot colspan=2 style='border-right:2.0pt double black;max-width:112pt;'>Provincial Office&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td class=xl66>SAI Number</td>
                     <td id="pr-template__sai-value-id" class=x-sai-number-slot style='max-width:25pt;'></td>
                     <td class=xl66></td>
@@ -84,16 +84,32 @@
                         <tr>
                             <td class=x-col-1 style='border-top:none;max-width: 50pt;'>{{ $item[0] }}</td>
                             <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'>{{ $item[1] }}</td>
-                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;' colspan=2>{{ $item[2] }}</td>
+                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;padding-bottom: @if(count($items) > 1) {{ (250/count($items)) < 0 ? 0 : (250/count($items)) }}px; @else 250px; @endif' colspan=2>{{ $item[2] }}</td>
                             <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'>{{ $item[3] }}</td>
                             <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'>{{ $item[4] }}</td>
                             <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'>{{ $item[5] }}</td>
                         </tr>
                     @endforeach
+           
                     <tr>
                         <td class=x-col-1 style='border-top:none;max-width: 50pt;'></td>
                         <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
-                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;' colspan=2>*************************************************************************** Nothing Follows *****</td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;padding-bottom: 2.5em;' colspan=2>***** Nothing Follows *****</td>
+                        <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'></td>
+                        <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
+                        <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
+                    </tr>
+                    <tr>
+                        <td class=x-col-1 style='border-top:none;max-width: 50pt;'></td>
+                        <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;padding-bottom: 2em;' colspan=2>
+                            
+                           <span class="x-budget-officer-designation-slot" role="text">
+                               <span class="x-budget-officer-slot" role="text">{{ $budget_officer_name }}</span> <br>
+                               <span class="x-budget-officer-designation-slot" role="text">{{ $budget_officer_designation }}</span>
+                           </span>
+                            
+                        </td>
                         <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'></td>
                         <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
                         <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
@@ -114,7 +130,7 @@
                 {{-- <tr height=34 style='height:25.5pt;'> --}}
                 <tr>
                     <td class=xl297 height=34 style='height:25.5pt;border-top:none;text-align:center;'>Purpose:</td>
-                    <td id="pr-template__purpose-value-id" class=x-purpose-slot colspan=6 rowspan=2 style='border-right:2.0pt double black;'>{{ $purpose }}</td>
+                    <td id="pr-template__purpose-value-id" class=x-purpose-slot colspan=6 rowspan=2 style='border-right:2.0pt double black;max-width: 418pt;'>{{ $purpose }}</td>
                 </tr>
 
                 <tr height=30 style='height:22.5pt;'>
