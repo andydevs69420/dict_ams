@@ -122,6 +122,21 @@ class AppController extends Controller
 
 
     /**
+     * View jo form -> index
+     * @param Request $request request
+     * @return View
+     **/
+    function viewJOForm(Request $request)
+    {
+        $data = [
+            'JoFormData' => json_decode($request->input('data'),true)
+        ];
+
+        return view('app/new-job-order/view-jo-form', $data);
+    }
+
+    
+    /**
      * Users -> index
      * @param Request $request request
      * @return View

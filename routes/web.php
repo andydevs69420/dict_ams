@@ -56,7 +56,8 @@ Route::controller(AppController::class)->group(function () {
                 Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
         // jo
         Route::get("/newjoborder", "jobOrder");
-
+            // view jo form
+                Route::get('/newjoborder/viewjoform', [AppController::class,'viewJOForm']);
     // users
     Route::get("/users", "users");
         // accept or decline

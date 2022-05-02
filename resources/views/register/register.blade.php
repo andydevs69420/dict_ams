@@ -14,7 +14,7 @@
                 <div class="card">
                     <!--<div class="card-header">{{ __('Register') }}</div>-->
 
-                    <div class="card-body row">
+                    <div class="card-body bg-white">
                         <div class="row justify-content-center">
                             <img id="dict-logo" src="{{ url("images/dict-transparent.png") }}" alt="" class="img-fluid">
                         </div>
@@ -175,7 +175,7 @@
                                 <a href="{{ '/login' }}" class="btn btn-secondary cancel-button mx-2">
                                     {{ __('Cancel') }}
                                 </a>
-                                <button type="submit" class="btn btn-primary register-button mx-2">
+                                <button type="submit" class="btn register-button mx-2">
                                     {{ __('Register') }}
                                 </button>
                             </div>
