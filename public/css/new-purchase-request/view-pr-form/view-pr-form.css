@@ -35,13 +35,17 @@ img[alt="form-header"] {
 
 table {
   display: block;
+  width: 640px;
   table-layout: fixed;
   border-collapse: collapse;
 }
 
-table, tbody {
-  display: block !important;
-  width: 640px !important;
+tbody {
+  width: 100% !important;
+}
+
+tr {
+  height: 100% !important;
 }
 
 .xl119 {
@@ -512,6 +516,24 @@ table, tbody {
   border-bottom: .5pt hairline black;
   border-left: .5pt solid black;
   white-space: normal;
+}
+
+.x-budget-officer-slot {
+  font-weight: 700;
+  font-family: Calibri, sans-serif;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.x-budget-officer-designation-slot {
+  font-family: Calibri, sans-serif;
+  font-weight: initial;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .x-purpose-slot {

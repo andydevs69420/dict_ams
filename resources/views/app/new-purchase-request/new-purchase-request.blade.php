@@ -34,15 +34,15 @@
                     </div>
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
 
-                        <div class="card shadow">
+                        <div class="card border-0 shadow-lg">
                             {{-- new-purchase-request__card-header --}}
-                            <div class="card-header py-3 border-0 bg-white">
+                            <div class="card-header py-2 border-0 bg-white">
                                 <span class="text-black fw-bolder" role="text">{{ __("FILES") }}</span>
                             </div>
                             <div class="card-body">
                                 <div id="file-content-id" class="d-block"></div>
                                 <input id="file-pick-id" class="d-none" type="file" name="file[]" accept="image/.jpeg,.png,.pdf" multiple>
-                                <button class="new-purchase-request__upload-files-btn btn w-100 border" for="file-pick-id" type="button" onclick="javascript:$("#file-pick-id").click()">
+                                <button class="new-purchase-request__upload-files-btn btn w-100 border" for="file-pick-id" type="button" onclick='javascript:$("#file-pick-id").click()'>
                                     <i class="fa fa-upload"></i>
                                     <span role="text">{{ __("UPLOAD FILES") }}</span>
                                 </button>
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="shadow">
-                                    <button class="new-purchase-request__submit-btn btn w-100 text-light" type="submit" disabled>
+                                    <button id="new-purchase-request__submit" class="new-purchase-request__submit-btn btn w-100 text-light" type="submit" disabled>
                                         <i class="fa fa-paper-plane"></i>
                                         <span role="text">{{ __("SEND REQUEST") }}</span>
                                     </button>
@@ -84,7 +84,6 @@
 
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
-
 
 @stop
 
