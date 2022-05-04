@@ -163,7 +163,17 @@ class AppController extends Controller
                  **/
                 public function user__user_profile(Request $request)
                 {
-                    return view("app.users.user-profile");
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+
+                    if (!$request->has("user"))
+                        return redirect()->intended("/dashboard");
+
+                    $user = UserVerificationDetails::isVerified($request->input("user"));
+                    if (!$user)
+                        return redirect()->intended("/dashboard");
+
+                    return view("app.users.user-profile", ["user" => UserVerificationDetails::getUserByID($request->input("user"))]);
                 }
 
                 /**

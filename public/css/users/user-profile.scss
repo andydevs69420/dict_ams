@@ -1,0 +1,22 @@
+@import '../global/sizing';
+
+.user-profile__dp-image-wrapper
+{
+    padding-top: 45%;
+    width: 45%;
+    border-radius: 100%;
+
+    @include onMD()
+    {
+        padding-top: 35%;
+        width: 35%;
+    }
+
+    @include onLG()
+    {
+        padding-top: 50%;
+        width: 50%;
+    }
+
+}
+

@@ -13,7 +13,7 @@
 
     jQuery(()=> {
         window.messageModal = new MessageModal("#users__message-modal");
-        $("#users__user-table").DataTable({
+        window.userTable = $("#users__user-table").DataTable({
             "responsive" : true ,
             "autoWidth"  : false,
             "colReorder" : {
@@ -96,9 +96,11 @@
                     return somethingWentWrong();
                 
                 window.messageModal.show("Info", "User deleted successfully!");
-
-                $("#user-row__user-"+user_id)
-                .remove();
+                
+                window.userTable?.row($("#user-row__user-"+user_id))
+                .remove()
+                .draw();
+                
             },
             error: function(response, status, request) 
             { somethingWentWrong(); }

@@ -15,7 +15,7 @@
                     <a class="text-dark" href="{{ url("/logout") }}"><small><i class="me-2 fa-solid fa-right-from-bracket"></i>&nbsp;{{ __("logout") }}</small></a>
                 </li>
                 <li class="topbar__dropdown-dropper-item">
-                    <a class="text-dark" href="{{ url("/logout") }}"><small><i class="me-2 fa-solid fa-user-gear"></i>{{ __("account settings") }}</small></a>
+                    <a class="text-dark" href="{{ url("/user/userprofile?user=" . Auth::user()->user_id) }}"><small><i class="me-2 fa-solid fa-user-gear"></i>{{ __("account settings") }}</small></a>
                 </li>
             </ul>
         </div>
