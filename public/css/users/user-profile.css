@@ -5,22 +5,17 @@
 /* on extra-large devices and above */
 /* on extra-extra large devices and above */
 .user-profile__dp-image-wrapper {
-  padding-top: 45%;
-  width: 45%;
+  margin: 0 auto;
+  padding-top: 40%;
+  width: 40%;
   border-radius: 100%;
-}
-
-@media screen and (min-width: 768px) {
-  .user-profile__dp-image-wrapper {
-    padding-top: 35%;
-    width: 35%;
-  }
 }
 
 @media screen and (min-width: 992px) {
   .user-profile__dp-image-wrapper {
-    padding-top: 50%;
-    width: 50%;
+    margin: initial;
+    padding-top: 80%;
+    width: 80%;
   }
 }
 /*# sourceMappingURL=user-profile.css.map */

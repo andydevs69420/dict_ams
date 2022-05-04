@@ -16,7 +16,7 @@
         <div class="container py-2">
             <div class="row">
                 <div class="col-12 col-lg-3">
-                    <div class="user-profile__dp-image-wrapper d-block position-relative me-md-auto me-lg-auto my-2 shadow">
+                    <div class="user-profile__dp-image-wrapper d-block my-4 position-relative shadow">
 
                     </div>
                 </div>
