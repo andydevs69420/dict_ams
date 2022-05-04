@@ -14,7 +14,7 @@
 /* ================= USER LIST COLORS =============== */
 /* ================= REQUISITIONER LIST COLORS ====== */
 /* ================= ITEM LIST COLORS =============== */
-.users__users-header-label {
+.requisitioner__requisitioner-header-label {
   font-size: 1.6em;
 }
 
@@ -61,4 +61,4 @@
   border-color: #198754 !important;
   background-color: #198754 !important;
 }
-/*# sourceMappingURL=users.css.map */
+/*# sourceMappingURL=requisitioner.css.map */

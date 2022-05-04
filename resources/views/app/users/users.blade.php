@@ -17,7 +17,15 @@
     {{-- message modal --}}
     <x-message-modal id="users__message-modal"></x-message-modal>
 
-    <div class="d-block py-5">
+    <div class="d-block py-2">
+
+        <div class="container p-0">
+            <div class="row">
+                <div class="col-12">
+                    <span class="users__users-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Users") }}</span>
+                </div>
+            </div>
+        </div>
 
         <div class="users__table-wrapper container py-2 rounded-2 shadow-lg">
 

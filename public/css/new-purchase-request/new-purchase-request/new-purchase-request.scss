@@ -2,8 +2,12 @@
 
 @import '../../global/appcolor';
 
+// @deprecated
 .new-purchase-request__card-header
 { background-color: $NPR-CARD-HEADER !important; }
+
+.purhcase-request__purhcase-request-header-label
+{ font-size: 1.6em; }
 
 .new-purchase-request__upload-files-btn , 
 .new-purchase-request__upload-files-btn *

@@ -15,7 +15,10 @@
         window.messageModal = new MessageModal("#users__message-modal");
         $("#users__user-table").DataTable({
             "responsive" : true ,
-            "autoWidth"  : false
+            "autoWidth"  : false,
+            "colReorder" : {
+                realtime: true
+            }
         });
     });
 

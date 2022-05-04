@@ -80,7 +80,16 @@
 
     @endif
 
-    <div class="d-block py-5">
+    <div class="d-block py-2">
+
+        <div class="container p-0">
+            <div class="row">
+                <div class="col-12">
+                    <span class="requisitioner__requisitioner-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Item List") }}</span>
+                </div>
+            </div>
+        </div>
+
         <div class="container py-2 rounded-2 shadow-lg">
             <table id="item-list__item-list-table" class="table table-striped w-100">
                 <thead>

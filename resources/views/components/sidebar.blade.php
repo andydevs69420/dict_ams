@@ -68,9 +68,10 @@
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
                                 <i class="sidebar__list-icon fa fa-list"></i><a class="sidebar__list-label" href="#">{{ __("Form List") }}</a>
                             </li>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("itemlist") }}">
+                            {{-- @deprecated "Item List" --}}
+                            {{-- <li class="sidebar__li-item list-group-item {{ $isPathMatch("itemlist") }}">
                                 <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="{{ url("/itemlist") }}">{{ __("Item List") }}</a>
-                            </li>
+                            </li> --}}
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
                                 <i class="sidebar__list-icon fa fa-comment"></i><a class="sidebar__list-label" href="#">{{ __("Messages") }}</a>
                             </li>
@@ -93,9 +94,10 @@
                                         </span>
                                     @endif
                                 </a>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("itemlist") }}">
+                            {{-- @deprecated "Item List" --}}
+                            {{-- <li class="sidebar__li-item list-group-item {{ $isPathMatch("itemlist") }}">
                                 <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="{{ url("/itemlist") }}">{{ __("Item List") }}</a>
-                            </li>
+                            </li> --}}
                             <li class="sidebar__li-item list-group-item {{ $isPathMatch("requisitioner") }}">
                                 <i class="sidebar__list-icon fa fa-user"></i><a class="sidebar__list-label" href="{{ url("/requisitioner") }}">{{ __("Requisitioner") }}</a>
                             </li>

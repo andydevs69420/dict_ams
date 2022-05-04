@@ -60,15 +60,7 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                <select class="selectPicker form-select p-0 border-0 bg-white" name="description[]" placeholder="{{ __("Item description") }}" data-live-search="true" required>
-
-                                                    @foreach(App\Models\ItemList::getAllitems() as $item)
-                                                            <option value="{{ $item->itemlist_id }}">
-                                                                {{ $item->itemname }}
-                                                            </option>
-                                                    @endforeach
-
-                                                </select>
+                                                <input class="form-control border-0 bg-white" name="description[]" type="text" placeholder="{{ __("Item description") }}" required>
                                             </div>
                                         </div>
                                         <!-- quantity group -->

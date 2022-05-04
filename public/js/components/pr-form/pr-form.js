@@ -48,25 +48,6 @@
             $(element).val("");
         });
 
-        // make another description dropdown
-        $(clone_itm.find('select[name="description[]"]'))
-        .each((index, select) => {
-
-            select = $(select);
-
-            firstparent = select.parent();
-
-            rootparent  = firstparent.parent();
-            firstparent.remove();
-
-            rootparent.append(select);
-
-            select.find('option[class="bs-title-option"]')[0].remove();
-
-            select.selectpicker();
-
-        });
-
         // finally append item
         item_list.append(clone_itm);
 

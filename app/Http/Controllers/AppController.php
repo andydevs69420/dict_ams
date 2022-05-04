@@ -76,23 +76,19 @@ class AppController extends Controller
         
         $items = json_decode($request->input("items"),true);
 
-        for ($i = 0; $i < count($items); $i++)
-        {   
-            $items[$i][2] = ItemList::getItemByID($items[$i][2])->itemname;
-        }
-
-        error_log("RESULT: ".json_encode($items));
-
         $requisitioner = UserVerificationDetails::getUserByID($request->input("requester"));
         $budgetofficer = UserVerificationDetails::getUserByID($request->input("budget-officer"));
         $recommending  = UserVerificationDetails::getUserByID($request->input("recommending-approval"));
         
+        if (!($requisitioner || $budgetofficer || $recommending))
+            return abort(403);
+
         $data = [
-            "items"   => $items,
-            "purpose" => $request->input("purpose"),
-            "requester_name" => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
-            "requester_designation" => Designation::getDesignationByID($requisitioner->designation_id),
-            "budget_officer_name" => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
+            "items"                      => $items,
+            "purpose"                    => $request->input("purpose"),
+            "requester_name"             => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
+            "requester_designation"      => Designation::getDesignationByID($requisitioner->designation_id),
+            "budget_officer_name"        => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
             "budget_officer_designation" => Designation::getDesignationByID($budgetofficer->designation_id),
             "recommending_approval_name" => $recommending->lastname.", ".$recommending->firstname." ".$recommending->middleinitial,
             "recommending_approval_designation" => Designation::getDesignationByID($recommending->designation_id),

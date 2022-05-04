@@ -20,6 +20,15 @@
 
 @section("content")
     <div class="d-block py-5">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-9">
+                    <span class="purhcase-request__purhcase-request-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase request") }}</span>
+                </div>
+            </div>
+        </div>
+        
         <form id="request-pr-form" action="">
 
             @csrf

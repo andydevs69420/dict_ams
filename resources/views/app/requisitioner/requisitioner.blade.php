@@ -4,13 +4,25 @@
 
 @section("dependencies")
 
+    {{-- requisitioner css --}}
+    <link rel="stylesheet" href="{{ asset("css/requisitioner/requisitioner.css") }}">
+
     {{-- datatable css --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     
 @stop
 
 @section("content")
-    <div class="d-block py-5">
+    <div class="d-block py-2">
+
+        <div class="container p-0">
+            <div class="row">
+                <div class="col-12">
+                    <span class="requisitioner__requisitioner-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Requisitioner") }}</span>
+                </div>
+            </div>
+        </div>
+
         <div class="container py-2 rounded-2 shadow-lg">
             <table id="requisitioner__requisitioner-table" class="table table-striped w-100">
                 <thead>
@@ -40,10 +52,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        $(document).ready(() => {
-            $("#requisitioner__requisitioner-table").DataTable();
-        });
-    </script>
+    {{-- requisitioner js --}}
+    <script type="text/javascript" src="{{ asset("js/requisitioner/requisitioner.js") }}"></script>
 
 @stop
