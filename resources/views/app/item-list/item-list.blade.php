@@ -82,7 +82,7 @@
 
     <div class="d-block py-2">
 
-        <div class="container p-0">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <span class="requisitioner__requisitioner-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Item List") }}</span>

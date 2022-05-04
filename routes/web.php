@@ -60,6 +60,8 @@ Route::controller(AppController::class)->group(function () {
                 Route::get('/newjoborder/viewjoform', [AppController::class,'viewJOForm']);
     // users
     Route::get("/users", "users");
+        // view profile
+        Route::get("/user/{id}", "user__user_profile")->name("user");
         // accept or decline
         Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
         // delete

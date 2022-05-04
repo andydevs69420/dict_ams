@@ -159,7 +159,15 @@ class AppController extends Controller
     /* user subdir ----> */
 
                 /**
-                 * Update new users verification status -> users/updateverificationstatus
+                 * View user profile -> user/userid
+                 **/
+                public function user__user_profile(Request $request)
+                {
+                    return view("app.users.user-profile");
+                }
+
+                /**
+                 * Update new users verification status -> user/updateverificationstatus
                  * @param Request $request request
                  * @return bool
                  * @example
@@ -182,7 +190,7 @@ class AppController extends Controller
 
 
                 /**
-                 * Delete verified user -> users/deleteuser
+                 * Delete verified user -> user/deleteuser
                  * @param Request $request request
                  * @return bool
                  * @example

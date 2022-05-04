@@ -3,12 +3,9 @@
 
 /*
 
-    user.js - andydevs69420 - April 21 2022
+    user.js - andydevs69420 - May 4 2022
     | submit issue if error found!!
     ;
-
-    @brief - User related functions
-        ex: removing user, verifying user, etc.
 
 */
 

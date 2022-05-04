@@ -77,6 +77,7 @@
 
 
     /**
+     * Deletes current row from table based on id
      * @param user_id "String | Number" user's id 
      * @return null
      * @example
