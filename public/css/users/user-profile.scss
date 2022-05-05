@@ -1,18 +1,26 @@
 @import '../global/sizing';
 
-.user-profile__dp-image-wrapper
+
+.user-profile__user-image-wrapper
 {
-    margin: 0 auto;
-    padding-top: 40%;
-    width: 40%;
-    border-radius: 100%;
+    width: 100%;
+    min-height: 170px;
+    max-height: 16em;
+    overflow-y: hidden;
+}
 
-    @include onLG()
-    {
-        margin: initial;
-        padding-top: 80%;
-        width: 80%;
+
+.user_profile__short-info-list
+{
+    list-style-type: none;
+    padding: 0;
+    & > li 
+    { 
+        display: flex;
+        align-items: center;
+        padding: 0 !important; 
     }
-
+    & > li > i
+    { min-width: 1.5em; }
 }
 

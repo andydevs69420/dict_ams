@@ -80,7 +80,7 @@
 
     @endif
 
-    <div class="d-block py-2">
+    <div class="d-block py-3">
 
         <div class="container">
             <div class="row">

@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-    <div class="d-block py-5">
+    <div class="d-block py-3">
         <form id="request-form" action="">
 
             @csrf

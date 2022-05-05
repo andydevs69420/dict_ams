@@ -12,16 +12,41 @@
 
 
 @section("content")
-    <div class="d-block py-2">
-        <div class="container py-2">
-            <div class="row">
-                <div class="col-12 col-lg-3">
-                    <div class="user-profile__dp-image-wrapper d-block my-4 position-relative shadow">
-
+    <div class="d-block py-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+                    <div class="card border-0 bg-white shadow-lg">
+                        <div class="user-profile__user-image-wrapper d-flex align-items-center justify-content-center">
+                            <img class="card-img-top" src="https://photos.smugmug.com/Kyoto/Kyoto-Romantic-Cherry-Blossom-Itinerary/i-dQdfWJD/0/4575e10a/L/shutterstock_1017748132-L.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body bg-white">
+                            <h5 class="card-title">{{ $user->lastname . ', ' . $user->firstname . ' ' . $user->middleinitial }}</h5>
+                            <ul class="user_profile__short-info-list bg-white">
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span class="text-truncate"><small class="fw-bold">{{ $user->email }}</small></span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-building"></i>
+                                    <span class="text-truncate"><small class="fw-bold">{{ App\Models\Designation::getDesignationById($user->designation_id) }}</small></span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-universal-access"></i>
+                                    <span class="text-truncate"><small class="fw-bold">{{ App\Models\Accesslevel::getAccesslevelById($user->accesslevel_id) }}</small></span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    B
+                <div class="col-12 col-md-6 col-lg-5 col-xl-8">
+                    <form class="mt-2 mt-md-0" action="">
+                        <div class="card border-0 bg-white shadow-lg">
+                            <div class="card-body bg-white">
+                                Hello
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

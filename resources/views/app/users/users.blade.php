@@ -17,7 +17,7 @@
     {{-- message modal --}}
     <x-message-modal id="users__message-modal"></x-message-modal>
 
-    <div class="d-block py-2">
+    <div class="d-block py-3">
 
         <div class="container">
             <div class="row">

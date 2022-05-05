@@ -4,18 +4,29 @@
 /* on large devices and above */
 /* on extra-large devices and above */
 /* on extra-extra large devices and above */
-.user-profile__dp-image-wrapper {
-  margin: 0 auto;
-  padding-top: 40%;
-  width: 40%;
-  border-radius: 100%;
+.user-profile__user-image-wrapper {
+  width: 100%;
+  min-height: 170px;
+  max-height: 16em;
+  overflow-y: hidden;
 }
 
-@media screen and (min-width: 992px) {
-  .user-profile__dp-image-wrapper {
-    margin: initial;
-    padding-top: 80%;
-    width: 80%;
-  }
+.user_profile__short-info-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user_profile__short-info-list > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 !important;
+}
+
+.user_profile__short-info-list > li > i {
+  min-width: 1.5em;
 }
 /*# sourceMappingURL=user-profile.css.map */

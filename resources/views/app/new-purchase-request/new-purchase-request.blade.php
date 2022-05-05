@@ -19,7 +19,7 @@
 @stop
 
 @section("content")
-    <div class="d-block py-5">
+    <div class="d-block py-3">
 
         <div class="container">
             <div class="row">
