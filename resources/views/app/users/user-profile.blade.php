@@ -165,7 +165,11 @@
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-building"></i></span>
-                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="confirm-password" placeholder="Confirm password"></select>
+                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="confirm-password" placeholder="Confirm password">
+                                                        @foreach(App\Models\Designation::all() as $desig)
+                                                            <option value="{{ $desig->designation_id }}" @if(strcmp($desig->designation_id, $user->designation_id) === 0) selected @endif >{{ App\Models\Designation::getDesignationById($desig->designation_id) }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +178,13 @@
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-universal-access"></i></span>
-                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="accesslevel" placeholder="Accesslevel"></select>
+                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="accesslevel" placeholder="Accesslevel">
+
+                                                        @foreach(App\Models\Accesslevel::all() as $al)
+                                                            <option value="{{ $al->accesslevel_id }}" @if(strcmp($al->accesslevel_id, $user->accesslevel_id) === 0) selected @endif >{{ App\Models\Accesslevel::getAccesslevelById($al->accesslevel_id) }}</option>
+                                                        @endforeach
+
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
