@@ -15,6 +15,9 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
 
 <br>
 
+* **May 6, 2022**
+    * Deprecated  "Messages" for all user.
+
 * **May 4, 2022**
     * Deprecated  "Item List" for both regular user and admin.
 
