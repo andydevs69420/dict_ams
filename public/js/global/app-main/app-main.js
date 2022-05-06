@@ -5,7 +5,12 @@
     console.info("%cStop!", 'font-weight: bolder;color: red; background: transparent; font-size: 5em;');
     console.info("%cModifying system resources may cause the system to malfunction.", 'color: gray; background: transparent; font-size: 1.5em;');
 
-    jQuery(()=> window.fit__app_main__content__wrapper());
+    jQuery(()=> {
+
+        auto_resizer();
+        window.fit__app_main__content__wrapper();
+
+    });
 
     /**
      * Fit content wrapper
@@ -28,6 +33,19 @@
             });
 
         });
+    }
+
+
+    function auto_resizer()
+    {
+        win = $(window);
+
+        if (win.width() <= 1366)
+        {
+            console.log(window.innerWidth = 200)
+        }
+        console.log(window)
+       
     }
 
 })();
