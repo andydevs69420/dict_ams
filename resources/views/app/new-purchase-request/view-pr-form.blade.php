@@ -81,20 +81,28 @@
                 <!-- ITEM TEMPLATE -->
                 <div id="pr-template__item-list">
                     @foreach ($items as $item)
-                        <tr>
+                        <tr style="border-bottom: 1px solid black;">
                             <td class=x-col-1 style='border-top:none;max-width: 50pt;'>{{ $item[0] }}</td>
                             <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'>{{ $item[1] }}</td>
-                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;padding-bottom: @if(count($items) > 1) {{ (250/count($items)) < 0 ? 0 : (250/count($items)) }}px; @else 250px; @endif' colspan=2>{{ $item[2] }}</td>
+                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;padding-bottom: 1em;' colspan=2>{{ $item[2] }}</td>
                             <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'>{{ $item[3] }}</td>
                             <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'>{{ $item[4] }}</td>
                             <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'>{{ $item[5] }}</td>
                         </tr>
                     @endforeach
            
+                    <tr style="border-bottom: 1px solid black;">
+                        <td class=x-col-1 style='border-top:none;max-width: 50pt;'></td>
+                        <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;padding-bottom: 1em;' colspan=2>***** Nothing Follows *****</td>
+                        <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'></td>
+                        <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
+                        <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
+                    </tr>
                     <tr>
                         <td class=x-col-1 style='border-top:none;max-width: 50pt;'></td>
                         <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
-                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;padding-bottom: 2.5em;' colspan=2>***** Nothing Follows *****</td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;padding-bottom: 2.5em;padding-bottom: @if(count($items) > 1) {{ (250/count($items)) < 0 ? 0 : (250/count($items)) }}px; @else 250px; @endif' colspan=2></td>
                         <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'></td>
                         <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
                         <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>

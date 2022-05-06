@@ -72,9 +72,10 @@
                             {{-- <li class="sidebar__li-item list-group-item {{ $isPathMatch("itemlist") }}">
                                 <i class="sidebar__list-icon fa fa-clipboard"></i><a class="sidebar__list-label" href="{{ url("/itemlist") }}">{{ __("Item List") }}</a>
                             </li> --}}
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
+                            {{-- @deprecated "Messages" --}}
+                            {{-- <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
                                 <i class="sidebar__list-icon fa fa-comment"></i><a class="sidebar__list-label" href="#">{{ __("Messages") }}</a>
-                            </li>
+                            </li> --}}
                         </ul>
                         @break
                     @case(14)

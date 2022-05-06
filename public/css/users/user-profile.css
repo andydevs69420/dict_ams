@@ -4,29 +4,51 @@
 /* on large devices and above */
 /* on extra-large devices and above */
 /* on extra-extra large devices and above */
-.user-profile__user-image-wrapper {
-  width: 100%;
-  min-height: 170px;
-  max-height: 16em;
-  overflow-y: hidden;
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= REQUISITIONER LIST COLORS ====== */
+/* ================= ITEM LIST COLORS =============== */
+.input-group-text {
+  display: block !important;
+  min-width: 3em !important;
+  background-color: #0020EC !important;
 }
 
-.user_profile__short-info-list {
-  list-style-type: none;
-  padding: 0;
+.user-profile__avatar-wrapper {
+  padding-top: 55%;
+  width: 55%;
+  border-radius: 100%;
 }
 
-.user_profile__short-info-list > li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 !important;
+@media screen and (min-width: 768px) {
+  .user-profile__avatar-wrapper {
+    padding-top: 65%;
+    width: 65%;
+  }
 }
 
-.user_profile__short-info-list > li > i {
+.user-profile__avatar-floater {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  border-radius: 100%;
+}
+
+.user_profile__short-info-list > li > i.fa-solid {
+  font-size: 1.3em;
   min-width: 1.5em;
+}
+
+.user_profile__short-info-list > li > span[role="text"] {
+  font-size: 1.2em;
 }
 /*# sourceMappingURL=user-profile.css.map */
