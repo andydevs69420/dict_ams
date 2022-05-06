@@ -40,44 +40,9 @@
                                 13 := STAFF
                         --}}
 
-                        @if($id != 4)
-                            <div class="col col-sm-auto col-md-3">
-                                {{-- messages --}}
-                                <div class="dashboard__dashboard-tile dashboard__tile-blue d-block position-relative shadow-lg">
-                                    <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
-                                        <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                            <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("MESSAGES") }}</span>
-                                            <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
-                                                <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
-                                                    0
-                                                </span>
-                                                <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-users"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-                        <div class="col col-sm-auto col-md-3">
-                            {{-- messages --}}
-                            <div class="dashboard__dashboard-tile dashboard__tile-blue d-block position-relative shadow-lg">
-                                <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
-                                    <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("MESSAGES") }}</span>
-                                        <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
-                                            <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
-                                                0
-                                            </span>
-                                            <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-users"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-sm-auto col-md-3">
+                        <div class="col col-6 col-md-3">
                             {{-- purchase request list --}}
-                            <div class="dashboard__dashboard-tile dashboard__tile-pink d-block position-relative shadow-lg">
+                            <div class="dashboard__dashboard-tile dashboard__tile-green d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
                                         <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("PR LIST") }}</span>
@@ -91,17 +56,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col col-sm-auto col-md-3">
-                            {{-- Purchase items  --}}
-                            <div class="dashboard__dashboard-tile dashboard__tile-green d-block position-relative shadow-lg bg-light">
+                        <div class="col col-6 col-md-3">
+                            {{-- purchase request list --}}
+                            <div class="dashboard__dashboard-tile dashboard__tile-pink d-block position-relative shadow-lg">
                                 <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
                                     <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
-                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("ITEMS LIST") }}</span>
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("JO LIST") }}</span>
                                         <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
-                                            <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
-                                                {{ App\Models\ItemList::countRows() }}
+                                            <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
+                                                {{ App\Models\JoForm::countRows() }}
                                             </span>
-                                            <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-clipboard"></i>
+                                            <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-rectangle-list"></i>
                                         </div>
                                     </div>
                                 </div>
