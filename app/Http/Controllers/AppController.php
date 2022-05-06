@@ -353,4 +353,40 @@ class AppController extends Controller
 
         return view("app.requisitioner.requisitioner");
     }
+
+
+
+    /**
+     * Supply Officer Form List -> index
+     * @param Request $request request
+     * @return View
+     *
+     **/
+    public function so_approvedforms(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["10"]))
+            return redirect()->to("/logout");
+
+        return view("supplyofficer.so-forms");
+    }
+
+    
+    /* user subdir ----> */
+                /**
+                 * Add so-forms -> generatepqs
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "supply officer" has access to this page, accesslevel = 10
+                 *
+                 **/
+                public function so_approvedforms_generatepqs(Request $request)
+                {
+
+                    // ...
+                    return view("supplyofficer.view-price-quotation-sheet");
+                }
 }

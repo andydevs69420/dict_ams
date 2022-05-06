@@ -1,0 +1,21 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= REQUISITIONER LIST COLORS ====== */
+/* ================= ITEM LIST COLORS =============== */
+
+.new-job-order__upload-files-btn,
+.new-job-order__upload-files-btn * {
+  color: #0020EC !important;
+  border-color: #0020EC !important;
+}
+
+.new-job-order__submit-btn {
+  background-color: #0020EC !important;
+}
+/*# sourceMappingURL=new-purchase-request.css.map */

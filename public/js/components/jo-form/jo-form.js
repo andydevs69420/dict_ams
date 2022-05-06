@@ -1,3 +1,17 @@
+(function(){
+
+    jQuery(() => {
+        $("[data-bs-toggle='tooltip']").tooltip();
+        $("[data-bs-toggle='popover']").popover();
+        $("select").selectpicker({
+            search : true
+        });
+    });
+
+
+
+})();
+
 
 /**
  * 
@@ -16,22 +30,21 @@ function add__item()
     .append($(`
         <li id="item-${nth_child}-id" class="list-group-item bg-transparent border-0 border-top mt-5 rounded-0 p-0 pt-2">
         <div class="d-flex align-items-center justify-content-between">
-            <span class="item-header" role="text">Job Order Item ${nth_child}</span>
+            <span class="item-header" role="text">Item ${nth_child}</span>
             <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item ${nth_child}" onclick="javascript:remove__item('#item-${nth_child}-id')">&times;</button>
         </div>
         <div class="container-fluid p-0 mt-2">
             <div class="row">
-
                 <div class="col-4 pt-3 pb-4">
-                
                     <div  class="input-group">
+                        <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Stock number" data-bs-content="Item stock number"><i class="fa-solid fa-barcode"></i></a>
                         <input class="form-control bg-light jo-itemno" name="stock[]" type="number" placeholder="Item No." required>
                     </div>
                 </div>
 
                 <div class="col-4 pt-3 pb-4">
-                
                     <div class="input-group">
+                        <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit" data-bs-content="Item Unit ex: pcs, in, mm, cm"><i class="fa-solid fa-scale-balanced"></i></a>
                         <input class="form-control bg-light  jo-unit" list="default-units" name="unit[]" type="text" placeholder="Unit" required>
                         <datalist id="default-units">
                             <option value="pcs">
@@ -42,35 +55,34 @@ function add__item()
                     </div>
                 </div>
             </div>
-            <div class="row">
 
+            <div class="row">
                 <div class="col-12 pb-4">
-                
                     <div  class="input-group">
-                        <textarea class="form-control bg-light jo-description" name="description[]" type="text" placeholder="Description" rows="2" required style="resize: none;"></textarea>
+                        <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
+                        <input class="form-control bg-light jo-description" name="description[]" type="text" placeholder="Item description" required>
                     </div>
                 </div>
             </div>
+
             <div class="row">
-
                 <div class="col-4 pb-3">
-
                     <div class="input-group">
+                        <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
                         <input id="quantity-id" class="form-control bg-light jo-quantity" name="qty[]" type="number" placeholder="Quantity" required onkeyup="javascript:calc_quantity(this.value)">
                     </div>
                 </div>
 
                 <div class="col-4 pb-3">
-                
                     <div class="input-group">
+                        <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit cost" data-bs-content="Item cost per unit"><i class="fa-solid fa-coins"></i></a>
                         <input id="unitcost-id" class="form-control bg-light jo-unitcost" name="unitcost[]" type="number"  placeholder="Unit cost" required onkeyup="javascript:calc_cost(this.value)">
                     </div>
                 </div>
 
                 <div class="col-4 pb-3">
-            
                     <div class="input-group">
-            
+                        <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Total cost" data-bs-content="Item total cost"><i class="fa-solid fa-peso-sign"></i></a>
                         <input id="total-amount-id" class="form-control bg-light jo-totalamount" name="totalcost[]" type="number"  placeholder="Total Amount" required>
                     </div>
                 </div>

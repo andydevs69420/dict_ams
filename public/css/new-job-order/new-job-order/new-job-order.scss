@@ -1,0 +1,20 @@
+
+
+@import '../../global/appcolor';
+
+// @deprecated
+.new-purchase-request__card-header
+{ background-color: $NPR-CARD-HEADER !important; }
+
+.purhcase-request__purhcase-request-header-label
+{ font-size: 1.6em; }
+
+.new-purchase-request__upload-files-btn , 
+.new-purchase-request__upload-files-btn *
+{ 
+    color: $NPR-UPLOAD-FILE-BDC !important;
+    border-color: $NPR-UPLOAD-FILE-BDC !important;
+}
+
+.new-purchase-request__submit-btn
+{ background-color: $NPR-SUBMIT-FORM-BTN !important; }
