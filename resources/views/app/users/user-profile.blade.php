@@ -15,16 +15,16 @@
     <div class="d-block py-3">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-9 col-lg-5 col-xl-4">
+                <div class="col-10 col-md-9 col-lg-5 col-xl-3">
                     <div class="card border-0 bg-white shadow-lg">
                         <div class="d-block p-3 overflow-hidden">
-
                             <div class="user-profile__avatar-wrapper d-block position-relative mx-auto bg-light shadow">
-
+                                
+                                {{-- add enable edit if self profile --}}
                                 @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
-                                    <div class="d-block position-absolute rounded-circle shadow" style="right: 15px;bottom: 15px;z-index: 3;">
+                                    <div class="d-block position-absolute rounded-circle shadow" style="right: 0;bottom: 15%;transform: translateY(-15%);z-index: 3;">
                                         <input id="user-profile__edit-profile" accept=".jpg, .png" class="d-none" type="file" >
-                                        <button type="label" class="btn btn-light rounded-circle" for="user-profile__edit-profile" style="width: 45px;height: 45px;" onclick='javascript: $("#user-profile__edit-profile").click()'>
+                                        <button type="label" class="btn btn-light rounded-circle" for="user-profile__edit-profile" style="padding:0;width: 35px;height: 35px;" onclick='javascript: $("#user-profile__edit-profile").click()'>
                                             <i class="fa-solid fa-pencil"></i>
                                         </button>
                                     </div>
@@ -37,27 +37,42 @@
 
                         </div>
                         <div class="card-body bg-white">
-                            <h5 class="card-title">{{ $user->lastname . ', ' . $user->firstname . ' ' . $user->middleinitial }}</h5>
+                            <h5 class="card-title text-center">{{ $user->lastname . ', ' . $user->firstname . ' ' . $user->middleinitial }}</h5>
                             <ul class="user_profile__short-info-list list-group list-group-flush bg-white">
-                                <li class="list-group-item border-0">
+                                <li class="list-group-item border-0 text-truncate">
                                     <i class="fa-solid fa-envelope"></i>
                                     <span class="text-muted text-truncate" role="text">{{ $user->email }}</span>
                                 </li>
-                                <li class="list-group-item border-0">
+                                <li class="list-group-item border-0 text-truncate">
                                     <i class="fa-solid fa-building"></i>
                                     <span class="text-muted text-truncate" role="text">{{ App\Models\Designation::getDesignationById($user->designation_id) }}</span>
                                 </li>
-                                <li class="list-group-item border-0">
+                                <li class="list-group-item border-0 text-truncate">
                                     <i class="fa-solid fa-universal-access"></i>
                                     <span class="text-muted text-truncate" role="text">{{ App\Models\Accesslevel::getAccesslevelById($user->accesslevel_id) }}</span>
                                 </li>
+
+                                {{-- add logout if self profile --}}
+                                @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
+                                    <li class="list-group-item">
+                                        <div class="shadow">
+                                            <a class="btn btn-success w-100" href="{{ url("/logout") }}">
+                                                <i class="fa-solid fa-right-from-bracket"></i>
+                                                Signout
+                                            </a>
+                                        </div>
+                                    </li>
+                                @endif
+
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-9 col-lg-5 col-xl-8">
+                <div class="col-10 col-md-9 col-lg-5 col-xl-8">
                    
-                    <div class="card mt-2 mt-lg-0 border-0 bg-white shadow-lg">
+                    <div class="card mt-4 mt-lg-0 border-0 bg-white shadow-lg">
+
+                        {{-- add edit account if self profile --}}
                         @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
                             <div class="card-header py-3 border-0 bg-white">
                                 <div class="input-group mb-2">
@@ -66,55 +81,116 @@
                                 </div>
                             </div>
                         @endif
+
                         <div class="card-body bg-white">
                             <form action="">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-12 col-lg-4">
+                                        <div class="col-12">
+                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;">User profile</span>
+                                        </div>
+                                        <div class="col-12">
                                             {{-- firstname group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light">FN</span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="firstname" placeholder="Firstname">
+                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="firstname" placeholder="{{ __("Firstname") }}" value="{{ $user->firstname }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-4">
+                                        <div class="col-12">
                                             {{-- lastname group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light">LN</span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="lastname" placeholder="Lastname">
+                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="lastname" placeholder="Lastname" value="{{ $user->lastname }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-4">
+                                        <div class="col-12">
                                             {{-- middleinital group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light">MI</span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="middleinitial" placeholder="MI">
+                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="middleinitial" placeholder="MI" value="{{ $user->middleinitial }}">
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-12"><hr class="bg-secondary"></div>
+                                        <div class="col-12">
+                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;">Credentials</span>
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             {{-- username group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-user"></i></span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="username" placeholder="Username">
+                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="username" placeholder="Username" value="{{ $user->username }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- email group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-envelope"></i></span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="email" placeholder="Email">
+                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="email" placeholder="Email" value="{{ $user->email }}">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-lg-6">
+                                            {{-- password group --}}
+                                            <div class="shadow my-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-lock"></i></span>
+                                                    <input class="form-control border-0 bg-white text-truncate" type="password" name="password" placeholder="Password" value="********">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            {{-- confirm password group --}}
+                                            <div class="shadow my-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-check-circle"></i></span>
+                                                    <input class="form-control border-0 bg-white text-truncate" type="password" name="confirm-password" placeholder="Confirm password" value="********">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12"><hr class="bg-secondary"></div>
+                                        <div class="col-12">
+                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;">Role</span>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            {{-- designation group --}}
+                                            <div class="shadow my-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-building"></i></span>
+                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="confirm-password" placeholder="Confirm password"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            {{-- accesslevel group --}}
+                                            <div class="shadow my-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-universal-access"></i></span>
+                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="accesslevel" placeholder="Accesslevel"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- add update btn if self profile --}}
+                                        @if(strcmp($user->user_id, Auth::user()->user_id) === 0)
+                                            <div class="col-12 d-block">
+                                                <div class="shadow my-3 w-100">
+                                                    <button class="user-profile__update-btn btn btn-primary w-100">
+                                                        <i class="fa-solid fa-refresh"></i>
+                                                        UPDATE
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                     </div>
                                 </div>
                             </form>

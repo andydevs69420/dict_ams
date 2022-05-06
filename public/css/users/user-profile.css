@@ -44,11 +44,16 @@
 }
 
 .user_profile__short-info-list > li > i.fa-solid {
-  font-size: 1.3em;
-  min-width: 1.5em;
+  font-size: 1.2em;
+  min-width: 1.4em;
 }
 
 .user_profile__short-info-list > li > span[role="text"] {
-  font-size: 1.2em;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.user-profile__update-btn {
+  background-color: #0020EC !important;
 }
 /*# sourceMappingURL=user-profile.css.map */
