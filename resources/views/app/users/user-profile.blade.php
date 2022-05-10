@@ -13,9 +13,34 @@
 
 @section("content")
     <div class="d-block py-3">
+
+        @if(Session::has("info"))
+            {{-- on success modal --}}
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog border-0">
+                    <div class="modal-content border-0">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span class="h5" role="text" style="font-weight: 300;">
+                                {{ session("info") }}
+                            </span>
+                        </div>
+                        <div class="modal-footer border-0">
+                            <div class="mx-auto w-25 shadow">
+                                <button type="button" class="btn w-100 btn-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-10 col-md-9 col-lg-5 col-xl-3">
+                <div class="col-12 col-md-9 col-lg-5 col-xl-4 col-xxl-3">
                     <div class="card border-0 bg-white shadow-lg">
                         <div class="d-block p-3 overflow-hidden">
                             <div class="user-profile__avatar-wrapper d-block position-relative mx-auto bg-light shadow">
@@ -68,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-10 col-md-9 col-lg-5 col-xl-8">
+                <div class="col-12 col-md-9 col-lg-5 col-xl-8">
                    
                     <div class="card mt-4 mt-lg-0 border-0 bg-white shadow-lg">
 
@@ -76,124 +101,159 @@
                         @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
                             <div class="card-header py-3 border-0 bg-white">
                                 <div class="input-group mb-2">
-                                    <input id="user-profile__enable-edit" class="form-check-input rounded-1" type="checkbox" name="enable" value="off">
+                                    <input id="user-profile__enable-edit" class="form-check-input rounded-1" type="checkbox" name="enable" value="off" @if($errors->all()) checked @endif>
                                     <label class="ms-2 text-dark" for="user-profile__enable-edit"><small class="text-muted" style="user-select:none;">{{ __("Enable editing") }}</small></label>
                                 </div>
                             </div>
                         @endif
 
                         <div class="card-body bg-white">
-                            <form action="">
+                            <form id="user-profile__edit-profile-form" action="{{ url("/user/editprofile") }}" method="POST">
+
+                                @csrf
+
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;">User profile</span>
+                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;" role="text">User profile</span>
                                         </div>
                                         <div class="col-12">
                                             {{-- firstname group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light">FN</span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="firstname" placeholder="{{ __("Firstname") }}" value="{{ $user->firstname }}">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="text" name="firstname" placeholder="{{ __("Firstname") }}" value="{{ $user->firstname }}" disabled autocomplete="firstname">
                                                 </div>
                                             </div>
+                                            @error("firstname")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-12">
                                             {{-- lastname group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light">LN</span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="lastname" placeholder="Lastname" value="{{ $user->lastname }}">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="text" name="lastname" placeholder="{{ __("Lastname") }}" value="{{ $user->lastname }}" disabled>
                                                 </div>
                                             </div>
+                                            @error("lastname")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-12">
                                             {{-- middleinital group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light">MI</span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="middleinitial" placeholder="MI" value="{{ $user->middleinitial }}">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="text" name="middleinitial" placeholder="{{__("MI") }}" value="{{ $user->middleinitial }}" disabled>
                                                 </div>
                                             </div>
+                                            @error("middleinitial")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-12"><hr class="bg-secondary"></div>
                                         <div class="col-12">
-                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;">Credentials</span>
+                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;" role="text">Credentials</span>
                                         </div>
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- username group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-user"></i></span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="username" placeholder="Username" value="{{ $user->username }}">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="text" name="username" placeholder="{{ __("Username") }}" value="{{ $user->username }}" disabled>
                                                 </div>
                                             </div>
+                                            @error("username")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- email group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-envelope"></i></span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="text" name="email" placeholder="Email" value="{{ $user->email }}">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="text" name="email" placeholder="{{ __("Email") }}" value="{{ $user->email }}" disabled>
                                                 </div>
                                             </div>
+                                            @error("email")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- password group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-lock"></i></span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="password" name="password" placeholder="Password" value="********">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="password" name="password" placeholder="{{ __("Password") }}" value="********" disabled>
                                                 </div>
                                             </div>
+                                            @error("password")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- confirm password group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-check-circle"></i></span>
-                                                    <input class="form-control border-0 bg-white text-truncate" type="password" name="confirm-password" placeholder="Confirm password" value="********">
+                                                    <input class="form-control form-control-sm border-0 bg-white text-truncate" type="password" name="password_confirmation" placeholder="{{ __("Confirm password") }}" value="********" disabled>
                                                 </div>
                                             </div>
+                                            @error("confirm-password")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-12"><hr class="bg-secondary"></div>
                                         <div class="col-12">
-                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;">Role</span>
+                                            <span class="text-muted" style="font-size: 1.4em; font-weight: 300;" role="text">Role</span>
                                         </div>
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- designation group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-building"></i></span>
-                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="confirm-password" placeholder="Confirm password">
+                                                    <select class="form-select form-select-sm border-0 bg-white text-truncate" type="text" name="designation" placeholder="{{__("Designation") }}" disabled>
                                                         @foreach(App\Models\Designation::all() as $desig)
                                                             <option value="{{ $desig->designation_id }}" @if(strcmp($desig->designation_id, $user->designation_id) === 0) selected @endif >{{ App\Models\Designation::getDesignationById($desig->designation_id) }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
+                                            @error("designation")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-12 col-xl-6">
                                             {{-- accesslevel group --}}
                                             <div class="shadow my-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text border-0 bg-primary text-light"><i class="fa-solid fa-universal-access"></i></span>
-                                                    <select class="form-select border-0 bg-white text-truncate" type="text" name="accesslevel" placeholder="Accesslevel">
-
-                                                        @foreach(App\Models\Accesslevel::all() as $al)
-                                                            <option value="{{ $al->accesslevel_id }}" @if(strcmp($al->accesslevel_id, $user->accesslevel_id) === 0) selected @endif >{{ App\Models\Accesslevel::getAccesslevelById($al->accesslevel_id) }}</option>
-                                                        @endforeach
+                                                    <select class="form-select form-select-sm border-0 bg-white text-truncate" type="text" name="accesslevel" placeholder="{{ __("Accesslevel") }}" disabled>
+                                                        
+                                                        {{-- "14" := admin --}}
+                                                        @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
+                                                            <option value="{{ Auth::user()->accesslevel_id }}" selected>{{ App\Models\Accesslevel::getAccesslevelById(Auth::user()->accesslevel_id) }}</option>
+                                                        @else
+                                                            @foreach(App\Models\Accesslevel::all() as $al)
+                                                                <option value="{{ $al->accesslevel_id }}" @if(strcmp($al->accesslevel_id, $user->accesslevel_id) === 0) selected @endif >{{ App\Models\Accesslevel::getAccesslevelById($al->accesslevel_id) }}</option>
+                                                            @endforeach
+                                                        @endif
 
                                                     </select>
                                                 </div>
                                             </div>
+                                            @error("accesslevel")
+                                                <span class="text-danger small" role="text">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         {{-- add update btn if self profile --}}
                                         @if(strcmp($user->user_id, Auth::user()->user_id) === 0)
                                             <div class="col-12 d-block">
                                                 <div class="shadow my-3 w-100">
-                                                    <button class="user-profile__update-btn btn btn-primary w-100">
+                                                    <button class="user-profile__update-btn btn btn-primary w-100" disabled>
                                                         <i class="fa-solid fa-refresh"></i>
                                                         UPDATE
                                                     </button>
@@ -218,5 +278,19 @@
 
     {{-- javascript js --}}
     <script type="text/javascript" src="{{ asset("js/users/user-profile.js") }}"></script>
+
+    @if($errors->any())
+        <script defer>
+            jQuery(() => {
+                window.updateFormState("on");
+            })
+        </script>
+    @endif
+
+    <script>
+        jQuery(() => {
+            $(".modal").modal("show");
+        });
+    </script>
 
 @stop

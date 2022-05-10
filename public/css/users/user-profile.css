@@ -53,6 +53,17 @@
   font-weight: bold;
 }
 
+#user-profile__edit-profile-form {
+  opacity: .9;
+}
+
+#user-profile__edit-profile-form span[role="text"] {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .user-profile__update-btn {
   background-color: #0020EC !important;
 }

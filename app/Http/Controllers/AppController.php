@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
@@ -174,6 +175,64 @@ class AppController extends Controller
                         return redirect()->intended("/dashboard");
 
                     return view("app.users.user-profile", ["user" => UserVerificationDetails::getUserByID($request->input("user"))]);
+                }
+
+                /**
+                 * Edit user profile -> user/editprofile/userid
+                 * @param Request $request request
+                 **/ 
+                public function user__edit_profile(Request $request)
+                {
+                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                        return abort(403);
+                    
+                    $validator = Validator::make($request->all(), [
+                        'username' => ['required', 'string', 'max:255'],
+                        'email' => ['required', 'string', 'email', 'max:255', 
+                            (strcmp(Auth::user()->email, $request->input("email")) === 0)?
+                                'exists:user,email'
+                                :
+                                'unique:user'
+                        ],
+                        'password' => ['required', 'string', 'min:8', 'confirmed'],
+                        'firstname' => ['required', 'string', 'max:25'],
+                        'lastname' => ['required', 'string', 'max:25'],
+                        'middleinitial' => ['required', 'string', 'max:1'],
+                        'designation' => ['required', 'string'],
+                        'accesslevel' => ['required', 'string'],
+                    ]);
+
+                    if  ($validator->fails())
+                        // return response()->json(["errors" => $validator->errors()]);
+                        return redirect()->back()->withErrors($validator)->withInput();
+
+                    
+                    $update = [
+                        "username" => $request->input("username"),
+                        "email" => $request->input("email"),
+                        "firstname" => $request->input("firstname"),
+                        "lastname" => $request->input("lastname"),
+                        "middleinitial" => $request->input("middleinitial"),
+                        "designation_id" => $request->input("designation"),
+                        "accesslevel_id" => $request->input("accesslevel"),
+                    ];
+                    
+                    if (
+                        strcmp($request->input("password"), "********") !== 0 
+
+                    )
+                        $update["password"] = Hash::make($request->input("password"));
+                        
+                    $updated = User::where("user_id", "=", Auth::user()->user_id)
+                        ->update($update);
+                    
+                    $info = "";
+                    if ($updated)
+                        $info = "User profile updated successfully!";
+                    else
+                        $info = "User profile update failed!";
+
+                    return back()->with("info", $info);
                 }
 
                 /**
