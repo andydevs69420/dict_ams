@@ -52,12 +52,15 @@ class AuthController extends Controller
         $password = $request->input("password");
         $remember = (strcmp($request->remember, "on") === 0)? true : false;
 
-        if  (!Auth::attempt(["username" => $username, "password" => $request->password], $remember))
-            return back()->withErrors(["error" => "Invalid username or password"]);
+        if  (!(Auth::attempt(["username" => $username, "password" => $request->password], $remember)))
+            return back()->withErrors(["error" => "Invalid username or password"])->withInput();
         
-        if  (!UserVerificationDetails::isVerified(Auth::user()->user_id))
+        if  (!(UserVerificationDetails::isVerified(Auth::user()->user_id)))
+        {
+            Auth::logout();
             return back()->withErrors(["error"=> sprintf("User %s is not yet verified.", $request->username)]);
-       
+        }
+        
         return redirect()->to("/dashboard");
     }
     

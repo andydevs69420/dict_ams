@@ -62,6 +62,8 @@ Route::controller(AppController::class)->group(function () {
     Route::get("/users", "users");
         // view profile
         Route::get("/user/userprofile", "user__user_profile");
+        // edit profile
+        Route::post("/user/editprofile", "user__edit_profile");
         // accept or decline
         Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
         // delete

@@ -27,9 +27,24 @@
      * @example
      *     updateFormState("off" | "on");
      **/
-    function updateFormState(status)
+    window.updateFormState = function(status)
     {
-        alert(status);
+        form = $("#user-profile__edit-profile-form");
+        form.find("input, select, button")
+        .each((i, el) => {
+            if(status === "on")
+            {
+                $(el).removeAttr("disabled");
+                form.css("opacity", 1);
+                form.find('span[role="text"]').css("user-select", "auto");
+            }
+            else
+            {
+                $(el).prop("disabled", true);
+                form.css("opacity", .9);
+                form.find('span[role="text"]').css("user-select", "none");
+            }
+        });
     }
 
 })();

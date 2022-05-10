@@ -40,5 +40,12 @@
     { font-size: .9em;font-weight: bold; }
 }
 
+#user-profile__edit-profile-form
+{ 
+    opacity: .9;
+    & span[role="text"]
+    { user-select: none; }
+}
+
 .user-profile__update-btn
 { background-color: $USER-PROFILE-UPDATE-BTN-BG !important; }

@@ -71,10 +71,19 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: .7em;
+  padding-right: .7em;
   background-color: initial;
   border: 0;
+  -webkit-transition: background-color .4s ease-out !important;
+  transition: background-color .4s ease-out !important;
+}
+
+.sidebar__li-item:hover {
+  border-radius: .5em !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  -webkit-transition: background-color .3s ease-in-out !important;
+  transition: background-color .3s ease-in-out !important;
 }
 
 .sidebar__li-item:hover > * {
@@ -133,6 +142,7 @@
 .sidebar__accordion-button::after {
   margin-left: auto;
   margin-right: 0;
+  background-size: 1.2em !important;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230dcaf0'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 }
 
@@ -141,6 +151,7 @@
 .sidebar__accordion-header >
 .sidebar__accordion-button:not(.collapsed)::after {
   color: #F7F7F7 !important;
+  background-size: 1.2em !important;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 }
 
@@ -152,6 +163,8 @@
 }
 
 .sidebar__accordion-body-item {
+  padding-left: .5em !important;
+  padding-right: .5em !important;
   background-color: initial;
   border: 0;
 }
@@ -185,12 +198,19 @@
   text-decoration: none;
   text-overflow: ellipsis;
   font-size: .94em;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .sidebar__accordon-body-item-label {
   text-decoration: none;
   text-overflow: ellipsis;
   font-size: .94em;
+}
+
+.active-link {
+  border-radius: .5em !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 .active-link * {

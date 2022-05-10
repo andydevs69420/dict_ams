@@ -71,6 +71,13 @@ body {
 
 .app-main__content-root {
   min-width: 280px !important;
+  min-width: 100vw !important;
+}
+
+@media screen and (min-width: 576px) {
+  .app-main__content-root {
+    min-width: 280px !important;
+  }
 }
 
 .app-main__content-wrapper {
