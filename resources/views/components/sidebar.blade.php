@@ -76,6 +76,88 @@
                             </li>
                         </ul>
                         @break
+                    @case(8)
+                        {{-- 
+                            NOTE: tanawa sa accesslevel table unsay id
+                                 8 := BAC
+                        --}}
+                        <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                            <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">{{ __("COMPONENTS") }}</span>
+                            <li class="sidebar__li-item list-group-item">
+                                <div class="sidebar__accordion accordion accordion-flush">
+                                    <div class="sidebar__accordion-item accordion-item">
+                                        <div class="sidebar__accordion-header accordion-header">
+                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
+                                                <i class="sidebar__accordion-button-icon fa fa-file"></i><span class="sidebar__accordion-button-label" role="text">{{ __("Forms") }}</span>
+                                            </button>
+                                        </div>
+                                        <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                            <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newpurchaserequest") }}">
+                                                    <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/pricequotation") }}">{{ __("Price Quotation Status") }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @break
+                    @case(9)
+                        {{-- 
+                            NOTE: tanawa sa accesslevel table unsay id
+                                 9 := Canvasser
+                        --}}
+                        <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                            <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">{{ __("COMPONENTS") }}</span>
+                            <li class="sidebar__li-item list-group-item">
+                                <div class="sidebar__accordion accordion accordion-flush">
+                                    <div class="sidebar__accordion-item accordion-item">
+                                        <div class="sidebar__accordion-header accordion-header">
+                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
+                                                <i class="sidebar__accordion-button-icon fa fa-file"></i><span class="sidebar__accordion-button-label" role="text">{{ __("Order Status") }}</span>
+                                            </button>
+                                        </div>
+                                        <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                            <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newpurchaserequest") }}">
+                                                    <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest") }}">{{ __("Price Quotation") }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @break
+                    @case(11)
+                        {{-- 
+                            NOTE: tanawa sa accesslevel table unsay id
+                                 11 := BUDGET OFFICER
+                        --}}
+                        <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                            <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">{{ __("COMPONENTS") }}</span>
+                            <li class="sidebar__li-item list-group-item">
+                                <div class="sidebar__accordion accordion accordion-flush">
+                                    <div class="sidebar__accordion-item accordion-item">
+                                        <div class="sidebar__accordion-header accordion-header">
+                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
+                                                <i class="sidebar__accordion-button-icon fa fa-file"></i><span class="sidebar__accordion-button-label" role="text">{{ __("Order Status") }}</span>
+                                            </button>
+                                        </div>
+                                        <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                            <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newpurchaserequest") }}">
+                                                    <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequeststatus") }}">{{ __("Purchase Request") }}</a>
+                                                </li>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
+                                                    <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/joborderstatus") }}">{{ __("Job Order") }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        @break
                     @case(14)
                         {{-- 
                             NOTE: tanawa sa accesslevel table unsay id sa admin
@@ -122,6 +204,7 @@
                             </li>
                         </ul>
                         @break
+
                     @default
                         {{-- debug: pag walay access level --}}
                         <h3 class="d-block mx-auto lead">Invalid Accesslevel => "{{ $getAccesslevelId() }}"</h3>

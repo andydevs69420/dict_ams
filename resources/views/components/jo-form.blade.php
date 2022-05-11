@@ -21,7 +21,7 @@
     {{-- JO FORM --}}
     <div class="card border-0 shadow-lg">
         <div class="jo-form__card-header card-header mt-3 pb-0 border-0 bg-white">
-            <p class="fw-bold">&nbspItem Information</p>
+            <p class="fw-bold">&nbspItem 1</p>
         </div>
         <div class="card-body p-0">
             <div class="container-fluid">
@@ -56,14 +56,14 @@
                                             <div class="col-4 pt-3 pb-4">
                                                 {{-- <label class="text-dark py-1"><small>Item No</small><small class="req-symbol">*</small></label> --}}
                                                 <div  class="input-group">
-                                                    <input class="form-control bg-light jo-itemno" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="Item No." required>
+                                                    <input class="form-control bg-light jo-itemno" readonly ="" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="Item No." required>
                                                 </div>
                                             </div>
                                             <!-- unit group -->
                                             <div class="col-4 pt-3 pb-4">
                                                 {{-- <label class="text-dark py-1"><small>Unit</small><small class="req-symbol">*</small></label> --}}
                                                 <div class="input-group">
-                                                    <input class="form-control bg-light  jo-unit" list="default-units" name="unit[]" type="text" value="{{ $itm[1] }}" placeholder="Unit" required>
+                                                    <input class="form-control bg-light  jo-unit" readonly ="" list="default-units" name="unit[]" type="text" value="{{ $itm[1] }}" placeholder="Unit" required>
                                                     <datalist id="default-units">
                                                         <option value="pcs">
                                                         <option value="in">
@@ -78,7 +78,7 @@
                                             <div class="col-12 pb-4">
                                                 {{-- <label class="text-dark py-1"><small>Description</small><small class="req-symbol">*</small></label> --}}
                                                 <div  class="input-group">
-                                                    <textarea class="form-control bg-light jo-description" name="description[]" type="text" placeholder="Description" rows="2" required style="resize: none;">{{ $itm[2] }}</textarea>
+                                                    <textarea class="form-control bg-light jo-description" readonly ="" name="description[]" type="text" placeholder="Description" rows="2" required style="resize: none;">{{ $itm[2] }}</textarea>
                                                 </div>
                                             </div>
                                         </div>

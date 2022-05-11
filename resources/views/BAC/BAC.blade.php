@@ -1,6 +1,6 @@
 @extends("layout.app-main")
 
-@section('title', 'AMS | Purchase Request')
+@section('title', 'AMS | BAC Chairman')
 
 @section('dependencies')
 {{-- Budget officer css --}}
@@ -20,9 +20,7 @@
                 <table id="item-list__item-list-table" class="table table-striped w-100" data-order='[[ 0, "asc" ]]'>
                     <thead>
                             <tr>
-                            <th class="text-left" scope="col">{{ __("PR number") }}</th>
-                            <th class="text-left" scope="col">{{ __("Stock No.") }}</th>
-                            <th class="text-left" scope="col">{{ __("Unit") }}</th>
+                            <th class="text-left" scope="col">{{ __("PQ number") }}</th>
                             <th class="text-left" scope="col">{{ __("Description") }}</th>
                             <th class="text-left" scope="col">{{ __("Quantity") }}</th>
                             <th class="text-left" scope="col">{{ __("Unit cost") }}</th>
@@ -35,16 +33,10 @@
                         @foreach(App\Models\ItemList::getAllItems() as $item)
                                 <tr>
                                     <td>{{ $item-> $itemnumber }}</td>                                       
-                                    <td class="align-right">
-                                    <a href="{{ url('BO/edit/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
-                                    <a href="{{ url('BO/delete/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                    <a href="{{ url('BO/download/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
-
-                                    @isset($data->comment)
-                                        @if($data->comment != null)
-                                            <button class="ui circular basic icon button tiny uppercase" data-tooltip='{{ $data->comment }}' data-variation='wide' data-position='top right'><i class="ui icon comment alternate"></i></button>
-                                        @endif
-                                    @endisset
+                                        <td class="align-right">
+                                        <a href="{{ url('BO/edit/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
+                                        <a href="{{ url('BO/delete/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                                        <a href="{{ url('BO/download/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
                                     </td>
                                 </tr>
                         @endforeach    

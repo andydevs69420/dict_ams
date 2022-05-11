@@ -1,6 +1,6 @@
-@extends('layout.app-main')
-    
-@section('title', 'AMS | Edit PR Status')
+@extends("layout.app-main")
+
+@section('title', 'AMS | Edit Job order Request/Status')
 
 @section('dependencies')
     <link rel="stylesheet" href="{{ asset('css/Budgetofficer/Budgetoffice.css') }}">

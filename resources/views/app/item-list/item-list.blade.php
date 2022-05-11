@@ -85,7 +85,7 @@
             <table id="item-list__item-list-table" class="table table-striped w-100">
                 <thead>
                     <tr>
-                        <th class="text-left" scope="col">{{ __("Item No") }}</th>
+                        <th class="text-left" scope="col">{{ __("Item No.") }}</th>
                         <th class="text-left" scope="col">{{ __("Item Name") }}</th>
                         <th class="text-left" scope="col">{{ __("Item Description") }}</th>
 

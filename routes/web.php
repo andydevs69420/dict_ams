@@ -5,6 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BOController;
+use App\Http\Controllers\JOController;
+use App\Http\Controllers\CanvController;
+use App\Http\Controllers\BACController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +43,25 @@ Route::controller(AuthController::class)->group(function () {
 Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
-// Budget Officer
-Route::get('/BO',[BOController::class,'index']);
-Route::get('/edit-ors',[BOController::class,'edit']);
+// Budget Officer (Purchase Request)
+Route::get('/purchaserequeststatus',[BOController::class,'index']);
+Route::get('/edit-purchaserequest',[BOController::class,'edit']);
+// Budget Officer (Job Order)
+Route::get('/joborderstatus',[JOController::class,'index']);
+Route::get('/edit-Joborder',[JOController::class,'edit']);
+
+// Canvasser (Purchase Request)
+Route::get("/purchaserequest",[CanvController::class,'purchaserequest']);
+Route::get('/edit-canvasserPR',[CanvController::class,'editpurchaserequest']);
+Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
+
+// BAC Chairman (Price Quotation)
+Route::get("/pricequotation",[BACController::class,'index']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
 
-    // dashboard
+    // dashboard page
     Route::get("/dashboard", "dashboard");
 
     // create form
