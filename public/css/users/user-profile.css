@@ -64,6 +64,16 @@
           user-select: none;
 }
 
+.user-profile__update-btn-wrapper {
+  width: 100% !important;
+}
+
+@media screen and (min-width: 1200px) {
+  .user-profile__update-btn-wrapper {
+    width: auto !important;
+  }
+}
+
 .user-profile__update-btn {
   background-color: #0020EC !important;
 }

@@ -62,6 +62,8 @@ Route::controller(AppController::class)->group(function () {
     Route::get("/users", "users");
         // view profile
         Route::get("/user/userprofile", "user__user_profile");
+        // upload profile picture
+        Route::post("/user/uploadprofilepicture", "user__user_profile_update");
         // edit profile
         Route::post("/user/editprofile", "user__edit_profile");
         // accept or decline

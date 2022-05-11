@@ -14,11 +14,31 @@
 (function() {
 
     jQuery(() => {
+        
+        window.autolickSubmit();
+
         $("#user-profile__enable-edit").change((evt) => {
             $(evt.target).val(evt.target.value === "off"?"on":"off");
             updateFormState(evt.target.value);
         });
     });
+
+    $.ajaxSetup({
+        headers: { "X-CSRF-TOKEN" : $("meta[name=\"csrf-token\"]").attr("content") }
+    });
+
+    /**
+     * Auto submit form if filepicker changed
+     * @returns null
+     * @example 
+     *     window.autolickSubmit();
+     **/ 
+    window.autolickSubmit = function() {
+        $("#user-profile__edit-profile")
+        .change((evt) => {
+            $("#user-profile__image-upload").submit();
+        });
+    };
 
     /**
      * Enable fields and make them editable
@@ -46,5 +66,21 @@
             }
         });
     }
+
+    /**
+     * Delete user profile image, uses Ajax to delete user profile image
+     * @param null
+     * @return null
+     * @example
+     *    window.deleteProfileImage();
+     **/
+
+    window.deleteProfileImage = function()
+    {
+        $.ajax({
+            
+        });
+    }
+
 
 })();
