@@ -49,7 +49,7 @@
                                         <td class="text-center" style="vertical-align: middle !important;">
                                             
                                             <div class="dropdown">
-                                                <button id="action-user-{{ $user["user_id"] }}" class="btn btn-sm @if(strcmp($user["verificationstatus_id"], "1") === 0) btn-danger @elseif (strcmp($user["verificationstatus_id"], "2") === 0) btn-primary @else btn-success  @endif dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("action") }}</button>
+                                                <button id="action-user-{{ $user["user_id"] }}" class="btn btn-sm shadow @if(strcmp($user["verificationstatus_id"], "1") === 0) btn-danger @elseif (strcmp($user["verificationstatus_id"], "2") === 0) btn-primary @else btn-success  @endif dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("action") }}</button>
                                                 <ul class="dropdown-menu" aria-labelledby="action-user-{{ $user["user_id"] }}">
                                                     @switch($user["verificationstatus_id"])
                                                         @case(1)
@@ -57,7 +57,7 @@
                                                             <li><a class="dropdown-item" href="#" onclick='javascript:window.updateUserVerificationStatus("{{ $user["user_id"] }}", "3")'>{{ __("decline") }}</a></li>
                                                             @break
                                                         @case(2)
-                                                            <li><a class="dropdown-item" href="{{ url("/user/userprofile?user=" . $user->user_id) }}">{{ __("view profile") }}</a></li>
+                                                            <li><a class="dropdown-item" href="{{ url("/user/userprofile?user=" . Illuminate\Support\Facades\Crypt::encrypt($user->user_id)) }}">{{ __("view profile") }}</a></li>
                                                             <li><a class="dropdown-item @if(strcmp($user["user_id"], Auth::user()->user_id) === 0) disabled @endif" href="#" onclick='javascript:window.deleteUser("{{ $user["user_id"] }}")'>{{ __("delete") }}</a></li>
                                                             @break
                                                         @default {{-- 3? declined user --}}

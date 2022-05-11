@@ -82,8 +82,8 @@
 .sidebar__li-item:hover {
   border-radius: .5em !important;
   background-color: rgba(0, 0, 0, 0.1) !important;
-  -webkit-transition: background-color .3s ease-in-out !important;
-  transition: background-color .3s ease-in-out !important;
+  -webkit-transition: background-color .2s ease-in-out !important;
+  transition: background-color .2s ease-in-out !important;
 }
 
 .sidebar__li-item:hover > * {

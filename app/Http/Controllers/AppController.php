@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
+use App\Models\UserProfileImages;
 use App\Models\Designation;
 use App\Models\ItemList;
 use Auth;
@@ -170,20 +172,60 @@ class AppController extends Controller
                     if (!$request->has("user"))
                         return redirect()->intended("/dashboard");
 
-                    $user = UserVerificationDetails::isVerified($request->input("user"));
+                    $decrypt = null;
+                    
+                    try
+                    { $decrypt = (int) Crypt::decrypt($request->input("user")); }
+                    catch (\Illuminate\Contracts\Encryption\DecryptException $e)
+                    { return redirect()->intended("/dashboard"); }
+
+                    $user = UserVerificationDetails::isVerified($decrypt);
                     if (!$user)
                         return redirect()->intended("/dashboard");
 
-                    return view("app.users.user-profile", ["user" => UserVerificationDetails::getUserByID($request->input("user"))]);
+                    return view("app.users.user-profile", ["user" => UserVerificationDetails::getUserByID($decrypt)]);
+                }
+                
+                /**
+                 * Uploads image -> user/uploadprofilepicture
+                 * @param Request $request request
+                 * @return View
+                 **/
+                public function user__user_profile_update(Request $request)
+                {
+                    if (!Auth::check() || !($request->hasFile("user-image-upload")) || !request("user-image-upload")->isValid())
+                        return abort(403);
+                    
+
+                    $file = $request->file("user-image-upload");
+                    
+                    // filename
+                    $filename = Auth::user()->user_id."-".time().".".$file->getClientOriginalExtension();
+                    $truepath = "storage/user-images/".$filename;
+                    $path     = $file->storeAs("public/user-images", $filename);
+
+                    $info = "";
+                    if (!$path)
+                        $info = "Something went wrong while uploading your image.";
+                    else
+                    {
+                        if (!(UserProfileImages::updatePath(Auth::user()->user_id, $truepath)))
+                            $info = "Something went wrong while updating your profile.";
+                        else
+                            $info = "Profile updated successfully.";
+                    }
+
+                    return back()->with("info", $info);
                 }
 
                 /**
-                 * Edit user profile -> user/editprofile/userid
+                 * Edit user profile -> user/editprofile
                  * @param Request $request request
+                 * @return View
                  **/ 
                 public function user__edit_profile(Request $request)
                 {
-                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
+                    if (!Auth::check())
                         return abort(403);
                     
                     $validator = Validator::make($request->all(), [
@@ -194,12 +236,12 @@ class AppController extends Controller
                                 :
                                 'unique:user'
                         ],
-                        'password' => ['required', 'string', 'min:8', 'confirmed'],
-                        'firstname' => ['required', 'string', 'max:25'],
-                        'lastname' => ['required', 'string', 'max:25'],
-                        'middleinitial' => ['required', 'string', 'max:1'],
-                        'designation' => ['required', 'string'],
-                        'accesslevel' => ['required', 'string'],
+                        'password'  => ['required', 'string', 'min:8', 'confirmed'],
+                        'firstname' => ['required', 'string', 'min:2', 'max:25'   ],
+                        'lastname'  => ['required', 'string', 'min:2', 'max:25'   ],
+                        'middleinitial' => ['required', 'string', 'min:1', 'max:1'],
+                        'designation'   => ['required', 'string'],
+                        'accesslevel'   => ['required', 'string'],
                     ]);
 
                     if  ($validator->fails())
@@ -208,11 +250,11 @@ class AppController extends Controller
 
                     
                     $update = [
-                        "username" => $request->input("username"),
-                        "email" => $request->input("email"),
-                        "firstname" => $request->input("firstname"),
-                        "lastname" => $request->input("lastname"),
-                        "middleinitial" => $request->input("middleinitial"),
+                        "username"       => $request->input("username"),
+                        "email"          => $request->input("email"),
+                        "firstname"      => $request->input("firstname"),
+                        "lastname"       => $request->input("lastname"),
+                        "middleinitial"  => $request->input("middleinitial"),
                         "designation_id" => $request->input("designation"),
                         "accesslevel_id" => $request->input("accesslevel"),
                     ];

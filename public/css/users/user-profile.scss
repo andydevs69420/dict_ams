@@ -13,7 +13,6 @@
     padding-top: 55%;
     width: 55%;
     border-radius: 100%;
-
     @include onMD()
     {
         padding-top: 65%;
@@ -45,6 +44,15 @@
     opacity: .9;
     & span[role="text"]
     { user-select: none; }
+}
+
+.user-profile__update-btn-wrapper
+{
+    width: 100% !important;
+    @include onXL()
+    {
+        width: auto !important;
+    }
 }
 
 .user-profile__update-btn
