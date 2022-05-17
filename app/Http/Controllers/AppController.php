@@ -21,7 +21,10 @@ use App\Models\PrForm;
 
 
 /**
- * 
+ * Checks if request has required parameter
+ * @param  Request $request request
+ * @param Array $array array of required parameters
+ * @return boolean
  **/
 function hasNull(Request $request, Array $arr) {
     foreach ($arr as $ar)
