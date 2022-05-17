@@ -93,11 +93,11 @@ class AppController extends Controller
                         return back()->with(["info" => "Missing required parameter(s)."]);
                     
                     // =========== ITEMS   ===========
-                    $num_of_rows = count($request->input("stock"));
-                    $stck_col = $request->input("stock");
-                    $unit_col = $request->input("unit");
-                    $desc_col = $request->input("description");
-                    $qnty_col = $request->input("qty");
+                    $num_of_rows    = count($request->input("stock"));
+                    $stck_col       = $request->input("stock");
+                    $unit_col       = $request->input("unit");
+                    $desc_col       = $request->input("description");
+                    $qnty_col       = $request->input("qty");
                     $unitc_cost_col = $request->input("unitcost");
                     $total_cost_col = $request->input("totalcost");
                     //  =========== OTHERS ===========
@@ -165,11 +165,11 @@ class AppController extends Controller
                         return abort(403);
 
                     $data = [
-                        "items" => $items,
-                        "purpose" => $request->input("purpose"),
-                        "requester_name" => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
-                        "requester_designation" => Designation::getDesignationByID($requisitioner->designation_id),
-                        "budget_officer_name" => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
+                        "items"                      => $items,
+                        "purpose"                    => $request->input("purpose"),
+                        "requester_name"             => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
+                        "requester_designation"      => Designation::getDesignationByID($requisitioner->designation_id),
+                        "budget_officer_name"        => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
                         "budget_officer_designation" => Designation::getDesignationByID($budgetofficer->designation_id),
                         "recommending_approval_name" => $recommending->lastname.", ".$recommending->firstname." ".$recommending->middleinitial,
                         "recommending_approval_designation" => Designation::getDesignationByID($recommending->designation_id),
@@ -314,9 +314,9 @@ class AppController extends Controller
                                 :
                                 'unique:user'
                         ],
-                        'password'  => ['required', 'string', 'min:8', 'confirmed'],
-                        'firstname' => ['required', 'string', 'min:2', 'max:25'   ],
-                        'lastname'  => ['required', 'string', 'min:2', 'max:25'   ],
+                        'password'      => ['required', 'string', 'min:8', 'confirmed'],
+                        'firstname'     => ['required', 'string', 'min:2', 'max:25'   ],
+                        'lastname'      => ['required', 'string', 'min:2', 'max:25'   ],
                         'middleinitial' => ['required', 'string', 'min:1', 'max:1'],
                         'designation'   => ['required', 'string'],
                         'accesslevel'   => ['required', 'string'],
