@@ -29,7 +29,7 @@
             </div>
         </div>
         
-        <form id="request-pr-form" action="">
+        <form id="request-pr-form" action="{{ url("/newpurchaserequest/uploadprform") }}" method="POST">
 
             @csrf
 
@@ -59,7 +59,7 @@
                             <div class="card-footer py-2 py-lg-3 border-0 bg-white">
 
                                 <div class="input-group mb-2">
-                                    <input id="new-purchasse-request__confirm-signature" class="form-check-input rounded-1" type="checkbox" name="remember">
+                                    <input id="new-purchasse-request__confirm-signature" class="form-check-input rounded-1" type="checkbox" name="confirm">
                                     <label class="ms-2 text-dark" for="new-purchasse-request__confirm-signature"><small class="text-muted" style="user-select:none;">{{ __("Confirm signature") }}</small></label>
                                 </div>
 

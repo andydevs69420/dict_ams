@@ -10,11 +10,13 @@ class FormRequiredPersonel extends Model
     use HasFactory;
     protected $table = "form_required_personel";
 
-    public $timestamps = true;
+    public $timestamps = false;
     
     protected $fillable = [
-        "budgetofficer_id",
         "requisitioner_id",
+        "budgetofficer_id",
         "recommendingapprover_id",
     ];
+
+
 }

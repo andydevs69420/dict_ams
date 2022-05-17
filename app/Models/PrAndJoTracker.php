@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Form extends Model
+class PrAndJoTracker extends Model
 {
     use HasFactory;
-    protected $table = "form";
-
+    protected $table = "pr_and_jo_tracker";
 
     public $timestamps = false;
     
     protected $fillable = [
-        "prnumber",
-        "sainumber",
-        "purpose",
-        "formrequiredpersonel_id",
+        "form_id",
+        "requester_status_id",
+        "budget_officer_status_id",
+        "recommending_approval_status_id",
     ];
 }

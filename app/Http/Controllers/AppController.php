@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\UserVerificationDetails;
 use App\Models\UserProfileImages;
 use App\Models\Designation;
 use App\Models\ItemList;
-use Auth;
+use App\Models\FormRequiredPersonel;
+use App\Models\Form;
+use App\Models\PrForm;
+
+
+
+/**
+ * 
+ **/
+function hasNull(Request $request, Array $arr) {
+    foreach ($arr as $ar)
+        if(!$request->has($ar))
+            return true;
+    return false;
+}
 
 class AppController extends Controller
 {
@@ -48,57 +64,119 @@ class AppController extends Controller
             return redirect()->to("/login");
 
         if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
-            return redirect()->to("/logout");
+            return redirect()->to("/dashboard");
 
         return view("app.new-purchase-request.new-purchase-request");
     }
+    /* purchase request subdir ----> */
 
+                /**
+                 * Upload pr form
+                 * uses: "POST" request
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function uploadPRForm(Request $request) {
 
-    /**
-     * View pr form -> index
-     * @param Request $request request
-     * @return View
-     **/
-    function viewPrForm(Request $request)
-    {
-        if  (!Auth::check())
-            return redirect()->to("/login");
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                        return redirect()->to("/dashboard");
 
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
-            return redirect()->to("/logout");
-        
-        if 
-        (
-            !$request->has("items")          ||
-            !$request->has("purpose")        ||
-            !$request->has("requester")      ||
-            !$request->has("budget-officer") ||
-            !$request->has("recommending-approval")
-        )
-            return abort(403);
-        
-        $items = json_decode($request->input("items"),true);
+                    if (hasNull($request, [
+                        "stock"   , "unit"     , "description"    , 
+                        "qty"     , "unitcost" , "totalcost"      , 
+                        "purpose" , "requester", "budget-officer" , 
+                        "recommending-approval"
+                    ]))
+                        return back()->with(["info" => "Missing required parameter(s)."]);
+                    
+                    // =========== ITEMS   ===========
+                    $num_of_rows = count($request->input("stock"));
+                    $stck_col = $request->input("stock");
+                    $unit_col = $request->input("unit");
+                    $desc_col = $request->input("description");
+                    $qnty_col = $request->input("qty");
+                    $unitc_cost_col = $request->input("unitcost");
+                    $total_cost_col = $request->input("totalcost");
+                    //  =========== OTHERS ===========
+                    $purpose = $request->input("purpose");
+                    $requester = $request->input("requester");
+                    $budget_officer = $request->input("budget-officer");
+                    $recommending_approval = $request->input("recommending-approval");
 
-        $requisitioner = UserVerificationDetails::getUserByID($request->input("requester"));
-        $budgetofficer = UserVerificationDetails::getUserByID($request->input("budget-officer"));
-        $recommending  = UserVerificationDetails::getUserByID($request->input("recommending-approval"));
-        
-        if (!($requisitioner || $budgetofficer || $recommending))
-            return abort(403);
+                    # step 1 save required personel
+                    $frp_id  = FormRequiredPersonel::create([
+                        "requisitioner_id" => $requester,
+                        "budgetofficer_id" => $budget_officer,
+                        "recommendingapprover_id" => $recommending_approval
+                    ])->id;
 
-        $data = [
-            "items"                      => $items,
-            "purpose"                    => $request->input("purpose"),
-            "requester_name"             => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
-            "requester_designation"      => Designation::getDesignationByID($requisitioner->designation_id),
-            "budget_officer_name"        => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
-            "budget_officer_designation" => Designation::getDesignationByID($budgetofficer->designation_id),
-            "recommending_approval_name" => $recommending->lastname.", ".$recommending->firstname." ".$recommending->middleinitial,
-            "recommending_approval_designation" => Designation::getDesignationByID($recommending->designation_id),
-        ];
+                    # step 2 insert form
+                    $form_id = Form::create([
+                        "prnumber"  => "TO BE GENERATED LAST",
+                        "sainumber" => "",
+                        "purpose"   => $purpose,
+                        "formrequiredpersonel_id" => $frp_id
+                    ])->id;
 
-        return view("app.new-purchase-request.view-pr-form", $data);
-    }
+                    # step 3 insert items to pr form
+                    for ($idx = 0; $idx < $num_of_rows; $idx++)
+                    {
+                        PrForm::create([
+                            "form_id"   => $form_id,
+                            "stockno"   => $stck_col[$idx],
+                            "unit"      => $unit_col[$idx],
+                            "item"      => $desc_col[$idx],
+                            "quantity"  => $qnty_col[$idx],
+                            "unitcost"  => $unitc_cost_col[$idx],
+                            "totalcost" => $qnty_col[$idx]
+                        ]);
+                    }
+
+                    return redirect()->intended("/dashboard");
+                }
+
+                /**
+                 * View pr form -> index
+                 * uses: "GET" request
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function viewPrForm(Request $request)
+                {
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                        return redirect()->to("/dashboard");
+                    
+                    if (hasNull($request, ["items", "purpose", "requester", "budget-officer", "recommending-approval"]))
+                        return abort(403);
+                    
+                    $items = json_decode($request->input("items"),true);
+
+                    $requisitioner = UserVerificationDetails::getUserByID($request->input("requester"));
+                    $budgetofficer = UserVerificationDetails::getUserByID($request->input("budget-officer"));
+                    $recommending  = UserVerificationDetails::getUserByID($request->input("recommending-approval"));
+                    
+                    if (!($requisitioner || $budgetofficer || $recommending))
+                        return abort(403);
+
+                    $data = [
+                        "items" => $items,
+                        "purpose" => $request->input("purpose"),
+                        "requester_name" => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
+                        "requester_designation" => Designation::getDesignationByID($requisitioner->designation_id),
+                        "budget_officer_name" => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
+                        "budget_officer_designation" => Designation::getDesignationByID($budgetofficer->designation_id),
+                        "recommending_approval_name" => $recommending->lastname.", ".$recommending->firstname." ".$recommending->middleinitial,
+                        "recommending_approval_designation" => Designation::getDesignationByID($recommending->designation_id),
+                    ];
+
+                    return view("app.new-purchase-request.view-pr-form", $data);
+                }
 
 
     /**
@@ -118,7 +196,7 @@ class AppController extends Controller
             return redirect()->to("/login");
 
         if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
-            return redirect()->to("/logout");
+            return redirect()->to("/dashboard");
 
         return view("app.new-job-order.new-job-order");
     }
@@ -154,7 +232,7 @@ class AppController extends Controller
             return redirect()->to("/login");
 
         if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-            return redirect()->to("/logout");
+            return redirect()->to("/dashboard");
 
         return view("app.users.users");
     }
@@ -206,7 +284,7 @@ class AppController extends Controller
 
                     $info = "";
                     if (!$path)
-                        $info = "Something went wrong while uploading your image.";
+                        $info = "Something went wrong while uploading your image. 0";
                     else
                     {
                         if (!(UserProfileImages::updatePath(Auth::user()->user_id, $truepath)))

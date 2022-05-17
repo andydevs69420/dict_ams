@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('jo_form', function (Blueprint $table) {
-            $table->id()->unique();
+            $table->id('joform_id')->unique();
             $table->bigInteger('form_id')->unsigned();
         });
 

@@ -52,8 +52,10 @@ Route::controller(AppController::class)->group(function () {
     // create form
         // pr
         Route::get("/newpurchaserequest", "purchaseRequest");
+            // upload pr form
+                Route::post("/newpurchaserequest/uploadprform", "uploadPRForm");
             // view pr form
-                Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
+                Route::get("/newpurchaserequest/viewprform", "viewPRForm");
         // jo
         Route::get("/newjoborder", "jobOrder");
             // view jo form

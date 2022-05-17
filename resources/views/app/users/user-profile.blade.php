@@ -16,11 +16,11 @@
 
         @if(Session::has("info"))
             {{-- on success modal --}}
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" aria-hidden="true" style="padding-right: 0 !important;">
                 <div class="modal-dialog border-0">
                     <div class="modal-content border-0">
                         <div class="modal-header border-0">
-                            <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                            <h5 class="modal-title">Success</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -313,10 +313,12 @@
         </script>
     @endif
 
-    <script>
-        jQuery(() => {
-            $(".modal").modal("show");
-        });
-    </script>
+    @if (Session::has("info"))
+        <script>
+            jQuery(() => {
+                $(".modal").modal("show");
+            });
+        </script> 
+    @endif
 
 @stop

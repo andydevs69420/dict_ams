@@ -25,8 +25,13 @@ class UserProfileImages extends Model
     public static function getProfileImagePathByUserId(Int $userid)
     {
         $verified_user_id = UserVerificationDetails::getUserByID($userid)->userverificationdetails_id;
-        return self::where("user_verification_details_id", "=", $verified_user_id)
-        ->first()->path;
+        $path = self::where("user_verification_details_id", "=", $verified_user_id)
+        ->first();
+
+        if ($path)
+            return $path->path;
+        
+        return "images/no-image.png";
     }
 
     public static function updatePath(Int $userid, String $path)

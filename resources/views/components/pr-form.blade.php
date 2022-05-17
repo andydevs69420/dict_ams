@@ -57,14 +57,14 @@
                                             </div>
                                         </div>
                                         <!-- item description group -->
-                                        <div class="col-12 col-sm-6">
-                                            <div class="input-group my-3 shadow">
+                                        <div class="col-12">
+                                            <div class="input-group my-3 rounded shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                <input class="form-control border-0 bg-white" name="description[]" type="text" placeholder="{{ __("Item description") }}" required>
+                                                <textarea class="form-control border-0" rows="1" name="description[]" placeholder="{{ __("Item desciption") }}" required></textarea>
                                             </div>
                                         </div>
                                         <!-- quantity group -->
-                                        <div class="col-12 col-sm-6">
+                                        <div class="col-12 col-sm-12">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
                                                 <input class="form-control border-0 bg-white" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="{{ __("Qty") }}" required>

@@ -9,14 +9,16 @@ class PrForm extends Model
 {
     use HasFactory;
     protected $table = 'pr_form';
+
+    public $timestamps = false;
     
     protected $fillable = [
         'form_id',
         'stockno',
         'unit',
-        'item_id',
+        'item',
         'quantity',
-        'unitprice',
+        'unitcost',
         'totalcost',
     ];
 

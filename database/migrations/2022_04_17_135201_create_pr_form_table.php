@@ -16,10 +16,11 @@ return new class extends Migration
         if (!Schema::hasTable('pr_form'))
         {
             Schema::create('pr_form',function(Blueprint $table) {
-                $table->id()->uniqe();
+                $table->id('prform_id')->uniqe();
                 $table->bigInteger('form_id')->unsigned();
                 $table->integer('stockno');
-                $table->bigInteger('item_id')->unsigned();
+                $table->string('unit');
+                $table->string('item');
                 $table->integer('quantity');
                 $table->double('unitcost', 11, 2);
                 $table->double('totalcost', 11, 2);
@@ -27,7 +28,6 @@ return new class extends Migration
 
             Schema::table('pr_form', function (Blueprint $table) {
                 $table->foreign('form_id')->references('form_id')->on('form');
-                $table->foreign('item_id')->references('itemlist_id')->on('item_list');
             });
             
         }

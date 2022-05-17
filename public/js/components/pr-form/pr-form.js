@@ -3,6 +3,8 @@
 
     jQuery(() => {
         window.progressBar = new Progressbar("#pr-progress");
+        window.autoResizeTextArea();
+
         $("[data-bs-toggle='tooltip']").tooltip();
         $("[data-bs-toggle='popover']").popover();
         $("select").selectpicker({
@@ -42,9 +44,17 @@
         .attr("title", `Remove item ${nth_child}`)
         .attr("onclick", `javascript:remove__item("#${new_itmID}")`);
 
-        // clear fields
+        // clear fields input
         $(clone_itm.find("input"))
         .each((index,element) => {
+            $(element).val("");
+        });
+
+        // clear fields textarea
+        $(clone_itm.find("textarea"))
+        .each((index,element) => {
+            $(element).attr("rows", 1);
+            $(element).css("height", "auto");
             $(element).val("");
         });
 
@@ -53,7 +63,9 @@
 
         $('[data-bs-toggle="tooltip"]').tooltip();
         $('[data-bs-toggle="popover"]').popover();
+
         progressBar.update();
+        autoResizeTextArea();
     };
 
     /**
@@ -96,6 +108,27 @@
         progressBar.update();
 
     };
+
+    window.autoResizeTextArea = function() {
+
+        textareas_00 = $("textarea");
+        textareas_00.each((index, txtarea) => {
+            textareas = $(txtarea);
+            textareas.keyup(() => {
+
+                textareas.css("height", (textareas.prop("scrollHeight") > textareas.height()) ? (textareas.prop('scrollHeight'))+"px" : "auto");
+                
+                if (textareas.val().length <= 0)
+                    textareas.css("height", "auto");
+    
+                rows = textareas.val().toString().split("\n").length;
+                rows = (rows <= 0)? 1 : rows;
+                textareas.attr("rows", rows);
+    
+            });
+        });
+
+    }
 
 })();
 
