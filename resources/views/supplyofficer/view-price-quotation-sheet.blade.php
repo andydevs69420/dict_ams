@@ -20,62 +20,65 @@
                     <td height=20 colspan=7 style='height:15.0pt;'></td>
                 </tr>
                 <tr height=25 style='height:18.75pt;'>
-                    <td class=xl181 colspan=7 height=25 width=658 style='height:18.75pt;width:495pt;'>REQUEST FOR PRICE QUOTATION</td>
+                    <td class=xl181 colspan=9 height=25 width=658 style='height:18.75pt;width:495pt;'>REQUEST FOR PRICE QUOTATION</td>
                 </tr>
                 <tr height=25 style='height:18.75pt;'>
-                    <td class=xl181-b colspan=7 height=25 width=658 style='height:18.75pt;width:495pt;'>CANVASS FORM</td>
+                    <td class=xl181-b colspan=9 height=25 width=658 style='height:18.75pt;width:495pt;'>CANVASS FORM</td>
                 </tr>
                 <tr height=20 style='height:15.0pt;'>
                     <td height=20 colspan=7 style='height:15.0pt;'></td>
                 </tr>
 
 
+                <tr></tr>
+                <tr></tr>
                 <!-- FORM FIRST PART -->
                 <tr height=20 style='height:15.0pt;'>
-                    <td class=xl297 height=20 style='height:15.0pt;'></td>
+                    <td class=xl297 height=20 style='height:15.0pt;' colspan=3></td>
                     <td class=xl298></td>
                     <td class=xl299></td>
                     <td class=xl298></td>
                     <td class=xl298></td>
                     <td class=xl298></td>
-                    <td class=xl299></td>
+                    <td class=xl299 colspan="3"></td>
                 </tr>
-                <tr height=20 style='height:15.0pt;'>
-                    <td class=xl300 height=20 style='height:15.0pt;' colspan=2>&nbsp;&nbsp;Purchase Request No.</td>
-                    <td id="pr-template__supplier-value-id" class=x-division-slot colspan=1 style='border-right:2.0pt double black;max-width: 112pt;'>LOADING...</td>
-                    <td class=xl66 colspan=1>&nbsp;&nbsp;C. NO.</td>
+                <tr class="first-row" height=20 style='height:15.0pt;'>
+                    <td class=xl302 height=20 style='height:15.0pt;' colspan=4>&nbsp;&nbsp;Purchase Request No.</td>
+                    <td class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width: 112pt;'>LOADING...</td>
+                    <td class=xl66>&nbsp;&nbsp;C. NO.</td>
                     <td class=x-jo-number-slot style="max-width:25pt;" colspan=2>LOADING...</td>
-                    <td class=x-date-slot style="max-width:58pt;"></td>
+                    <td class=xl303 colspan="3"></td>
                 </tr>
-                <tr height=21 style='height:15.75pt;'>
-                    <td class=xl302 height=21 style='height:15.75pt;' colspan=2>&nbsp;&nbsp;ABC</td>
+                <tr class="first-row" height=21 style='height:15.75pt;'>
+                    <td class=xl302 height=21 style='height:15.75pt;' colspan=4>&nbsp;&nbsp;Approved Budget for the Contract (ABC)</td>
                     <td id="jo-template__address-value-id" class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width:112pt;'>LOADING...</td>
                     <td class=xl66>&nbsp;&nbsp;Date</td>
                     <td id="jo-template__date-value-id" class=x-jo-number-slot style="max-width:25pt;" colspan=2>LOADING...</td>
-                    <td class=xl303></td>
+                    <td class=xl303 colspan="3"></td>
                 </tr>
                 <tr height=21 style='height:15.75pt;'>
-                    <td class=xl302 height=21 style='height:15.75pt;' colspan=2>&nbsp;&nbsp;</td>
+                    <td class=xl302 height=21 style='height:15.75pt;' colspan=4>&nbsp;&nbsp;</td>
                     <td id="jo-template__procurement-value-id" class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width:112pt;'></td>
                     <td class=xl66></td>
                     <td style='max-width:25pt;'></td>
                     <td class=xl66></td>
-                    <td class=xl303></td>
+                    <td class=xl303 colspan="3"></td>
                 </tr>
                 
 
                 
                 <tr height=20 style='height:15.0pt;'>
-                    <td class=xl298 height=20 style='height:15.0pt;'></td>
+                    <td class=xl298 height=20 style='height:15.0pt;' colspan="4"></td>
                     <td class=xl298></td>
                     <td class=xl298></td>
                     <td class=xl298></td>
                     <td class=xl298></td>
                     <td class=xl298></td>
-                    <td class=xl298></td>
+                    <td class=xl298  colspan="3"></td>
                 </tr>
-                
 
+                <tr></tr>
+                <tr></tr>
                 <!-- FORM SECOND PART -->
                 <tr>
                     <td id="notice-1">GENTLEMEN:</td>
@@ -153,7 +156,7 @@
 
                 <tr height=19 style='height:14.25pt;'>
                     <td class=xl310 height=19 style='height:14.25pt;border-top:none;'>Item no.</td>
-                    <td class=xl311 width=75 style='border-top:none;width:56pt;'>QTY</td>
+                    <td class=xl311 style='border-top:none;'>QTY</td>
                     <td class=xl1225  style='border-right:.5pt solid black;border-left:none;'>Unit</td>
                     <td class=xl312 colspan=2 style='border-top:none;border-left:none;'>Item Description</td>
                     <td class=xl312 style='border-top:none;border-left:none;'>Unit Cost</td>
@@ -177,25 +180,28 @@
                 
                 <!-- ITEM TEMPLATE -->
                 <div id="pr-template__item-list">
-                    {{-- @foreach ($JoFormData['items'] as $item)
+                    {{-- @foreach ($PQSFormData['data'] as $formitem)
                         <tr>
-                            <td class=x-col-1 style='border-top:none;max-width: 50pt;'>{{ $item[0] }}</td>
-                            <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'>{{ $item[1] }}</td>
-                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;' colspan=2>{{ $item[2] }}</td>
-                            <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;'>{{ $item[3] }}</td>
-                            <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'>{{ $item[4] }}</td>
-                            <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'>{{ $item[5] }}</td>
+                            <td class=x-col-1 style='border-top:none;'>{{ $formitem[0] }}</td>
+                            <td class=x-col-2 style='border-top:none;border-left:none;'>{{ $formitem[1] }}</td>
+                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;' colspan=2>{{ $formitem[2] }}</td>
+                            <td class=x-col-4 style='border-top:none;border-left:none;'>{{ $formitem[3] }}</td>
+                            <td class=x-col-5 style='border-top:none;border-left:none;'>{{ $formitem[4] }}</td>
+                            <td class=x-col-6 style='border-top:none;border-left:none;'>{{ $formitem[5] }}</td>
+                            <td class=x-col-5 style='border-top:none;border-left:none;'>{{ $formitem[4] }}</td>
+                            <td class=x-col-6 style='border-top:none;border-left:none;'>{{ $formitem[5] }}</td>
                         </tr>
                     @endforeach --}}
+                    {{-- temporary --}}
                     <tr class="after-lastitem-notice">
-                        <td class=x-col-1 style='border-top:none;max-width: 30pt;'></td>
-                        <td class=x-col-2 style='border-top:none;border-left:none;max-width: 45pt;'></td>
-                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;max-width:158pt;font-size: 12px;text-align: center;'></td>
-                        <td class=x-col-4 style='border-top:none;border-left:none;max-width:24pt;' colspan=2></td>
-                        <td class=x-col-5 style='border-top:none;border-left:none;max-width: 22pt;'></td>
-                        <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
-                        <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
-                        <td class=x-col-6 style='border-top:none;border-left:none;max-width: 57pt;'></td>
+                        <td class=x-col-1 style='border-top:none;'></td>
+                        <td class=x-col-2 style='border-top:none;border-left:none;'></td>
+                        <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;font-size: 12px;text-align: center;'></td>
+                        <td class=x-col-4 style='border-top:none;border-left:none;' colspan=2></td>
+                        <td class=x-col-5 style='border-top:none;border-left:none;'></td>
+                        <td class=x-col-6 style='border-top:none;border-left:none;'></td>
+                        <td class=x-col-6 style='border-top:none;border-left:none;'></td>
+                        <td class=x-col-6 style='border-top:none;border-left:none;'></td>
                     </tr>
                 </div>
 
@@ -207,20 +213,16 @@
                     <td class=xl335 style='border-top:none;'></td>
                     <td class=xl333 style='border-top:none;border-left:none;'></td>
                     <td class=xl336 style='border-top:none;border-left:none;'></td>
-                    <td class=xl337 style='border-top:none;border-left:none;'></td>
-                    <td class=xl337 style='border-top:none;border-left:none;'></td>
-                    <td class=xl337 style='border-top:none;border-left:none;'></td>
                 </tr>
 
                 <tr height=34 style='height:15.5pt;'>
-                    <td class=xl297-b height=34 style='height:25.5pt;width:428pt;;vertical-align:middle;' colspan=2 rowspan=2></td>
-                    <td class=xl297-b height=34 style='height:25.5pt;width:428pt;;vertical-align:middle;' colspan=2 rowspan=2></td>
-                    <td class=xl297-b height=34 style='height:25.5pt;width:428pt;;vertical-align:middle;' colspan=2 rowspan=2></td>
-                    <td id="pr-template__purpose-value-id" class=x-purpose-slot colspan=5 rowspan=2 width=569></td>
+                    <td class=xl297-b height=34 style='height:25.5pt;vertical-align:middle;' colspan=2 rowspan=2></td>
+                    <td class=xl297-b height=34 style='height:25.5pt;vertical-align:middle;' colspan=2 rowspan=2></td>
+                    <td class=xl297-b height=34 style='height:25.5pt;vertical-align:middle;' colspan=2 rowspan=2></td>
+                    <td id="pr-template__purpose-value-id" class=x-purpose-slot colspan=5></td>
                 </tr>
 
 
-                <!-- FORM LAST PART -->
 
             </table>
         </div>

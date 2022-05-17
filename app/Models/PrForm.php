@@ -30,4 +30,26 @@ class PrForm extends Model
      **/
     public static function countRows()
     { return countTruncate(count(self::all())); }
+
+
+    /**
+     * Get's PrForm by id
+     * @param Int $prformnumber form id
+     * @return Array[Array]
+     **/
+    public static function getFormByID(Int $prformnumber)
+    {
+        return self::where("itemlist_id", "=", $prformnumber)
+        ->first();
+    }
+
+
+    /**
+     * Gets all item in table
+     * @return Array[Array]
+     * @example
+     *     ItemList::getAllPrForms();
+     **/
+    public static function getAllPrForms()
+    { return self::all(); }
 }

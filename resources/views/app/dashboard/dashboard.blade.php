@@ -108,6 +108,35 @@
                             </div>
                         </div>
                         @break
+                    @case(8)   {{-- ================= BAC CHAIRMAN ================= --}}
+                        {{-- 
+                            NOTE: tanawa sa accesslevel table unsay id
+                                8 := BAC CHAIRMAN
+                        --}}
+                        <div class="col col-sm-auto col-md-3">
+                            {{-- messages --}}
+                            <div class="dashboard__dashboard-tile dashboard__tile-blue d-block position-relative shadow-lg">
+                                <div class="d-block position-absolute w-100 h-100" style="inset: 0 !important;">
+                                    <div class="d-flex flex-column-reverse flex-lg-column flex-column align-items-center align-items-lg-start justify-content-center px-2 px-lg-3 w-100 h-100">
+                                        <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("PRICE QUOTATION SHEETS") }}</span>
+                                        <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
+                                            <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
+                                                1
+                                            </span>
+                                            <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-rectangle-list"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+
+
+
+
+                        @break
                     @case(10)   {{-- ================= SUPPLY OFFICER ================= --}}
                         {{-- 
                             NOTE: tanawa sa accesslevel table unsay id

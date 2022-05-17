@@ -389,4 +389,23 @@ class AppController extends Controller
                     // ...
                     return view("supplyofficer.view-price-quotation-sheet");
                 }
+
+
+
+    /**
+     * BAC Chair PQS List -> index
+     * @param Request $request request
+     * @return View
+     *
+     **/
+    public function bac_chair_pqsforms(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["8"]))
+            return redirect()->to("/logout");
+
+        return view("bac-chairman.pqs-forms");
+    }
 }

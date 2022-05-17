@@ -44,6 +44,10 @@ tbody {
   width: 100%;
 }
 
+.first-row td{
+  font-size: 15px;
+}
+
 .xl119 {
   font-family: Calibri, sans-serif;
   text-align: right;
@@ -224,6 +228,10 @@ tbody {
   border-right: none;
   border-bottom: 2.0pt double black;
   border-left: 2.0pt double black;
+}
+
+.all-border{
+  border: 2.0pt double black;
 }
 
 .xl311 {

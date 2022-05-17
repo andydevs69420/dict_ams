@@ -86,5 +86,12 @@ Route::controller(AppController::class)->group(function () {
         //View Form
         //...
 
+    // supply officer approved forms
+    Route::get("/bac_chair_pqsforms", "bac_chair_pqsforms");
+        //Generate Price Quotation Sheet
+        //Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
+        //View Form
+        //...
+
 
 });

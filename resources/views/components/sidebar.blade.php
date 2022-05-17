@@ -77,6 +77,25 @@
                             </li>
                         </ul>
                         @break
+                    @case(8)
+                        {{-- 
+                            NOTE: tanawa sa accesslevel table unsay id sa admin
+                                10 := SUPPLY OFFICER
+                        --}}
+                        <ul class="sidebar__ul list-group list-group-flush mx-auto">
+                            <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">{{ __("COMPONENTS") }}</span>
+                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("bac-pqsforms") }}">
+                                <i class="sidebar__accordion-button-icon fa fa-file"></i>
+                                <a class="sidebar__list-label" href="{{ url("/bac_chair_pqsforms") }}">{{ __("PQS Forms") }}</a>
+                            </li>
+
+                        </ul>
+                        
+
+
+
+
+                        @break
                     @case(10)
                         {{-- 
                             NOTE: tanawa sa accesslevel table unsay id sa admin
