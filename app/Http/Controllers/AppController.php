@@ -210,10 +210,10 @@ class AppController extends Controller
     function viewJOForm(Request $request)
     {
         $data = [
-            'JoFormData' => json_decode($request->input('data'),true)
+            "JoFormData" => json_decode($request->input("data"),true)
         ];
 
-        return view('app/new-job-order/view-jo-form', $data);
+        return view("app/new-job-order/view-jo-form", $data);
     }
 
     
@@ -307,19 +307,19 @@ class AppController extends Controller
                         return abort(403);
                     
                     $validator = Validator::make($request->all(), [
-                        'username' => ['required', 'string', 'max:255'],
-                        'email' => ['required', 'string', 'email', 'max:255', 
+                        "username" => ["required", "string", "max:255"],
+                        "email" => ["required", "string", "email", "max:255", 
                             (strcmp(Auth::user()->email, $request->input("email")) === 0)?
-                                'exists:user,email'
+                                "exists:user,email"
                                 :
-                                'unique:user'
+                                "unique:user"
                         ],
-                        'password'      => ['required', 'string', 'min:8', 'confirmed'],
-                        'firstname'     => ['required', 'string', 'min:2', 'max:25'   ],
-                        'lastname'      => ['required', 'string', 'min:2', 'max:25'   ],
-                        'middleinitial' => ['required', 'string', 'min:1', 'max:1'],
-                        'designation'   => ['required', 'string'],
-                        'accesslevel'   => ['required', 'string'],
+                        "password"      => ["required", "string", "min:8", "confirmed"],
+                        "firstname"     => ["required", "string", "min:2", "max:25"   ],
+                        "lastname"      => ["required", "string", "min:2", "max:25"   ],
+                        "middleinitial" => ["required", "string", "min:1", "max:1"],
+                        "designation"   => ["required", "string"],
+                        "accesslevel"   => ["required", "string"],
                     ]);
 
                     if  ($validator->fails())
@@ -430,9 +430,9 @@ class AppController extends Controller
                         return response()->json(["errors" => "Invalid access!"]);
 
                     $validator = Validator::make($request->all(),[
-                        'itemnumber'       => 'required|unique:item_list|integer|digits:8',
-                        'itemname'         => 'required|string|min:4|max:100',
-                        'itemdescription'  => 'required|string|min:4|max:100',
+                        "itemnumber"       => "required|unique:item_list|integer|digits:8",
+                        "itemname"         => "required|string|min:4|max:100",
+                        "itemdescription"  => "required|string|min:4|max:100",
                     ],["itemnumber.unique" => "An Item with the same item number already exists."]);
 
                     if  ($validator->fails())
@@ -473,9 +473,9 @@ class AppController extends Controller
                         return response()->json(["errors" => "Invalid access!"]);
 
                     $validator = Validator::make($request->all(),[
-                        'itemnumber'       => 'required|unique:item_list|integer|digits:8',
-                        'itemname'         => 'required|string|min:4|max:100',
-                        'itemdescription'  => 'required|string|min:4|max:100',
+                        "itemnumber"       => "required|unique:item_list|integer|digits:8",
+                        "itemname"         => "required|string|min:4|max:100",
+                        "itemdescription"  => "required|string|min:4|max:100",
                     ],["itemnumber.unique" => "An Item with the same item number already exists."]);
 
                     if  ($validator->fails())
