@@ -14,9 +14,30 @@ class Form extends Model
     public $timestamps = false;
     
     protected $fillable = [
+        "formtype_id",
+        "createdat",
         "prnumber",
         "sainumber",
         "purpose",
         "formrequiredpersonel_id",
     ];
+
+    /**
+     * Gets forms by requisitioner and formtype
+     * @param Int $requisitionerid requisitioner's id
+     * @param Int $formtypeid formtype id
+     * @return Array
+     **/
+    public static function getForms(Int $requisitionerid, Int $formtypeid) {
+        return self::join(
+            "form_type", "form.formtype_id", "=", "form_type.formtype_id"
+        )
+        ->join(
+            "form_required_personel", "form.formrequiredpersonel_id", "=", "form_required_personel.formrequiredpersonel_id"
+        )
+        ->where("form_type.formtype_id", "=", $formtypeid)
+        ->where("form_required_personel.requisitioner_id", "=", $requisitionerid)
+        ->get();
+    }
+
 }

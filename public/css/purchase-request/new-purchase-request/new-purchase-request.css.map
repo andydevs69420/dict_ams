@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACIA,wDAAwD;AAMxD,wDAAwD;AAOxD,wDAAwD;AAIxD,wDAAwD;AAWxD,wDAAwD;AAIxD,wDAAwD;AAKxD,wDAAwD;AAGxD,wDAAwD;AAMxD,wDAAwD;AAKxD,wDAAwD;ADlDxD,AAAA,kCAAkC,CAClC;EAAE,gBAAgB,ECJP,OAAO,CDImB,UAAU;CAAI;;AAEnD,AAAA,gDAAgD,CAChD;EAAE,SAAS,EAAE,KAAK;CAAI;;AAEtB,AAAA,uCAAuC;AACvC,uCAAuC,CAAC,CAAC,CACzC;EACI,KAAK,ECZE,OAAO,CDYc,UAAU;EACtC,YAAY,ECbL,OAAO,CDaqB,UAAU;CAChD;;AAED,AAAA,iCAAiC,CACjC;EAAE,gBAAgB,ECjBP,OAAO,CDiBuB,UAAU;CAAI",
+    "sources": [
+        "new-purchase-request.scss",
+        "../../global/_appcolor.scss"
+    ],
+    "names": [],
+    "file": "new-purchase-request.css"
+}

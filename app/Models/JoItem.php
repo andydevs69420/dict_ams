@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JoForm extends Model
+class JoItem extends Model
 {
     use HasFactory;
     protected $table = 'jo_form';

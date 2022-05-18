@@ -1,8 +1,10 @@
-@import '../global/sizing';
-@import '../global/appcolor';
+@import '../../global/sizing';
+@import '../../global/appcolor';
 
-.requisitioner__requisitioner-header-label
+.purchase-request-list__purchase-request-list-header-label
 { font-size: 1.6em; }
+
+
 
 
 .dataTables_length
@@ -39,9 +41,9 @@
   }
 }
 
+
 .page-item.active .page-link
 {
-  border-color: $REQUISITIONER-LIST-ACTIVE-LINK-BG !important;
-  background-color: $REQUISITIONER-LIST-ACTIVE-LINK-BG !important;
+  border-color: $PURCHASE-REQUEST-LIST-ACTIVE-LINK-BG !important;
+  background-color: $PURCHASE-REQUEST-LIST-ACTIVE-LINK-BG !important;
 }
-

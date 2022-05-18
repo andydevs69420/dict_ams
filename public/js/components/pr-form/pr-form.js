@@ -255,7 +255,7 @@ function generate__pr_form()
     
     // generate form
 
-    desturl = `${window.location.origin}/newpurchaserequest/viewprform?items=${JSON.stringify(arranged_data)}`;
+    desturl = `${window.location.origin}/purchaserequest/viewprform?items=${JSON.stringify(arranged_data)}`;
     other_fields.forEach((field_name) => {
         desturl += `&${field_name}=${$(`[name="${field_name}"]`).val()}`;
     });

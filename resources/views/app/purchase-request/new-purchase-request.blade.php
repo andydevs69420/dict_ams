@@ -5,10 +5,10 @@
 @section("dependencies")
 
     {{-- bootstrap-select css  --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.css") }}">
 
     {{-- NEW PURCHASE REQUEST css --}}
-    <link rel="stylesheet" href="{{ asset("css/new-purchase-request/new-purchase-request/new-purchase-request.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/purchase-request/new-purchase-request/new-purchase-request.css") }}">
 
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
@@ -29,7 +29,7 @@
             </div>
         </div>
         
-        <form id="request-pr-form" action="{{ url("/newpurchaserequest/uploadprform") }}" method="POST">
+        <form id="request-pr-form" action="{{ url("/purchaserequest/uploadprform") }}" method="POST">
 
             @csrf
 
@@ -82,11 +82,10 @@
 @section("javascript")
 
     {{-- bootstrap-select js --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
     {{-- NEW PURCHASE REQUEST js --}}
-    <script type="text/javascript" src="{{ asset("js/new-purchase-request/new-purchase-request.js") }}"></script>
-
+    <script type="text/javascript" src="{{ asset("js/purchase-request/new-purchase-request.js") }}"></script>
 
     {{-- PR js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>

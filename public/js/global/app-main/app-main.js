@@ -7,7 +7,6 @@
 
     jQuery(()=> {
 
-        auto_resizer();
         window.fit__app_main__content__wrapper();
 
     });
@@ -33,19 +32,6 @@
             });
 
         });
-    }
-
-
-    function auto_resizer()
-    {
-        win = $(window);
-
-        if (win.width() <= 1366)
-        {
-            console.log(window.innerWidth = 200)
-        }
-        console.log(window)
-       
     }
 
 })();

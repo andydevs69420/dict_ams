@@ -48,14 +48,14 @@
                                 <div class="sidebar__accordion accordion accordion-flush">
                                     <div class="sidebar__accordion-item accordion-item">
                                         <div class="sidebar__accordion-header accordion-header">
-                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
+                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#create-form-accordion-collapse-id">
                                                 <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Create Form") }}</span>
                                             </button>
                                         </div>
-                                        <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                        <div id="create-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
                                             <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newpurchaserequest") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/newpurchaserequest") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/newpurchaserequest") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/newpurchaserequest") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
                                                     <a class="sidebar__accordon-body-item-label" href="{{ url("/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
@@ -65,8 +65,26 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("") }}">
-                                <i class="sidebar__list-icon fa fa-list"></i><a class="sidebar__list-label" href="#">{{ __("Form List") }}</a>
+                            <li class="sidebar__li-item list-group-item">
+                                <div class="sidebar__accordion accordion accordion-flush">
+                                    <div class="sidebar__accordion-item accordion-item">
+                                        <div class="sidebar__accordion-header accordion-header">
+                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#form-list-accordion-collapse-id">
+                                                <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-list"></i> {{ __("Form List") }}</span>
+                                            </button>
+                                        </div>
+                                        <div id="form-list-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                            <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/viewprlist") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                                </li>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("#") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("#") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                         @break
