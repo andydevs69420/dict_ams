@@ -36,7 +36,7 @@ class PrForm extends Component
                 dapat naay default item
                 mao ni si item 1
              */
-            ['', '', '', '', '', '']
+            ['stockno' => '', 'unit' => '', 'item' => '', 'quantity' => '', 'unitcost' => '', 'totalcost' => ''],
         ], 
         String $purpose              = '', 
         Array  $budgetOfficer        = [], 
@@ -52,7 +52,6 @@ class PrForm extends Component
         $this->recommendingApproval = $recommendingApproval;
     }
 
-    // =============== REQUISITIONER METHODS ===============
     
     /**
      * Returns Waring message
@@ -89,7 +88,7 @@ class PrForm extends Component
 
 
     /** 
-     * Returns requisitioner id
+     * Returns budget officer id
      * @return Int
      **/
     public function getBudgetOfficerAccessLevelId()
@@ -97,7 +96,7 @@ class PrForm extends Component
 
 
     /**
-     * Returns requisitioner name eg: LN, FN MN
+     * Returns budget officer name eg: LN, FN MN
      * @return String
      **/
     public function getBudgetOfficerName()
@@ -110,7 +109,7 @@ class PrForm extends Component
 
 
     /**
-     * Returns requisitioner designation eg: designation, Accesslevel
+     * Returns budget officer designation eg: designation, Accesslevel
      * @return String
      **/
     public function getBudgetOfficerDesignation()

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PrItem extends Model
 {
     use HasFactory;
-    protected $table = 'pr_form';
+    protected $table = 'pr_item';
 
     public $timestamps = false;
     
@@ -32,4 +32,17 @@ class PrItem extends Model
      **/
     public static function countRows()
     { return countTruncate(count(self::all())); }
+
+
+    /**
+     * Gets all items
+     * @param Int $formid form id
+     * @return Array
+     * @example
+     *     PrForm::getItemsByFormId();
+     **/
+    public static function getItemsByFormId(Int $formid)
+    {
+        return self::where("form_id", "=", $formid)->get();
+    }
 }

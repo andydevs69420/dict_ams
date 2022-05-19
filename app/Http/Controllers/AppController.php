@@ -18,6 +18,7 @@ use App\Models\ItemList;
 use App\Models\FormRequiredPersonel;
 use App\Models\Form;
 use App\Models\PrItem;
+use App\Models\PrAndJoTracker;
 
 
 /**
@@ -128,8 +129,34 @@ class AppController extends Controller
                     #============================
                     if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
                         return redirect()->to("/dashboard");
+                    
+                    #============================
+                    # Go back to page if        =
+                    # any field has null value. =
+                    #============================
+                    if (hasNull($request, ["prform"]))
+                        return redirect()->to("/dashboard");
+                    
+                    $form_id = $request->input("prform");
 
-                    return view("app.purchase-request.purchase-request-form-info");
+                    #==============================
+                    # Decypt form id. If invalid, =
+                    # redirect to dashboard.      =
+                    #==============================
+                    try 
+                    { $form_id = Crypt::decrypt($form_id); } 
+                    catch(Illuminate\Contracts\Encryption\DecryptException $e) 
+                    { return redirect()->to("/dashboard"); }
+
+                    $data = PrAndJoTracker::getFormInfoByFormID($form_id)->toArray();
+                    error_log(json_encode($data));
+
+                    $data["pr_items"] = PrItem::getItemsByFormId($form_id)->toArray();
+                    $data["rQ_data"]  = UserVerificationDetails::getUserByID($data["requisitioner_id"])->toArray();
+                    $data["bO_data"]  = UserVerificationDetails::getUserByID($data["budgetofficer_id"])->toArray();
+                    $data["rA_data"]  = UserVerificationDetails::getUserByID($data["recommendingapprover_id"])->toArray();
+
+                    return view("app.purchase-request.purchase-request-form-info", $data);
                 }
 
                 /**
@@ -159,7 +186,7 @@ class AppController extends Controller
                     # any field has null value. =
                     #============================
                     if (hasNull($request, ["stock", "unit", "description", "qty", "unitcost", "totalcost", "purpose" , "requester" , "budget-officer", "recommending-approval"]))
-                    return back()->with(["info" => "Missing required parameter(s)."]);
+                        return back()->with(["info" => "Missing required parameter(s)."]);
                     
                     #=======================
                     # Item fields          =
@@ -214,11 +241,11 @@ class AppController extends Controller
                         $step3_data[ "item"      ] = $desc_col[$idx];
                         $step3_data[ "quantity"  ] = $qnty_col[$idx];
                         $step3_data[ "unitcost"  ] = $unitc_cost_col[$idx];
-                        $step3_data[ "totalcost" ] = $qnty_col[$idx];
+                        $step3_data[ "totalcost" ] = $total_cost_col[$idx];
                         PrItem::create($step3_data);
                     }
 
-                    return redirect()->intended("/dashboard");
+                    return redirect()->to("/purchaserequest/viewprforminfo?prform=" . Crypt::encrypt($form_id));
                 }
 
                 /**
@@ -267,7 +294,7 @@ class AppController extends Controller
                     # recommending-approval) is =
                     # null                      =
                     #============================
-                    if (!($requisitioner || $budgetofficer || $recommending))
+                    if (!($rQ || $bO || $rA))
                         return abort(403);
 
                     #============================
@@ -275,7 +302,7 @@ class AppController extends Controller
                     #============================
                     $data = [];
                     $data[               "items"               ] = $items;
-                    $data[              "purpose"              ] = request->input("purpose");
+                    $data[              "purpose"              ] = $request->input("purpose");
                     $data[           "requester_name"          ] = formatName($rQ);
                     $data[       "requester_designation"       ] = Designation::getDesignationByID($rQ->designation_id);
                     $data[        "budget_officer_name"        ] = formatName($bO);
@@ -508,8 +535,8 @@ class AppController extends Controller
                     $update_data[ "firstname"      ] = $request->input("firstname");
                     $update_data[ "lastname"       ] = $request->input("lastname");
                     $update_data[ "middleinitial"  ] = $request->input("middleinitial");
-                    $update_data[ "designation_id" ] = $request->input("designation_id");
-                    $update_data[ "accesslevel_id" ] = $request->input("accesslevel_id");
+                    $update_data[ "designation_id" ] = $request->input("designation");
+                    $update_data[ "accesslevel_id" ] = $request->input("accesslevel");
                     
                     
                     #===================================

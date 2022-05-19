@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('form_id')->unsigned();
         });
 
-        Schema::table('jo_form', function (Blueprint $table) {
+        Schema::table('jo_item', function (Blueprint $table) {
             $table->foreign('form_id')->references('form_id')->on('form');
         });
     }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class JoItem extends Model
 {
     use HasFactory;
-    protected $table = 'jo_form';
+    protected $table = 'jo_item';
     
     protected $fillable = [
         'form_id',

@@ -74,7 +74,6 @@
      * @example
      *    window.deleteProfileImage();
      **/
-
     window.deleteProfileImage = function()
     {
         $.ajax({

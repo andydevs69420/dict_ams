@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('pr_item',function(Blueprint $table) {
             $table->id('pritem_id')->unique();
             $table->bigInteger('form_id')->unsigned();
-            $table->integer('stockno');
+            $table->string('stockno');
             $table->string('unit');
             $table->string('item');
             $table->integer('quantity');

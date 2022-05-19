@@ -25,9 +25,9 @@ return new class extends Migration
                 BEGIN
                     INSERT INTO pr_and_jo_tracker (
                         form_id, 
-                        requester_status_id, 
-                        budget_officer_status_id, 
-                        recommending_approval_status_id
+                        requesterstatus_id, 
+                        budgetofficerstatus_id, 
+                        recommendingapprovalstatus_id
                     ) VALUES (
                         NEW.form_id,
                         1,

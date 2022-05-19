@@ -28,7 +28,8 @@ class Form extends Model
      * @param Int $formtypeid formtype id
      * @return Array
      **/
-    public static function getForms(Int $requisitionerid, Int $formtypeid) {
+    public static function getForms(Int $requisitionerid, Int $formtypeid) 
+    {
         return self::join(
             "form_type", "form.formtype_id", "=", "form_type.formtype_id"
         )
@@ -37,7 +38,25 @@ class Form extends Model
         )
         ->where("form_type.formtype_id", "=", $formtypeid)
         ->where("form_required_personel.requisitioner_id", "=", $requisitionerid)
+        ->orderBy("form.createdat", "desc")
         ->get();
+    }
+
+    /**
+     * Get for by id
+     * @param Int $formid form id
+     * @return Array
+     **/
+    public static function getFormById(Int $formid)
+    {
+        return self::join(
+            "form_type", "form.formtype_id", "=", "form_type.formtype_id"
+        )
+        ->join(
+            "form_required_personel", "form.formrequiredpersonel_id", "=", "form_required_personel.formrequiredpersonel_id"
+        )
+        ->where("form.form_id", "=", $formid)
+        ->first();
     }
 
 }
