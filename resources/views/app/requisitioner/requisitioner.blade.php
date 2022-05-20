@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset("css/requisitioner/requisitioner.css") }}">
 
     {{-- datatable css --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
     
 @stop
 
@@ -51,8 +51,8 @@
 @section("javascript")
 
     {{-- datatable js --}}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="{{ asset("extra/dataTable/jQuery-dataTable-bs5-1.11.5.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.js") }}"></script>
 
     {{-- requisitioner js --}}
     <script type="text/javascript" src="{{ asset("js/requisitioner/requisitioner.js") }}"></script>

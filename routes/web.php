@@ -51,11 +51,15 @@ Route::controller(AppController::class)->group(function () {
 
     // create form
         // pr
-        Route::get("/newpurchaserequest", "purchaseRequest");
+        Route::get("/purchaserequest/newpurchaserequest", "purchaseRequest");
+            // view pr list
+                Route::get("/purchaserequest/viewprlist", "viewPRFormList");
+            // view uploaded form
+                Route::get("/purchaserequest/viewprforminfo", "viewPRFormInfo");
             // upload pr form
-                Route::post("/newpurchaserequest/uploadprform", "uploadPRForm");
+                Route::post("/purchaserequest/uploadprform", "uploadPRForm");
             // view pr form
-                Route::get("/newpurchaserequest/viewprform", "viewPRForm");
+                Route::get("/purchaserequest/viewprform", "viewPRForm");
         // jo
         Route::get("/newjoborder", "jobOrder");
             // view jo form
@@ -63,24 +67,15 @@ Route::controller(AppController::class)->group(function () {
     // users
     Route::get("/users", "users");
         // view profile
-        Route::get("/user/userprofile", "user__user_profile");
+            Route::get("/user/userprofile", "user__user_profile");
         // upload profile picture
-        Route::post("/user/uploadprofilepicture", "user__user_profile_update");
+            Route::post("/user/uploadprofilepicture", "user__user_profile_update");
         // edit profile
-        Route::post("/user/editprofile", "user__edit_profile");
+            Route::post("/user/editprofile", "user__edit_profile");
         // accept or decline
-        Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
+            Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
         // delete
-        Route::post("/user/deleteuser", "user__deleteUser");
-
-    // item list
-    Route::get("/itemlist", "itemlist");
-        // add item
-        Route::post("/itemlist/additem", "itemlist__addItem");
-        // update item
-        Route::post("/itemlist/updateitem", "itemlist__updateItem");
-        // delete item
-        Route::post("/itemlist/deleteitem", "itemlist__deleteItem");
+            Route::post("/user/deleteuser", "user__deleteUser");
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");

@@ -16,23 +16,20 @@
 
                         {{-- default item --}}
 
+                        <?php $idx = 0; ?>
+
                         @foreach ($getItems() as $itm)
 
-                            {{--
+                            <li @if ($idx !== 0) id="item-{{$idx+1}}-id" @else id="pr-form__item-template-default" @endif class="list-group-item bg-transparent border-0 rounded-0 p-0">
+                                
+                                @if ($idx !== 0)
+                                    <hr class="bg-info">
+                                @endif
 
-                                $itm[0] para sa stock
-                                $itm[1] para sa unit
-                                $itm[2] para sa description
-                                $itm[3] para sa Quanity
-                                $itm[4] para sa Unit cost
-                                $itm[5] para sa Total cost
-
-                            --}}
-
-                            <li id="pr-form__item-template-default" class="list-group-item bg-transparent border-0 rounded-0 p-0">
+                                
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <span class="fw-bold" role="text">Item 1</span>
-                                    <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
+                                    <span class="fw-bold" role="text">Item {{ $idx+1 }}</span>
+                                    <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item {{ $idx+1 }}" @if ($idx !== 0) onclick='javascript:remove__item("#item-{{$idx+1}}-id")' @endif>&times;</button>
                                 </div>
                                 <div class="container-fluid p-0">
                                     <div class="row">
@@ -40,14 +37,14 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Stock number" data-bs-content="Item stock number"><i class="fa-solid fa-barcode"></i></a>
-                                                <input class="form-control border-0 bg-white" name="stock[]" type="number" value="{{ $itm[0] }}" placeholder="{{ __("Stock no.") }}">
+                                                <input class="form-control border-0 bg-white" name="stock[]" type="number" value="{{ $itm["stockno"] }}" placeholder="{{ __("Stock no.") }}">
                                             </div>
                                         </div>
                                         <!-- unit group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit" data-bs-content="Item Unit ex: pcs, in, mm, cm"><i class="fa-solid fa-scale-balanced"></i></a>
-                                                <input class="form-control border-0 bg-white" list="default-units" name="unit[]" type="text" value="{{ $itm[1] }}" placeholder="{{ __("Unit") }}" required>
+                                                <input class="form-control border-0 bg-white" list="default-units" name="unit[]" type="text" value="{{ $itm["unit"] }}" placeholder="{{ __("Unit") }}" required>
                                                 <datalist id="default-units">
                                                     <option value="pcs">
                                                     <option value="in">
@@ -60,33 +57,36 @@
                                         <div class="col-12">
                                             <div class="input-group my-3 rounded shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                <textarea class="form-control border-0" rows="1" name="description[]" placeholder="{{ __("Item desciption") }}" required></textarea>
+                                                <textarea class="form-control border-0" rows="1" name="description[]" placeholder="{{ __("Item desciption") }}" required>{{ $itm["item"] }}</textarea>
                                             </div>
                                         </div>
                                         <!-- quantity group -->
                                         <div class="col-12 col-sm-12">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
-                                                <input class="form-control border-0 bg-white" name="qty[]" type="number" value="{{ $itm[3] }}" placeholder="{{ __("Qty") }}" required>
+                                                <input class="form-control border-0 bg-white" name="qty[]" type="number" value="{{ $itm["quantity"] }}" placeholder="{{ __("Qty") }}" required>
                                             </div>
                                         </div>
                                         <!-- unit cost group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit cost" data-bs-content="Item cost per unit"><i class="fa-solid fa-coins"></i></a>
-                                                <input class="form-control border-0 bg-white" name="unitcost[]" type="number" value="{{ $itm[4] }}" placeholder="{{ __("Unit cost") }}">
+                                                <input class="form-control border-0 bg-white" name="unitcost[]" type="number" value="{{ $itm["unitcost"] }}" placeholder="{{ __("Unit cost") }}">
                                             </div>
                                         </div>
                                         <!-- total cost group -->
                                         <div class="col-12 col-sm-6">
                                             <div class="input-group my-3 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Total cost" data-bs-content="Item total cost"><i class="fa-solid fa-peso-sign"></i></a>
-                                                <input class="form-control border-0 bg-white" name="totalcost[]" type="number" value="{{ $itm[5] }}" placeholder="{{ __("Total cost") }}">
+                                                <input class="form-control border-0 bg-white" name="totalcost[]" type="number" value="{{ $itm["totalcost"] }}" placeholder="{{ __("Total cost") }}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
+
+                            <?php $idx++; ?>
+
                         @endforeach
 
                     </ul>

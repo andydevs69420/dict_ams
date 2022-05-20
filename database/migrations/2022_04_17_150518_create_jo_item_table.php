@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jo_form', function (Blueprint $table) {
-            $table->id('joform_id')->unique();
+        Schema::create('jo_item', function (Blueprint $table) {
+            $table->id('joitem_id')->unique();
             $table->bigInteger('form_id')->unsigned();
         });
 
-        Schema::table('jo_form', function (Blueprint $table) {
+        Schema::table('jo_item', function (Blueprint $table) {
             $table->foreign('form_id')->references('form_id')->on('form');
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jo_form');
+        Schema::dropIfExists('jo_item');
     }
 };

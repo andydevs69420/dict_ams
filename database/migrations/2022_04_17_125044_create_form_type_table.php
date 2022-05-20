@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\FormType;
+
 return new class extends Migration
 {
     /**
@@ -13,12 +15,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('item_list', function (Blueprint $table) {
-            $table->id('itemlist_id')->unique();
-            $table->bigInteger('itemnumber');
-            $table->string('itemname');
-            $table->string('itemdescription');
+        Schema::create('form_type', function (Blueprint $table) {
+            $table->id("formtype_id");
+            $table->string("formtype");
         });
+
+        FormType::create([ "formtype" => "Purchase Request" ]);
+        FormType::create([ "formtype" => "Job Order" ]);
     }
 
     /**
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_list');
+        Schema::dropIfExists('form_type');
     }
 };

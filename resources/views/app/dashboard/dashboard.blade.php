@@ -47,7 +47,7 @@
                                                     <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("PR LIST") }}</span>
                                                     <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                                         <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
-                                                            {{ App\Models\PrForm::countRows() }}
+                                                            PR TBD
                                                         </span>
                                                         <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-rectangle-list"></i>
                                                     </div>
@@ -63,9 +63,9 @@
                                                     <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("JO LIST") }}</span>
                                                     <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                                         <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
-                                                            {{ App\Models\JoForm::countRows() }}
+                                                            JO TBD
                                                         </span>
-                                                        <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-rectangle-list"></i>
+                                                        <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-helmet-safety"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,7 +118,7 @@
                                                     <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("TOTAL NUMBER OF PR FORM") }}</span>
                                                     <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                                         <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
-                                                            {{ App\Models\PrForm::countRows() }}
+                                                            PR TBD
                                                         </span>
                                                         <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-rectangle-list"></i>
                                                     </div>
@@ -134,7 +134,7 @@
                                                     <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start opacity-100" role="text">{{ __("TOTAL NUMBER OF JO FORM") }}</span>
                                                     <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                                         <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start opacity-100" role="text">
-                                                            {{ App\Models\JoForm::countRows() }}
+                                                            JO TBD
                                                         </span>
                                                         <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-helmet-safety"></i>
                                                     </div>

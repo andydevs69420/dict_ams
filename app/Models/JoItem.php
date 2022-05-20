@@ -5,31 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PrForm extends Model
+class JoItem extends Model
 {
     use HasFactory;
-    protected $table = 'pr_form';
-
-    public $timestamps = false;
+    protected $table = 'jo_item';
     
     protected $fillable = [
         'form_id',
-        'stockno',
-        'unit',
-        'item',
-        'quantity',
-        'unitcost',
-        'totalcost',
+        // dungagi
     ];
 
-    
+   
     /**
      * Counts number of rows
      * @return String
      * @example
-     *     PrForm::countRows();
+     *     JoForm::countRows();
      * 
      **/
     public static function countRows()
     { return countTruncate(count(self::all())); }
+
 }
