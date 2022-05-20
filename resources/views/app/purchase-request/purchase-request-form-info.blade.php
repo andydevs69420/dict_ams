@@ -57,31 +57,31 @@
 
                                             @if(strcmp($rQ_STATUS, "signitured") === 0)
                                                 <li class="progress-step ok">
-                                                    <i class="fa fa-check"></i>
+                                                    <i class="fa fa-check fa-2xs"></i>
                                                 </li>
                                             @else
                                                 <li class="progress-step not-ok">
-                                                    <i class="fa fa-times"></i>
+                                                    <i class="fa fa-times fa-2xs"></i>
                                                 </li>
                                             @endif
 
                                             @if(strcmp($bO_STATUS, "signitured") === 0)
                                                 <li class="progress-step ok">
-                                                    <i class="fa fa-check"></i>
+                                                    <i class="fa fa-check fa-2xs"></i>
                                                 </li>
                                             @else
                                                 <li class="progress-step not-ok">
-                                                    <i class="fa fa-times"></i>
+                                                    <i class="fa fa-times fa-2xs"></i>
                                                 </li>
                                             @endif
 
                                             @if(strcmp($rA_STATUS, "signitured") === 0)
                                                 <li class="progress-step ok">
-                                                    <i class="fa fa-check"></i>
+                                                    <i class="fa fa-check fa-2xs"></i>
                                                 </li>
                                             @else
                                                 <li class="progress-step not-ok">
-                                                    <i class="fa fa-times"></i>
+                                                    <i class="fa fa-times fa-2xs"></i>
                                                 </li>
                                             @endif
 
