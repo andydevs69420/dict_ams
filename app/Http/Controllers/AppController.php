@@ -185,7 +185,7 @@ class AppController extends Controller
                     # Go back to page if        =
                     # any field has null value. =
                     #============================
-                    if (hasNull($request, ["stock", "unit", "description", "qty", "unitcost", "totalcost", "purpose" , "requester" , "budget-officer", "recommending-approval"]))
+                    if (hasNull($request, ["stock", "unit", "description", "qty", "unitcost", "totalcost", "purpose" , "requester" , "budget-officer", "recommending-approval", "file-upload"]) || !request("file-upload")->isValid())
                         return back()->with(["info" => "Missing required parameter(s)."]);
                     
                     #=======================
@@ -207,6 +207,17 @@ class AppController extends Controller
                     $rQ_id   = $request->input("requester");
                     $bO_id   = $request->input("budget-officer");
                     $rA_id   = $request->input("recommending-approval");
+                    $file    = $request->file("file-upload");
+
+
+                    #============================================
+                    # Store file first to prevent errors.       =
+                    #============================================
+                    $filename = Carbon::now()->toDateString().".".$file->getClientOriginalExtension();
+                    $truepath = "storage/form-files/".$filename;
+                    $filepath = $file->storeAs("public/form-files", $filename);
+                    if (!$filepath)
+                        return back()->with(["info" => "Something went wrong while uploading file!"]);
 
                     #=================================
                     # step 1 save required personel  =
@@ -227,6 +238,7 @@ class AppController extends Controller
                     $step2_data[ "sainumber"               ] = "";
                     $step2_data[ "purpose"                 ] = $purpose;
                     $step2_data[ "formrequiredpersonel_id" ] = $frp_id;
+                    $step2_data[ "fileembedded"            ] = $filepath;
                     $form_id = Form::create($step2_data)->id;
                     
                     #=================================
@@ -477,7 +489,7 @@ class AppController extends Controller
                     #==============================================
                     $info = "";
                     if (!$path)
-                        $info = "Something went wrong while uploading your image. 0";
+                        $info = "Something went wrong while uploading your image.";
                     else
                     {
                         if (!(UserProfileImages::updatePath(Auth::user()->user_id, $truepath)))
@@ -632,5 +644,60 @@ class AppController extends Controller
             return redirect()->to("/login");
 
         return view("app.requisitioner.requisitioner");
+    }
+
+
+
+    /**
+     * Supply Officer Form List -> index
+     * @param Request $request request
+     * @return View
+     *
+     **/
+    public function so_approvedforms(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["10"]))
+            return redirect()->to("/logout");
+
+        return view("supplyofficer.so-forms");
+    }
+
+    
+    /* user subdir ----> */
+                /**
+                 * Add so-forms -> generatepqs
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "supply officer" has access to this page, accesslevel = 10
+                 *
+                 **/
+                public function so_approvedforms_generatepqs(Request $request)
+                {
+
+                    // ...
+                    return view("supplyofficer.view-price-quotation-sheet");
+                }
+
+
+
+    /**
+     * BAC Chair PQS List -> index
+     * @param Request $request request
+     * @return View
+     *
+     **/
+    public function bac_chair_pqsforms(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["8"]))
+            return redirect()->to("/logout");
+
+        return view("bac-chairman.pqs-forms");
     }
 }

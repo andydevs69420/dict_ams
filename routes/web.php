@@ -80,4 +80,19 @@ Route::controller(AppController::class)->group(function () {
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
 
+    // supply officer approved forms
+    Route::get("/so_approvedforms", "so_approvedforms");
+        //Generate Price Quotation Sheet
+        Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
+        //View Form
+        //...
+
+    // supply officer approved forms
+    Route::get("/bac_chair_pqsforms", "bac_chair_pqsforms");
+        //Generate Price Quotation Sheet
+        //Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
+        //View Form
+        //...
+
+
 });

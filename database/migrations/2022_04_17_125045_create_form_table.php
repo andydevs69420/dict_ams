@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("sainumber");
             $table->string("purpose");
             $table->bigInteger("formrequiredpersonel_id")->unsigned();
+            $table->string("fileembedded");
         });
 
         Schema::table("form", function (Blueprint $table) {

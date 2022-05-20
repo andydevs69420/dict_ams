@@ -1,0 +1,32 @@
+/* Based on bootstrap breakpoints */
+/* on small devices and above */
+/* on medium devices and above */
+/* on large devices and above */
+/* on extra-large devices and above */
+/* on extra-extra large devices and above */
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= REQUISITIONER LIST COLORS ====== */
+/* ================= ITEM LIST COLORS =============== */
+.so_forms-header-label {
+    font-size: 1.6em;
+  }
+  
+  .new-job-order__upload-files-btn,
+  .new-job-order__upload-files-btn * {
+    color: #0020EC !important;
+    border-color: #0020EC !important;
+  }
+  
+  .new-job-order__submit-btn {
+    background-color: #0020EC !important;
+  }
+  
+
+  /*# sourceMappingURL=users.css.map */

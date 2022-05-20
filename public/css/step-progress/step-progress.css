@@ -16,7 +16,7 @@
   padding: 0;
   width: 3px;
   height: auto;
-  background-color: #64aa35;
+  background-color: #ee4646;
   border-radius: 5em;
 }
 
@@ -31,15 +31,15 @@
   white-space: nowrap;
 }
 
-.step-progress > .progress-step > * {
-  display: inline;
-}
-
 .step-progress > .progress-step:nth-child(even) {
-  margin: 30px 0px;
+  margin: 40px 0px;
 }
 
-.step-progress > .progress-step::before {
+.step-progress > .progress-step:last-child {
+  margin-bottom: 0px;
+}
+
+.step-progress > .progress-step {
   content: '';
   display: -webkit-box;
   display: -ms-flexbox;
@@ -50,14 +50,41 @@
           flex-direction: row;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin: 0;
   padding: 0;
-  width: 15px !important;
-  height: 15px !important;
+  width: 25px !important;
+  height: 25px !important;
   border-radius: 100%;
   border: 3px solid white;
-  background-color: #64aa35;
+  background-color: #ee4646;
   -webkit-box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.8);
           box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.8);
+}
+
+.progress-label > span {
+  height: 25px !important;
+  line-height: 25px !important;
+}
+
+.progress-label > span:nth-child(even) {
+  margin: 40px 0px;
+}
+
+.progress-label > span:last-child {
+  margin-bottom: 0px;
+}
+
+.step-progress > .progress-step.ok {
+  color: white;
+}
+
+.step-progress > .progress-step.not-ok {
+  color: #48ff00;
 }
 /*# sourceMappingURL=step-progress.css.map */

@@ -20,6 +20,7 @@ class Form extends Model
         "sainumber",
         "purpose",
         "formrequiredpersonel_id",
+        "fileembedded",
     ];
 
     /**

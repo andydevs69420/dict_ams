@@ -32,18 +32,73 @@
                         :recommending-approval="$rA_data"></x-pr-form>
                 </div>
 
-                <div class="col-12 col-lg-3">
+                <div class="col-12 col-lg-3 mt-4 mt-lg-0">
                     <div class="card border-0 shadow-lg">
-                        <div class="card-body">
+                        <div class="card-body px-1 py-2">
 
-                            <ol class="step-progress">
-                                <li class="progress-step">
-                                    <span>asdasd</span>
-                                </li>
-                                <li class="progress-step"></li>
-                                <li class="progress-step"></li>
-                            </ol>
+                            {{-- files --}}
+                            <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">FILES</span>
 
+                            <div class="d-block px-2 mb-2">
+                                <a class="btn btn-sm text-truncate rounded-pill w-100 border-primary" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
+                            </div>
+
+                            <div class="d-block px-2">
+                                <hr class="bg-info">
+                            </div>
+
+                            {{-- tracking --}}
+
+                            <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">TRACKING</span>
+                            <div class="container-fluid mb-2">
+                                <div class="row flex-nowrap">
+                                    <div class="col-1">
+                                        <ol class="step-progress">
+
+                                            @if(strcmp($rQ_STATUS, "signitured") === 0)
+                                                <li class="progress-step ok">
+                                                    <i class="fa fa-check"></i>
+                                                </li>
+                                            @else
+                                                <li class="progress-step not-ok">
+                                                    <i class="fa fa-times"></i>
+                                                </li>
+                                            @endif
+
+                                            @if(strcmp($bO_STATUS, "signitured") === 0)
+                                                <li class="progress-step ok">
+                                                    <i class="fa fa-check"></i>
+                                                </li>
+                                            @else
+                                                <li class="progress-step not-ok">
+                                                    <i class="fa fa-times"></i>
+                                                </li>
+                                            @endif
+
+                                            @if(strcmp($rA_STATUS, "signitured") === 0)
+                                                <li class="progress-step ok">
+                                                    <i class="fa fa-check"></i>
+                                                </li>
+                                            @else
+                                                <li class="progress-step not-ok">
+                                                    <i class="fa fa-times"></i>
+                                                </li>
+                                            @endif
+
+                                        </ol>
+                                    </div>
+                                    <div class="col-11 pl-0">
+                                        <div class="progress-label">
+                                            <span class="d-block small text-truncate @if(strcmp($rQ_STATUS, "unsignitured") === 0) text-muted @endif" role="text">Requisitioner</span>
+                                            <span class="d-block small text-truncate @if(strcmp($bO_STATUS, "unsignitured") === 0) text-muted @endif" role="text">Budget Officer</span>
+                                            <span class="d-block small text-truncate @if(strcmp($rA_STATUS, "unsignitured") === 0) text-muted @endif" role="text">Recommending Approval</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- comments --}}
+                            <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">COMMENTS</span>
                         </div>
                     </div>
                 </div>

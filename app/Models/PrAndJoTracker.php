@@ -40,6 +40,7 @@ class PrAndJoTracker extends Model
                 	form.sainumber, 
                 	form.purpose, 
                 	form.formrequiredpersonel_id, 
+                    form.fileembedded,
                 	form_required_personel.requisitioner_id, 
                 	form_required_personel.budgetofficer_id, 
                 	form_required_personel.recommendingapprover_id 
