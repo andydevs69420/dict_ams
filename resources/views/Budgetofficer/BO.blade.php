@@ -1,10 +1,5 @@
-@extends(
-    'layout.app-main', 
-    [
-        'accesslevelid' => $LoggedUserInfo['accesslevel_id'], // para sa sidebar
-        'username'      => $LoggedUserInfo['username']        // para sa topbar
-    ]
-)
+@extends("layout.app-main")
+
 @section('title', 'AMS | Obligation Request')
 
 @section('dependencies')
@@ -35,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @isset($ORS) //table name
+                            {{-- @isset($ORS) //table name
                                 @foreach ($ORS as $data)
                                 <tr>
                                     <td>{{ $data-> PR_number }}</td>                                       
@@ -52,7 +47,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                            @endisset        
+                            @endisset         --}}
                         </tbody>
                     </table>
                 </div>

@@ -39,6 +39,26 @@ class Form extends Model
         )
         ->where("form_type.formtype_id", "=", $formtypeid)
         ->where("form_required_personel.requisitioner_id", "=", $requisitionerid)
+        ->orderBy("form.form_id", "desc")
+        ->orderBy("form.createdat", "desc")
+        ->get();
+    }
+
+    /**
+     * Gets forms by formtype
+     * @param Int $formtypeid formtype id
+     * @return Array
+     **/
+    public static function getALlFormsByFormType(Int $formtypeid) 
+    {
+        return self::join(
+            "form_type", "form.formtype_id", "=", "form_type.formtype_id"
+        )
+        ->join(
+            "form_required_personel", "form.formrequiredpersonel_id", "=", "form_required_personel.formrequiredpersonel_id"
+        )
+        ->where("form_type.formtype_id", "=", $formtypeid)
+        ->orderBy("form.form_id", "desc")
         ->orderBy("form.createdat", "desc")
         ->get();
     }
@@ -52,9 +72,6 @@ class Form extends Model
     {
         return self::join(
             "form_type", "form.formtype_id", "=", "form_type.formtype_id"
-        )
-        ->join(
-            "form_required_personel", "form.formrequiredpersonel_id", "=", "form_required_personel.formrequiredpersonel_id"
         )
         ->where("form.form_id", "=", $formid)
         ->first();

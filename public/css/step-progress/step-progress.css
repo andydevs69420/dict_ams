@@ -40,7 +40,6 @@
 }
 
 .step-progress > .progress-step {
-  content: '';
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -72,8 +71,8 @@
   line-height: 25px !important;
 }
 
-.progress-label > span:nth-child(even) {
-  margin: 40px 0px;
+.progress-label > div:nth-child(even) {
+  margin: 35px 0px;
 }
 
 .progress-label > span:last-child {

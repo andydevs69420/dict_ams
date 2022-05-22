@@ -21,91 +21,81 @@
 @section("content")
     <div class="d-block py-3">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-9">
-                    <x-pr-form 
-                        :items="$pr_items"
-                        :purpose="$purpose"
-                        :requisitioner="$rQ_data"
-                        :budget-officer="$bO_data"
-                        :recommending-approval="$rA_data"></x-pr-form>
-                </div>
+        <form action="POST" enctype="multipart/form-data">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-9">
+                        <x-pr-form 
+                            :items="$pr_items"
+                            :purpose="$purpose"
+                            :requisitioner="$rQ_data"
+                            :budget-officer="$bO_data"
+                            :recommending-approval="$rA_data"></x-pr-form>
+                    </div>
 
-                <div class="col-12 col-lg-3 mt-4 mt-lg-0">
-                    <div class="card border-0 shadow-lg">
-                        <div class="card-body px-1 py-2">
+                    <div class="col-12 col-lg-3 mt-4 mt-lg-0">
+                        <div class="card border-0 shadow-lg">
+                            <div class="card-body px-1 py-2">
 
-                            {{-- files --}}
-                            <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">FILES</span>
+                                {{-- files --}}
+                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILES</span>
 
-                            <div class="d-block px-2 mb-2">
-                                <a class="btn btn-sm text-truncate rounded-pill w-100 border-primary" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
-                            </div>
+                                <div class="d-block px-2 mb-2">
+                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-primary" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
+                                </div>
 
-                            <div class="d-block px-2">
-                                <hr class="bg-info">
-                            </div>
+                                <div class="d-block px-2">
+                                    <hr class="bg-info">
+                                </div>
 
-                            {{-- tracking --}}
+                                {{-- tracking --}}
 
-                            <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">TRACKING</span>
-                            <div class="container-fluid mb-2">
-                                <div class="row flex-nowrap">
-                                    <div class="col-1">
-                                        <ol class="step-progress">
+                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">TRACKING</span>
+                                <div class="container-fluid mb-2">
+                                    <div class="row flex-nowrap">
+                                        <div class="col-1">
+                                            <ol class="step-progress">
 
-                                            @if(strcmp($rQ_STATUS, "signitured") === 0)
-                                                <li class="progress-step ok">
-                                                    <i class="fa fa-check fa-2xs"></i>
-                                                </li>
-                                            @else
-                                                <li class="progress-step not-ok">
-                                                    <i class="fa fa-times fa-2xs"></i>
-                                                </li>
-                                            @endif
+                                                @foreach(\App\Models\FormRequiredPersonel::getFormByFormID($form_id) as $frp)
+                                                    
+                                                    @if(strcmp($frp->personelstatus, "signitured") === 0)
+                                                        <li class="progress-step ok">
+                                                            <i class="fa fa-check fa-2xs"></i>
+                                                        </li>
+                                                    @else
+                                                        <li class="progress-step not-ok">
+                                                            <i class="fa fa-times fa-2xs"></i>
+                                                        </li>
+                                                    @endif
 
-                                            @if(strcmp($bO_STATUS, "signitured") === 0)
-                                                <li class="progress-step ok">
-                                                    <i class="fa fa-check fa-2xs"></i>
-                                                </li>
-                                            @else
-                                                <li class="progress-step not-ok">
-                                                    <i class="fa fa-times fa-2xs"></i>
-                                                </li>
-                                            @endif
+                                                @endforeach
 
-                                            @if(strcmp($rA_STATUS, "signitured") === 0)
-                                                <li class="progress-step ok">
-                                                    <i class="fa fa-check fa-2xs"></i>
-                                                </li>
-                                            @else
-                                                <li class="progress-step not-ok">
-                                                    <i class="fa fa-times fa-2xs"></i>
-                                                </li>
-                                            @endif
-
-                                        </ol>
-                                    </div>
-                                    <div class="col-11 pl-0">
-                                        <div class="progress-label">
-                                            <span class="d-block small text-truncate @if(strcmp($rQ_STATUS, "unsignitured") === 0) text-muted @endif" role="text">Requisitioner</span>
-                                            <span class="d-block small text-truncate @if(strcmp($bO_STATUS, "unsignitured") === 0) text-muted @endif" role="text">Budget Officer</span>
-                                            <span class="d-block small text-truncate @if(strcmp($rA_STATUS, "unsignitured") === 0) text-muted @endif" role="text">Recommending Approval</span>
+                                            </ol>
+                                        </div>
+                                        <div class="col-11 pl-0">
+                                            <div class="progress-label">
+                                                @foreach(\App\Models\FormRequiredPersonel::getFormByFormID($form_id) as $frp)
+                                                    <div class="d-block small text-truncate @if(strcmp($frp->personelstatus, "unsignitured") === 0) text-muted @endif" role="text">
+                                                        <span class="d-block" role="text">{{ \App\Models\Accesslevel::getAccesslevelById($frp->accesslevel_id) }}</span>
+                                                        <span class="d-block small" role="text" style="font-size: .5em">{{ $frp->updatedat? $frp->updatedat : "----:--:--" }}</span>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            {{-- comments --}}
-                            <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">COMMENTS</span>
+                                {{-- comments --}}
+                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">COMMENTS</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-        
+
+        </form>
+    
     </div>
 @stop
 
@@ -119,6 +109,18 @@
 
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
+
+    {{--
+        14 := ADMIN 
+        readonly if admin.
+    --}}
+    @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
+        <script>
+            $("form").find("input, textarea, button")
+            .attr("readonly", true)
+            .attr("disabled", true);
+        </script>
+    @endif
 
 @stop
 

@@ -8,8 +8,8 @@ use App\Models\User;
 class BOController extends Controller
 {
     public function index(){
-        $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
-        return view('Budgetofficer.BO', $data);
+        // $data = ['LoggedUserInfo' => getVerifiedUserById(session('LoggedUser'))];
+        return view('Budgetofficer.BO');
     }
 
     public function edit(){

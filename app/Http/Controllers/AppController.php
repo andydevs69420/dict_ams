@@ -14,11 +14,9 @@ use App\Models\User;
 use App\Models\UserVerificationDetails;
 use App\Models\UserProfileImages;
 use App\Models\Designation;
-use App\Models\ItemList;
 use App\Models\FormRequiredPersonel;
 use App\Models\Form;
 use App\Models\PrItem;
-use App\Models\PrAndJoTracker;
 
 
 /**
@@ -104,11 +102,11 @@ class AppController extends Controller
                     if (!Auth::check())
                         return redirect()->to("/login");
                     
-                    #============================
-                    # Only requisitioner can    =
-                    # view pr form list.        =
-                    #============================
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                    #======================================
+                    # Only requisitioner and admin can    =
+                    # view pr form list.                  =
+                    #======================================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
                         return redirect()->to("/dashboard");
                     
                     return view("app.purchase-request.purchase-request-list");
@@ -123,11 +121,11 @@ class AppController extends Controller
                     if (!Auth::check())
                         return redirect()->to("/login");
                     
-                    #============================
-                    # Only requisitioner can    =
-                    # view pr form.             =
-                    #============================
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                    #======================================
+                    # Only requisitioner and admin can    =
+                    # view pr form.                       =
+                    #======================================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
                         return redirect()->to("/dashboard");
                     
                     #============================
@@ -144,17 +142,18 @@ class AppController extends Controller
                     # redirect to dashboard.      =
                     #==============================
                     try 
-                    { $form_id = Crypt::decrypt($form_id); } 
-                    catch(Illuminate\Contracts\Encryption\DecryptException $e) 
+                    { $form_id = (Int) Crypt::decrypt($form_id); } 
+                    catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
                     { return redirect()->to("/dashboard"); }
 
-                    $data = PrAndJoTracker::getFormInfoByFormID($form_id)->toArray();
-                    error_log(json_encode($data));
+                    $data = Form::getFormByID($form_id)->toArray();
 
                     $data["pr_items"] = PrItem::getItemsByFormId($form_id)->toArray();
-                    $data["rQ_data"]  = UserVerificationDetails::getUserByID($data["requisitioner_id"])->toArray();
-                    $data["bO_data"]  = UserVerificationDetails::getUserByID($data["budgetofficer_id"])->toArray();
-                    $data["rA_data"]  = UserVerificationDetails::getUserByID($data["recommendingapprover_id"])->toArray();
+                    $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
+                    
+                    $data["rQ_data"] = $frp[0]->toArray();
+                    $data["bO_data"] = $frp[1]->toArray();
+                    $data["rA_data"] = $frp[2]->toArray();
 
                     return view("app.purchase-request.purchase-request-form-info", $data);
                 }
@@ -218,18 +217,9 @@ class AppController extends Controller
                     $filepath = $file->storeAs("public/form-files", $filename);
                     if (!$filepath)
                         return back()->with(["info" => "Something went wrong while uploading file!"]);
-
-                    #=================================
-                    # step 1 save required personel  =
-                    #=================================
-                    $step1_data = [];
-                    $step1_data[ "requisitioner_id"        ] = $rQ_id;
-                    $step1_data[ "budgetofficer_id"        ] = $bO_id;
-                    $step1_data[ "recommendingapprover_id" ] = $rA_id;
-                    $frp_id = FormRequiredPersonel::create($step1_data)->id;
                     
                     #=================================
-                    # step 2 insert form             =
+                    # step 1 insert form             =
                     #=================================
                     $step2_data = [];
                     $step2_data[ "formtype_id"             ] = 1; # PR := 1
@@ -237,12 +227,11 @@ class AppController extends Controller
                     $step2_data[ "prnumber"                ] = "";
                     $step2_data[ "sainumber"               ] = "";
                     $step2_data[ "purpose"                 ] = $purpose;
-                    $step2_data[ "formrequiredpersonel_id" ] = $frp_id;
                     $step2_data[ "fileembedded"            ] = $filepath;
                     $form_id = Form::create($step2_data)->id;
                     
                     #=================================
-                    # step 3 insert items to pr form =
+                    # step 2 insert items to pr form =
                     #=================================
                     for ($idx = 0; $idx < $num_of_rows; $idx++)
                     {
@@ -256,6 +245,31 @@ class AppController extends Controller
                         $step3_data[ "totalcost" ] = $total_cost_col[$idx];
                         PrItem::create($step3_data);
                     }
+
+                    #=================================
+                    # step 3 save required personel  =
+                    #=================================
+                    // requisitioner
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $rQ_id,
+                        "personelstatus_id"          => 1,
+                        "updatedat"                  => Carbon::now()
+                    ]);
+                    // budget officer
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $bO_id,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => Carbon::now()
+                    ]);
+                    // recommending approval
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $rA_id,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => Carbon::now()
+                    ]);
 
                     return redirect()->to("/purchaserequest/viewprforminfo?prform=" . Crypt::encrypt($form_id));
                 }
@@ -429,7 +443,7 @@ class AppController extends Controller
                     try
                     { $decrypt = (int) Crypt::decrypt($request->input("user")); }
                     catch (\Illuminate\Contracts\Encryption\DecryptException $e)
-                    { return redirect()->intended("/dashboard"); }
+                    { return redirect()->to("/dashboard"); }
 
                     #=====================================
                     # Check if user is already verified. =

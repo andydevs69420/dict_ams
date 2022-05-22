@@ -39,19 +39,43 @@
                             </thead>
                             <tbody>
 
-                                @foreach(\App\Models\Form::getForms(Auth::user()->user_id, 1) as $form)
 
-                                    <tr>
-                                        <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
-                                        <td style="vertical-align: middle !important;">{{ $form->prnumber }}</td>
-                                        <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
-                                        <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
-                                        <td class="text-center" style="vertical-align: middle !important;">
-                                            <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
-                                        </td>
-                                    </tr>
-                                
-                                @endforeach
+                                @if(Auth::user()->accesslevel_id === 14)
+                                    {{-- 
+                                        getALlFormsByFormType(formtypeid);
+                                    --}}
+                                    @foreach(\App\Models\Form::getALlFormsByFormType(1) as $form)
+
+                                        <tr>
+                                            <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->prnumber }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
+                                            <td class="text-center" style="vertical-align: middle !important;">
+                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
+                                            </td>
+                                        </tr>
+                                    
+
+                                    @endforeach
+                                @else
+                                    {{-- 
+                                        getForms(userid, formtypeid);
+                                    --}}
+                                    @foreach(\App\Models\FormRequiredPersonel::getFormByUser(Auth::user()->user_id) as $form)
+
+                                        <tr>
+                                            <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->prnumber }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
+                                            <td class="text-center" style="vertical-align: middle !important;">
+                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
+                                            </td>
+                                        </tr>
+                                    
+                                    @endforeach
+                                @endif
 
                             </tbody>
                         </table>

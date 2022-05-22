@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PrAndJoTrackerStatus extends Model
+class PersonelStatus extends Model
 {
     use HasFactory;
-    protected $table = "pr_and_jo_tracker_status";
+    protected $table = "personel_status";
 
     public $timestamps = false;
     
     protected $fillable = [
-        "prandjotrackerstatus",
+        "personelstatus",
     ];
 }

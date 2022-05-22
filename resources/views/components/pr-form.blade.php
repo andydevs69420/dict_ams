@@ -182,7 +182,7 @@
                     <span role="text">{{ __("GENERATE FORM") }}</span>
                 </button>
             </span>
-            <span class="small text-muted" role="text">{{ __("Form v0.5") }}</span>
+            <span class="small text-muted" role="text">{{ __("Form v0.6") }}</span>
         </div>
     </div>
 </div>

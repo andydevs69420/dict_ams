@@ -17,16 +17,17 @@ return new class extends Migration
         {
             Schema::create('form_required_personel',function(Blueprint $table) {
                 $table->id('formrequiredpersonel_id')->uniqe();
-                $table->bigInteger('budgetofficer_id')->unsigned();
-                $table->bigInteger('requisitioner_id')->unsigned();
-                $table->bigInteger('recommendingapprover_id')->unsigned();
+                $table->bigInteger('form_id')->unsigned();
+                $table->bigInteger('userverificationdetails_id')->unsigned();
+                $table->bigInteger('personelstatus_id')->unsigned();
+                $table->dateTime('updatedat')->nullable();
             });
 
             
             Schema::table('form_required_personel', function (Blueprint $table) {
-                $table->foreign('budgetofficer_id')->references('userverificationdetails_id')->on('user_verification_details');
-                $table->foreign('requisitioner_id')->references('userverificationdetails_id')->on('user_verification_details');
-                $table->foreign('recommendingapprover_id')->references('userverificationdetails_id')->on('user_verification_details');
+                $table->foreign('form_id')->references('form_id')->on('form');
+                $table->foreign('userverificationdetails_id')->references('userverificationdetails_id')->on('user_verification_details');
+                $table->foreign('personelstatus_id')->references('personelstatus_id')->on('personel_status');
             });
             
         }

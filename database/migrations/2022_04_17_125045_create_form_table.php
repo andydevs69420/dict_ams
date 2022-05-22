@@ -20,13 +20,11 @@ return new class extends Migration
             $table->string("prnumber");
             $table->string("sainumber");
             $table->string("purpose");
-            $table->bigInteger("formrequiredpersonel_id")->unsigned();
             $table->string("fileembedded");
         });
 
         Schema::table("form", function (Blueprint $table) {
             $table->foreign("formtype_id")->references("formtype_id")->on("form_type");
-            $table->foreign("formrequiredpersonel_id")->references("formrequiredpersonel_id")->on("form_required_personel");
         });
     }
 
