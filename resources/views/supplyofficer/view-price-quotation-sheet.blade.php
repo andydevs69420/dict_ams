@@ -44,7 +44,7 @@
                 </tr>
                 <tr class="first-row" height=20 style='height:15.0pt;'>
                     <td class=xl302 height=20 style='height:15.0pt;' colspan=4>&nbsp;&nbsp;Purchase Request No.</td>
-                    <td class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width: 112pt;'>LOADING...</td>
+                    <td class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width: 112pt;'>{{ $pqsdata['prid'] }}</td>
                     <td class=xl66>&nbsp;&nbsp;C. NO.</td>
                     <td class=x-jo-number-slot style="max-width:25pt;" colspan=2>LOADING...</td>
                     <td class=xl303 colspan="3"></td>
@@ -90,8 +90,8 @@
                 <tr class="spacer"></tr>
                 <tr class="spacer"></tr>
                 <tr>
-                    <td class="name canvasser-name" colspan="6">ERWIN AMPER</td>
-                    <td class="name companyrep-name" colspan="6">JAMES YAP</td>
+                    <td class="name canvasser-name" colspan="6">LOADING..</td>
+                    <td class="name companyrep-name" colspan="6">LOADING..</td>
                 </tr>
                 <tr>
                     <td class="name-label" colspan="6">CANVASSER</td>
@@ -180,18 +180,18 @@
                 
                 <!-- ITEM TEMPLATE -->
                 <div id="pr-template__item-list">
-                    {{-- @foreach ($PQSFormData['data'] as $formitem)
+                    @foreach ($itemdata as $formitem)
                         <tr>
-                            <td class=x-col-1 style='border-top:none;'>{{ $formitem[0] }}</td>
-                            <td class=x-col-2 style='border-top:none;border-left:none;'>{{ $formitem[1] }}</td>
-                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;' colspan=2>{{ $formitem[2] }}</td>
-                            <td class=x-col-4 style='border-top:none;border-left:none;'>{{ $formitem[3] }}</td>
-                            <td class=x-col-5 style='border-top:none;border-left:none;'>{{ $formitem[4] }}</td>
-                            <td class=x-col-6 style='border-top:none;border-left:none;'>{{ $formitem[5] }}</td>
-                            <td class=x-col-5 style='border-top:none;border-left:none;'>{{ $formitem[4] }}</td>
-                            <td class=x-col-6 style='border-top:none;border-left:none;'>{{ $formitem[5] }}</td>
+                            <td class=x-col-1 style='border-top:none;'>{{ $formitem["stockno"] }}</td>
+                            <td class=x-col-2 style='border-top:none;border-left:none;'>{{ $formitem["quantity"] }}</td>
+                            <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;'>{{ $formitem["unit"] }}</td>
+                            <td class=x-col-4 style='border-top:none;border-left:none;' colspan="2">{{ $formitem["item"] }}</td>
+                            <td class=x-col-5 style='border-top:none;border-left:none;'></td>
+                            <td class=x-col-6 style='border-top:none;border-left:none;'></td>
+                            <td class=x-col-5 style='border-top:none;border-left:none;'></td>
+                            <td class=x-col-6 style='border-top:none;border-left:none;'></td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                     {{-- temporary --}}
                     <tr class="after-lastitem-notice">
                         <td class=x-col-1 style='border-top:none;'></td>

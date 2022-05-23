@@ -45,4 +45,26 @@ class PrItem extends Model
     {
         return self::where("form_id", "=", $formid)->get();
     }
+
+
+    /**
+     * Gets all item in table -> with unique form id
+     * @return Array[Array]
+     * @example
+     *     ItemList::getAllPrForms();
+     **/
+    public static function getAllPrFormsByForm()
+    { return self::select("form_id")->distinct()->get(); }
+
+
+
+     /**
+     * Gets all item in table -> with unique form id
+     * @return Array[Array]
+     * @example
+     *     ItemList::getAllPrForms();
+     **/
+    public static function getAllPrForms()
+    { return self::select("*")->distinct()->get(); }
+    
 }
