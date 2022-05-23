@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AppController;
@@ -76,6 +77,12 @@ Route::controller(AppController::class)->group(function () {
             Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
         // delete
             Route::post("/user/deleteuser", "user__deleteUser");
+        // closure | hash user_id
+            Route::post("/user/hashid", function() {
+                return response()->json([
+                    "hashid" => Crypt::encrypt(request()->user_id)
+                ]);
+            });
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
