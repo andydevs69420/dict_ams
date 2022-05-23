@@ -50,14 +50,6 @@ Route::get('/edit-purchaserequest',[BOController::class,'edit']);
 Route::get('/joborderstatus',[JOController::class,'index']);
 Route::get('/edit-Joborder',[JOController::class,'edit']);
 
-// Canvasser (Purchase Request)
-Route::get("/purchaserequest",[CanvController::class,'purchaserequest']);
-Route::get('/edit-canvasserPR',[CanvController::class,'editpurchaserequest']);
-Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
-
-// BAC Chairman (Price Quotation)
-Route::get("/pricequotation",[BACController::class,'index']);
-
 // app group routes
 Route::controller(AppController::class)->group(function () {
 

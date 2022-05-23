@@ -144,7 +144,7 @@
                         @case(9)   {{-- ================= Canvasser ========= --}}
                         {{-- 
                             NOTE: tanawa sa accesslevel table unsay id
-                                 11 := Canvasser
+                                 9 := Canvasser
                         --}}
                         @if($id != 9)
                         <div class="col col-sm-auto col-md-3">
