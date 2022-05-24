@@ -137,11 +137,10 @@
         .addClass(parseInt(status_id) === 2 ? "btn-primary" : "btn-success");
 
         dropdown = $(row).find("ul.dropdown-menu");
-        
+        user_id  = $(row).attr("id").split("-")[2];
 
         if (parseInt(status_id) === 2)
         {
-            user_id = $(row).attr("id").split("-")[2];
 
             $.ajax({
                 url  : "/user/hashid",
@@ -158,21 +157,23 @@
                             $(`<a class="dropdown-item" href="/user/userprofile?user=${response['hashid']}">`)
                             .text("view profile")
                         )
-                    )
-                    .append(
-                        $("<li>")
-                        .append(
-                            $(`<a class="dropdown-item" href="#" onclick='javascript:window.deleteUser("${user_id}")'>`)
-                            .text("delete")
-                        )
                     );
-
-                }
+                },
+                error: function(response, status, request)
+                { somethingWentWrong(); }
             });
         }
         else
         {
-            alert("FOOC")
+            dropdown.empty();
+            dropdown
+            .append(
+                $("<li>")
+                .append(
+                    $(`<a class="dropdown-item" href="#" onclick='javascript:window.deleteUser("${user_id}")'>`)
+                    .text("delete")
+                )
+            );
         }
        
     }

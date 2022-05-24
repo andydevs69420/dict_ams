@@ -102,10 +102,10 @@
                                     <div class="accordion-item">
                                         <div class="accordion-header p-2">
                                             <div class="input-group mt-2 mb-3">
-                                                <textarea id="purchase-request-form-info__comment-field" class="form-control" name="" id="" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
+                                                <textarea id="purchase-request-form-info__comment-field" class="form-control" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
                                             </div>
                                             <span class="d-block my-2">
-                                                <button id="purchase-request-form-info__comment-field" class="btn btn-success w-100" type="button">
+                                                <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100" type="button" onclick="javascript: window.addComment()">
                                                     {{ __("COMMENT") }}
                                                 </button>
                                             </span>
@@ -136,6 +136,9 @@
 
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
+
+    {{-- PURCHASE REQUEST FORM INFO --}}
+    <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
 
     {{--
         14 := ADMIN 

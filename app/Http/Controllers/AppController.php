@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
+
+use App\Models\Designation;
+use App\Models\Accesslevel;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
 use App\Models\UserProfileImages;
-use App\Models\Designation;
-use App\Models\FormRequiredPersonel;
 use App\Models\Form;
 use App\Models\PrItem;
-
+use App\Models\FormRequiredPersonel;
+use App\Models\FormRequiredPersonelComment;
 
 /**
  * Formats lastname
@@ -157,6 +159,25 @@ class AppController extends Controller
 
                     return view("app.purchase-request.purchase-request-form-info", $data);
                 }
+                // pr subroutine ----->
+                    function addPrFormInfoComment(Request $request)
+                    {
+                        if (!Auth::check())
+                            return false;
+
+                        if (hasNull($request, ["frp", "comment"]))
+                            return false;
+                        
+                        $form_required_personel = $request->input("frp");
+                        $comment                = $request->input("comment");
+
+                        $signal = FormRequiredPersonelComment::create([
+                            "formrequiredpersonel_id" => $form_required_personel,
+                            "comment"                 => $comment
+                        ]);
+                        
+                        return (bool) !(!$signal);
+                    }
 
                 /**
                  * Upload pr form
