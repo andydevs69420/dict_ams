@@ -461,12 +461,11 @@ class AppController extends Controller
                  **/
                 public function user__user_profile_update(Request $request)
                 {
-                    #============================
-                    # Redirect to login if not  =
-                    # login or expired.         =
-                    #============================
+                    #=================================
+                    # Return 403 if not logged in.   =
+                    #=================================
                     if (!Auth::check())
-                        return redirect()->to("/login");
+                        return abort(403);
                     
                     #=================================
                     # Return 403 if no images found. =
@@ -513,6 +512,28 @@ class AppController extends Controller
                     }
 
                     return back()->with("info", $info);
+                }
+
+                public static function user__delete_user_profile_image(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    $decrypt = null;
+                    try
+                    { $decrypt = (int) Crypt::decrypt($request->input("user")); }
+                    catch (\Illuminate\Contracts\Encryption\DecryptException $e)
+                    { return redirect()->to("/dashboard"); }
+
+                    $result = UserProfileImages::deleteUserProfileImageByUserID((Int) $decrypt);
+                    if (!$result)
+                        return back()->with("info", "Profile image deletetion error!");
+                        
+                    return back()->with("info", "Successfully deleted profile image.");
                 }
 
                 /**

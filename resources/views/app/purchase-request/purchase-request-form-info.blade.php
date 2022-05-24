@@ -86,7 +86,34 @@
                                 </div>
 
                                 {{-- comments --}}
-                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">COMMENTS</span>
+                                <div class="accordion">
+                                    <div class="accordion-item">
+                                        <h6 class="accordion-header">
+                                            <button class="accordion-button py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                <span class="d-block px-2 small text-muted" role="text" style="font-weight: 400;">COMMENTS</span>
+                                            </button>
+                                        </h6>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body px-2" style="max-height: 450px; overflow-y: auto;">
+                                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quaerat voluptates ab. Pariatur laudantium quod voluptatum, voluptate nesciunt aliquid cumque.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <div class="accordion-header p-2">
+                                            <div class="input-group mt-2 mb-3">
+                                                <textarea id="purchase-request-form-info__comment-field" class="form-control" name="" id="" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
+                                            </div>
+                                            <span class="d-block my-2">
+                                                <button id="purchase-request-form-info__comment-field" class="btn btn-success w-100" type="button">
+                                                    {{ __("COMMENT") }}
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
