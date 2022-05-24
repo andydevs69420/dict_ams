@@ -49,7 +49,7 @@ class Form extends Model
      * @param Int $formtypeid formtype id
      * @return Array
      **/
-    public static function getALlFormsByFormType(Int $formtypeid) 
+    public static function getAllFormsByFormType(Int $formtypeid) 
     {
         return self::join(
             "form_type", "form.formtype_id", "=", "form_type.formtype_id"
