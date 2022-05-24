@@ -12,7 +12,31 @@
 
 @section('content')
     <div class="d-block py-3">
-        <form id="request-form" action="">
+        @if (Session::has("info"))
+            <div class="modal fade" tabindex="-1" aria-hidden="true" style="padding-right: 0 !important;">
+                <div class="modal-dialog border-0">
+                    <div class="modal-content border-0">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title">Success</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span class="h5" role="text" style="font-weight: 300;">
+                                {{ session("info") }}
+                            </span>
+                        </div>
+                        <div class="modal-footer border-0">
+                            <div class="mx-auto w-25 shadow">
+                                <button type="button" class="btn w-100 btn-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+
+        <form id="request-form" action="{{ url("/newjoborder/uploadjoform") }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -31,7 +55,7 @@
                             </div>
                             <div class="card-body">
                                 <div id="file-content-id" class="d-block"></div>
-                                <input id="file-pick-id" class="d-none" type="file" name="file[]" accept="image/.jpeg,.png,.pdf" multiple>
+                                <input id="file-pick-id" class="d-none" type="file" name="file-upload" accept="image/.jpeg,.png,.pdf" multiple>
                                 <button class="new-job-order__upload-files-btn btn w-100 border" for="file-pick-id" type="button" onclick='javascript:$("#file-pick-id").click()'>
                                     <i class="fa fa-upload"></i>
                                     <span role="text">{{ __("UPLOAD FILES") }}</span>

@@ -133,7 +133,7 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Budget Officer" data-bs-content="Target budget officer"><i class="fa-solid fa-user"></i></a>
-                        <select class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer" placeholder="{{ __("Budget officer") }}" data-live-search="true" required>
+                        <select class="selectPicker form-select p-0 border-0 bg-white" name="budget-officer" placeholder="{{ __("Budget officer") }}" data-live-search="true">
 
                             @if(strlen($getBudgetOfficerName()) > 0)
                                 <option value="{{ $getBudgetOfficerId() }}" selected>
@@ -154,7 +154,7 @@
                 <div class="col-12">
                     <div class="input-group my-3 shadow">
                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Recommending approval" data-bs-content="Target recommending approval"><i class="fa-solid fa-user"></i></a>
-                        <select class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" placeholder="{{ __("Recommending approval") }}" data-live-search="true" required>
+                        <select class="selectPicker form-select p-0 border-0 bg-white" name="recommending-approval" placeholder="{{ __("Recommending approval") }}" data-live-search="true">
 
                             @if(strlen($getRecommendingApprovalName()) > 0)
                                 <option value="{{ $getRecommendingApprovalId() }}" selected>

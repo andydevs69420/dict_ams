@@ -64,7 +64,12 @@ Route::controller(AppController::class)->group(function () {
         // jo
         Route::get("/newjoborder", "jobOrder");
             // view jo form
-                Route::get('/newjoborder/viewjoform', [AppController::class,'viewJOForm']);
+                Route::get('/newjoborder/viewjoform', 'viewJOForm');
+            // upload jo form
+                Route::post("/newjoborder/uploadjoform", "uploadJOForm");
+            // view uploaded form
+                Route::get("/newjoborder/viewjoforminfo", "viewJOFormInfo");
+
     // users
     Route::get("/users", "users");
         // view profile
@@ -90,9 +95,11 @@ Route::controller(AppController::class)->group(function () {
     // supply officer approved forms
     Route::get("/so_approvedforms", "so_approvedforms");
         //Generate Price Quotation Sheet
-        Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
+            Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
         //View Form
-        //...
+            Route::get("/so_approvedforms/viewform", "so_approvedforms_viewform");
+        //Uploadd PQS
+            Route::post("/so_approvedforms/uploadpqs", "so_approvedforms_uploadpqs");
 
     // supply officer approved forms
     Route::get("/bac_chair_pqsforms", "bac_chair_pqsforms");
