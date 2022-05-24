@@ -54,9 +54,9 @@
                             <textarea placeholder="Type something here..."name="comment" class="uppercase" rows="5">@isset($l->comment){{ $l->comment }}@endisset</textarea>
                         </div>
                         <div class="box-footer">
-                            <input type="hidden" class="readonly" readonly="" name="id" value="@isset($e_id){{ $e_id }}@endisset">
+                            <input type="hidden" class="readonly" readonly="" name="id" value="@isset($form_id){{ $form_id }}@endisset">
                             <button class="small_button border" type="submit" name="submit"><i class="ui checkmark icon"></i> {{ __("Update") }}</button>
-                            <a href="{{ url('purchaserequeststatus') }}" class="ui black grey small button"><i class="ui times icon"></i> {{ __("Cancel") }}</a>
+                            <a href="{{ url('joborderstatus') }}" class="ui black grey small button"><i class="ui times icon"></i> {{ __("Cancel") }}</a>
                         </div>
                     </div>
                 <form>

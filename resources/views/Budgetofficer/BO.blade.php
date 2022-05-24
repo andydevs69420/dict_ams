@@ -1,6 +1,6 @@
 @extends("layout.app-main")
 
-@section('title', 'AMS | Purchase Request')
+@section('title', 'AMS | Purchase Request Status')
 
 @section('dependencies')
 {{-- Budget officer css --}}
@@ -32,19 +32,19 @@
                             </tr>
                     </thead>
                     <tbody>
-                        @foreach(App\Models\ItemList::getAllItems() as $item)
+                        @foreach($form as $Form_id)
                                 <tr>
-                                    <td>{{ $item-> $itemnumber }}</td>                                       
+                                    <td>{{ $Form_id}}</td>                                       
                                     <td class="align-right">
-                                    <a href="{{ url('BO/edit/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
-                                    <a href="{{ url('BO/delete/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                    <a href="{{ url('BO/download/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
+                                        <a href="{{ url('Budgetofficer/edit-purchaserequest/'.$Form_id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
+                                        <a href="{{ url('Budgetofficer/delete/'.$Form_id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                                        <a href="{{ url('Budgetofficer/download/'.$Form_id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
 
-                                    @isset($data->comment)
+                                    <!-- @isset($data->comment)
                                         @if($data->comment != null)
                                             <button class="ui circular basic icon button tiny uppercase" data-tooltip='{{ $data->comment }}' data-variation='wide' data-position='top right'><i class="ui icon comment alternate"></i></button>
                                         @endif
-                                    @endisset
+                                    @endisset -->
                                     </td>
                                 </tr>
                         @endforeach    
