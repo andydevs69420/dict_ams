@@ -31,19 +31,19 @@
                             </tr>
                     </thead>
                     </tbody>
-                    @foreach(App\Models\JoItem::getAllJoForms() as $form)
+                        @foreach($form as $Form_id)
                                 <tr>
                                     <td>{{ $form }}</td>                                       
                                     <td class="align-right">
-                                    <a href="{{ url('BO/edit/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
-                                    <a href="{{ url('BO/delete/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                    <a href ="{{ url('BO/download/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
+                                    <a href="{{ url('Budgetofficer/edit-Joboder/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
+                                    <a href="{{ url('Budgetofficer/delete/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                                    <a href ="{{ url('Budgetofficer/download/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
 
-                                    @isset($data->comment)
+                                    <!-- @isset($data->comment)
                                         @if($data->comment != null)
                                             <button class="ui circular basic icon button tiny uppercase" data-tooltip='{{ $data->comment }}' data-variation='wide' data-position='top right'><i class="ui icon comment alternate"></i></button>
                                         @endif
-                                    @endisset
+                                    @endisset -->
                                     </td>
                                 </tr>
                         @endforeach     
