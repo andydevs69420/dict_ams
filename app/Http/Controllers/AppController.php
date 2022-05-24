@@ -261,14 +261,14 @@ class AppController extends Controller
                         "form_id"                    => $form_id,
                         "userverificationdetails_id" => $bO_id,
                         "personelstatus_id"          => 2,
-                        "updatedat"                  => Carbon::now()
+                        "updatedat"                  => null
                     ]);
                     // recommending approval
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
                         "userverificationdetails_id" => $rA_id,
                         "personelstatus_id"          => 2,
-                        "updatedat"                  => Carbon::now()
+                        "updatedat"                  => null
                     ]);
 
                     return redirect()->to("/purchaserequest/viewprforminfo?prform=" . Crypt::encrypt($form_id));

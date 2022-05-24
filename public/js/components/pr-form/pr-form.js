@@ -274,13 +274,15 @@ $("#file-pick-id")
 
     file = e.target.files;
 
+    $("#file-content-id").empty();
+
     for (idx = 0; idx < file.length; idx++)
     {
         filereader = new FileReader();
         filereader.readAsDataURL(file[idx]);
         filereader.onloadend = (data) => {
             $("#file-content-id")
-            .append($(`<a class="d-inline-block px-4 border rounded-pill bg-light text-nowrap text-truncate text-decoration-none" href="${data.currentTarget.result}" target="__blank" style="max-width: 100%;"><small>${file[idx].name}</small></a>`));
+            .append($(`<a class="btn btn-sm my-2 px-4 w-100 border-success rounded-pill bg-light text-success text-nowrap text-truncate text-decoration-none" href="${data.currentTarget.result}" target="__blank" style="max-width: 100%;"><small>${file[0].name}</small></a>`));
         }
     }
 

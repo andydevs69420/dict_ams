@@ -54,9 +54,6 @@ class Form extends Model
         return self::join(
             "form_type", "form.formtype_id", "=", "form_type.formtype_id"
         )
-        ->join(
-            "form_required_personel", "form.formrequiredpersonel_id", "=", "form_required_personel.formrequiredpersonel_id"
-        )
         ->where("form_type.formtype_id", "=", $formtypeid)
         ->orderBy("form.form_id", "desc")
         ->orderBy("form.createdat", "desc")

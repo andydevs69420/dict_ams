@@ -38,10 +38,10 @@
                             <div class="card-body px-1 py-2">
 
                                 {{-- files --}}
-                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILES</span>
+                                <span class="d-block px-2 py-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILE</span>
 
                                 <div class="d-block px-2 mb-2">
-                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-primary" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
+                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-success text-success" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
                                 </div>
 
                                 <div class="d-block px-2">

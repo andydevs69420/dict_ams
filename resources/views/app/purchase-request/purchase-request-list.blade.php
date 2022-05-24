@@ -44,7 +44,7 @@
                                     {{-- 
                                         getALlFormsByFormType(formtypeid);
                                     --}}
-                                    @foreach(\App\Models\Form::getALlFormsByFormType(1) as $form)
+                                    @foreach(\App\Models\Form::getAllFormsByFormType(1) as $form)
 
                                         <tr>
                                             <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
