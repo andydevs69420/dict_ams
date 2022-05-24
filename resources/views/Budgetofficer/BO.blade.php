@@ -32,13 +32,13 @@
                             </tr>
                     </thead>
                     <tbody>
-                        @foreach(App\Models\ItemList::getAllItems() as $item)
+                        @foreach(App\Models\PrItem::getAllPrForms() as $form)
                                 <tr>
-                                    <td>{{ $item-> $itemnumber }}</td>                                       
+                                    <td >{{ $form_id }}</td>                                       
                                     <td class="align-right">
-                                    <a href="{{ url('BO/edit/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
-                                    <a href="{{ url('BO/delete/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                    <a href="{{ url('BO/download/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
+                                    <a href="{{ url('BO/edit/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
+                                    <a href="{{ url('BO/delete/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                                    <a href="{{ url('BO/download/'.$form_id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
 
                                     @isset($data->comment)
                                         @if($data->comment != null)
