@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <span class="so_forms-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Price Quotation Sheets") }}</span>
+                    <span class="so_forms-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Price Quotation Request") }}</span>
                 </div>
             </div>
         </div>
@@ -32,39 +32,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach(App\Models\PQSForm::getAllPQSForms() as $pqsform)
+                @foreach($form as $Form_id)
                         <tr>
-                            <td style="vertical-align: middle !important;">{{ $pqsform["form_id"] }}</td>
+                            <td>{{ $Form_id}}</td>
                             <td style="vertical-align: middle !important;">{{ Requisitioner }}</td>
                             <td style="vertical-align: middle !important;">{{ Date }}</td>
                             <td class="text-center" style="vertical-align: middle !important;">
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("action") }}</button>
+                                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("Status") }}</button>
                                     <ul class="dropdown-menu" aria-labelledby="">
                                         <li><a class="dropdown-item" href="#">{{ __("View") }}</a></li>
                                         <li><a class="dropdown-item" href="#">{{ __("Approve") }}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{ __("Decline") }}</a></li>                               
+                                        <li><a class="dropdown-item" href="#">{{ __("Decline") }}</a></li>
+                                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("Send") }}</button>                               
                                     </ul>
                                 </div>
                             </td>
                         </tr>  
-                    @endforeach  --}}
-                    {{-- temporary --}}
-                    <tr>
-                        <td style="vertical-align: middle !important;">Purchase Request</td>
-                        <td style="vertical-align: middle !important;">Monkey D. Luffy</td>
-                        <td style="vertical-align: middle !important;">05/23/2022</td>
-                        <td class="text-center" style="vertical-align: middle !important;">
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("action") }}</button>
-                                <ul class="dropdown-menu" aria-labelledby="">
-                                    <li><a class="dropdown-item" href="#">{{ __("View") }}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{ __("Approve") }}</a></li>
-                                    <li><a class="dropdown-item" href="#">{{ __("Decline") }}</a></li>                               
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>   
+                @endforeach
                 </tbody>
             </table>
         </div>

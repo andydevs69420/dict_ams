@@ -1,6 +1,6 @@
-@extends('layout.app-main')
-    
-@section('title', 'AMS | Edit PR Status')
+@extends("layout.app-main")
+
+@section('title', 'AMS | Edit Job order Request/Status')
 
 @section('dependencies')
     <link rel="stylesheet" href="{{ asset('css/Budgetofficer/Budgetoffice.css') }}">
@@ -56,7 +56,7 @@
                         <div class="box-footer">
                             <input type="hidden" class="readonly" readonly="" name="id" value="@isset($form_id){{ $form_id }}@endisset">
                             <button class="small_button border" type="submit" name="submit"><i class="ui checkmark icon"></i> {{ __("Update") }}</button>
-                            <a href="{{ url('purchaserequeststatus') }}" class="ui black grey small button"><i class="ui times icon"></i> {{ __("Cancel") }}</a>
+                            <a href="{{ url('joborderstatus') }}" class="ui black grey small button"><i class="ui times icon"></i> {{ __("Cancel") }}</a>
                         </div>
                     </div>
                 <form>
