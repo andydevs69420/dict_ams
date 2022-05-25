@@ -57,6 +57,8 @@ Route::controller(AppController::class)->group(function () {
                 Route::get("/purchaserequest/viewprlist", "viewPRFormList");
             // view uploaded form
                 Route::get("/purchaserequest/viewprforminfo", "viewPRFormInfo");
+                // load comments
+                Route::get("/purchaserequest/loadcomment", "loadPrFormInfoComment");
                 // upload comment
                 Route::post("/purchaserequest/addcomment", "addPrFormInfoComment");
             // upload pr form

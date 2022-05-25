@@ -157,11 +157,51 @@ class AppController extends Controller
                     $data["bO_data"] = $frp[1]->toArray();
                     $data["rA_data"] = $frp[2]->toArray();
 
-                    return view("app.purchase-request.purchase-request-form-info", $data);
+                    error_log(json_encode($data));
+
+                    return response(view("app.purchase-request.purchase-request-form-info", $data));
                 }
                 // pr subroutine ----->
+
+                    function loadPrFormInfoComment(Request $request)
+                    {
+                        #============================
+                        # Return false if not       =
+                        # login or expired.         =
+                        #============================
+                        if (!Auth::check())
+                            return false;
+
+                        if (hasNull($request, ["hash"]))
+                            return false;
+                        
+                        $formid = $request->input("hash");
+
+                        try 
+                        { $formid = (Int) Crypt::decrypt($formid); } 
+                        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                        { return false; }
+
+                        $data = FormRequiredPersonelComment::getAllCommentsByFormID($formid);
+
+                        foreach($data as $comment_data)
+                        {
+                            echo view("components.comment-bubble", $comment_data);
+                        }                        
+                    }
+
+                    /**
+                     * Adds comment
+                     * @param Request $request request
+                     * @example
+                     *      
+                     **/ 
                     function addPrFormInfoComment(Request $request)
                     {
+                        #============================
+                        # Return false if not       =
+                        # login or expired.         =
+                        #============================
                         if (!Auth::check())
                             return false;
 
@@ -171,12 +211,17 @@ class AppController extends Controller
                         $form_required_personel = $request->input("frp");
                         $comment                = $request->input("comment");
 
+                        try 
+                        { $form_required_personel = (Int) Crypt::decrypt($form_required_personel); } 
+                        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                        { return false; }
+
                         $signal = FormRequiredPersonelComment::create([
                             "formrequiredpersonel_id" => $form_required_personel,
                             "comment"                 => $comment
                         ]);
                         
-                        return (bool) !(!$signal);
+                        return (bool) $signal;
                     }
 
                 /**
