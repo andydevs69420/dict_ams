@@ -131,10 +131,52 @@
      **/
     function updateActionBtnBG(row, status_id)
     {
-        return $(row)
+        $(row)
         .find("button")
         .removeClass("btn-danger")
         .addClass(parseInt(status_id) === 2 ? "btn-primary" : "btn-success");
+
+        dropdown = $(row).find("ul.dropdown-menu");
+        user_id  = $(row).attr("id").split("-")[2];
+
+        if (parseInt(status_id) === 2)
+        {
+
+            $.ajax({
+                url  : "/user/hashid",
+                type : "POST",
+                data : { "user_id": user_id },
+                dataType : "json",
+                success  : function(response, status, request)
+                {
+                    dropdown.empty();
+                    dropdown
+                    .append(
+                        $("<li>")
+                        .append(
+                            $(`<a class="dropdown-item" href="/user/userprofile?user=${response['hashid']}">`)
+                            .text("view profile")
+                        )
+                    );
+                },
+                error: function(response, status, request)
+                { somethingWentWrong(); }
+            });
+        }
+        else
+        {
+            dropdown.empty();
+            dropdown
+            .append(
+                $("<li>")
+                .append(
+                    $(`<a class="dropdown-item" href="#" onclick='javascript:window.deleteUser("${user_id}")'>`)
+                    .text("delete")
+                )
+            );
+        }
+       
     }
 
 })();
+

@@ -52,11 +52,21 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end rounded shadow" aria-labelledby="user-profile__image-option">
                                         <li>
-                                            <button class="dropdown-item"> 
-                                                <i class="fa-solid fa-trash"></i>
-                                                &nbsp;
-                                                Delete profile image 
-                                            </button>
+
+                                            @if(strcmp(App\Models\UserProfileImages::getProfileImagePathByUserId($user->user_id), "images/no-image.png") === 0)
+                                                <span class="dropdown-item text-muted" style="cursor: pointer"> 
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    &nbsp;
+                                                    Delete profile image 
+                                                </span>
+                                            @else
+                                                <a class="dropdown-item" href="{{ url("/user/deleteprofilepicture?user=" . \Illuminate\Support\Facades\Crypt::encrypt(Auth::user()->user_id)) }}"> 
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    &nbsp;
+                                                    Delete profile image 
+                                                </a>
+                                            @endif
+                                            
                                         </li>
                                     </ul>
                                 </div>

@@ -10,16 +10,18 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
+
+use App\Models\Designation;
+use App\Models\Accesslevel;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
 use App\Models\UserProfileImages;
-use App\Models\Designation;
-use App\Models\FormRequiredPersonel;
 use App\Models\Form;
 use App\Models\PrItem;
 use App\Models\JoItem;
 use App\Models\PqsItem;
-
+use App\Models\FormRequiredPersonel;
+use App\Models\FormRequiredPersonelComment;
 
 /**
  * Formats lastname
@@ -157,8 +159,72 @@ class AppController extends Controller
                     $data["bO_data"] = $frp[1]->toArray();
                     $data["rA_data"] = $frp[2]->toArray();
 
-                    return view("app.purchase-request.purchase-request-form-info", $data);
+                    error_log(json_encode($data));
+
+                    return response(view("app.purchase-request.purchase-request-form-info", $data));
                 }
+                // pr subroutine ----->
+
+                    function loadPrFormInfoComment(Request $request)
+                    {
+                        #============================
+                        # Return false if not       =
+                        # login or expired.         =
+                        #============================
+                        if (!Auth::check())
+                            return false;
+
+                        if (hasNull($request, ["hash"]))
+                            return false;
+                        
+                        $formid = $request->input("hash");
+
+                        try 
+                        { $formid = (Int) Crypt::decrypt($formid); } 
+                        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                        { return false; }
+
+                        $data = FormRequiredPersonelComment::getAllCommentsByFormID($formid);
+
+                        foreach($data as $comment_data)
+                        {
+                            echo view("components.comment-bubble", $comment_data);
+                        }                        
+                    }
+
+                    /**
+                     * Adds comment
+                     * @param Request $request request
+                     * @example
+                     *      
+                     **/ 
+                    function addPrFormInfoComment(Request $request)
+                    {
+                        #============================
+                        # Return false if not       =
+                        # login or expired.         =
+                        #============================
+                        if (!Auth::check())
+                            return false;
+
+                        if (hasNull($request, ["frp", "comment"]))
+                            return false;
+                        
+                        $form_required_personel = $request->input("frp");
+                        $comment                = $request->input("comment");
+
+                        try 
+                        { $form_required_personel = (Int) Crypt::decrypt($form_required_personel); } 
+                        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                        { return false; }
+
+                        $signal = FormRequiredPersonelComment::create([
+                            "formrequiredpersonel_id" => $form_required_personel,
+                            "comment"                 => $comment
+                        ]);
+                        
+                        return (bool) $signal;
+                    }
 
                 /**
                  * Upload pr form
@@ -263,14 +329,14 @@ class AppController extends Controller
                         "form_id"                    => $form_id,
                         "userverificationdetails_id" => 2,
                         "personelstatus_id"          => 2,
-                        "updatedat"                  => Carbon::now()
+                        "updatedat"                  => null
                     ]);
                     // recommending approval
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
                         "userverificationdetails_id" => 2,
                         "personelstatus_id"          => 2,
-                        "updatedat"                  => Carbon::now()
+                        "updatedat"                  => null
                     ]);
 
                     return redirect()->to("/purchaserequest/viewprforminfo?prform=" . Crypt::encrypt($form_id));
@@ -598,12 +664,11 @@ class AppController extends Controller
                  **/
                 public function user__user_profile_update(Request $request)
                 {
-                    #============================
-                    # Redirect to login if not  =
-                    # login or expired.         =
-                    #============================
+                    #=================================
+                    # Return 403 if not logged in.   =
+                    #=================================
                     if (!Auth::check())
-                        return redirect()->to("/login");
+                        return abort(403);
                     
                     #=================================
                     # Return 403 if no images found. =
@@ -650,6 +715,28 @@ class AppController extends Controller
                     }
 
                     return back()->with("info", $info);
+                }
+
+                public static function user__delete_user_profile_image(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    $decrypt = null;
+                    try
+                    { $decrypt = (int) Crypt::decrypt($request->input("user")); }
+                    catch (\Illuminate\Contracts\Encryption\DecryptException $e)
+                    { return redirect()->to("/dashboard"); }
+
+                    $result = UserProfileImages::deleteUserProfileImageByUserID((Int) $decrypt);
+                    if (!$result)
+                        return back()->with("info", "Profile image deletetion error!");
+                        
+                    return back()->with("info", "Successfully deleted profile image.");
                 }
 
                 /**

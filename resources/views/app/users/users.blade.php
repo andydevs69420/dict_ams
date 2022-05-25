@@ -58,7 +58,6 @@
                                                             @break
                                                         @case(2)
                                                             <li><a class="dropdown-item" href="{{ url("/user/userprofile?user=" . Illuminate\Support\Facades\Crypt::encrypt($user->user_id)) }}">{{ __("view profile") }}</a></li>
-                                                            <li><a class="dropdown-item @if(strcmp($user["user_id"], Auth::user()->user_id) === 0) disabled @endif" href="#" onclick='javascript:window.deleteUser("{{ $user["user_id"] }}")'>{{ __("delete") }}</a></li>
                                                             @break
                                                         @default {{-- 3? declined user --}}
                                                             <li><a class="dropdown-item @if(strcmp($user["user_id"], Auth::user()->user_id) === 0) disabled @endif" href="#" onclick='javascript:window.deleteUser("{{ $user["user_id"] }}")'>{{ __("delete") }}</a></li>

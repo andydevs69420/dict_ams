@@ -40,4 +40,14 @@ class UserProfileImages extends Model
         return self::where("user_verification_details_id", "=", $verified_user_id)
         ->update(["path" => $path]);
     }
+
+    public static function deleteUserProfileImageByUserID(Int $userid)
+    {
+        return self::join(
+            "user_verification_details", "user_profile_images.user_verification_details_id", "=", "user_verification_details.userverificationdetails_id"
+        )
+        ->where("user_verification_details.user_id", "=", $userid)
+        ->update(["path" => "images/no-image.png"]);
+    }
+
 }

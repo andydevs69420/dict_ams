@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BOController;
+use App\Http\Controllers\BACController;
+use App\Http\Controllers\CanvController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +43,23 @@ Route::controller(AuthController::class)->group(function () {
 Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
-// Budget Officer
-Route::get('/BO',[BOController::class,'index']);
-Route::get('/edit-ors',[BOController::class,'edit']);
+// Budget Officer (Purchase Request)
+Route::get('/purchaserequeststatus',[BOController::class,'index']);
+Route::get('/edit-purchaserequest',[BOController::class,'edit']);
+// Budget Officer (Job Order)
+Route::get('/joborderstatus',[BOController::class,'JoIndex']);
+Route::get('/edit-Joborder',[BOController::class,'Joedit']);
+
+//BAC chairman
+Route::get('/BACpricequotation',[BACController::class,'BACIndex']);
+
+//Canvasser
+Route::get('/CanVpricequotation',[BACController::class,'CanvIndex']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
 
-    // dashboard
+    // dashboard page
     Route::get("/dashboard", "dashboard");
 
     // create form
@@ -56,6 +69,10 @@ Route::controller(AppController::class)->group(function () {
                 Route::get("/purchaserequest/viewprlist", "viewPRFormList");
             // view uploaded form
                 Route::get("/purchaserequest/viewprforminfo", "viewPRFormInfo");
+                // load comments
+                Route::get("/purchaserequest/loadcomment", "loadPrFormInfoComment");
+                // upload comment
+                Route::post("/purchaserequest/addcomment", "addPrFormInfoComment");
             // upload pr form
                 Route::post("/purchaserequest/uploadprform", "uploadPRForm");
             // view pr form
@@ -75,12 +92,20 @@ Route::controller(AppController::class)->group(function () {
             Route::get("/user/userprofile", "user__user_profile");
         // upload profile picture
             Route::post("/user/uploadprofilepicture", "user__user_profile_update");
+        // delete profile picture
+            Route::get("/user/deleteprofilepicture", "user__delete_user_profile_image");
         // edit profile
             Route::post("/user/editprofile", "user__edit_profile");
         // accept or decline
             Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
         // delete
             Route::post("/user/deleteuser", "user__deleteUser");
+        // closure | hash user_id
+            Route::post("/user/hashid", function() {
+                return response()->json([
+                    "hashid" => Crypt::encrypt(request()->user_id)
+                ]);
+            });
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
