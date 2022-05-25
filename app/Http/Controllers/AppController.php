@@ -150,11 +150,17 @@ class AppController extends Controller
                     catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
                     { return redirect()->to("/dashboard"); }
 
-                    $data = Form::getFormByID($form_id)->toArray();
-
+                    $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
+                    error_log(json_encode($data));
+                    #=========================
+                    # Get items.             =
+                    #=========================
                     $data["pr_items"] = PrItem::getItemsByFormId($form_id)->toArray();
+            
+                    #=========================
+                    # Get required personel. =
+                    #=========================
                     $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
-                    
                     $data["rQ_data"] = $frp[0]->toArray();
                     $data["bO_data"] = $frp[1]->toArray();
                     $data["rA_data"] = $frp[2]->toArray();
@@ -165,6 +171,11 @@ class AppController extends Controller
                 }
                 // pr subroutine ----->
 
+                    /**
+                     * Loads comment dynamically
+                     * @param Request $request request
+                     * access: AJAX
+                     **/
                     function loadPrFormInfoComment(Request $request)
                     {
                         #============================
@@ -193,10 +204,10 @@ class AppController extends Controller
                     }
 
                     /**
-                     * Adds comment
+                     * Adds comment dynamically
                      * @param Request $request request
-                     * @example
-                     *      
+                     * @return boolean
+                     * access: AJAX
                      **/ 
                     function addPrFormInfoComment(Request $request)
                     {
@@ -320,21 +331,21 @@ class AppController extends Controller
                     // requisitioner
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
-                        "userverificationdetails_id" => 1,
+                        "userverificationdetails_id" => $rQ_id,
                         "personelstatus_id"          => 1,
                         "updatedat"                  => Carbon::now()
                     ]);
                     // budget officer
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
-                        "userverificationdetails_id" => 2,
+                        "userverificationdetails_id" => $bO_id,
                         "personelstatus_id"          => 2,
                         "updatedat"                  => null
                     ]);
                     // recommending approval
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
-                        "userverificationdetails_id" => 2,
+                        "userverificationdetails_id" => $rA_id,
                         "personelstatus_id"          => 2,
                         "updatedat"                  => null
                     ]);
@@ -840,7 +851,7 @@ class AppController extends Controller
                     $signal = UserVerificationDetails::where("user_id", "=", $user_id)
                             ->update(["verificationstatus_id" => $status_id]);
 
-                    return (bool) !(!$signal);
+                    return (bool) $signal;
                 }
 
 
@@ -868,7 +879,7 @@ class AppController extends Controller
                     $signal = UserVerificationDetails::where("user_id", "=", $userid)
                             ->delete();
 
-                    return (bool) !(!$signal);
+                    return (bool) $signal;
                 }
 
     /**

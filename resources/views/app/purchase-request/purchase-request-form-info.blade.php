@@ -116,7 +116,7 @@
                                                 <textarea id="purchase-request-form-info__comment-field" class="form-control" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
                                             </div>
                                             <span class="d-block my-2">
-                                                <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->formrequiredpersonel_id) }}">
+                                                <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
                                                     {{ __("COMMENT") }}
                                                 </button>
                                             </span>

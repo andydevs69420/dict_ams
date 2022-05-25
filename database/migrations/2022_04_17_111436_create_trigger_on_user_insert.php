@@ -27,7 +27,7 @@ return new class extends Migration
                 BEGIN
                     INSERT INTO user_verification_details (`user_id`, `verificationstatus_id`) 
                     VALUES (NEW.user_id, IF(NEW.accesslevel_id NOT IN (4, 5, 13), 1, 2));
-                    INSERT INTO user_profile_images (`user_verification_details_id`, `path`)
+                    INSERT INTO user_profile_images (`userverificationdetails_id`, `path`)
                     VALUES (NEW.user_id, "images/no-image.png");
                 END
         ');

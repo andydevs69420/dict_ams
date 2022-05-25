@@ -20,6 +20,8 @@ class FormRequiredPersonel extends Model
         "updatedat"
     ];
 
+
+
     public static function getFormByUser(Int $userid)
     {
         return self::select(
@@ -50,6 +52,38 @@ class FormRequiredPersonel extends Model
         ->groupBy("form.form_id")
         ->orderBy("form.form_id", "desc")
         ->get();
+    }
+
+    public static function getFormByFormAndUserID(Int $formid, $userid)
+    {
+        return self::select(
+            "form_required_personel.*",
+            "form.*",
+            "uvd.*",
+            "personel_status.*"
+        )
+        ->join(
+            "form", "form_required_personel.form_id", "=", "form.form_id"
+        )
+        ->join(
+            DB::raw("
+                (
+                    SELECT 
+                        user_verification_details.userverificationdetails_id,
+                        user_verification_details.verificationstatus_id,
+                        user.*
+                    FROM
+                        user_verification_details 
+                        INNER JOIN user ON user_verification_details.user_id = user.user_id
+                ) AS uvd
+            "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
+        )
+        ->join(
+            "personel_status", "form_required_personel.personelstatus_id", "=", "personel_status.personelstatus_id"
+        )
+        ->where("form.form_id", "=", $formid)
+        ->where("user_id", "=", $userid)
+        ->first();
     }
 
     public static function getFormByFormID(Int $formid)
