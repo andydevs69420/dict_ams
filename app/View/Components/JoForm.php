@@ -15,6 +15,7 @@ class JoForm extends Component
     public Array $requisitioner;
     public String $requesterDesign = "";
     public String $conforme;
+    public String $authofficial;
 
     /**
      * Create a new component instance.
@@ -27,12 +28,14 @@ class JoForm extends Component
         Array $requisitioner = [],
         String $requesterDesign = "",
         String $conforme = "",
+        String $authofficial = "",
     )
     {
         $this->items             = $items;
         $this->requisitioner     = $requisitioner;
         $this->requesterDesign   = $requesterDesign; 
         $this->conforme          = $conforme; 
+        $this->authofficial         = $authofficial; 
     }
 
 

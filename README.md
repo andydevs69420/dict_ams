@@ -11,9 +11,20 @@
 
 A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHASING GOODS/SERVICES.
 
+## 📝 Changelog
+
+<br>
+
+* **May 6, 2022**
+    * Deprecated  "Messages" for all user.
+
+* **May 4, 2022**
+    * Deprecated  "Item List" for both regular user and admin.
+
 ## 👦 Developers 
 
 <br>
+
 <div align="left">
     <img src="https://avatars.githubusercontent.com/u/58409313?v=4" width="92" style="display: inline; border-radius: 50%;">
     <div>
@@ -37,8 +48,11 @@ A COMPUTERIZED WEB-BASED ACCOUNTING MANAGEMENT SYSTEM FOR THE PROCESS OF PURCHAS
         <div><a href="https://github.com/bsbodollo01" style="display: block; font-size: 1em;">(bsbodollo01)</a></div>
     </div>
 </div>
+
 <br>
 
 ## 👪 Contributors
+
+<br>
 
 - <span><a href="https://github.com/ellmarieee" style="font-size: 1em;">ellmarieee</a> (database)</span>

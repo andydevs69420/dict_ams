@@ -34,6 +34,15 @@ body
     { min-width: 1400px; }
 }
 
+body.modal-open 
+{
+    overflow: auto !important;
+    padding: 0px !important;
+}
+
+body.modal-open .modal
+{ padding: 0px !important; }
+
 .app-main__noscript-content-wrapper
 { 
     background-color: $PRIMARY !important;
@@ -41,7 +50,12 @@ body
 }
 
 .app-main__content-root
-{ min-width: 280px !important; }
+{ 
+    min-width: 280px !important;
+    min-width: 100vw !important;
+    @include onSM()
+    { min-width: 280px !important; }
+}
 
 .app-main__content-wrapper
 { overflow: hidden auto !important; }

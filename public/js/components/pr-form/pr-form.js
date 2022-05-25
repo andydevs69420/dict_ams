@@ -3,6 +3,8 @@
 
     jQuery(() => {
         window.progressBar = new Progressbar("#pr-progress");
+        window.autoResizeTextArea();
+
         $("[data-bs-toggle='tooltip']").tooltip();
         $("[data-bs-toggle='popover']").popover();
         $("select").selectpicker({
@@ -42,29 +44,18 @@
         .attr("title", `Remove item ${nth_child}`)
         .attr("onclick", `javascript:remove__item("#${new_itmID}")`);
 
-        // clear fields
+        // clear fields input
         $(clone_itm.find("input"))
         .each((index,element) => {
             $(element).val("");
         });
 
-        // make another description dropdown
-        $(clone_itm.find('select[name="description[]"]'))
-        .each((index, select) => {
-
-            select = $(select);
-
-            firstparent = select.parent();
-
-            rootparent  = firstparent.parent();
-            firstparent.remove();
-
-            rootparent.append(select);
-
-            select.find('option[class="bs-title-option"]')[0].remove();
-
-            select.selectpicker();
-
+        // clear fields textarea
+        $(clone_itm.find("textarea"))
+        .each((index,element) => {
+            $(element).attr("rows", 1);
+            $(element).css("height", "auto");
+            $(element).val("");
         });
 
         // finally append item
@@ -72,7 +63,9 @@
 
         $('[data-bs-toggle="tooltip"]').tooltip();
         $('[data-bs-toggle="popover"]').popover();
+
         progressBar.update();
+        autoResizeTextArea();
     };
 
     /**
@@ -115,6 +108,27 @@
         progressBar.update();
 
     };
+
+    window.autoResizeTextArea = function() {
+
+        textareas_00 = $("textarea");
+        textareas_00.each((index, txtarea) => {
+            textareas = $(txtarea);
+            textareas.keyup(() => {
+
+                textareas.css("height", (textareas.prop("scrollHeight") > textareas.height()) ? (textareas.prop('scrollHeight'))+"px" : "auto");
+                
+                if (textareas.val().length <= 0)
+                    textareas.css("height", "auto");
+    
+                rows = textareas.val().toString().split("\n").length;
+                rows = (rows <= 0)? 1 : rows;
+                textareas.attr("rows", rows);
+    
+            });
+        });
+
+    }
 
 })();
 
@@ -241,7 +255,7 @@ function generate__pr_form()
     
     // generate form
 
-    desturl = `${window.location.origin}/newpurchaserequest/viewprform?items=${JSON.stringify(arranged_data)}`;
+    desturl = `${window.location.origin}/purchaserequest/viewprform?items=${JSON.stringify(arranged_data)}`;
     other_fields.forEach((field_name) => {
         desturl += `&${field_name}=${$(`[name="${field_name}"]`).val()}`;
     });
@@ -260,13 +274,15 @@ $("#file-pick-id")
 
     file = e.target.files;
 
+    $("#file-content-id").empty();
+
     for (idx = 0; idx < file.length; idx++)
     {
         filereader = new FileReader();
         filereader.readAsDataURL(file[idx]);
         filereader.onloadend = (data) => {
             $("#file-content-id")
-            .append($(`<a class="d-inline-block px-4 border rounded-pill bg-light text-nowrap text-truncate text-decoration-none" href="${data.currentTarget.result}" target="__blank" style="max-width: 100%;"><small>${file[idx].name}</small></a>`));
+            .append($(`<a class="btn btn-sm my-2 px-4 w-100 border-success rounded-pill bg-light text-success text-nowrap text-truncate text-decoration-none" href="${data.currentTarget.result}" target="__blank" style="max-width: 100%;"><small>${file[0].name}</small></a>`));
         }
     }
 

@@ -1,0 +1,47 @@
+@import '../global/sizing';
+@import '../global/appcolor';
+
+.requisitioner__requisitioner-header-label
+{ font-size: 1.6em; }
+
+
+.dataTables_length
+{ 
+  text-align: left !important; 
+  & > label > select
+  { margin-left: 14px !important; }
+
+  @include onMD()
+  { 
+    & > label > select
+    { margin-left: initial !important; }
+  }
+}
+
+.dataTables_filter
+{
+  margin-top: .5em !important;
+  width: 100% !important;
+  text-align: left !important;
+  & > label
+  { width: 100% !important; }
+
+  & > label > input
+  {  width: calc(100% - 57.8px) !important; }
+
+  @include onMD()
+  { 
+    margin: 0 !important;
+    width: auto !important;
+    text-align: right !important;
+    & > label, input
+    { width: auto !important; }
+  }
+}
+
+.page-item.active .page-link
+{
+  border-color: $REQUISITIONER-LIST-ACTIVE-LINK-BG !important;
+  background-color: $REQUISITIONER-LIST-ACTIVE-LINK-BG !important;
+}
+

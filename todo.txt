@@ -1,0 +1,39 @@
+
+
+
+
+
+
+TODO:
+
+		PR:
+			[1]. inputed na ang item description - finish
+			[2]. upload file
+		JO:
+			[1]. butngan ug icons ang input unya pag e click mo show ang pop over ug para asa to nga input
+			[2]. naa japun siyay requisitioner, budget officer ug recommending approval
+			[3]. upload file
+		
+		BO:
+			[1]. mo show sa list ang first item. 
+				 unya pag e click nimo, Mo redirect siya sa information ato na pr/jo dayun mo display 
+				 tanan item ug iya status unya maka add siyag comment.
+
+TODO:
+	admin can add designation and access level, unit
+	....
+
+Office:
+	Regional office
+		lanao
+		mis or
+		mis oc
+		camuiguin
+		bukidnon
+	division
+		admin
+		technical operations divisions
+
+
+
+

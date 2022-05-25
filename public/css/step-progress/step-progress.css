@@ -1,0 +1,89 @@
+.step-progress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  padding: 0;
+  width: 3px;
+  height: auto;
+  background-color: #ee4646;
+  border-radius: 5em;
+}
+
+.step-progress > .progress-step {
+  list-style-type: none;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: block;
+  overflow-x: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.step-progress > .progress-step:nth-child(even) {
+  margin: 40px 0px;
+}
+
+.step-progress > .progress-step:last-child {
+  margin-bottom: 0px;
+}
+
+.step-progress > .progress-step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 100%;
+  border: 3px solid white;
+  background-color: #ee4646;
+  -webkit-box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.8);
+          box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.8);
+}
+
+.progress-label > span {
+  height: 25px !important;
+  line-height: 25px !important;
+}
+
+.progress-label > div:nth-child(even) {
+  margin: 35px 0px;
+}
+
+.progress-label > span:last-child {
+  margin-bottom: 0px;
+}
+
+.step-progress > .progress-step.ok {
+  color: white;
+}
+
+.step-progress > .progress-step.not-ok {
+  color: #48ff00;
+}
+/*# sourceMappingURL=step-progress.css.map */

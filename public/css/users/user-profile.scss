@@ -1,0 +1,59 @@
+@import '../global/sizing';
+@import '../global/appcolor';
+
+.input-group-text
+{ 
+  display: block !important;
+  min-width: 3em !important;
+  background-color: $USER-PROFILE-INPUT-ICON-BG  !important; 
+}
+
+.user-profile__avatar-wrapper
+{
+    padding-top: 55%;
+    width: 55%;
+    border-radius: 100%;
+    @include onMD()
+    {
+        padding-top: 65%;
+        width: 65%;
+    }
+}
+
+.user-profile__avatar-floater
+{
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 90%;
+    height: 90%;
+    border-radius: 100%;
+}
+
+
+.user_profile__short-info-list
+{
+    & > li > i.fa-solid
+    { font-size: 1.2em; min-width: 1.4em; }
+    & > li > span[role="text"]
+    { font-size: .9em;font-weight: bold; }
+}
+
+#user-profile__edit-profile-form
+{ 
+    opacity: .9;
+    & span[role="text"]
+    { user-select: none; }
+}
+
+.user-profile__update-btn-wrapper
+{
+    width: 100% !important;
+    @include onXL()
+    {
+        width: auto !important;
+    }
+}
+
+.user-profile__update-btn
+{ background-color: $USER-PROFILE-UPDATE-BTN-BG !important; }
