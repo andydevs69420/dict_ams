@@ -74,4 +74,16 @@ class Form extends Model
         ->first();
     }
 
+
+    /**
+     * Get pdf by id
+     * @param Int $formid form id
+     * @return Array
+     **/
+    public static function getPDFById(Int $formid)
+    {   
+        return self::select("fileembedded")->where("form_id", "=", $formid)->get();
+
+    }
+
 }

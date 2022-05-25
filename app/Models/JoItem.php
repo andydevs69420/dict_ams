@@ -12,7 +12,12 @@ class JoItem extends Model
     
     protected $fillable = [
         'form_id',
-        // dungagi
+        'itemno',
+        'unit',
+        'description',
+        'quantity',
+        'unitcost',
+        'amount',
     ];
 
    
@@ -28,23 +33,14 @@ class JoItem extends Model
 
 
     /**
-     * Get's PrForm by id
-     * @param Int $prformnumber form id
-     * @return Array[Array]
-     **/
-    public static function getFormByID(Int $prformnumber)
-    {
-        return self::where("itemlist_id", "=", $prformnumber)
-        ->first();
-    }
-
-
-    /**
-     * Gets all item in table
-     * @return Array[Array]
+     * Gets all items
+     * @param Int $formid form id
+     * @return Array
      * @example
-     *     ItemList::getAllPrForms();
+     *     JoForm::getItemsByFormId();
      **/
-    public static function getAllPrForms()
-    { return self::all(); }
+    public static function getItemsByFormId(Int $formid)
+    {
+        return self::where("form_id", "=", $formid)->get();
+    }
 }

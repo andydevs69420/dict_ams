@@ -18,6 +18,8 @@ use App\Models\UserVerificationDetails;
 use App\Models\UserProfileImages;
 use App\Models\Form;
 use App\Models\PrItem;
+use App\Models\JoItem;
+use App\Models\PqsItem;
 use App\Models\FormRequiredPersonel;
 use App\Models\FormRequiredPersonelComment;
 
@@ -318,21 +320,21 @@ class AppController extends Controller
                     // requisitioner
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
-                        "userverificationdetails_id" => $rQ_id,
+                        "userverificationdetails_id" => 1,
                         "personelstatus_id"          => 1,
                         "updatedat"                  => Carbon::now()
                     ]);
                     // budget officer
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
-                        "userverificationdetails_id" => $bO_id,
+                        "userverificationdetails_id" => 2,
                         "personelstatus_id"          => 2,
                         "updatedat"                  => null
                     ]);
                     // recommending approval
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
-                        "userverificationdetails_id" => $rA_id,
+                        "userverificationdetails_id" => 2,
                         "personelstatus_id"          => 2,
                         "updatedat"                  => null
                     ]);
@@ -434,21 +436,156 @@ class AppController extends Controller
 
         return view("app.new-job-order.new-job-order");
     }
+    /* purchase request subdir ----> */
+
+                /**
+                 * View jo form -> index
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function viewJOForm(Request $request)
+                {
+                    $data = [
+                        "JoFormData" => json_decode($request->input("data"),true)
+                    ];
+
+                    return view("app/new-job-order/view-jo-form", $data);
+                }
+
+                
+                /**
+                 * View jo form inf
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function viewJOFormInfo(Request $request)
+                {
+
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    # Verification
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
+                        return redirect()->to("/dashboard");
+                    
+                    # Check Null
+                    if (hasNull($request, ["joform"]))
+                        return redirect()->to("/dashboard");
+                    
+                    $form_id = $request->input("joform");
+
+                    #==============================
+                    # Decypt form id. If invalid, =
+                    # redirect to dashboard.      =
+                    #==============================
+                    try 
+                    { $form_id = (Int) Crypt::decrypt($form_id); } 
+                    catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                    { return redirect()->to("/dashboard"); }
+
+                    $data = Form::getFormByID($form_id)->toArray();
+
+                    $data["jo_items"] = JoItem::getItemsByFormId($form_id)->toArray();
+                    $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
+                    
+                    $data["requester_data"] = $frp[0]->toArray();
+                    $data["conforme_data"]  = $frp[1];
+                    $data["authoff_data"]   = $frp[2];
+
+                    return view("app.new-job-order.job-order-form-info", $data);
+                }
 
 
-    /**
-     * View jo form -> index
-     * @param Request $request request
-     * @return View
-     **/
-    function viewJOForm(Request $request)
-    {
-        $data = [
-            "JoFormData" => json_decode($request->input("data"),true)
-        ];
+                /**
+                 * Upload jio form
+                 * uses: "POST" request
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function uploadJOForm(Request $request) {
+  
+                    # Verification
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                        return redirect()->to("/dashboard");
 
-        return view("app/new-job-order/view-jo-form", $data);
-    }
+                    
+
+                    # Get Field Values
+                    $num_of_rows     = count($request->input("stock"));
+                    $stock_col       = $request->input("stock");
+                    $unit_col        = $request->input("unit");
+                    $desc_col        = $request->input("description");
+                    $qnty_col        = $request->input("qty");
+                    $unitc_cost_col  = $request->input("unitcost");
+                    $total_cost_col  = $request->input("amount");
+
+                    $requester_id   = 1;
+                    $conforme_id   = 2;
+                    $authorizedoff_id   = 2;
+                    $file    = $request->file("file-upload");
+
+
+                    # Get File (PDF)
+                    $filename = Carbon::now()->toDateString().".".$file->getClientOriginalExtension();
+                    $truepath = "storage/form-files/".$filename;
+                    $filepath = $file->storeAs("public/form-files", $filename);
+                    if (!$filepath)
+                        return back()->with(["info" => "Something went wrong while uploading file!"]);
+                    
+
+                    # Create Form (insert)
+                    $form_data = [];
+                    $form_data["formtype_id"]       = 2; # JO := 2
+                    $form_data["createdat"]         = Carbon::now();
+                    $form_data["prnumber"]          = "";
+                    $form_data["sainumber"]         = "";
+                    $form_data["purpose"]           = "asda";
+                    $form_data["fileembedded"]      = $filepath;
+                    $form_id = Form::create($form_data)->id;
+                    
+                    
+                    # Create JoItem (insert)
+                    for ($idx = 0; $idx < $num_of_rows; $idx++)
+                    {
+                        $joitemdata = [];
+                        $joitemdata["form_id"]     = $form_id;
+                        $joitemdata["itemno"]      = $stock_col[$idx];
+                        $joitemdata["unit"]        = $unit_col[$idx];
+                        $joitemdata["description"] = $desc_col[$idx];
+                        $joitemdata["quantity"]    = $qnty_col[$idx];
+                        $joitemdata["unitcost"]    = $unitc_cost_col[$idx];
+                        $joitemdata["amount"]      = $total_cost_col[$idx];
+                        JoItem::create($joitemdata);
+                    }
+
+                    # Save in FormRequiredPersonel
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $requester_id,
+                        "personelstatus_id"          => 1,
+                        "updatedat"                  => Carbon::now()
+                    ]);
+                    // conforme
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $conforme_id,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => Carbon::now()
+                    ]);
+                    // authorized official
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $authorizedoff_id,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => Carbon::now()
+                    ]);
+
+                    return redirect()->to("/newjoborder/viewjoforminfo?joform=" . Crypt::encrypt($form_id));
+                    
+                }
 
     
     /**
@@ -777,12 +914,85 @@ class AppController extends Controller
                  *
                  **/
                 public function so_approvedforms_generatepqs(Request $request)
-                {
+                {   
+                    $id = json_decode($request->input("data"),true);
+                    $items = PrItem::getItemsByFormId($id["formid"]);
+                    $pdffile = Form::getPDFById($id["formid"]);
+                    $data = [
+                        "pqsdata" => $id,
+                        "itemdata" => $items,
+                        "pdfdata" => $pdffile,
+                    ];
 
-                    // ...
-                    return view("supplyofficer.view-price-quotation-sheet");
+                    return view("supplyofficer.view-price-quotation-sheet", $data);
+                }
+                                /**
+                 * Add so-forms -> viewform
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "supply officer" has access to this page, accesslevel = 10
+                 *
+                 **/
+                public function so_approvedforms_viewform(Request $request)
+                {   
+                    $id = json_decode($request->input("data"),true);
+                    $pdffile = Form::getPDFById($id["formid"]);
+                    $data = [
+                        "pqsdata" => $id,
+                        "pdfdata" => $pdffile,
+                    ];
+
+                    return Response::make(base64_decode( $pdffile), 200, [
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'inline; filename="'."2022-05-23.pdf".'"',
+                    ]);
                 }
 
+                /**
+                 * Add so-forms -> viewform
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "supply officer" has access to this page, accesslevel = 10
+                 *
+                 **/
+                public function so_approvedforms_uploadpqs(Request $request)
+                {   
+ 
+                    # Verification
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["10"]))
+                        return redirect()->to("/dashboard");
+
+                    
+
+                    # Get Field Values
+                    $form_id      = $request->input("form-number-input");
+                    $file    = $request->file("file-upload");
+
+
+                    # Get File (PDF)
+                    $filename = Carbon::now()->toDateString().".".$file->getClientOriginalExtension();
+                    $truepath = "storage/form-files/".$filename;
+                    $filepath = $file->storeAs("public/form-files", $filename);
+                    if (!$filepath)
+                        return back()->with(["info" => "Something went wrong while uploading file!"]);
+                
+                    
+                    
+                    # Create PqsItem (insert)
+
+                    $pqsitemdata = [];
+                    $pqsitemdata["form_id"]     = $form_id;
+                    PqsItem::create($pqsitemdata);
+                    
+
+                    return view("supplyofficer.so-forms");
+                    
+                }
 
 
     /**

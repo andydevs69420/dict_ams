@@ -23,7 +23,9 @@ class JoForm extends Component
      * @return void
      */
     public function __construct(
-        Array $items = [['', '', '', '', '', '']], 
+        Array $items = [
+            ['itemno' => '', 'unit' => '', 'description' => '', 'quantity' => '', 'unitcost' => '', 'amount' => ''],
+        ], 
         // String $purpose = "", 
         Array $requisitioner = [],
         String $requesterDesign = "",
