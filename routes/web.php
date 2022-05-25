@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BOController;
+use App\Http\Controllers\BACController;
+use App\Http\Controllers\CanvController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +50,12 @@ Route::get('/edit-purchaserequest',[BOController::class,'edit']);
 Route::get('/joborderstatus',[BOController::class,'JoIndex']);
 Route::get('/edit-Joborder',[BOController::class,'Joedit']);
 
+//BAC chairman
+Route::get('/BACpricequotation',[BACController::class,'BACIndex']);
+
+//Canvasser
+Route::get('/CanVpricequotation',[BACController::class,'CanvIndex']);
+
 // app group routes
 Route::controller(AppController::class)->group(function () {
 
@@ -54,30 +64,58 @@ Route::controller(AppController::class)->group(function () {
 
     // create form
         // pr
-        Route::get("/newpurchaserequest", "purchaseRequest");
+        Route::get("/purchaserequest/newpurchaserequest", "purchaseRequest");
+            // view pr list
+                Route::get("/purchaserequest/viewprlist", "viewPRFormList");
+            // view uploaded form
+                Route::get("/purchaserequest/viewprforminfo", "viewPRFormInfo");
+                // upload comment
+                Route::post("/purchaserequest/addcomment", "addPrFormInfoComment");
+            // upload pr form
+                Route::post("/purchaserequest/uploadprform", "uploadPRForm");
             // view pr form
-                Route::get("/newpurchaserequest/viewprform", [AppController::class,"viewPRForm"]);
+                Route::get("/purchaserequest/viewprform", "viewPRForm");
         // jo
         Route::get("/newjoborder", "jobOrder");
             // view jo form
                 Route::get('/newjoborder/viewjoform', [AppController::class,'viewJOForm']);
     // users
     Route::get("/users", "users");
+        // view profile
+            Route::get("/user/userprofile", "user__user_profile");
+        // upload profile picture
+            Route::post("/user/uploadprofilepicture", "user__user_profile_update");
+        // delete profile picture
+            Route::get("/user/deleteprofilepicture", "user__delete_user_profile_image");
+        // edit profile
+            Route::post("/user/editprofile", "user__edit_profile");
         // accept or decline
-        Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
+            Route::post("/user/updateverificationstatus", "user__updateVerificationStatus");
         // delete
-        Route::post("/user/deleteuser", "user__deleteUser");
-
-    // item list
-    Route::get("/itemlist", "itemlist");
-        // add item
-        Route::post("/itemlist/additem", "itemlist__addItem");
-        // update item
-        Route::post("/itemlist/updateitem", "itemlist__updateItem");
-        // delete item
-        Route::post("/itemlist/deleteitem", "itemlist__deleteItem");
+            Route::post("/user/deleteuser", "user__deleteUser");
+        // closure | hash user_id
+            Route::post("/user/hashid", function() {
+                return response()->json([
+                    "hashid" => Crypt::encrypt(request()->user_id)
+                ]);
+            });
 
     // requisitioner
     Route::get("/requisitioner", "requisitioner");
+
+    // supply officer approved forms
+    Route::get("/so_approvedforms", "so_approvedforms");
+        //Generate Price Quotation Sheet
+        Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
+        //View Form
+        //...
+
+    // supply officer approved forms
+    Route::get("/bac_chair_pqsforms", "bac_chair_pqsforms");
+        //Generate Price Quotation Sheet
+        //Route::get("/so_approvedforms/generatepqs", "so_approvedforms_generatepqs");
+        //View Form
+        //...
+
 
 });

@@ -1,0 +1,28 @@
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= VIEW PR LIST COLORS ============ */
+/* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= REQUISITIONER LIST COLORS ====== */
+.new-purchase-request__card-header {
+  background-color: #0020EC !important;
+}
+
+.purhcase-request__purhcase-request-header-label {
+  font-size: 1.6em;
+}
+
+.new-purchase-request__upload-files-btn,
+.new-purchase-request__upload-files-btn * {
+  color: #0020EC !important;
+  border-color: #0020EC !important;
+}
+
+.new-purchase-request__submit-btn {
+  background-color: #0020EC !important;
+}
+/*# sourceMappingURL=new-purchase-request.css.map */

@@ -2,14 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
+
+use Carbon\Carbon;
+
+use App\Models\Designation;
+use App\Models\Accesslevel;
 use App\Models\User;
 use App\Models\UserVerificationDetails;
-use App\Models\Designation;
-use App\Models\ItemList;
-use Auth;
+use App\Models\UserProfileImages;
+use App\Models\Form;
+use App\Models\PrItem;
+use App\Models\FormRequiredPersonel;
+use App\Models\FormRequiredPersonelComment;
+
+/**
+ * Formats lastname
+ * @param  $arr user info
+ * @return String
+ **/
+function formatName($arr) 
+{ return $arr->lastname . ", " . $arr->firstname . " " . $arr->middleinitial; }
+
+
+/**
+ * Checks if request has required parameter
+ * @param  Request $request request
+ * @param Array $array array of required parameters
+ * @return boolean
+ **/
+function hasNull(Request $request, Array $arr) {
+    foreach ($arr as $ar)
+        if(!$request->has($ar))
+            return true;
+    return false;
+}
 
 class AppController extends Controller
 {
@@ -21,6 +53,10 @@ class AppController extends Controller
      **/
     public function dashboard(Request $request)
     {
+        #============================
+        # Redirect to login if not  =
+        # login or expired.         =
+        #============================
         if  (!Auth::check())
             return redirect()->to("/login");
 
@@ -41,65 +77,287 @@ class AppController extends Controller
      **/
     function purchaseRequest(Request $request)
     {
+        #============================
+        # Redirect to login if not  =
+        # login or expired.         =
+        #============================
         if  (!Auth::check())
             return redirect()->to("/login");
 
+        #============================
+        # Only requisitioner can    =
+        # create pr form.           =
+        #============================
         if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
-            return redirect()->to("/logout");
+            return redirect()->to("/dashboard");
 
-        return view("app.new-purchase-request.new-purchase-request");
+        return view("app.purchase-request.new-purchase-request");
     }
+    /* purchase request subdir ----> */
+
+                function viewPRFormList(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    #======================================
+                    # Only requisitioner and admin can    =
+                    # view pr form list.                  =
+                    #======================================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
+                        return redirect()->to("/dashboard");
+                    
+                    return view("app.purchase-request.purchase-request-list");
+                }
+
+                function viewPRFormInfo(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    #======================================
+                    # Only requisitioner and admin can    =
+                    # view pr form.                       =
+                    #======================================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
+                        return redirect()->to("/dashboard");
+                    
+                    #============================
+                    # Go back to page if        =
+                    # any field has null value. =
+                    #============================
+                    if (hasNull($request, ["prform"]))
+                        return redirect()->to("/dashboard");
+                    
+                    $form_id = $request->input("prform");
+
+                    #==============================
+                    # Decypt form id. If invalid, =
+                    # redirect to dashboard.      =
+                    #==============================
+                    try 
+                    { $form_id = (Int) Crypt::decrypt($form_id); } 
+                    catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                    { return redirect()->to("/dashboard"); }
+
+                    $data = Form::getFormByID($form_id)->toArray();
+
+                    $data["pr_items"] = PrItem::getItemsByFormId($form_id)->toArray();
+                    $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
+                    
+                    $data["rQ_data"] = $frp[0]->toArray();
+                    $data["bO_data"] = $frp[1]->toArray();
+                    $data["rA_data"] = $frp[2]->toArray();
+
+                    return view("app.purchase-request.purchase-request-form-info", $data);
+                }
+                // pr subroutine ----->
+                    function addPrFormInfoComment(Request $request)
+                    {
+                        if (!Auth::check())
+                            return false;
+
+                        if (hasNull($request, ["frp", "comment"]))
+                            return false;
+                        
+                        $form_required_personel = $request->input("frp");
+                        $comment                = $request->input("comment");
+
+                        $signal = FormRequiredPersonelComment::create([
+                            "formrequiredpersonel_id" => $form_required_personel,
+                            "comment"                 => $comment
+                        ]);
+                        
+                        return (bool) !(!$signal);
+                    }
+
+                /**
+                 * Upload pr form
+                 * uses: "POST" request
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function uploadPRForm(Request $request) {
+
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    #============================
+                    # Only requisitioner can    =
+                    # upload pr form.           =
+                    #============================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                        return redirect()->to("/dashboard");
+
+                    #============================
+                    # Go back to page if        =
+                    # any field has null value. =
+                    #============================
+                    if (hasNull($request, ["stock", "unit", "description", "qty", "unitcost", "totalcost", "purpose" , "requester" , "budget-officer", "recommending-approval", "file-upload"]) || !request("file-upload")->isValid())
+                        return back()->with(["info" => "Missing required parameter(s)."]);
+                    
+                    #=======================
+                    # Item fields          =
+                    #=======================
+                    $num_of_rows    = count($request->input("stock"));
+                    $stck_col       = $request->input("stock");
+                    $unit_col       = $request->input("unit");
+                    $desc_col       = $request->input("description");
+                    $qnty_col       = $request->input("qty");
+                    $unitc_cost_col = $request->input("unitcost");
+                    $total_cost_col = $request->input("totalcost");
 
 
-    /**
-     * View pr form -> index
-     * @param Request $request request
-     * @return View
-     **/
-    function viewPrForm(Request $request)
-    {
-        if  (!Auth::check())
-            return redirect()->to("/login");
+                    #=======================
+                    # Other fields         =
+                    #=======================
+                    $purpose = $request->input("purpose");
+                    $rQ_id   = $request->input("requester");
+                    $bO_id   = $request->input("budget-officer");
+                    $rA_id   = $request->input("recommending-approval");
+                    $file    = $request->file("file-upload");
 
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
-            return redirect()->to("/logout");
-        
-        if 
-        (
-            !$request->has("items")          ||
-            !$request->has("purpose")        ||
-            !$request->has("requester")      ||
-            !$request->has("budget-officer") ||
-            !$request->has("recommending-approval")
-        )
-            return abort(403);
-        
-        $items = json_decode($request->input("items"),true);
 
-        for ($i = 0; $i < count($items); $i++)
-        {   
-            $items[$i][2] = ItemList::getItemByID($items[$i][2])->itemname;
-        }
+                    #============================================
+                    # Store file first to prevent errors.       =
+                    #============================================
+                    $filename = Carbon::now()->toDateString().".".$file->getClientOriginalExtension();
+                    $truepath = "storage/form-files/".$filename;
+                    $filepath = $file->storeAs("public/form-files", $filename);
+                    if (!$filepath)
+                        return back()->with(["info" => "Something went wrong while uploading file!"]);
+                    
+                    #=================================
+                    # step 1 insert form             =
+                    #=================================
+                    $step2_data = [];
+                    $step2_data[ "formtype_id"             ] = 1; # PR := 1
+                    $step2_data[ "createdat"               ] = Carbon::now();
+                    $step2_data[ "prnumber"                ] = "";
+                    $step2_data[ "sainumber"               ] = "";
+                    $step2_data[ "purpose"                 ] = $purpose;
+                    $step2_data[ "fileembedded"            ] = $filepath;
+                    $form_id = Form::create($step2_data)->id;
+                    
+                    #=================================
+                    # step 2 insert items to pr form =
+                    #=================================
+                    for ($idx = 0; $idx < $num_of_rows; $idx++)
+                    {
+                        $step3_data = [];
+                        $step3_data[ "form_id"   ] = $form_id;
+                        $step3_data[ "stockno"   ] = $stck_col[$idx];
+                        $step3_data[ "unit"      ] = $unit_col[$idx];
+                        $step3_data[ "item"      ] = $desc_col[$idx];
+                        $step3_data[ "quantity"  ] = $qnty_col[$idx];
+                        $step3_data[ "unitcost"  ] = $unitc_cost_col[$idx];
+                        $step3_data[ "totalcost" ] = $total_cost_col[$idx];
+                        PrItem::create($step3_data);
+                    }
 
-        error_log("RESULT: ".json_encode($items));
+                    #=================================
+                    # step 3 save required personel  =
+                    #=================================
+                    // requisitioner
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $rQ_id,
+                        "personelstatus_id"          => 1,
+                        "updatedat"                  => Carbon::now()
+                    ]);
+                    // budget officer
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $bO_id,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => null
+                    ]);
+                    // recommending approval
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => $rA_id,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => null
+                    ]);
 
-        $requisitioner = UserVerificationDetails::getUserByID($request->input("requester"));
-        $budgetofficer = UserVerificationDetails::getUserByID($request->input("budget-officer"));
-        $recommending  = UserVerificationDetails::getUserByID($request->input("recommending-approval"));
-        
-        $data = [
-            "items"   => $items,
-            "purpose" => $request->input("purpose"),
-            "requester_name" => $requisitioner->lastname.", ".$requisitioner->firstname." ".$requisitioner->middleinitial,
-            "requester_designation" => Designation::getDesignationByID($requisitioner->designation_id),
-            "budget_officer_name" => $budgetofficer->lastname.", ".$budgetofficer->firstname." ".$budgetofficer->middleinitial,
-            "budget_officer_designation" => Designation::getDesignationByID($budgetofficer->designation_id),
-            "recommending_approval_name" => $recommending->lastname.", ".$recommending->firstname." ".$recommending->middleinitial,
-            "recommending_approval_designation" => Designation::getDesignationByID($recommending->designation_id),
-        ];
+                    return redirect()->to("/purchaserequest/viewprforminfo?prform=" . Crypt::encrypt($form_id));
+                }
 
-        return view("app.new-purchase-request.view-pr-form", $data);
-    }
+                /**
+                 * View pr form -> index
+                 * uses: "GET" request
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function viewPrForm(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # yes login or expired.     =
+                    #============================
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    #============================
+                    # Only requisitioner can    =
+                    # view pr form.             =
+                    #============================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                        return redirect()->to("/dashboard");
+
+                    #==============================
+                    # Return 404 if any of these  =
+                    # fields is null.             =
+                    #==============================
+                    if (hasNull($request, ["items", "purpose", "requester", "budget-officer", "recommending-approval"]))
+                        return abort(403);
+                    
+                    #============================
+                    # convert items to json     =
+                    #============================
+                    $items = json_decode($request->input("items"),true);
+
+
+                    $rQ = UserVerificationDetails::getUserByID($request->input("requester"));
+                    $bO = UserVerificationDetails::getUserByID($request->input("budget-officer"));
+                    $rA = UserVerificationDetails::getUserByID($request->input("recommending-approval"));
+                    
+                    #============================
+                    # Return 403 if fields      =
+                    # (requisitioner,           =
+                    # budget-officer,           =
+                    # recommending-approval) is =
+                    # null                      =
+                    #============================
+                    if (!($rQ || $bO || $rA))
+                        return abort(403);
+
+                    #============================
+                    # Arranged data             =
+                    #============================
+                    $data = [];
+                    $data[               "items"               ] = $items;
+                    $data[              "purpose"              ] = $request->input("purpose");
+                    $data[           "requester_name"          ] = formatName($rQ);
+                    $data[       "requester_designation"       ] = Designation::getDesignationByID($rQ->designation_id);
+                    $data[        "budget_officer_name"        ] = formatName($bO);
+                    $data[    "budget_officer_designation"     ] = Designation::getDesignationByID($bO->designation_id);
+                    $data[    "recommending_approval_name"     ] = formatName($rA);
+                    $data[ "recommending_approval_designation" ] = Designation::getDesignationByID($rA->designation_id);
+                    return view("app.purchase-request.view-purchase-request-form", $data);
+                }
 
 
     /**
@@ -115,11 +373,19 @@ class AppController extends Controller
      **/
     function jobOrder(Request $request)
     {
+        #============================
+        # Redirect to login if not  =
+        # login or expired.         =
+        #============================
         if  (!Auth::check())
             return redirect()->to("/login");
 
+        #============================
+        # Only requisitioner can    =
+        # create jo form.           =
+        #============================
         if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
-            return redirect()->to("/logout");
+            return redirect()->to("/dashboard");
 
         return view("app.new-job-order.new-job-order");
     }
@@ -133,10 +399,10 @@ class AppController extends Controller
     function viewJOForm(Request $request)
     {
         $data = [
-            'JoFormData' => json_decode($request->input('data'),true)
+            "JoFormData" => json_decode($request->input("data"),true)
         ];
 
-        return view('app/new-job-order/view-jo-form', $data);
+        return view("app/new-job-order/view-jo-form", $data);
     }
 
     
@@ -151,11 +417,19 @@ class AppController extends Controller
      **/
     public function users(Request $request)
     {
+        #============================
+        # Redirect to login if not  =
+        # login or expired.         =
+        #============================
         if  (!Auth::check())
             return redirect()->to("/login");
 
+        #============================
+        # Only admin can view user  =
+        # list                      =
+        #============================
         if (!isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-            return redirect()->to("/logout");
+            return redirect()->to("/dashboard");
 
         return view("app.users.users");
     }
@@ -163,7 +437,204 @@ class AppController extends Controller
     /* user subdir ----> */
 
                 /**
-                 * Update new users verification status -> users/updateverificationstatus
+                 * View user profile -> user/userid
+                 **/
+                public function user__user_profile(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+
+                    #============================
+                    # Redirect to dashboard if  =
+                    # user parameter is not     =
+                    # present.                  =
+                    #============================
+                    if (!$request->has("user"))
+                        return redirect()->intended("/dashboard");
+
+                    #=================================================
+                    # Decrypt hashed user id.                        =
+                    # If invalid hashed value, redirect to dashboard =
+                    #=================================================
+                    $decrypt = null;
+                    try
+                    { $decrypt = (int) Crypt::decrypt($request->input("user")); }
+                    catch (\Illuminate\Contracts\Encryption\DecryptException $e)
+                    { return redirect()->to("/dashboard"); }
+
+                    #=====================================
+                    # Check if user is already verified. =
+                    #=====================================
+                    if (!(UserVerificationDetails::isVerified($decrypt)))
+                        return redirect()->intended("/dashboard");
+
+                    return view("app.users.user-profile", ["user" => UserVerificationDetails::getUserByID($decrypt)]);
+                }
+                
+                /**
+                 * Uploads image -> user/uploadprofilepicture
+                 * @param Request $request request
+                 * @return View
+                 **/
+                public function user__user_profile_update(Request $request)
+                {
+                    #=================================
+                    # Return 403 if not logged in.   =
+                    #=================================
+                    if (!Auth::check())
+                        return abort(403);
+                    
+                    #=================================
+                    # Return 403 if no images found. =
+                    #=================================
+                    if (!($request->hasFile("user-image-upload")) || !request("user-image-upload")->isValid())
+                        return abort(403);
+                    
+                    #================================
+                    # Get uploaded file if success. =
+                    #================================
+                    $file = $request->file("user-image-upload");
+                    
+                    #============================================
+                    # Sets filename.                            =
+                    # fmt: user_id + '-' + time_delta.extension =
+                    #============================================
+                    $filename = Auth::user()->user_id."-".time().".".$file->getClientOriginalExtension();
+                    #============================================
+                    # Save truepath.                            =
+                    # truepath is used by the system to restore =
+                    # image path.                               =
+                    #============================================
+                    $truepath = "storage/user-images/".$filename;
+                    #============================================
+                    # Save path.                                =
+                    # path is used by the system to store the   =
+                    # exact image path from symlink.            =
+                    #============================================
+                    $path = $file->storeAs("public/user-images", $filename);
+
+                    #==============================================
+                    # Return information about updating profile,  =
+                    # ex: success | failure                       =
+                    #==============================================
+                    $info = "";
+                    if (!$path)
+                        $info = "Something went wrong while uploading your image.";
+                    else
+                    {
+                        if (!(UserProfileImages::updatePath(Auth::user()->user_id, $truepath)))
+                            $info = "Something went wrong while updating your profile.";
+                        else
+                            $info = "Profile updated successfully.";
+                    }
+
+                    return back()->with("info", $info);
+                }
+
+                public static function user__delete_user_profile_image(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    $decrypt = null;
+                    try
+                    { $decrypt = (int) Crypt::decrypt($request->input("user")); }
+                    catch (\Illuminate\Contracts\Encryption\DecryptException $e)
+                    { return redirect()->to("/dashboard"); }
+
+                    $result = UserProfileImages::deleteUserProfileImageByUserID((Int) $decrypt);
+                    if (!$result)
+                        return back()->with("info", "Profile image deletetion error!");
+                        
+                    return back()->with("info", "Successfully deleted profile image.");
+                }
+
+                /**
+                 * Edit user profile -> user/editprofile
+                 * uses: "POST" request
+                 * @param Request $request request
+                 * @return View
+                 **/ 
+                public function user__edit_profile(Request $request)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+
+                    #============================
+                    # Validation rules.         =
+                    #============================
+                    $validator_data = [];
+                    $validator_data[      "username"   ] = "required|string|max:50";
+                    $validator_data[         "email"   ] = (strcmp(Auth::user()->email, $request->input("email")) === 0)? "required|string|email|max:100|exists:user,email" : "required|string|email|max:100|unique:user";
+                    $validator_data[      "password"   ] = (strcmp($request->input("password"), "********") !== 0)? "required|string|regex:/^([_A-Z].*\d+.*)$/|min:8|confirmed" : "required|string|min:8|confirmed";
+                    $validator_data[     "firstname"   ] = "required|string|regex:/^([A-Z]\w*(\s?[A-Z]\w*)*)$/|min:2|max:25";
+                    $validator_data[      "lastname"   ] = "required|string|regex:/^([A-Z][a-z]*)$/|min:2|max:25";
+                    $validator_data[ "middleinitial"   ] = "required|string|regex:/^([A-Z])$/|min:1|max:1";
+                    $validator_data[   "designation"   ] = "required|string";
+                    $validator_data[   "accesslevel"   ] = "required|string";
+                    $validator = Validator::make($request->all(), $validator_data);
+
+
+                    #===================================
+                    # Go back to page if not validate. =
+                    #===================================
+                    if  ($validator->fails())
+                        return redirect()->back()->withErrors($validator)->withInput();
+
+                    #=========================
+                    # Update data.           =
+                    #=========================
+                    $update_data = [];
+                    $update_data[ "username"       ] = $request->input("username");
+                    $update_data[ "email"          ] = $request->input("email");
+                    $update_data[ "firstname"      ] = $request->input("firstname");
+                    $update_data[ "lastname"       ] = $request->input("lastname");
+                    $update_data[ "middleinitial"  ] = $request->input("middleinitial");
+                    $update_data[ "designation_id" ] = $request->input("designation");
+                    $update_data[ "accesslevel_id" ] = $request->input("accesslevel");
+                    
+                    
+                    #===================================
+                    # Include password if field value  =
+                    # is not "********".               =
+                    #===================================
+                    if (strcmp($request->input("password"), "********") !== 0)
+                    $update_data["password"] = Hash::make($request->input("password"));
+                    
+                    #================================
+                    # Update info based on user_id. =
+                    #================================
+                    $updated = User::where("user_id", "=", Auth::user()->user_id)
+                    ->update($update_data);
+                    
+                    #==================================
+                    # Return information about update =
+                    # ex: success | failure           =
+                    #==================================
+                    $info = "";
+                    if ($updated)
+                        $info = "User profile updated successfully!";
+                    else
+                        $info = "User profile update failed!";
+
+                    return back()->with("info", $info);
+                }
+
+                /**
+                 * Update new users verification status -> user/updateverificationstatus
                  * @param Request $request request
                  * @return bool
                  * @example
@@ -173,20 +644,26 @@ class AppController extends Controller
                  **/
                 public function user__updateVerificationStatus(Request $request)
                 {
+                    #=========================================
+                    # Return false if not loggedin as admin. =
+                    #=========================================
                     if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
                         return false;
 
+                    #===============================
+                    # Update verificationstatus_id =
+                    #===============================
                     $user_id   = $request->input("user_id");
                     $status_id = $request->input("status_id");
-
                     $signal = UserVerificationDetails::where("user_id", "=", $user_id)
                             ->update(["verificationstatus_id" => $status_id]);
+
                     return (bool) !(!$signal);
                 }
 
 
                 /**
-                 * Delete verified user -> users/deleteuser
+                 * Delete verified user -> user/deleteuser
                  * @param Request $request request
                  * @return bool
                  * @example
@@ -196,136 +673,21 @@ class AppController extends Controller
                  **/
                 public function user__deleteUser(Request $request)
                 {
+                    #=========================================
+                    # Return false if not loggedin as admin. =
+                    #=========================================
                     if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
                         return false;
 
+                    #=========================================
+                    # Delete user by user_id.                =
+                    #=========================================
                     $userid = $request->input("user_id");
                     $signal = UserVerificationDetails::where("user_id", "=", $userid)
                             ->delete();
+
                     return (bool) !(!$signal);
                 }
-
-
-    /**
-     * Item List -> index
-     * @param Request $request request
-     * @return View
-     *
-     **/
-    public function itemlist(Request $request)
-    {
-        if  (!Auth::check())
-            return redirect()->to("/login");
-
-        return view("app.item-list.item-list");
-    }
-
-    /* item list subdir ----> */
-                /**
-                 * Add item -> itemlist/additem
-                 * @param Request $request request
-                 * @return view
-                 * @example
-                 *     Only "admin" has access to this page
-                 *         Accesslevel table
-                 *             14 := admin
-                 *
-                 **/
-                public function itemlist__additem(Request $request)
-                {
-                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-                        return response()->json(["errors" => "Invalid access!"]);
-
-                    $validator = Validator::make($request->all(),[
-                        'itemnumber'       => 'required|unique:item_list|integer|digits:8',
-                        'itemname'         => 'required|string|min:4|max:100',
-                        'itemdescription'  => 'required|string|min:4|max:100',
-                    ],["itemnumber.unique" => "An Item with the same item number already exists."]);
-
-                    if  ($validator->fails())
-                        return response()->json(["errors" => $validator->errors()]);
-
-                    $item = new ItemList();
-
-                    $item->itemnumber      = $request->input("itemnumber");
-                    $item->itemname        = $request->input("itemname");
-                    $item->itemdescription = $request->input("itemdescription");
-                    $signal = $item->save();
-
-                    if  (!$signal)
-                        // debug
-                        return response()->json(["message" => "Item addition failed!", "successful" => false]);
-
-                    // TODO: Fix this
-                    return response()->json([
-                        "message"     => "Item added successfully!",
-                        "successful"  => true,
-                        "itemlist_id" => $item->id]);
-                }
-
-
-                /**
-                 * Update item -> itemlist/updateitem
-                 * @param Request $request request
-                 * @return view
-                 * @example
-                 *     Only "admin" has access to this page
-                 *         Accesslevel table
-                 *             14 := admin
-                 *
-                 **/
-                public function itemlist__updateItem(Request $request)
-                {
-                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-                        return response()->json(["errors" => "Invalid access!"]);
-
-                    $validator = Validator::make($request->all(),[
-                        'itemnumber'       => 'required|unique:item_list|integer|digits:8',
-                        'itemname'         => 'required|string|min:4|max:100',
-                        'itemdescription'  => 'required|string|min:4|max:100',
-                    ],["itemnumber.unique" => "An Item with the same item number already exists."]);
-
-                    if  ($validator->fails())
-                        return response()->json(["errors" => $validator->errors()]);
-
-                    $signal = ItemList::where("itemlist_id", "=", $request->input("itemlist_id"))
-                        ->update([
-                            "itemnumber" => $request->input("itemnumber"),
-                            "itemname"   => $request->input("itemname"),
-                            "itemdescription" => $request->input("itemdescription"),
-                        ]);
-
-                    if  (!$signal)
-                        // debug
-                        return response()->json(["message" => "Update failed!", "successful" => false]);
-
-                    return response()->json([
-                        "message"    => "Item was updated successfully!",
-                        "successful" => true
-                    ]);
-                }
-
-
-                /**
-                 * Delete item -> itemlist/deleteitem
-                 * @param Request $request request
-                 * @return bool
-                 * @example
-                 *     Only "admin" has access to this page
-                 *         Accesslevel table
-                 *             14 := admin
-                 **/
-                public function itemlist__deleteItem(Request $request)
-                {
-                    if (!Auth::check() || !isValidAccess(Auth::user()->accesslevel_id, ["14"]))
-                        return false;
-
-                    $itemlist_id = $request->input("itemlist_id");
-                    $signal      = ItemList::where("itemlist_id", "=", $itemlist_id)
-                                    ->delete();
-                    return (bool) !(!$signal);
-                }
-
 
     /**
      * Requisitioner -> index
@@ -338,5 +700,60 @@ class AppController extends Controller
             return redirect()->to("/login");
 
         return view("app.requisitioner.requisitioner");
+    }
+
+
+
+    /**
+     * Supply Officer Form List -> index
+     * @param Request $request request
+     * @return View
+     *
+     **/
+    public function so_approvedforms(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["10"]))
+            return redirect()->to("/logout");
+
+        return view("supplyofficer.so-forms");
+    }
+
+    
+    /* user subdir ----> */
+                /**
+                 * Add so-forms -> generatepqs
+                 * @param Request $request request
+                 * @return view
+                 * @example
+                 *     Only "supply officer" has access to this page, accesslevel = 10
+                 *
+                 **/
+                public function so_approvedforms_generatepqs(Request $request)
+                {
+
+                    // ...
+                    return view("supplyofficer.view-price-quotation-sheet");
+                }
+
+
+
+    /**
+     * BAC Chair PQS List -> index
+     * @param Request $request request
+     * @return View
+     *
+     **/
+    public function bac_chair_pqsforms(Request $request)
+    {
+        if  (!Auth::check())
+            return redirect()->to("/login");
+
+        if (!isValidAccess(Auth::user()->accesslevel_id, ["8"]))
+            return redirect()->to("/logout");
+
+        return view("bac-chairman.pqs-forms");
     }
 }

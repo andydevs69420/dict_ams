@@ -40,7 +40,7 @@
 
                 <div class="input-group my-2">
                     <span class="input-group-text text-white"><i class="fa fa-user"></i></span>
-                    <input class="form-control" type="text" name="username" placeholder="{{ __("Username") }}" required>
+                    <input class="form-control" type="text" name="username" placeholder="{{ __("Username") }}" required value="{{ old("username") }}">
                 </div>
                 <div class="input-group my-2">
                     <span class="input-group-text text-white"><i class="fa fa-lock"></i></span>

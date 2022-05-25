@@ -13,9 +13,12 @@
 
     jQuery(()=> {
         window.messageModal = new MessageModal("#users__message-modal");
-        $("#users__user-table").DataTable({
+        window.userTable = $("#users__user-table").DataTable({
             "responsive" : true ,
-            "autoWidth"  : false
+            "autoWidth"  : false,
+            "colReorder" : {
+                realtime: true
+            }
         });
     });
 
@@ -74,6 +77,7 @@
 
 
     /**
+     * Deletes current row from table based on id
      * @param user_id "String | Number" user's id 
      * @return null
      * @example
@@ -92,9 +96,11 @@
                     return somethingWentWrong();
                 
                 window.messageModal.show("Info", "User deleted successfully!");
-
-                $("#user-row__user-"+user_id)
-                .remove();
+                
+                window.userTable?.row($("#user-row__user-"+user_id))
+                .remove()
+                .draw();
+                
             },
             error: function(response, status, request) 
             { somethingWentWrong(); }
@@ -125,10 +131,52 @@
      **/
     function updateActionBtnBG(row, status_id)
     {
-        return $(row)
+        $(row)
         .find("button")
         .removeClass("btn-danger")
         .addClass(parseInt(status_id) === 2 ? "btn-primary" : "btn-success");
+
+        dropdown = $(row).find("ul.dropdown-menu");
+        user_id  = $(row).attr("id").split("-")[2];
+
+        if (parseInt(status_id) === 2)
+        {
+
+            $.ajax({
+                url  : "/user/hashid",
+                type : "POST",
+                data : { "user_id": user_id },
+                dataType : "json",
+                success  : function(response, status, request)
+                {
+                    dropdown.empty();
+                    dropdown
+                    .append(
+                        $("<li>")
+                        .append(
+                            $(`<a class="dropdown-item" href="/user/userprofile?user=${response['hashid']}">`)
+                            .text("view profile")
+                        )
+                    );
+                },
+                error: function(response, status, request)
+                { somethingWentWrong(); }
+            });
+        }
+        else
+        {
+            dropdown.empty();
+            dropdown
+            .append(
+                $("<li>")
+                .append(
+                    $(`<a class="dropdown-item" href="#" onclick='javascript:window.deleteUser("${user_id}")'>`)
+                    .text("delete")
+                )
+            );
+        }
+       
     }
 
 })();
+

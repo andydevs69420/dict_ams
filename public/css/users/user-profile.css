@@ -1,0 +1,80 @@
+/* Based on bootstrap breakpoints */
+/* on small devices and above */
+/* on medium devices and above */
+/* on large devices and above */
+/* on extra-large devices and above */
+/* on extra-extra large devices and above */
+/* ================= LOGIN COLORS   ================= */
+/* ================= SIDEBAR COLORS ================= */
+/* ================= TOPBAR COLORS ================== */
+/* ================= DASHBOARD COLORS =============== */
+/* ================= PROGRESSBAR COLORS ============= */
+/* ================= NEW PR FORM COLORS ============= */
+/* ================= VIEW PR LIST COLORS ============ */
+/* ================= PR FORM COLORS ================= */
+/* ================= USER LIST COLORS =============== */
+/* ================= REQUISITIONER LIST COLORS ====== */
+.input-group-text {
+  display: block !important;
+  min-width: 3em !important;
+  background-color: #0020EC !important;
+}
+
+.user-profile__avatar-wrapper {
+  padding-top: 55%;
+  width: 55%;
+  border-radius: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .user-profile__avatar-wrapper {
+    padding-top: 65%;
+    width: 65%;
+  }
+}
+
+.user-profile__avatar-floater {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  border-radius: 100%;
+}
+
+.user_profile__short-info-list > li > i.fa-solid {
+  font-size: 1.2em;
+  min-width: 1.4em;
+}
+
+.user_profile__short-info-list > li > span[role="text"] {
+  font-size: .9em;
+  font-weight: bold;
+}
+
+#user-profile__edit-profile-form {
+  opacity: .9;
+}
+
+#user-profile__edit-profile-form span[role="text"] {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.user-profile__update-btn-wrapper {
+  width: 100% !important;
+}
+
+@media screen and (min-width: 1200px) {
+  .user-profile__update-btn-wrapper {
+    width: auto !important;
+  }
+}
+
+.user-profile__update-btn {
+  background-color: #0020EC !important;
+}
+/*# sourceMappingURL=user-profile.css.map */

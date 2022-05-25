@@ -1,6 +1,9 @@
 @import '../global/sizing';
 @import '../global/appcolor';
 
+.users__users-header-label
+{ font-size: 1.6em; }
+
 .dataTables_length
 { 
   text-align: left !important; 
@@ -37,6 +40,6 @@
 
 .page-item.active .page-link
 {
-  border-color: $USER-LIST-ACTIVE-LIBK-BG !important;
-  background-color: $USER-LIST-ACTIVE-LIBK-BG !important;
+  border-color: $USER-LIST-ACTIVE-LINK-BG !important;
+  background-color: $USER-LIST-ACTIVE-LINK-BG !important;
 }

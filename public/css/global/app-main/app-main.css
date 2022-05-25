@@ -10,9 +10,10 @@
 /* ================= DASHBOARD COLORS =============== */
 /* ================= PROGRESSBAR COLORS ============= */
 /* ================= NEW PR FORM COLORS ============= */
+/* ================= VIEW PR LIST COLORS ============ */
 /* ================= PR FORM COLORS ================= */
 /* ================= USER LIST COLORS =============== */
-/* ================= ITEM LIST COLORS =============== */
+/* ================= REQUISITIONER LIST COLORS ====== */
 * {
   margin: 0;
   -webkit-box-sizing: border-box;
@@ -63,6 +64,15 @@ body {
   }
 }
 
+body.modal-open {
+  overflow: auto !important;
+  padding: 0px !important;
+}
+
+body.modal-open .modal {
+  padding: 0px !important;
+}
+
 .app-main__noscript-content-wrapper {
   background-color: #0020EC !important;
   z-index: 999999999;
@@ -70,6 +80,13 @@ body {
 
 .app-main__content-root {
   min-width: 280px !important;
+  min-width: 100vw !important;
+}
+
+@media screen and (min-width: 576px) {
+  .app-main__content-root {
+    min-width: 280px !important;
+  }
 }
 
 .app-main__content-wrapper {
