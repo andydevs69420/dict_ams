@@ -19,6 +19,10 @@
 @stop
 
 @section("content")
+
+    {{-- message modal --}}
+    <x-message-modal id="purchase-request-form-info__message-modal"></x-message-modal>
+
     <div class="d-block py-3">
 
         <form action="POST" enctype="multipart/form-data">
@@ -86,7 +90,41 @@
                                 </div>
 
                                 {{-- comments --}}
-                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">COMMENTS</span>
+                                <div class="accordion">
+                                    <div class="accordion-item">
+                                        <h6 class="accordion-header">
+                                            <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                <span class="d-block px-2 small text-muted" role="text" style="font-weight: 400;">COMMENTS</span>
+                                            </button>
+                                        </h6>
+                                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body px-2" style="max-height: 350px; overflow-y: auto;">
+                                                <div class="container-fluid">
+                                                    <div id="purchase-request-form-info__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
+                                                        <div class="px-2 py-5 text-center">
+                                                            <i class="d-block text-muted fa-solid fa-comment fa-2x"></i>
+                                                            <span class="text-muted text-truncate" role="text">loading comments...</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <div class="accordion-header p-2">
+                                            <div class="input-group mt-2 mb-3">
+                                                <textarea id="purchase-request-form-info__comment-field" class="form-control" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
+                                            </div>
+                                            <span class="d-block my-2">
+                                                <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->formrequiredpersonel_id) }}">
+                                                    {{ __("COMMENT") }}
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -104,11 +142,17 @@
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
+    {{-- message modal js --}}
+    <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
+
     {{-- PR js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
+
+    {{-- PURCHASE REQUEST FORM INFO --}}
+    <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
 
     {{--
         14 := ADMIN 
