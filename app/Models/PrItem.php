@@ -20,6 +20,7 @@ class PrItem extends Model
         'quantity',
         'unitcost',
         'totalcost',
+        'status'
     ];
 
     

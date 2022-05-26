@@ -37,12 +37,23 @@
 						<tbody>
                         @foreach($form as $Form_id)
                                 <tr>
-                                    <td>{{ $Form_id}}</td>                                       
+                                    <td>{{$Form_id}}</td>                                       
                                     <td class="align-right">
-                                        <a href="{{ url('Budgetofficer/edit-purchaserequest/'.$Form_id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
-                                        <a href="{{ url('Budgetofficer/delete/'.$Form_id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                        <a href="{{ url('Budgetofficer/download/'.$Form_id) }}" class="ui circular basic icon button tiny"><i class="icon download alternate outline"></i></a>
-
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("Status") }}</button>
+                                                <ul class="dropdown-menu" aria-labelledby="">
+                                                    <li><a class="dropdown-item" value="{{ $Form_id["status"] }}">{{ __("Pending") }}</a></li>
+                                                    <li><a class="dropdown-item" value="{{ $Form_id["status"] }}">{{ __("Approve") }}</a></li>
+                                                    <li><a class="dropdown-item" value="{{ $Form_id["status"] }}">{{ __("Decline") }}</a></li>                               
+                                                </ul>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("Status") }}</button>
+                                                <ul class="dropdown-menu" aria-labelledby="">
+                                                    <li><a class="dropdown-item" onclick="javascript: generate__pr_form()">{{ __("Download file") }}</a></li>
+                                                    <li><a class="dropdown-item" onclick='javascript:$("#file-pick-id").click()'>{{ __("Upload file") }}</a></li>
+                                                </ul>
+                                        </div>
                                     </td>
                                 </tr>
                         @endforeach    

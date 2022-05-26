@@ -18,6 +18,7 @@ class JoItem extends Model
         'quantity',
         'unitcost',
         'amount',
+        'status',
     ];
 
    
