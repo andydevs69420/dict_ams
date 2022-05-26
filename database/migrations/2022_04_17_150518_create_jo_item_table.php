@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    public $timestamps = false;
+
     /**
      * Run the migrations.
      *
@@ -16,6 +19,13 @@ return new class extends Migration
         Schema::create('jo_item', function (Blueprint $table) {
             $table->id('joitem_id')->unique();
             $table->bigInteger('form_id')->unsigned();
+            $table->string('itemno');
+            $table->string('unit');
+            $table->string('description');
+            $table->integer('quantity');
+            $table->double('unitcost', 11, 2);
+            $table->double('amount', 11, 2);
+            $table->timestamps();
         });
 
         Schema::table('jo_item', function (Blueprint $table) {

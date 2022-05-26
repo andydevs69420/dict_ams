@@ -11,7 +11,7 @@ class UserProfileImages extends Model
     protected $table = 'user_profile_images';
     
     protected $fillable = [
-        'user_verification_details_id',
+        'userverificationdetails_id',
         'path',
     ];
 
@@ -25,7 +25,7 @@ class UserProfileImages extends Model
     public static function getProfileImagePathByUserId(Int $userid)
     {
         $verified_user_id = UserVerificationDetails::getUserByID($userid)->userverificationdetails_id;
-        $path = self::where("user_verification_details_id", "=", $verified_user_id)
+        $path = self::where("userverificationdetails_id", "=", $verified_user_id)
         ->first();
 
         if ($path)
@@ -37,14 +37,14 @@ class UserProfileImages extends Model
     public static function updatePath(Int $userid, String $path)
     {
         $verified_user_id = UserVerificationDetails::getUserByID($userid)->userverificationdetails_id;
-        return self::where("user_verification_details_id", "=", $verified_user_id)
+        return self::where("userverificationdetails_id", "=", $verified_user_id)
         ->update(["path" => $path]);
     }
 
     public static function deleteUserProfileImageByUserID(Int $userid)
     {
         return self::join(
-            "user_verification_details", "user_profile_images.user_verification_details_id", "=", "user_verification_details.userverificationdetails_id"
+            "user_verification_details", "user_profile_images.userverificationdetails_id", "=", "user_verification_details.userverificationdetails_id"
         )
         ->where("user_verification_details.user_id", "=", $userid)
         ->update(["path" => "images/no-image.png"]);

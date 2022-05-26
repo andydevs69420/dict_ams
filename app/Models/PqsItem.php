@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JoForm extends Model
+class PqsItem extends Model
 {
     use HasFactory;
-    protected $table = 'pqs_form';
+    protected $table = 'pqs_item';
     
     protected $fillable = [
         'form_id',
