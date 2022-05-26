@@ -1,6 +1,6 @@
 @extends("layout.app-main")
 
-@section("title", "AMS | PR Info")
+@section("title", "AMS | JO Info")
 
 @section("dependencies")
 
@@ -109,6 +109,8 @@
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
+    {{-- JO FORM js --}}
+    <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
     {{--
         14 := ADMIN 
         readonly if admin.

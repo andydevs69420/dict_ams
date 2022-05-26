@@ -44,7 +44,7 @@
                                 <li id="jo-form__jo-item-template" class="list-group-item bg-transparent border-0 rounded-0 p-0">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <span class="item-header" role="text">Item 1</span>
-                                        <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
+                                        <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
                                     </div>
                                     <div class="container-fluid p-0 mt-2">
                                         <div class="row">
@@ -75,7 +75,7 @@
                                             <div class="col-12 pb-4">
                                                 <div  class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Job description" data-bs-content="Job name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                    <input class="form-control border-0 bg-white jo-description" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Job description") }}" required>
+                                                    <textarea class="form-control border-0 bg-white jo-description" rows="1" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Job description") }}" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
