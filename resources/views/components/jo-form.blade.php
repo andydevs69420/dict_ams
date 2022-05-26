@@ -41,7 +41,7 @@
                                     <hr class="bg-info">
                                 @endif
 
-                                <li class="list-group-item bg-transparent border-0 rounded-0 p-0">
+                                <li id="jo-form__jo-item-template" class="list-group-item bg-transparent border-0 rounded-0 p-0">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <span class="item-header" role="text">Item 1</span>
                                         <button class="btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
@@ -71,31 +71,31 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <!-- item dscription group -->
+                                            <!-- job dscription group -->
                                             <div class="col-12 pb-4">
                                                 <div  class="input-group shadow">
-                                                    <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                    <input class="form-control border-0 bg-white jo-description" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Item description") }}" required>
+                                                    <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Job description" data-bs-content="Job name or description"><i class="fa-solid fa-newspaper"></i></a>
+                                                    <input class="form-control border-0 bg-white jo-description" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Job description") }}" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <!-- quantity group -->
-                                            <div class="col-4 pb-3">
+                                            <div class="col-12 pb-3">
                                                 <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
                                                     <input id="quantity-id" class="form-control border-0 bg-white jo-quantity" name="qty[]" type="number" value="{{ $itm["quantity"] }}" placeholder="Quantity" required onkeyup="javascript:calc_quantity(this.value)">
                                                 </div>
                                             </div>
                                             <!-- unit cost group -->
-                                            <div class="col-4 pb-3">
+                                            <div class="col-6 pb-3">
                                                 <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit cost" data-bs-content="Item cost per unit"><i class="fa-solid fa-coins"></i></a>
                                                     <input id="unitcost-id" class="form-control border-0 bg-white jo-unitcost" name="unitcost[]" type="number" value="{{ $itm["unitcost"] }}" placeholder="Unit cost" required onkeyup="javascript:calc_cost(this.value)">
                                                 </div>
                                             </div>
                                             <!-- total cost group -->
-                                            <div class="col-4 pb-3">
+                                            <div class="col-6 pb-3">
                                                 <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Total cost" data-bs-content="Item total cost"><i class="fa-solid fa-peso-sign"></i></a>
                                                     <input id="total-amount-id" class="form-control border-0 bg-white jo-totalamount" name="amount[]" type="number" value="{{ $itm["amount"] }}" placeholder="Total Amount" required>

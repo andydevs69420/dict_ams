@@ -56,7 +56,7 @@
                             <div class="card-body">
                                 <div id="file-content-id" class="d-block"></div>
                                 <input id="file-pick-id" class="d-none" type="file" name="file-upload" accept="image/.jpeg,.png,.pdf" multiple>
-                                <button class="new-job-order__upload-files-btn btn w-100 border" for="file-pick-id" type="button" onclick='javascript:$("#file-pick-id").click()'>
+                                <button class="new-job-order__upload-files-btn btn btn-sm w-100 border rounded-pill" for="file-pick-id" type="button" onclick='javascript:$("#file-pick-id").click()'>
                                     <i class="fa fa-upload"></i>
                                     <span role="text">{{ __("UPLOAD FILES") }}</span>
                                 </button>
