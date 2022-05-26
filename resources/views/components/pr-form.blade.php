@@ -55,28 +55,28 @@
                                         </div>
                                         <!-- item description group -->
                                         <div class="col-12">
-                                            <div class="input-group my-3 rounded shadow">
+                                            <div class="input-group my-2 rounded shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
                                                 <textarea class="form-control border-0" rows="1" name="description[]" placeholder="{{ __("Item desciption") }}" required>{{ $itm["item"] }}</textarea>
                                             </div>
                                         </div>
                                         <!-- quantity group -->
                                         <div class="col-12 col-sm-12">
-                                            <div class="input-group my-3 shadow">
+                                            <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
                                                 <input class="form-control border-0 bg-white" name="qty[]" type="number" value="{{ $itm["quantity"] }}" placeholder="{{ __("Qty") }}" required>
                                             </div>
                                         </div>
                                         <!-- unit cost group -->
                                         <div class="col-12 col-sm-6">
-                                            <div class="input-group my-3 shadow">
+                                            <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit cost" data-bs-content="Item cost per unit"><i class="fa-solid fa-coins"></i></a>
                                                 <input class="form-control border-0 bg-white" name="unitcost[]" type="number" value="{{ $itm["unitcost"] }}" placeholder="{{ __("Unit cost") }}">
                                             </div>
                                         </div>
                                         <!-- total cost group -->
                                         <div class="col-12 col-sm-6">
-                                            <div class="input-group my-3 shadow">
+                                            <div class="input-group my-2 shadow">
                                                 <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Total cost" data-bs-content="Item total cost"><i class="fa-solid fa-peso-sign"></i></a>
                                                 <input class="form-control border-0 bg-white" name="totalcost[]" type="number" value="{{ $itm["totalcost"] }}" placeholder="{{ __("Total cost") }}">
                                             </div>
