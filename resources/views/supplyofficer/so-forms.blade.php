@@ -6,10 +6,9 @@
 
     {{-- supply officer css --}}
     <link rel="stylesheet" href="{{ asset("css/supplyofficer/so-forms.css") }}">
-    
+
     {{-- datatable css --}}
-    <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("css/users/users.css") }}">
+    <link rel="stylesheet" href="{{ asset("https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css") }}">
 @stop
 
 @section("content")
@@ -28,30 +27,29 @@
 
             <div class="forms_table-wrapper container m-2 py-2 rounded-2 shadow-lg">
 
-                <table id="users__user-table" class="table table-borderless w-100">
+                <table id="so-forms-table" class="table table-borderless w-100">
                     <thead>
                         <tr>
                             <th class="text-left" scope="col">{{ __("Form ID") }}</th>
-                            <th class="text-left" scope="col">{{ __("PR/JO ID") }}</th>
-                            <th class="text-left" scope="col">{{ __("Date Approved") }}</th>
+                            <th class="text-left" scope="col">{{ __("Form Type") }}</th>
+                            <th class="text-left" scope="col">{{ __("Date Requested") }}</th>
                             <th class="text-left" scope="col">{{ __("Requesitioner") }}</th>
                             <th class="text-center" scope="col">{{ __("Action") }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tbody>
-                            @foreach(App\Models\PrItem::getAllPrForms() as $form)
+                            @foreach(App\Models\Form::getAllForms() as $form)
                                 <tr>
                                     <td id="form-id" style="vertical-align: middle !important;">{{ $form["form_id"] }}</td>
-                                    <td id="pr-id" style="vertical-align: middle !important;">{{ $form["pritem_id"] }}</td>
-                                    <td style="vertical-align: middle !important;">Loading..</td>
+                                    <td id="pr-id" style="vertical-align: middle !important;"> @if($form["formtype_id"] === 1) {{ "Purchase Request" }} @elseif($form["formtype_id"] === 2) {{ "Job Order" }} @endif</td>
+                                    <td style="vertical-align: middle !important;">{{ $form["createdat"] }}</td>
                                     <td style="vertical-align: middle !important;">Loading..</td>
                                     <td class="text-center" style="vertical-align: middle !important;">
                                         <div class="dropdown">
                                             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("action") }}</button>
                                             <ul class="dropdown-menu" aria-labelledby="">
-                                                <li><span class="dropdown-item" role="text"  onclick="javascript:view_form()">{{ __("View") }}</a></li>
-                                                <li><span class="dropdown-item" role="text" onclick="javascript:generate__pqs_form()">{{ __("Generate PQS") }}</span></li>
+                                                <li><span class="dropdown-item" role="text"  onclick='javascript:view_form("{{ $form["form_id"] }}")'>{{ __("View") }}</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -91,71 +89,34 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="mx-auto mt-5 py-2 w-50">
-                <div class="card border-0 shadow-lg">
-                    <div class="card-header py-2 border-0 bg-white">
-                        <span class="text-black fw-bolder" role="text">{{ __("UPLOAD PQS") }}</span>
-                    </div>
-                    <div class="card-body">
-                        <div id="file-content-id" class="d-block mb-4">
-                            <input id="form-number-input" name="form-number-input" type="text" placeholder="Form Number" class="form-control bg-light">
-                        </div>
-                        <input id="file-pick-id" class="d-none" type="file" name="file-upload" accept="image/.jpeg,.png,.pdf" multiple>
-                        <button class="new-job-order__upload-files-btn btn w-100 border" for="file-pick-id" type="button" onclick='javascript:$("#file-pick-id").click()'>
-                            <i class="fa fa-upload"></i>
-                            <span role="text">{{ __("UPLOAD PQS") }}</span>
-                        </button>
-                    </div>
-                    <div class="card-footer py-2 py-lg-3 border-0 bg-white">
-
-                        <div class="shadow">
-                            <button id="new-job-order__submit" class="new-job-order__submit-btn btn w-100 text-light" type="submit">
-                                <i class="fa fa-paper-plane"></i>
-                                <span role="text">{{ __("SEND REQUEST") }}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </form>
     </div>
 @stop
 
 @section("javascript")
     {{-- datatable js --}}
-    <script type="text/javascript" src="{{ asset("extra/dataTable/jQuery-dataTable-bs5-1.11.5.min.js") }}"></script>
-    <script type="text/javascript" src="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("https://code.jquery.com/jquery-3.5.1.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js") }}"></script>
 
     {{-- message modal js --}}
     <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
 
     <script>
-        function generate__pqs_form(){
-            id = $('#form-id').text();
-            prid = $('#pr-id').text();
 
-            let form_data = {
-                'formid' : id,
-                'prid' : prid,
-            };
-            return window.open(`/so_approvedforms/generatepqs?data=${JSON.stringify(form_data)}`);
-
-
-
-        }
-
-
-        function view_form(){
-            id = $('#form-id').text();
+        function view_form(id){
 
             let form_data = {
                 'formid' : id,
             };
-            return window.open(`/so_approvedforms/viewform?data=${JSON.stringify(form_data)}`);
+            return window.location.href = `/so_approvedforms/viewform?data=${JSON.stringify(form_data)}`;
         }
+
+
+        $(document).ready(function () {
+            $('#so-forms-table').DataTable();
+        });
+
     </script>
 @stop
 

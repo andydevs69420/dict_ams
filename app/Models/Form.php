@@ -61,6 +61,21 @@ class Form extends Model
     }
 
     /**
+     * Gets forms by formtype
+     * @param Int $formtypeid formtype id
+     * @return Array
+     **/
+    public static function getAllForms() 
+    {
+        return self::join(
+            "form_type", "form.formtype_id", "=", "form_type.formtype_id"
+        )
+        ->orderBy("form.form_id", "desc")
+        ->orderBy("form.createdat", "desc")
+        ->get();
+    }
+
+    /**
      * Get for by id
      * @param Int $formid form id
      * @return Array
