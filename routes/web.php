@@ -45,16 +45,14 @@ Route::post("/register", [RegisterController::class,"store"]);
 
 // Budget Officer (Purchase Request)
 Route::get('/purchaserequeststatus',[BOController::class,'index']);
-Route::get('/edit-purchaserequest',[BOController::class,'edit']);
 // Budget Officer (Job Order)
 Route::get('/joborderstatus',[BOController::class,'JoIndex']);
-Route::get('/edit-Joborder',[BOController::class,'Joedit']);
 
 //BAC chairman
 Route::get('/BACpricequotation',[BACController::class,'BACIndex']);
 
 //Canvasser
-Route::get('/CanVpricequotation',[BACController::class,'CanvIndex']);
+Route::get('/CanVpricequotation',[CanvController::class,'CanvIndex']);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
