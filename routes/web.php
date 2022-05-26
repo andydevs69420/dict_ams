@@ -79,6 +79,8 @@ Route::controller(AppController::class)->group(function () {
                 Route::get("/purchaserequest/viewprform", "viewPRForm");
         // jo
         Route::get("/newjoborder", "jobOrder");
+            // view jo list
+                Route::get('/joborder/joborderlist', 'viewJOFormList');
             // view jo form
                 Route::get('/newjoborder/viewjoform', 'viewJOForm');
             // upload jo form

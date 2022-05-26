@@ -5,27 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\UserVerificationDetails;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\PrForm;
-use App\Models\JoForm;
 
 use Auth;
 
 class BOController extends Controller
 {
-    public function index(){
-        $form = PrForm::all();
+    public function index() {
+        // $form = PrForm::all();
 
-        if  (!Auth::check())
-            return redirect()->to("/login");
+        // if  (!Auth::check())
+        //     return redirect()->to("/login");
 
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["11"]))
-            return redirect()->to("/logout");
+        // if (!Auth::user()->isBudgetOfficer())
+        //     return redirect()->to("/dashboard");
 
-        return view('Budgetofficer.BO',compact('form'));
+        // return view('Budgetofficer.BO', compact('form'));
+        return view('Budgetofficer.BO');
     }
 
 
-    public function edit(){
+    public function edit() {
         
         if  (!Auth::check())
             return redirect()->to("/login");

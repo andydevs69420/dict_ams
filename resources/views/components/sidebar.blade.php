@@ -78,8 +78,8 @@
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/viewprlist") }}">
                                                     <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("#") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("#") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("joborder/joborderlist") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/joborder/joborderlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
                                                 </li>
                                             </ul>
                                         </div>

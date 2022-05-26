@@ -21,8 +21,15 @@ class FormRequiredPersonel extends Model
     ];
 
 
-
-    public static function getFormByUser(Int $userid)
+    /**
+     * Gets form by user id and formtypid
+     * @param Int $userid user's id
+     * @param Int formtype
+     * @return FormRequiredPersonel
+     * @example
+     *     FormRequiredPersonel::getFormByUserAndFormType(Auth::user()->iser_id, $formtype_id);
+     **/
+    public static function getFormByUserAndFormType(Int $userid, Int $formtype)
     {
         return self::select(
             "form.*",
@@ -49,11 +56,20 @@ class FormRequiredPersonel extends Model
             "personel_status", "form_required_personel.personelstatus_id", "=", "personel_status.personelstatus_id"
         )
         ->where("user_id", "=", $userid)
+        ->where("formtype_id", "=", $formtype)
         ->groupBy("form.form_id")
         ->orderBy("form.form_id", "desc")
         ->get();
     }
 
+    /**
+     * Gets form by form and user's id
+     * @param Int $formid
+     * @param Int $userid user's id
+     * @return FormRequiredPersonel
+     * @example
+     *     FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id);
+     **/
     public static function getFormByFormAndUserID(Int $formid, $userid)
     {
         return self::select(
@@ -86,6 +102,13 @@ class FormRequiredPersonel extends Model
         ->first();
     }
 
+    /**
+     * Gets form by form id
+     * @param Int $formid form_id
+     * @return FormRequiredPersonel
+     * @example
+     *      FormRequiredPersonel::getFormByFormID(1)
+     **/
     public static function getFormByFormID(Int $formid)
     {
         return self::select(
@@ -117,7 +140,14 @@ class FormRequiredPersonel extends Model
         ->get();
     }
 
-    public static function getRequiredPersonelsByFormID($formid)
+    /**
+     * Gets form's required personel by formid per/ form ex: (Requisitioner, budget officer, recoomending approval)
+     * @param Int $formid
+     * @return Arrray[user] array of required personel
+     * @example
+     *     FormRequiredPersonel::getRequiredPersonelsByFormID(1);
+     **/
+    public static function getRequiredPersonelsByFormID(Int $formid)
     {
         return self::select(
             "form_required_personel.*",

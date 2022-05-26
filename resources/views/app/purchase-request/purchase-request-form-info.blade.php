@@ -154,18 +154,6 @@
     {{-- PURCHASE REQUEST FORM INFO --}}
     <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
 
-    {{--
-        14 := ADMIN 
-        readonly if admin.
-    --}}
-    @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
-        <script>
-            $("form").find("input, textarea, button")
-            .attr("readonly", true)
-            .attr("disabled", true);
-        </script>
-    @endif
-
 @stop
 
 

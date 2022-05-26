@@ -1,6 +1,6 @@
 @extends("layout.app-main")
 
-@section("title", "AMS | PR List")
+@section("title", "AMS | JO List")
 
 @section("dependencies")
 
@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <span class="purchase-request-list__purchase-request-list-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase Request List") }}</span>
+                    <span class="purchase-request-list__purchase-request-list-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order List") }}</span>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                                     {{-- 
                                         getALlFormsByFormType(formtypeid);
                                     --}}
-                                    @foreach(\App\Models\Form::getAllFormsByFormType(1) as $form)
+                                    @foreach(\App\Models\Form::getAllFormsByFormType(2) as $form)
 
                                         <tr>
                                             <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
@@ -62,7 +62,7 @@
                                     {{-- 
                                         getFormByUser(userid);
                                     --}}
-                                    @foreach(\App\Models\FormRequiredPersonel::getFormByUserAndFormType(Auth::user()->user_id, 1) as $form)
+                                    @foreach(\App\Models\FormRequiredPersonel::getFormByUserAndFormType(Auth::user()->user_id, 2) as $form)
 
                                         <tr>
                                             <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
@@ -70,7 +70,7 @@
                                             <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
                                             <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                             <td class="text-center" style="vertical-align: middle !important;">
-                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
+                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/newjoborder/viewjoforminfo?joform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
                                             </td>
                                         </tr>
                                     

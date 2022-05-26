@@ -49,17 +49,18 @@
                                     <div class="container-fluid p-0 mt-2">
                                         <div class="row">
                                             <!-- item no group -->
-                                            <div class="col-4 pt-3 pb-4">
-                                                <div  class="input-group">
+                                            <div class="col-6 pt-3 pb-4">
+
+                                                <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Stock number" data-bs-content="Item stock number"><i class="fa-solid fa-barcode"></i></a>
-                                                    <input class="form-control bg-light jo-itemno" name="stock[]" type="number" value="{{ $itm["itemno"] }}" placeholder="Item No." required>
+                                                    <input class="form-control border-0 bg-white jo-itemno" name="stock[]" type="number" value="{{ $itm["itemno"] }}" placeholder="Item No." required>
                                                 </div>
                                             </div>
                                             <!-- unit group -->
-                                            <div class="col-4 pt-3 pb-4">
-                                                <div class="input-group">
+                                            <div class="col-6 pt-3 pb-4">
+                                                <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit" data-bs-content="Item Unit ex: pcs, in, mm, cm"><i class="fa-solid fa-scale-balanced"></i></a>
-                                                    <input class="form-control bg-light  jo-unit" list="default-units" name="unit[]" type="text" value="{{ $itm["unit"] }}" placeholder="Unit" required>
+                                                    <input class="form-control border-0 bg-white jo-unit" list="default-units" name="unit[]" type="text" value="{{ $itm["unit"] }}" placeholder="Unit" required>
                                                     <datalist id="default-units">
                                                         <option value="pcs">
                                                         <option value="in">
@@ -72,32 +73,32 @@
                                         <div class="row">
                                             <!-- item dscription group -->
                                             <div class="col-12 pb-4">
-                                                <div  class="input-group">
+                                                <div  class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                    <input class="form-control bg-light jo-description" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Item description") }}" required>
+                                                    <input class="form-control border-0 bg-white jo-description" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Item description") }}" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <!-- quantity group -->
                                             <div class="col-4 pb-3">
-                                                <div class="input-group">
+                                                <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Quantity" data-bs-content="Item quantity"><i class="fa-solid fa-calculator"></i></a>
-                                                    <input id="quantity-id" class="form-control bg-light jo-quantity" name="qty[]" type="number" value="{{ $itm["quantity"] }}" placeholder="Quantity" required onkeyup="javascript:calc_quantity(this.value)">
+                                                    <input id="quantity-id" class="form-control border-0 bg-white jo-quantity" name="qty[]" type="number" value="{{ $itm["quantity"] }}" placeholder="Quantity" required onkeyup="javascript:calc_quantity(this.value)">
                                                 </div>
                                             </div>
                                             <!-- unit cost group -->
                                             <div class="col-4 pb-3">
-                                                <div class="input-group">
+                                                <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Unit cost" data-bs-content="Item cost per unit"><i class="fa-solid fa-coins"></i></a>
-                                                    <input id="unitcost-id" class="form-control bg-light jo-unitcost" name="unitcost[]" type="number" value="{{ $itm["unitcost"] }}" placeholder="Unit cost" required onkeyup="javascript:calc_cost(this.value)">
+                                                    <input id="unitcost-id" class="form-control border-0 bg-white jo-unitcost" name="unitcost[]" type="number" value="{{ $itm["unitcost"] }}" placeholder="Unit cost" required onkeyup="javascript:calc_cost(this.value)">
                                                 </div>
                                             </div>
                                             <!-- total cost group -->
                                             <div class="col-4 pb-3">
-                                                <div class="input-group">
+                                                <div class="input-group shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Total cost" data-bs-content="Item total cost"><i class="fa-solid fa-peso-sign"></i></a>
-                                                    <input id="total-amount-id" class="form-control bg-light jo-totalamount" name="amount[]" type="number" value="{{ $itm["amount"] }}" placeholder="Total Amount" required>
+                                                    <input id="total-amount-id" class="form-control border-0 bg-white jo-totalamount" name="amount[]" type="number" value="{{ $itm["amount"] }}" placeholder="Total Amount" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,24 +118,24 @@
                     </div>
                     <!-- requester group -->
                     <div class="col-12">
-                        <div class="input-group my-4">
+                        <div class="input-group shadow my-4">
                             <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Requisitioner" data-bs-content="Job order requisitioner"><i class="fa-solid fa-user"></i></a>
-                            <input id="req-name" class="form-control form-control-disabled text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" disabled>
+                            <input id="req-name" class="form-control form-control-disabled border-0 bg-white text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" disabled>
                             <span  id="req-designation" class="form-text text-center text-truncate small">{{ $requesterDesign }}</span>
                         </div>
                     </div>
                     <!-- conforme group -->
                     <div class="col-12">
-                        <div class="input-group mb-4">
+                        <div class="input-group shadow mb-4">
                             <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Conforme" data-bs-content="Job order conforme"><i class="fa-solid fa-user"></i></a>
-                            <input id="conforme-name" name="conforme-name" class="form-control bg-light form-control-disabled text-truncate" type="text" value="{{ $conforme }}" placeholder="Conforme">
+                            <input id="conforme-name" name="conforme-name" class="form-control border-0 bg-white form-control-disabled text-truncate" type="text" value="{{ $conforme }}" placeholder="Conforme">
                         </div>
                     </div>
                     <!-- authorized official group -->
                     <div class="col-12">
-                        <div class="input-group mb-4">
+                        <div class="input-group shadow mb-4">
                             <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Authorized Official" data-bs-content="Authorized official"><i class="fa-solid fa-user"></i></a>
-                            <input id="authofficial-name" name="authofficial-name" class="form-control bg-light form-control-disabled text-truncate" type="text" value="{{ $authofficial }}" placeholder="Authorized Official">
+                            <input id="authofficial-name" name="authofficial-name" class="form-control border-0 bg-white form-control-disabled text-truncate" type="text" value="{{ $authofficial }}" placeholder="Authorized Official">
                         </div>
                     </div>
                 </div>

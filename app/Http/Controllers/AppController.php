@@ -90,7 +90,7 @@ class AppController extends Controller
         # Only requisitioner can    =
         # create pr form.           =
         #============================
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+        if (!Auth::user()->isRequisitioner())
             return redirect()->to("/dashboard");
 
         return view("app.purchase-request.new-purchase-request");
@@ -124,12 +124,12 @@ class AppController extends Controller
                     #============================
                     if (!Auth::check())
                         return redirect()->to("/login");
-                    
+
                     #======================================
                     # Only requisitioner and admin can    =
                     # view pr form.                       =
                     #======================================
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
+                    if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
                     
                     #============================
@@ -151,7 +151,6 @@ class AppController extends Controller
                     { return redirect()->to("/dashboard"); }
 
                     $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
-                    error_log(json_encode($data));
                     #=========================
                     # Get items.             =
                     #=========================
@@ -164,8 +163,6 @@ class AppController extends Controller
                     $data["rQ_data"] = $frp[0]->toArray();
                     $data["bO_data"] = $frp[1]->toArray();
                     $data["rA_data"] = $frp[2]->toArray();
-
-                    error_log(json_encode($data));
 
                     return response(view("app.purchase-request.purchase-request-form-info", $data));
                 }
@@ -185,22 +182,35 @@ class AppController extends Controller
                         if (!Auth::check())
                             return false;
 
+                        #==============================
+                        # Return false if any of      =
+                        # these field has null value. =
+                        #==============================
                         if (hasNull($request, ["hash"]))
                             return false;
                         
                         $formid = $request->input("hash");
 
+                        #===============================
+                        # Decrypt form_id. If invalid, =
+                        # return false                 =
+                        #===============================
                         try 
-                        { $formid = (Int) Crypt::decrypt($formid); } 
+                        { 
+                            $formid = (Int) Crypt::decrypt($formid); 
+                        }
                         catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-                        { return false; }
+                        { 
+                            return false;
+                        }
 
                         $data = FormRequiredPersonelComment::getAllCommentsByFormID($formid);
 
+                        #======================
+                        # Return view.        =
+                        #======================
                         foreach($data as $comment_data)
-                        {
                             echo view("components.comment-bubble", $comment_data);
-                        }                        
                     }
 
                     /**
@@ -218,16 +228,28 @@ class AppController extends Controller
                         if (!Auth::check())
                             return false;
 
+                        #==============================
+                        # Return false if any of      =
+                        # these field has null value. =
+                        #==============================
                         if (hasNull($request, ["frp", "comment"]))
                             return false;
                         
                         $form_required_personel = $request->input("frp");
                         $comment                = $request->input("comment");
 
+                        #==============================
+                        # Decypt frp_id. If invalid,  =
+                        # return false                =
+                        #==============================
                         try 
-                        { $form_required_personel = (Int) Crypt::decrypt($form_required_personel); } 
+                        { 
+                            $form_required_personel = (Int) Crypt::decrypt($form_required_personel);
+                        } 
                         catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-                        { return false; }
+                        { 
+                            return false;
+                        }
 
                         $signal = FormRequiredPersonelComment::create([
                             "formrequiredpersonel_id" => $form_required_personel,
@@ -256,7 +278,7 @@ class AppController extends Controller
                     # Only requisitioner can    =
                     # upload pr form.           =
                     #============================
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                    if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
 
                     #============================
@@ -372,7 +394,7 @@ class AppController extends Controller
                     # Only requisitioner can    =
                     # view pr form.             =
                     #============================
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                    if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
 
                     #==============================
@@ -442,12 +464,30 @@ class AppController extends Controller
         # Only requisitioner can    =
         # create jo form.           =
         #============================
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+        if (!Auth::user()->isRequisitioner())
             return redirect()->to("/dashboard");
 
         return view("app.new-job-order.new-job-order");
     }
     /* purchase request subdir ----> */
+                function viewJOFormList()
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    #======================================
+                    # Only requisitioner and admin can    =
+                    # view pr form list.                  =
+                    #======================================
+                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
+                        return redirect()->to("/dashboard");
+                    
+                    return view("app.new-job-order.job-order-list");
+                }
 
                 /**
                  * View jo form -> index
@@ -476,7 +516,7 @@ class AppController extends Controller
                         return redirect()->to("/login");
                     
                     # Verification
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
+                    if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
                     
                     # Check Null
@@ -519,7 +559,7 @@ class AppController extends Controller
                     if  (!Auth::check())
                         return redirect()->to("/login");
                     
-                    if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13"]))
+                    if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
 
                     
