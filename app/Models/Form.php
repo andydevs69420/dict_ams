@@ -65,12 +65,13 @@ class Form extends Model
      * @param Int $formtypeid formtype id
      * @return Array
      **/
-    public static function getAllForms() 
+    public static function getAllApprovedForms() 
     {
         return self::join(
-            "form_type", "form.formtype_id", "=", "form_type.formtype_id"
+            "form_required_personel", "form.form_id", "=", "form_required_personel.form_id"
         )
-        ->orderBy("form.form_id", "desc")
+        ->where("form_required_personel.personelstatus_id", "=", 1)
+        ->orderBy("form.form_id", "asc")
         ->orderBy("form.createdat", "desc")
         ->get();
     }
