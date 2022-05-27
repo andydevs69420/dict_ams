@@ -968,16 +968,22 @@ class AppController extends Controller
                 {   
                     $id = json_decode($request->input("data"),true);
                     $items = PrItem::getItemsByFormId($id["formid"]);
-                    $pdffile = Form::getPDFById($id["formid"]);
+                    $date =  $id["date"];
+                    $canvasser = UserVerificationDetails::getUserByID($id["canvasserid"]);
+                    $form = Form::getFormById($id["formid"]);
                     $data = [
-                        "pqsdata" => $id,
+                        "formdata" => $form,
                         "itemdata" => $items,
-                        "pdfdata" => $pdffile,
+                        "canvasserdata" => $canvasser,
+                        "date" => $date,
                     ];
 
                     return view("supplyofficer.view-price-quotation-sheet", $data);
                 }
-                                /**
+
+
+
+                /**
                  * Add so-forms -> viewform
                  * @param Request $request request
                  * @return view
@@ -987,18 +993,28 @@ class AppController extends Controller
                  **/
                 public function so_approvedforms_viewform(Request $request)
                 {   
-                    $id = json_decode($request->input("data"),true);
-                    $pdffile = Form::getPDFById($id["formid"]);
-                    $data = [
-                        "pqsdata" => $id,
-                        "pdfdata" => $pdffile,
-                    ];
 
-                    return Response::make(base64_decode( $pdffile), 200, [
-                        'Content-Type' => 'application/pdf',
-                        'Content-Disposition' => 'inline; filename="'."2022-05-23.pdf".'"',
-                    ]);
+                    
+                    $id = json_decode($request->input("data"),true);
+                    $form = Form::getFormById($id["formid"]);
+
+
+                    $data["pr_items"] = PrItem::getItemsByFormId($id["formid"])->toArray();
+                    // $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($id["formid"]);
+                    
+                    // $data["rQ_data"] = $frp[0]->toArray();
+                    // $data["bO_data"] = $frp[1]->toArray();
+                    // $data["rA_data"] = $frp[2]->toArray();
+                    $formdata = [
+                        "form" => $form,
+                        "form_data" => $data,
+                    ];
+                    return view("supplyofficer.so-view-form", $formdata);
                 }
+
+
+
+
 
                 /**
                  * Add so-forms -> viewform
@@ -1021,7 +1037,7 @@ class AppController extends Controller
                     
 
                     # Get Field Values
-                    $form_id      = $request->input("form-number-input");
+                    $form_id      = $request->input("form-id");
                     $file    = $request->file("file-upload");
 
 
