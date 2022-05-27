@@ -539,9 +539,8 @@ class AppController extends Controller
                     $data["jo_items"] = JoItem::getItemsByFormId($form_id)->toArray();
                     $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
                     
-                    $data["requester_data"] = $frp[0]->toArray();
-                    $data["conforme_data"]  = $frp[1];
-                    $data["authoff_data"]   = $frp[2];
+                    $data["requester_data"]     = $frp[0]->toArray();
+                    $data["authofficial_data"]  = $frp[1]->toArray();
 
                     return view("app.new-job-order.job-order-form-info", $data);
                 }
@@ -562,21 +561,22 @@ class AppController extends Controller
                     if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
 
+                    if (hasNull($request, ["stock", "unit", "description", "qty", "unitcost", "amount", "requester-name", "authofficial-name"]))
+                        return back()->with(["info" => "Missing required parameter(s)."]);
                     
 
                     # Get Field Values
-                    $num_of_rows     = count($request->input("stock"));
-                    $stock_col       = $request->input("stock");
-                    $unit_col        = $request->input("unit");
-                    $desc_col        = $request->input("description");
-                    $qnty_col        = $request->input("qty");
-                    $unitc_cost_col  = $request->input("unitcost");
-                    $total_cost_col  = $request->input("amount");
+                    $num_of_rows      = count($request->input("stock"));
+                    $stock_col        = $request->input("stock");
+                    $unit_col         = $request->input("unit");
+                    $desc_col         = $request->input("description");
+                    $qnty_col         = $request->input("qty");
+                    $unitc_cost_col   = $request->input("unitcost");
+                    $total_cost_col   = $request->input("amount");
 
-                    $requester_id   = 1;
-                    $conforme_id   = 2;
-                    $authorizedoff_id   = 2;
-                    $file    = $request->file("file-upload");
+                    $requester_id     = $request->input("requester-name");
+                    $authorizedoff_id = $request->input("authofficial-name");
+                    $file = $request->file("file-upload");
 
 
                     # Get File (PDF)
@@ -593,7 +593,7 @@ class AppController extends Controller
                     $form_data["createdat"]         = Carbon::now();
                     $form_data["prnumber"]          = "";
                     $form_data["sainumber"]         = "";
-                    $form_data["purpose"]           = "asda";
+                    $form_data["purpose"]           = "";
                     $form_data["fileembedded"]      = $filepath;
                     $form_id = Form::create($form_data)->id;
                     
@@ -613,19 +613,14 @@ class AppController extends Controller
                     }
 
                     # Save in FormRequiredPersonel
+                    // requisitioner
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,
                         "userverificationdetails_id" => $requester_id,
                         "personelstatus_id"          => 1,
                         "updatedat"                  => Carbon::now()
                     ]);
-                    // conforme
-                    FormRequiredPersonel::create([
-                        "form_id"                    => $form_id,
-                        "userverificationdetails_id" => $conforme_id,
-                        "personelstatus_id"          => 2,
-                        "updatedat"                  => Carbon::now()
-                    ]);
+            
                     // authorized official
                     FormRequiredPersonel::create([
                         "form_id"                    => $form_id,

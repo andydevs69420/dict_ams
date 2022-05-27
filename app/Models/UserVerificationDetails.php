@@ -191,4 +191,17 @@ class UserVerificationDetails extends Model
         ->where("verification_status.verificationstatus_id", "=", "2")
         ->get();
     }
+
+    public static function getAllAuthorizedOfficial()
+    {
+        return self::join(
+            "user", "user_verification_details.user_id", "=", "user.user_id",
+        )
+        ->join(
+            "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
+        )
+        ->whereIn("user.accesslevel_id", [1, 2])
+        ->where("verification_status.verificationstatus_id", "=", "2")
+        ->get();
+    }
 }

@@ -73,7 +73,7 @@
                                             <div class="col-12">
                                                 <div  class="input-group my-2 shadow">
                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Job description" data-bs-content="Job name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                    <textarea class="form-control border-0 bg-white jo-description" rows="1" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Job description") }}" required></textarea>
+                                                    <textarea class="form-control border-0 bg-white jo-description" rows="1" name="description[]" type="text" value="{{ $itm["description"] }}" placeholder="{{ __("Job description") }}" required>{{ $itm["itemno"] }}</textarea>
                                                 </div>
                                             </div>
                                             <!-- quantity group -->
@@ -123,8 +123,19 @@
                     <div class="col-12">
                         <div class="input-group shadow my-2">
                             <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Requisitioner" data-bs-content="Job order requisitioner"><i class="fa-solid fa-user"></i></a>
-                            <input id="req-name" class="form-control form-control-disabled border-0 bg-white text-truncate" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" disabled>
-                            <span  id="req-designation" class="form-text text-center text-truncate small">{{ $requesterDesign }}</span>
+                            <select id="req-name" class="selectPicker form-select p-0 border-0 bg-white" name="requester-name" type="text" value="{{ $getRequisitionerName() }}" placeholder="Lastname, Firstname Middle Initial" required>
+
+                                @if(strlen($getRequisitionerName()) > 0)
+                                    <option value="{{ $getRequisitionerId() }}" selected>{{ $getRequisitionerName() }} - ({{ \App\Models\Accesslevel::getAccesslevelById($getRequisitionerAccesslevelId()) }})</option>
+                                @else
+                                    @foreach(App\Models\UserVerificationDetails::getAllRequisitioner() as $requisitioner)
+                                        <option value="{{ $requisitioner->user_id }}">
+                                            {{ $requisitioner->lastname }}, {{ $requisitioner->firstname }} {{ $requisitioner->middleinitial }} - ({{ App\Models\Accesslevel::getAccesslevelById($requisitioner->accesslevel_id) }})
+                                        </option>
+                                    @endforeach
+                                @endif
+
+                            </select>
                         </div>
                     </div>
                     <!-- authorized official group -->
@@ -133,10 +144,12 @@
                             <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Authorized Official" data-bs-content="Authorized official"><i class="fa-solid fa-user"></i></a>
                             <select id="authofficial-name" class="selectPicker form-select p-0 border-0 bg-white" name="authofficial-name" placeholder="Authorized Official" data-live-search="true" required>
 
-                                @if(strlen($authofficial) > 0)
-                                    <option value="1">{{ $authofficial }}</option>
+                                @if(strlen($getAuthorizedOfficialName()) > 0)
+                                    <option value="{{ $getAuthorizedOfficialId() }}" selected>{{ $getAuthorizedOfficialName() }} - ({{ \App\Models\Accesslevel::getAccesslevelById($getAuthOfficialAccesslevelId()) }})</option>
                                 @else
-                                    <option value="2">FPPOPO</option>
+                                    @foreach(\App\Models\UserVerificationDetails::getAllAuthorizedOfficial() as $ao)
+                                        <option value="{{ $ao->user_id }}">{{ $ao->lastname . ", " . $ao->firstname . " " . $ao->middleinitial }} - ({{ \App\Models\Accesslevel::getAccesslevelById($ao->accesslevel_id) }})</option>
+                                    @endforeach
                                 @endif
 
                             </select>

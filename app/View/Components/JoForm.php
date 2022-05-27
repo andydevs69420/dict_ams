@@ -13,9 +13,9 @@ class JoForm extends Component
 {
     public Array $items;
     public Array $requisitioner;
-    public String $requesterDesign = "";
+    public Array $requesterDesign;
     public String $conforme;
-    public String $authofficial;
+    public Array $authofficial;
 
     /**
      * Create a new component instance.
@@ -27,17 +27,17 @@ class JoForm extends Component
             ['itemno' => '', 'unit' => '', 'description' => '', 'quantity' => '', 'unitcost' => '', 'amount' => ''],
         ], 
         // String $purpose = "", 
-        Array $requisitioner = [],
-        String $requesterDesign = "",
-        String $conforme = "",
-        String $authofficial = "",
+        Array $requisitioner    = [],
+        Array $requesterDesign  = [],
+        String $conforme        = "",
+        Array $authofficial     = [],
     )
     {
         $this->items             = $items;
         $this->requisitioner     = $requisitioner;
         $this->requesterDesign   = $requesterDesign; 
         $this->conforme          = $conforme; 
-        $this->authofficial         = $authofficial; 
+        $this->authofficial      = $authofficial; 
     }
 
 
@@ -47,6 +47,32 @@ class JoForm extends Component
      */
     public function getItems() : Array
     { return $this->items; }
+
+    // =================================== REQUISITIONER ===================================
+
+    /**
+     * Returns accesslevel id
+     * @return String
+     **/
+    public function getRequisitionerId()
+    {
+        if (!(array) $this->requisitioner)
+            return "";
+
+        return $this->requisitioner['user_id'];
+    }
+
+    /**
+     * Returns accesslevel id
+     * @return String
+     **/
+    public function getRequisitionerAccesslevelId()
+    {
+        if (!(array) $this->requisitioner)
+            return "";
+
+        return $this->requisitioner['accesslevel_id'];
+    }
 
     /**
      * Returns requisitioner name
@@ -58,6 +84,44 @@ class JoForm extends Component
             return "";
 
         return $this->requisitioner['lastname'] . ', ' . $this->requisitioner['firstname'] . ' ' . $this->requisitioner['middleinitial'];
+    }
+
+    // =================================== AUTHORIZED OFFICIAL ===================================
+
+    /**
+     * Returns accesslevel id
+     * @return String
+     **/
+    public function getAuthorizedOfficialId()
+    {
+        if (!(array) $this->authofficial)
+            return "";
+
+        return $this->authofficial['user_id'];
+    }
+
+    /**
+     * Returns accesslevel id
+     * @return String
+     **/
+    public function getAuthOfficialAccesslevelId()
+    {
+        if (!(array) $this->authofficial)
+            return "";
+
+        return $this->authofficial['accesslevel_id'];
+    }
+
+    /**
+     * Returns authorized official name
+     * @return String
+     **/
+    public function getAuthorizedOfficialName()
+    {
+        if (!(array) $this->authofficial)
+            return "";
+
+        return $this->authofficial['lastname'] . ', ' . $this->authofficial['firstname'] . ' ' . $this->authofficial['middleinitial'];
     }
 
     /**

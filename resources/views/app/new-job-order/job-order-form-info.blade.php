@@ -27,9 +27,9 @@
                     <div class="col-12 col-lg-9">
                         <x-jo-form 
                             :items="$jo_items"
+                            :conforme="'LOADING..'"
                             :requisitioner="$requester_data"
-                            :conforme="$conforme_data='LOADING..'"
-                            :authofficial="$authoff_data='LOADING..'"></x-jo-form>
+                            :authofficial="$authofficial_data"></x-jo-form>
                     </div>
 
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
