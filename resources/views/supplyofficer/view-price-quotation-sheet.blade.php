@@ -43,17 +43,27 @@
                     <td class=xl299 colspan="3"></td>
                 </tr>
                 <tr class="first-row" height=20 style='height:15.0pt;'>
-                    <td class=xl302 height=20 style='height:15.0pt;' colspan=4>&nbsp;&nbsp;Purchase Request No.</td>
-                    <td class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width: 112pt;'>{{ $pqsdata['prid'] }}</td>
-                    <td class=xl66>&nbsp;&nbsp;C. NO.</td>
-                    <td class=x-jo-number-slot style="max-width:25pt;" colspan=2>LOADING...</td>
+                    <td class=xl302 height=20 style='height:15.0pt;' colspan=4>&nbsp;&nbsp;{{ __("Purchase Request No.") }}</td>
+                    <td class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width: 112pt;'>
+                        @if ($formdata["formtype_id"] === 1)
+                            @if (strlen($formdata["prnumber"]) > 0)
+                                {{ $formdata["prnumber"] }}
+                            @else
+                                {{ __("TBA") }}
+                            @endif
+                        @elseif ($formdata["formtype_id"] === 2)
+                            {{ __("TBA") }}
+                        @endif
+                    </td>
+                    <td class=xl66>&nbsp;&nbsp;{{ __("Canvass NO.") }}</td>
+                    <td class=x-jo-number-slot style="max-width:25pt;" colspan=2>{{ __("TBA") }}</td>
                     <td class=xl303 colspan="3"></td>
                 </tr>
                 <tr class="first-row" height=21 style='height:15.75pt;'>
-                    <td class=xl302 height=21 style='height:15.75pt;' colspan=4>&nbsp;&nbsp;Approved Budget for the Contract (ABC)</td>
-                    <td id="jo-template__address-value-id" class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width:112pt;'>LOADING...</td>
-                    <td class=xl66>&nbsp;&nbsp;Date</td>
-                    <td id="jo-template__date-value-id" class=x-jo-number-slot style="max-width:25pt;" colspan=2>LOADING...</td>
+                    <td class=xl302 height=21 style='height:15.75pt;' colspan=4>&nbsp;&nbsp;{{ __("Approved Budget for the Contract (ABC)") }}</td>
+                    <td id="jo-template__address-value-id" class=x-office-slot colspan=1 style='border-right:2.0pt double black;max-width:112pt;'>{{ __("TBA") }}</td>
+                    <td class=xl66>&nbsp;&nbsp;{{ __("Date") }}</td>
+                    <td id="jo-template__date-value-id" class=x-jo-number-slot style="max-width:25pt;" colspan=2>{{ $date }}</td>
                     <td class=xl303 colspan="3"></td>
                 </tr>
                 <tr height=21 style='height:15.75pt;'>
@@ -90,8 +100,8 @@
                 <tr class="spacer"></tr>
                 <tr class="spacer"></tr>
                 <tr>
-                    <td class="name canvasser-name" colspan="6">LOADING..</td>
-                    <td class="name companyrep-name" colspan="6">LOADING..</td>
+                    <td class="name canvasser-name" colspan="6">{{ $canvasserdata["firstname"]." ".$canvasserdata["middleinitial"]." ".$canvasserdata["lastname"]}}</td>
+                    <td class="name companyrep-name" colspan="6">{{ __("TBA") }}</td>
                 </tr>
                 <tr>
                     <td class="name-label" colspan="6">CANVASSER</td>

@@ -167,6 +167,29 @@ class UserVerificationDetails extends Model
     }
 
 
+
+    /**
+     * Gets all user (verified) which is also a budget officer
+     * @return Array
+     * @example
+     *     accesslevel table
+     *          11 := BUDGET OFFICER
+     *     UserVerificationDetails::getAllBudgetOfficer();
+     * 
+     **/ 
+    public static function getAllCanvasser()
+    {
+        return self::join(
+            "user", "user_verification_details.user_id", "=", "user.user_id",
+        )
+        ->join(
+            "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
+        )
+        ->where("user.accesslevel_id", "=", "9")
+        ->where("verification_status.verificationstatus_id", "=", "2")
+        ->get();
+    }
+
     /**
      * Gets all user (verified) which is also a recommending approver
      * @return Array
