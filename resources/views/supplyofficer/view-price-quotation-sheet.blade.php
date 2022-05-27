@@ -192,10 +192,22 @@
                 <div id="pr-template__item-list">
                     @foreach ($itemdata as $formitem)
                         <tr>
-                            <td class=x-col-1 style='border-top:none;'>{{ $formitem["stockno"] }}</td>
+                            <td class=x-col-1 style='border-top:none;'>
+                                @if (empty($formitem["stockno"]))
+                                    {{ $formitem["itemno"] }}
+                                @else
+                                    {{ $formitem["stockno"] }}
+                                @endif
+                            </td>
                             <td class=x-col-2 style='border-top:none;border-left:none;'>{{ $formitem["quantity"] }}</td>
                             <td class=x-col-3 style='border-right:.5pt solid black;border-left:none;'>{{ $formitem["unit"] }}</td>
-                            <td class=x-col-4 style='border-top:none;border-left:none;' colspan="2">{{ $formitem["item"] }}</td>
+                            <td class=x-col-4 style='border-top:none;border-left:none;' colspan="2">
+                                @if (empty($formitem["item"]))
+                                    {{ $formitem["description"] }}
+                                @else
+                                    {{ $formitem["item"] }}
+                                @endif
+                            </td>
                             <td class=x-col-5 style='border-top:none;border-left:none;'></td>
                             <td class=x-col-6 style='border-top:none;border-left:none;'></td>
                             <td class=x-col-5 style='border-top:none;border-left:none;'></td>

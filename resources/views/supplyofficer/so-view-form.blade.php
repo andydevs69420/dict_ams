@@ -1,5 +1,5 @@
 @extends("layout.app-main")
-@section('title', 'AMS | job order')
+@section('title', 'AMS | View Form')
 
 @section('dependencies')
 
@@ -63,7 +63,7 @@
                                                             <div class="col-12 pb-4">
                                                                 <div  class="input-group">
                                                                     <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Item description" data-bs-content="Item name or description"><i class="fa-solid fa-newspaper"></i></a>
-                                                                    <input class="form-control bg-light jo-description" value={{ $form["form_id"] }} name="form-id" type="text" disabled>
+                                                                    <input class="form-control bg-light jo-description" value={{ $form["form_id"] }} name="form-id" type="text" readonly="true">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -81,11 +81,11 @@
                                             
                                         </ul>
                                     </div>
-                                    <!-- Canvasser group -->
+                                    <!-- CANVASSER GROUP -->
                                     <div class="col-12">
                                         <div class="input-group mb-4">
                                             <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Requisitioner" data-bs-content="Purchase requisitioner"><i class="fa-solid fa-user"></i></a>
-                                            <select class="selectPicker form-select bg-light" name="requester"  placeholder="{{ __("Requisitioner") }}"  data-live-search="true" required>
+                                            <select class="selectPicker form-select bg-light" name="canvasser"  placeholder="{{ __("Add Canvasser") }}"  data-live-search="true" required>
                                                 @foreach(App\Models\UserVerificationDetails::getAllRequisitioner() as $canvasser)
                                                     <option value="{{ $canvasser->user_id }}">
                                                         {{ $canvasser->lastname }}, {{ $canvasser->firstname }} {{ $canvasser->middleinitial }} - ({{ App\Models\Accesslevel::getAccesslevelById($canvasser->accesslevel_id) }})
@@ -117,7 +117,10 @@
                                     <i class="fa fa-file"></i>
                                     <span role="text">{{ __("GENERATE PRICE QUOTATION") }}</span>
                                 </button>
-                                <span class="float-end text-muted" role="text">Form v0.4</span>
+                                <button class="btn btn-success text-light float-start" type="submit" form="validation-form" onclick='javascript:window.location.href = "/so_approvedforms"'>
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <span role="text">{{ __("BACK") }}</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -165,32 +168,9 @@
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
     <script type="text/javascript" src="{{ asset("js/new-job-order/new-job-order.js") }}"></script>
     
-    
-    <script>
+    {{-- so-view-form js --}}
+    <script type="text/javascript" src="{{ asset("js/supplyofficer/so-view-form.js") }}"></script>
 
-        function generate__pqs_form(id){
-            canvasser = $('.selectPicker').val();
-
-            // date
-            today = new Date();
-            date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
-
-            let form_data = {
-                'formid' : id,
-                'canvasserid': canvasser,
-                'date': date,
-            };
-            return window.open(`/so_approvedforms/generatepqs?data=${JSON.stringify(form_data)}`);
-
-        }
-
-        $(document).ready((evt) => {
-
-            $('[data-bs-toggle="tooltip"]').tooltip();
-
-        });
-
-    </script>
 @stop
 
 

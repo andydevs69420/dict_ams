@@ -1043,7 +1043,10 @@ class AppController extends Controller
                 public function so_approvedforms_generatepqs(Request $request)
                 {   
                     $id = json_decode($request->input("data"),true);
-                    $items = PrItem::getItemsByFormId($id["formid"]);
+                    $pritems = PrItem::getItemsByFormId($id["formid"])->toArray();
+                    $joitems = JoItem::getItemsByFormId($id["formid"])->toArray();
+                    $items = array_merge($pritems, $joitems);
+
                     $date =  $id["date"];
                     $canvasser = UserVerificationDetails::getUserByID($id["canvasserid"]);
                     $form = Form::getFormById($id["formid"]);
@@ -1110,7 +1113,9 @@ class AppController extends Controller
                     if (!isValidAccess(Auth::user()->accesslevel_id, ["10"]))
                         return redirect()->to("/dashboard");
 
-                    
+                    if (hasNull($request, ["canvasser", "file-upload"]))
+                        return back()->with(["info" => "Missing required parameter(s)."]);
+
 
                     # Get Field Values
                     $form_id      = $request->input("form-id");
