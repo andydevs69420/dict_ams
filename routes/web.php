@@ -44,11 +44,11 @@ Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
 // Budget Officer (Purchase Request)
-Route::get('/purchaserequeststatus',[BOController::class,'index']);
-Route::get('/edit-purchaserequest',[BOController::class,'edit']);
+Route::get('/budgetofficer/purchaserequeststatus',[BOController::class,'PrIndex']);
+Route::get('/budgetofficer/edit-purchaserequest',[BOController::class,'Predit']);
 // Budget Officer (Job Order)
-Route::get('/joborderstatus',[BOController::class,'JoIndex']);
-Route::get('/edit-Joborder',[BOController::class,'Joedit']);
+Route::get('/budgetofficer/joborderstatus',[BOController::class,'JoIndex']);
+Route::get('/budgetofficer/edit-Joborder',[BOController::class,'Joedit']);
 
 //BAC chairman
 Route::get('/BACpricequotation',[BACController::class,'BACIndex']);

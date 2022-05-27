@@ -170,8 +170,8 @@
                                         </div>
                                         <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
                                             <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newpurchaserequest") }}">
-                                                    <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequeststatus") }}">{{ __("Purchase Request") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/purchaserequeststatus") }}">
+                                                    <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}">{{ __("Purchase Request") }}</a>
                                                 </li>
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
                                                     <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/joborderstatus") }}">{{ __("Job Order") }}</a>

@@ -31,7 +31,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-left" scope="col">{{ __("Request date") }}</th>
-                                    <th class="text-left" scope="col">{{ __("Pr number") }}</th>
+                                    <th class="text-left" scope="col">{{ __("Jo number") }}</th>
                                     <th class="text-left" scope="col">{{ __("Sai number") }}</th>
                                     <th class="text-left" scope="col">{{ __("Purpose") }}</th>
                                     <th class="text-left" scope="col">{{ __("Action") }}</th>

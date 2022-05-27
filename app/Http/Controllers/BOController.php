@@ -10,21 +10,21 @@ use Auth;
 
 class BOController extends Controller
 {
-    public function index() {
-        // $form = PrForm::all();
+    public function PrIndex() {
 
-        // if  (!Auth::check())
-        //     return redirect()->to("/login");
+        if  (!Auth::check())
+            return redirect()->to("/login");
+        
+        if (!Auth::user()->isBudgetOfficer())
+            return redirect()->to("/dashboard");
+        
+        
 
-        // if (!Auth::user()->isBudgetOfficer())
-        //     return redirect()->to("/dashboard");
-
-        // return view('Budgetofficer.BO', compact('form'));
         return view('Budgetofficer.BO');
     }
 
 
-    public function edit() {
+    public function Predit() {
         
         if  (!Auth::check())
             return redirect()->to("/login");
