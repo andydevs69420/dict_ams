@@ -87,6 +87,10 @@ Route::controller(AppController::class)->group(function () {
                 Route::post("/newjoborder/uploadjoform", "uploadJOForm");
             // view uploaded form
                 Route::get("/newjoborder/viewjoforminfo", "viewJOFormInfo");
+                // load comments
+                Route::get("/joborder/loadcomment", "loadJoFormInfoComment");
+                // upload comment
+                Route::post("/joborder/addcomment", "addJoFormInfoComment");
 
     // users
     Route::get("/users", "users");

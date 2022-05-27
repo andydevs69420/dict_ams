@@ -469,7 +469,7 @@ class AppController extends Controller
 
         return view("app.new-job-order.new-job-order");
     }
-    /* purchase request subdir ----> */
+    /* job order subdir ----> */
                 function viewJOFormList()
                 {
                     #============================
@@ -534,13 +534,13 @@ class AppController extends Controller
                     catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
                     { return redirect()->to("/dashboard"); }
 
-                    $data = Form::getFormByID($form_id)->toArray();
+                    $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
 
                     $data["jo_items"] = JoItem::getItemsByFormId($form_id)->toArray();
                     $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
                     
-                    $data["requester_data"]     = $frp[0]->toArray();
-                    $data["authofficial_data"]  = $frp[1]->toArray();
+                    $data["requester_data"]    = $frp[0]->toArray();
+                    $data["authofficial_data"] = $frp[1]->toArray();
 
                     return view("app.new-job-order.job-order-form-info", $data);
                 }
@@ -632,6 +632,87 @@ class AppController extends Controller
                     return redirect()->to("/newjoborder/viewjoforminfo?joform=" . Crypt::encrypt($form_id));
                     
                 }
+
+                // jo subroutine
+                    public static function loadJoFormInfoComment(Request $request)
+                    {
+                        #============================
+                        # Return false if not       =
+                        # login or expired.         =
+                        #============================
+                        if (!Auth::check())
+                            return false;
+
+                        #==============================
+                        # Return false if any of      =
+                        # these field has null value. =
+                        #==============================
+                        if (hasNull($request, ["hash"]))
+                            return false;
+                        
+                        $formid = $request->input("hash");
+
+                        #===============================
+                        # Decrypt form_id. If invalid, =
+                        # return false                 =
+                        #===============================
+                        try 
+                        { 
+                            $formid = (Int) Crypt::decrypt($formid); 
+                        }
+                        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                        { 
+                            return false;
+                        }
+
+                        $data = FormRequiredPersonelComment::getAllCommentsByFormID($formid);
+
+                        #======================
+                        # Return view.        =
+                        #======================
+                        foreach($data as $comment_data)
+                            echo view("components.comment-bubble", $comment_data);
+                    }
+
+                    public function addJoFormInfoComment(Request $request)
+                    {
+                        #============================
+                        # Return false if not       =
+                        # login or expired.         =
+                        #============================
+                        if (!Auth::check())
+                            return false;
+
+                        #==============================
+                        # Return false if any of      =
+                        # these field has null value. =
+                        #==============================
+                        if (hasNull($request, ["frp", "comment"]))
+                            return false;
+                        
+                        $form_required_personel = $request->input("frp");
+                        $comment                = $request->input("comment");
+
+                        #==============================
+                        # Decypt frp_id. If invalid,  =
+                        # return false                =
+                        #==============================
+                        try 
+                        { 
+                            $form_required_personel = (Int) Crypt::decrypt($form_required_personel);
+                        } 
+                        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+                        { 
+                            return false;
+                        }
+
+                        $signal = FormRequiredPersonelComment::create([
+                            "formrequiredpersonel_id" => $form_required_personel,
+                            "comment"                 => $comment
+                        ]);
+                        
+                        return (bool) $signal;
+                    }
 
     
     /**

@@ -92,8 +92,13 @@
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
+    {{-- jspdf js --}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    {{-- JO FORM js --}}
     <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
+    
+    {{-- NEW JOB ORDER js --}}
     <script type="text/javascript" src="{{ asset("js/new-job-order/new-job-order.js") }}"></script>
     <script>
         $(document).ready((evt) => {
