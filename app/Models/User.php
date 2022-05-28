@@ -51,4 +51,11 @@ class User extends Authenticatable
     public static function isBudgetOfficer()
     { return in_array(Auth::user()->accesslevel_id, [11]); }
 
+    /**
+     * Checks if user is admin
+     * @return bool
+     **/
+    public static function isAdmin()
+    { return in_array(Auth::user()->accesslevel_id, [14]); }
+
 }

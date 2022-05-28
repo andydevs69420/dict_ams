@@ -37,10 +37,10 @@
                             <div class="card-body px-1 py-2">
 
                                 {{-- files --}}
-                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILES</span>
+                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILE</span>
 
                                 <div class="d-block px-2 mb-2">
-                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-primary" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
+                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-success" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
                                 </div>
 
                                 <div class="d-block px-2">
@@ -136,23 +136,19 @@
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
-    {{-- PR js --}}
-    <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
-
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
     {{-- JO FORM js --}}
     <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
 
-    {{-- NEW JOB ORDER js --}}
-    <script type="text/javascript" src="{{ asset("js/new-job-order/new-job-order.js") }}"></script>
+    {{-- JOB ORDER FORM INFO js --}}
+    <script type="text/javascript" src="{{ asset("js/job-order/job-order-form-info.js") }}"></script>
 
     {{--
-        14 := ADMIN 
         readonly if admin.
     --}}
-    @if(strcmp(Auth::user()->accesslevel_id, "14") === 0)
+    @if(Auth::user()->isAdmin())
         <script>
             $("form").find("input, textarea, button")
             .attr("readonly", true)

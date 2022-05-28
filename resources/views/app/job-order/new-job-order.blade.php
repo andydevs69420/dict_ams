@@ -99,7 +99,7 @@
     <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
     
     {{-- NEW JOB ORDER js --}}
-    <script type="text/javascript" src="{{ asset("js/new-job-order/new-job-order.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/job-order/new-job-order.js") }}"></script>
     <script>
         $(document).ready((evt) => {
 

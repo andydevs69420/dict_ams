@@ -52,7 +52,7 @@
                                             <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
                                             <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                             <td class="text-center" style="vertical-align: middle !important;">
-                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
+                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo/" . Illuminate\Support\Facades\Crypt::encrypt($form->form_id) . "/view") }}">{{ __("View") }}</a>
                                             </td>
                                         </tr>
                                     
@@ -70,7 +70,7 @@
                                             <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
                                             <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                             <td class="text-center" style="vertical-align: middle !important;">
-                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
+                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo/" . Illuminate\Support\Facades\Crypt::encrypt($form->form_id) . "/view") }}">{{ __("View") }}</a>
                                             </td>
                                         </tr>
                                     

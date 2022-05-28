@@ -15,7 +15,7 @@
                     <a class="d-block text-dark w-100" href="{{ url("/logout") }}"><small><i class="me-2 fa-solid fa-right-from-bracket"></i>&nbsp;{{ __("logout") }}</small></a>
                 </li>
                 <li class="topbar__dropdown-dropper-item">
-                    <a class="d-block text-dark w-100" href="{{ url("/user/userprofile?user=" . Illuminate\Support\Facades\Crypt::encrypt(Auth::user()->user_id)) }}"><small><i class="me-2 fa-solid fa-user-gear"></i>{{ __("account settings") }}</small></a>
+                    <a class="d-block text-dark w-100" href="{{ url("/user/userprofile/" . Illuminate\Support\Facades\Crypt::encrypt(Auth::user()->user_id) . "/view") }}"><small><i class="me-2 fa-solid fa-user-gear"></i>{{ __("account settings") }}</small></a>
                 </li>
             </ul>
         </div>

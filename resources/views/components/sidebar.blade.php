@@ -57,8 +57,8 @@
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/newpurchaserequest") }}">
                                                     <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/newpurchaserequest") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("joborder/newjoborder") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/joborder/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -139,8 +139,9 @@
                                     </div>
                                 </div>
                             </li>
+                        </ul>
                         @break
-                        @case(10)
+                    @case(10)
                         {{-- 
                             NOTE: tanawa sa accesslevel table unsay id sa admin
                                 10 := SUPPLY OFFICER
@@ -153,10 +154,11 @@
                             </li>
 
                         </ul>
+                        @break
                     @case(11)
                         {{-- 
                             NOTE: tanawa sa accesslevel table unsay id
-                                 11 := BUDGET OFFICER
+                                11 := BUDGET OFFICER
                         --}}
                         <ul class="sidebar__ul list-group list-group-flush mx-auto">
                             <span class="sidebar__ul-label d-block py-3 text-info fw-bold" role="text">{{ __("COMPONENTS") }}</span>
@@ -164,24 +166,24 @@
                                 <div class="sidebar__accordion accordion accordion-flush">
                                     <div class="sidebar__accordion-item accordion-item">
                                         <div class="sidebar__accordion-header accordion-header">
-                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
-                                                <i class="sidebar__accordion-button-icon fa fa-file"></i><span class="sidebar__accordion-button-label" role="text">{{ __("Order Status") }}</span>
+                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#create-form-accordion-collapse-id">
+                                                <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Create Form") }}</span>
                                             </button>
                                         </div>
-                                        <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                        <div id="create-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
                                             <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/purchaserequeststatus") }}">
-                                                    <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}">{{ __("Purchase Request") }}</a>
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
-                                                    <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i><a class="sidebar__accordon-body-item-label" href="{{ url("/joborderstatus") }}">{{ __("Job Order") }}</a>
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-
+                        </ul>
                         @break
                     @case(14)
                         {{-- 

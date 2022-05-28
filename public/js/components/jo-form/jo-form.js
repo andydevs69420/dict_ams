@@ -72,10 +72,12 @@ function autoResizeTextArea() {
         textareas.keyup(() => {
 
             textareas.css("height", (textareas.prop("scrollHeight") > textareas.height()) ? (textareas.prop('scrollHeight'))+"px" : "auto");
-            
+
+            console.log("\""+textareas.val()+"\"")
+
             if (textareas.val().length <= 0)
                 textareas.css("height", "auto");
-
+            
             rows = textareas.val().toString().split("\n").length;
             rows = (rows <= 0)? 1 : rows;
             textareas.attr("rows", rows);

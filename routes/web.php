@@ -68,7 +68,7 @@ Route::controller(AppController::class)->group(function () {
             // view pr list
                 Route::get("/purchaserequest/viewprlist", "viewPRFormList");
             // view uploaded form
-                Route::get("/purchaserequest/viewprforminfo", "viewPRFormInfo");
+                Route::get("/purchaserequest/viewprforminfo/{prform}/view", "viewPRFormInfo");
                 // load comments
                 Route::get("/purchaserequest/loadcomment", "loadPrFormInfoComment");
                 // upload comment
@@ -78,15 +78,15 @@ Route::controller(AppController::class)->group(function () {
             // view pr form
                 Route::get("/purchaserequest/viewprform", "viewPRForm");
         // jo
-        Route::get("/newjoborder", "jobOrder");
+        Route::get("/joborder/newjoborder", "jobOrder");
             // view jo list
                 Route::get('/joborder/joborderlist', 'viewJOFormList');
             // view jo form
-                Route::get('/newjoborder/viewjoform', 'viewJOForm');
+                Route::get('/joborder/viewjoform', 'viewJOForm');
             // upload jo form
-                Route::post("/newjoborder/uploadjoform", "uploadJOForm");
+                Route::post("/joborder/uploadjoform", "uploadJOForm");
             // view uploaded form
-                Route::get("/newjoborder/viewjoforminfo", "viewJOFormInfo");
+                Route::get("/joborder/viewjoforminfo/{joform}/view", "viewJOFormInfo");
                 // load comments
                 Route::get("/joborder/loadcomment", "loadJoFormInfoComment");
                 // upload comment
@@ -95,7 +95,7 @@ Route::controller(AppController::class)->group(function () {
     // users
     Route::get("/users", "users");
         // view profile
-            Route::get("/user/userprofile", "user__user_profile");
+            Route::get("/user/userprofile/{user}/view", "user__user_profile");
         // upload profile picture
             Route::post("/user/uploadprofilepicture", "user__user_profile_update");
         // delete profile picture

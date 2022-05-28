@@ -1,22 +1,14 @@
 
+
 (function(root) {
-
-    jQuery(function() {
-        $("#new-job-order__confirm-signature").click((evt) => {
-            if (evt.target.checked)
-                $("#new-job-order__submit").removeAttr("disabled");
-            else 
-                $("#new-job-order__submit").attr("disabled", "disabled");
-        });
-
-        loadComments();
-        addComment();
-
-    });
-
 
     $.ajaxSetup({
         headers: { "X-CSRF-TOKEN" : $("meta[name=\"csrf-token\"]").attr("content") }
+    });
+
+    jQuery(function() {
+        loadComments();
+        addComment();
     });
 
     /**
@@ -60,6 +52,5 @@
             });
         });
     }
-
 })(window);
 

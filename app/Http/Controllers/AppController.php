@@ -116,8 +116,9 @@ class AppController extends Controller
                     return view("app.purchase-request.purchase-request-list");
                 }
 
-                function viewPRFormInfo(Request $request)
+                function viewPRFormInfo(String $prformid)
                 {
+                    error_log("ID ===> ".$prformid);
                     #============================
                     # Redirect to login if not  =
                     # login or expired.         =
@@ -132,14 +133,7 @@ class AppController extends Controller
                     if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
                     
-                    #============================
-                    # Go back to page if        =
-                    # any field has null value. =
-                    #============================
-                    if (hasNull($request, ["prform"]))
-                        return redirect()->to("/dashboard");
-                    
-                    $form_id = $request->input("prform");
+                    $form_id = $prformid;
 
                     #==============================
                     # Decypt form id. If invalid, =
@@ -467,7 +461,7 @@ class AppController extends Controller
         if (!Auth::user()->isRequisitioner())
             return redirect()->to("/dashboard");
 
-        return view("app.new-job-order.new-job-order");
+        return view("app.job-order.new-job-order");
     }
     /* job order subdir ----> */
                 function viewJOFormList()
@@ -486,7 +480,7 @@ class AppController extends Controller
                     if (!isValidAccess(Auth::user()->accesslevel_id, ["4", "5", "13", "14"]))
                         return redirect()->to("/dashboard");
                     
-                    return view("app.new-job-order.job-order-list");
+                    return view("app.job-order.job-order-list");
                 }
 
                 /**
@@ -500,7 +494,7 @@ class AppController extends Controller
                         "JoFormData" => json_decode($request->input("data"),true)
                     ];
 
-                    return view("app/new-job-order/view-jo-form", $data);
+                    return view("app.job-order.view-jo-form", $data);
                 }
 
                 
@@ -509,7 +503,7 @@ class AppController extends Controller
                  * @param Request $request request
                  * @return View
                  **/
-                function viewJOFormInfo(Request $request)
+                function viewJOFormInfo(String $joformid)
                 {
 
                     if (!Auth::check())
@@ -519,11 +513,7 @@ class AppController extends Controller
                     if (!Auth::user()->isRequisitioner())
                         return redirect()->to("/dashboard");
                     
-                    # Check Null
-                    if (hasNull($request, ["joform"]))
-                        return redirect()->to("/dashboard");
-                    
-                    $form_id = $request->input("joform");
+                    $form_id = $joformid;
 
                     #==============================
                     # Decypt form id. If invalid, =
@@ -542,7 +532,7 @@ class AppController extends Controller
                     $data["requester_data"]    = $frp[0]->toArray();
                     $data["authofficial_data"] = $frp[1]->toArray();
 
-                    return view("app.new-job-order.job-order-form-info", $data);
+                    return view("app.job-order.job-order-form-info", $data);
                 }
 
 
@@ -569,7 +559,7 @@ class AppController extends Controller
                     $num_of_rows      = count($request->input("stock"));
                     $stock_col        = $request->input("stock");
                     $unit_col         = $request->input("unit");
-                    $desc_col         = $request->input("description");
+                    $desc_col         = $request->input("description"); 
                     $qnty_col         = $request->input("qty");
                     $unitc_cost_col   = $request->input("unitcost");
                     $total_cost_col   = $request->input("amount");
@@ -626,10 +616,10 @@ class AppController extends Controller
                         "form_id"                    => $form_id,
                         "userverificationdetails_id" => $authorizedoff_id,
                         "personelstatus_id"          => 2,
-                        "updatedat"                  => Carbon::now()
+                        "updatedat"                  => null
                     ]);
 
-                    return redirect()->to("/newjoborder/viewjoforminfo?joform=" . Crypt::encrypt($form_id));
+                    return redirect()->to("/joborder/viewjoforminfo?joform=" . Crypt::encrypt($form_id));
                     
                 }
 
@@ -748,7 +738,7 @@ class AppController extends Controller
                 /**
                  * View user profile -> user/userid
                  **/
-                public function user__user_profile(Request $request)
+                public function user__user_profile(String $userid)
                 {
                     #============================
                     # Redirect to login if not  =
@@ -757,13 +747,7 @@ class AppController extends Controller
                     if  (!Auth::check())
                         return redirect()->to("/login");
 
-                    #============================
-                    # Redirect to dashboard if  =
-                    # user parameter is not     =
-                    # present.                  =
-                    #============================
-                    if (!$request->has("user"))
-                        return redirect()->intended("/dashboard");
+                    $user_id = $userid;
 
                     #=================================================
                     # Decrypt hashed user id.                        =
@@ -771,7 +755,7 @@ class AppController extends Controller
                     #=================================================
                     $decrypt = null;
                     try
-                    { $decrypt = (int) Crypt::decrypt($request->input("user")); }
+                    { $decrypt = (int) Crypt::decrypt($userid); }
                     catch (\Illuminate\Contracts\Encryption\DecryptException $e)
                     { return redirect()->to("/dashboard"); }
 

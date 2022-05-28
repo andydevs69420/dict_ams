@@ -144,11 +144,11 @@
     {{-- message modal js --}}
     <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
-    {{-- PR js --}}
-    <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
-
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
+
+    {{-- PR js --}}
+    <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
     {{-- PURCHASE REQUEST FORM INFO --}}
     <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
