@@ -43,6 +43,15 @@
         @endif
 
 
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-9">
+                    <span class="new-job-order__new-job-order-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job order") }}</span>
+                </div>
+            </div>
+        </div>
+
+
         <form id="request-form" action="{{ url("/joborder/uploadjoform") }}" method="POST" enctype="multipart/form-data">
 
             @csrf

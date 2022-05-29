@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="container py-2 rounded-2 shadow-lg">
+                    <div class="container py-2 rounded-2 shadow-lg overflow-hidden">
                         <table id="purchase-request-list__purchase-request-list-table" class="table table-striped w-100">
                             <thead>
                                 <tr>
@@ -52,7 +52,7 @@
                                             <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
                                             <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                             <td class="text-center" style="vertical-align: middle !important;">
-                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo/" . Illuminate\Support\Facades\Crypt::encrypt($form->form_id) . "/view") }}">{{ __("View") }}</a>
+                                                <a class="btn btn-sm btn-primary w-100 shadow" href="{{ url("/purchaserequest/viewprforminfo/" . Illuminate\Support\Facades\Crypt::encrypt($form->form_id) . "/view") }}">{{ __("View") }}</a>
                                             </td>
                                         </tr>
                                     

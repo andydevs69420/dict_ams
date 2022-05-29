@@ -8,11 +8,7 @@
 /* ================= PR FORM COLORS ================= */
 /* ================= USER LIST COLORS =============== */
 /* ================= REQUISITIONER LIST COLORS ====== */
-.new-job-order__card-header {
-  background-color: #0020EC !important;
-}
-
-.new-job-order__purhcase-request-header-label {
+.new-job-order__new-job-order-header-label {
   font-size: 1.6em;
 }
 

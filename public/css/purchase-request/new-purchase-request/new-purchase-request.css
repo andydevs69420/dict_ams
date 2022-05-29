@@ -8,10 +8,6 @@
 /* ================= PR FORM COLORS ================= */
 /* ================= USER LIST COLORS =============== */
 /* ================= REQUISITIONER LIST COLORS ====== */
-.new-purchase-request__card-header {
-  background-color: #0020EC !important;
-}
-
 .purhcase-request__purhcase-request-header-label {
   font-size: 1.6em;
 }

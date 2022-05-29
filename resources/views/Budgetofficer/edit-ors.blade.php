@@ -3,11 +3,13 @@
 @section('title', 'AMS | Edit PR Status')
 
 @section('dependencies')
+
     <link rel="stylesheet" href="{{ asset('css/Budgetofficer/Budgetoffice.css') }}">
+
 @stop
 
 @section('content')
-<div class="d-block w-100 h-100">
+    <div class="d-block w-100 h-100">
         <div class="container-fluid">
             <span class="dashboard__dashboard-header-label d-block px-0 py-3 text-muted" role="text">{{ __('Edit Purchase Request Status') }}</span>    
         </div>
@@ -45,7 +47,7 @@
                             <label>{{ __("Status") }}</label>
                             <select class="ui dropdown uppercase" name="status">
                                 <option value="Approved" @isset($l->status) @if($l->status == 'Approved') selected @endif @endisset>Approved</option>
-                                <option value="Pending" @isset($l->status) @if($l->status == 'Pending') selected @endif @endisset>Pending</option>
+                                <option value="Pending"  @isset($l->status) @if($l->status == 'Pending') selected @endif @endisset>Pending</option>
                                 <option value="Declined" @isset($l->status) @if($l->status == 'Declined') selected @endif @endisset>Declined</option>
                             </select>
                         </div>
@@ -62,5 +64,5 @@
                 <form>
             </div>
         </div>
-</div>
+    </div>
 @stop
