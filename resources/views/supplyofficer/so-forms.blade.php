@@ -46,14 +46,14 @@
 
                                     {{-- <tr>
                                         <td data-order="{{ $form->createdat }}" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
-                                        <td style="vertical-align: middle !important;">{{ $form->prnumber }}</td>
-                                        <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
-                                        <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
-                                        <td class="text-center" style="vertical-align: middle !important;">
-                                            <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
-                                        </td>
-                                    </tr>
-                                 --}}
+                                            <td style="vertical-align: middle !important;">{{ $form->prnumber }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
+                                            <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
+                                            <td class="text-center" style="vertical-align: middle !important;">
+                                                <a class="btn btn-sm btn-primary shadow" href="{{ url("/purchaserequest/viewprforminfo?prform=".Illuminate\Support\Facades\Crypt::encrypt($form->form_id)) }}">{{ __("View") }}</a>
+                                            </td>
+                                        </tr>
+                                    --}}
                                     <tr>
                                         <td id="form-id" style="vertical-align: middle !important;">{{ $form["form_id"] }}</td>
                                         <td id="pr-id" style="vertical-align: middle !important;"> @if($form["formtype_id"] === 1) {{ "Purchase Request" }} @elseif($form["formtype_id"] === 2) {{ "Job Order" }} @endif</td>

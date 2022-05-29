@@ -3,10 +3,13 @@
 @section('title', 'AMS | Canvasser Price Quotation')
 
 @section('dependencies')
-{{-- Budget officer css --}}
+
+    {{-- Budget officer css --}}
     <link rel="stylesheet" href="{{ asset('css/Budgetofficer/Budgetoffice.css') }}">
-{{-- datatable css --}}
+
+    {{-- datatable css --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    
 @stop
 
 @section('content')

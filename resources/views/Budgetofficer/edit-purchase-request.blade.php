@@ -1,6 +1,6 @@
 @extends("layout.app-main")
-
-@section("title", "AMS | PR Info")
+    
+@section("title", "AMS | Review PR")
 
 @section("dependencies")
 
@@ -13,19 +13,12 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- STEP PROGRESS css --}}
+    {{-- step progress css --}}
     <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
-
-    {{-- PURCHASE REQUEST FORM INFO css --}}
-    <link rel="stylesheet" href="{{ asset("css/purchase-request/purchase-request-form-info/purchase-request-form-info.css") }}">
 
 @stop
 
 @section("content")
-
-    {{-- message modal --}}
-    <x-message-modal id="purchase-request-form-info__message-modal"></x-message-modal>
-
     <div class="d-block py-3">
 
         <div class="container">
@@ -143,9 +136,10 @@
             </div>
 
         </form>
-    
+
     </div>
 @stop
+
 
 @section("javascript")
 
@@ -165,7 +159,3 @@
     <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
 
 @stop
-
-
-
-

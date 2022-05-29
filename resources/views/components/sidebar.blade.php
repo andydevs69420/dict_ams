@@ -167,7 +167,7 @@
                                     <div class="sidebar__accordion-item accordion-item">
                                         <div class="sidebar__accordion-header accordion-header">
                                             <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#create-form-accordion-collapse-id">
-                                                <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Create Form") }}</span>
+                                                <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Requested Form") }}</span>
                                             </button>
                                         </div>
                                         <div id="create-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
@@ -175,8 +175,8 @@
                                                 <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/purchaserequeststatus") }}">
                                                     <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/joborderstatus") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/joborderstatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
                                                 </li>
                                             </ul>
                                         </div>

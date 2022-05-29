@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserVerificationDetails;
-use Illuminate\Http\Request;
-use App\Models\User;
-
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+
+use App\Models\PrItem;
+use App\Models\FormRequiredPersonel;
 
 class BOController extends Controller
 {
@@ -18,31 +19,57 @@ class BOController extends Controller
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
 
-        return view('Budgetofficer.BO-purchaserequest');
+        return view("Budgetofficer.budget-officer-purchase-request");
     }
 
 
-    public function Predit() {
+    public function Predit(String $prformid) 
+    {
         
-        if  (!Auth::check())
+        if (!Auth::check())
             return redirect()->to("/login");
 
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["11"]))
-            return redirect()->to("/logout");
+        if (!Auth::user()->isBudgetOfficer())
+            return redirect()->to("/dashboard");
+        
+        $form_id = $prformid;
 
-        return view('Budgetofficer.edit-ors');
+        #==============================
+        # Decypt form id. If invalid, =
+        # redirect to dashboard.      =
+        #==============================
+        try 
+        { $form_id = (Int) Crypt::decrypt($form_id); } 
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+        { return redirect()->to("/dashboard"); }
+
+        $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
+        #=========================
+        # Get items.             =
+        #=========================
+        $data["pr_items"] = PrItem::getItemsByFormId($form_id)->toArray();
+
+        #=========================
+        # Get required personel. =
+        #=========================
+        $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
+        $data["rQ_data"] = $frp[0]->toArray();
+        $data["bO_data"] = $frp[1]->toArray();
+        $data["rA_data"] = $frp[2]->toArray();
+        
+        return view("Budgetofficer.edit-purchase-request", $data);
     }
 
-    public function JoIndex(){
-        $form = JoForm::all();
+    public function JoIndex() 
+    {
 
         if  (!Auth::check())
             return redirect()->to("/login");
 
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["11"]))
-            return redirect()->to("/logout");
+        if (!Auth::user()->isBudgetOfficer())
+            return redirect()->to("/dashboard");
 
-        return view('Budgetofficer.BO-Joborder', compact('form'));
+        return view("Budgetofficer.budget-officer-job-order");
     }
 
     public function JoEdit(){
@@ -52,7 +79,7 @@ class BOController extends Controller
         if (!isValidAccess(Auth::user()->accesslevel_id, ["11"]))
             return redirect()->to("/logout");
 
-        return view('Budgetofficer.edit-Joborder');
+        return view("Budgetofficer.edit-job-order");
     }
 
 }

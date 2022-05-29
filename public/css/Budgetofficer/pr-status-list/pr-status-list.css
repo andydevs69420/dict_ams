@@ -4,6 +4,10 @@
 /* on large devices and above */
 /* on extra-large devices and above */
 /* on extra-extra large devices and above */
+.budget-officer__pr-status-header-label {
+  font-size: 1.6em;
+}
+
 .dataTables_length {
   text-align: left !important;
 }

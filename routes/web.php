@@ -44,17 +44,18 @@ Route::get("/register", [RegisterController::class,"index"]);
 Route::post("/register", [RegisterController::class,"store"]);
 
 // Budget Officer (Purchase Request)
-Route::get('/budgetofficer/purchaserequeststatus',[BOController::class,'PrIndex']);
-Route::get('/budgetofficer/edit-purchaserequest',[BOController::class,'Predit']);
+Route::get("/budgetofficer/purchaserequeststatus",[BOController::class,"PrIndex"]);
+Route::get("/budgetofficer/editpurchaserequest/{prform}/review",[BOController::class,"Predit"]);
+
 // Budget Officer (Job Order)
-Route::get('/budgetofficer/joborderstatus',[BOController::class,'JoIndex']);
-Route::get('/budgetofficer/edit-Joborder',[BOController::class,'Joedit']);
+Route::get("/budgetofficer/joborderstatus",[BOController::class,"JoIndex"]);
+Route::get("/budgetofficer/editjoborder/{joform}/review",[BOController::class,"Joedit"]);
 
 //BAC chairman
-Route::get('/BACpricequotation',[BACController::class,'BACIndex']);
+Route::get("/BACpricequotation",[BACController::class,"BACIndex"]);
 
 //Canvasser
-Route::get('/CanVpricequotation',[BACController::class,'CanvIndex']);
+Route::get("/CanVpricequotation",[BACController::class,"CanvIndex"]);
 
 // app group routes
 Route::controller(AppController::class)->group(function () {
@@ -80,9 +81,9 @@ Route::controller(AppController::class)->group(function () {
         // jo
         Route::get("/joborder/newjoborder", "jobOrder");
             // view jo list
-                Route::get('/joborder/joborderlist', 'viewJOFormList');
+                Route::get("/joborder/joborderlist", "viewJOFormList");
             // view jo form
-                Route::get('/joborder/viewjoform', 'viewJOForm');
+                Route::get("/joborder/viewjoform", "viewJOForm");
             // upload jo form
                 Route::post("/joborder/uploadjoform", "uploadJOForm");
             // view uploaded form

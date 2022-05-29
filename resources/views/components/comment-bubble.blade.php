@@ -4,7 +4,7 @@
         <div class="d-flex align-items-center justify-content-center overflow-hidden rounded-circle shadow-sm" style="width: 30px; height: 30px;">
             <img class="img-fluid" src="{{ asset(App\Models\UserProfileImages::getProfileImagePathByUserId($user_id)) }}" alt="avatar">
         </div>
-        <a class="d-inline ms-1 p-0" style="font-size: .6em; text-decoration: none" href="{{ url("/user/userprofile/" . Illuminate\Support\Facades\Crypt::encrypt(Auth::user()->user_id) . "/view" ) }}" role="text">
+        <a class="d-inline ms-1 p-0" style="font-size: .6em; text-decoration: none" href="{{ url("/user/userprofile/" . Illuminate\Support\Facades\Crypt::encrypt($user_id) . "/view" ) }}" role="text">
             {{ $lastname . ", " . $firstname . " " . $middleinitial }}
         </a>
     </div>

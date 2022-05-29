@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,sDAAsD,CACtD;EAAE,SAAS,EAAE,KAAK;CAAI",
+    "sources": [
+        "job-order-form-info.scss"
+    ],
+    "names": [],
+    "file": "job-order-form-info.css"
+}

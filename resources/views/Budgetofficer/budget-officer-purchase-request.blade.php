@@ -11,18 +11,13 @@
     {{-- Budget officer css --}}
     <link rel="stylesheet" href="{{ asset('css/Budgetofficer/pr-status-list/pr-status-list.css') }}">
 
-    {{-- Budget officer css --}}
-    <link rel="stylesheet" href="{{ asset('css/Budgetofficer/Budgetoffice.css') }}">
-
-
-
 @stop
 
 @section('content')
     <div class="d-block py-3">
 
         <div class="container">
-            <span class="budget-officer__pr-status-header-label d-block px-0 py-3 text-muted" role="text">{{ __('Purchase Request Status') }}</span>    
+            <span class="budget-officer__pr-status-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Requested Purchase Request List") }}</span>    
         </div>
 
         <div class="container">
@@ -32,11 +27,11 @@
                         <table id="pr-list__pr-list-table" class="table table-striped w-100" data-order='[[ 0, "asc" ]]'>
                             <thead>
                                     <tr>
-                                    <th class="text-left" scope="col">{{ __("Request date") }}</th>
-                                    <th class="text-left" scope="col">{{ __("Pr number") }}</th>
-                                    <th class="text-left" scope="col">{{ __("Sai number") }}</th>
-                                    <th class="text-left" scope="col">{{ __("Purpose") }}</th>
-                                    <th class="text-left" scope="col">{{ __("Actions") }}</th>
+                                        <th class="text-left" scope="col">{{ __("Request date") }}</th>
+                                        <th class="text-left" scope="col">{{ __("Pr number") }}</th>
+                                        <th class="text-left" scope="col">{{ __("Sai number") }}</th>
+                                        <th class="text-left" scope="col">{{ __("Purpose") }}</th>
+                                        <th class="text-left" scope="col">{{ __("Actions") }}</th>
                                     </tr>
                             </thead>
                             <tbody>
@@ -47,9 +42,7 @@
                                         <td class="vertical-align: middle !important;">{{ $form->sainumber }}</td>
                                         <td class="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                         <td class="text-center">
-
-                                            <a class="btn btn-sm btn-primary shadow">{{ __("View") }}</a>
-
+                                            <a class="btn btn-sm btn-primary shadow" href="{{ url("/budgetofficer/editpurchaserequest/" . \Illuminate\Support\Facades\Crypt::encrypt($form->form_id) . "/review") }}">{{ __("View") }}</a>
                                         </td>
                                     </tr>
                                 @endforeach    

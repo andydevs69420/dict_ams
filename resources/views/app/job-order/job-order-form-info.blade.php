@@ -16,10 +16,21 @@
     {{-- step progress css --}}
     <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
 
+    {{-- JOB ORDER FORM INFO css --}}
+    <link rel="stylesheet" href="{{ asset("css/job-order/job-order-form-info/job-order-form-info.css") }}">
+
 @stop
 
 @section("content")
     <div class="d-block py-3">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-9">
+                    <span class="job-order-form-info__job-order-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order Preview") }}</span>
+                </div>
+            </div>
+        </div>
 
         <form action="POST" enctype="multipart/form-data">
             <div class="container">
