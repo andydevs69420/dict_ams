@@ -26,8 +26,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="container py-2 rounded-2 shadow-lg">
-                        <table id="purchase-request-list__purchase-request-list-table" class="table table-striped w-100">
+                    <div class="container py-4 rounded-2 shadow-lg overflow-hidden">
+                        <table id="job-order-list__job-order-list-table" class="table table-striped w-100">
                             <thead>
                                 <tr>
                                     <th class="text-left" scope="col">{{ __("Request date") }}</th>
@@ -93,8 +93,8 @@
     <script type="text/javascript" src="{{ asset("extra/dataTable/jQuery-dataTable-bs5-1.11.5.min.js") }}"></script>
     <script type="text/javascript" src="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.js") }}"></script>
 
-    {{-- purchase request list js --}}
-    <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-list.js") }}"></script>
+    {{-- PURCHASE REQUEST LIST js --}}
+    <script type="text/javascript" src="{{ asset("js/job-order/job-order-list.js") }}"></script>
 
 @stop
 

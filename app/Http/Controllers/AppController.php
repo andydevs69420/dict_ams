@@ -542,10 +542,11 @@ class AppController extends Controller
                  * @param Request $request request
                  * @return View
                  **/
-                function uploadJOForm(Request $request) {
+                function uploadJOForm(Request $request)
+                {
   
                     # Verification
-                    if  (!Auth::check())
+                    if (!Auth::check())
                         return redirect()->to("/login");
                     
                     if (!Auth::user()->isRequisitioner())
@@ -609,6 +610,14 @@ class AppController extends Controller
                         "userverificationdetails_id" => $requester_id,
                         "personelstatus_id"          => 1,
                         "updatedat"                  => Carbon::now()
+                    ]);
+
+                    // bo
+                    FormRequiredPersonel::create([
+                        "form_id"                    => $form_id,
+                        "userverificationdetails_id" => 3,
+                        "personelstatus_id"          => 2,
+                        "updatedat"                  => null
                     ]);
             
                     // authorized official

@@ -13,8 +13,12 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- step progress css --}}
+    {{-- STEP PROGRES css --}}
     <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
+
+    {{-- EDIT PURCHASE REQUEST css --}}
+    <link rel="stylesheet" href="{{ asset("css/budget-officer/purchase-request/edit-purchase-request/edit-purchase-request.css") }}">
+
 
 @stop
 
@@ -24,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
-                    <span class="purchase-request-form-info__purchase-request-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase Request Preview") }}</span>
+                    <span class="edit-purchase-request-form-info__edit-purchase-request-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase Request Preview") }}</span>
                 </div>
             </div>
         </div>

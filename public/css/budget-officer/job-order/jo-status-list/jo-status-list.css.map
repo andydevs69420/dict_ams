@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,uCAAuC,CACvC;EAAE,SAAS,EAAE,KAAK;CAAI",
+    "sources": [
+        "jo-status-list.scss"
+    ],
+    "names": [],
+    "file": "jo-status-list.css"
+}

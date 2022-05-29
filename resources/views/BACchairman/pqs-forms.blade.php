@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($form as $Form_id)
+                    @foreach($form as $Form_id)
                         <tr>
                             <td>{{ $Form_id}}</td>
                             <td style="vertical-align: middle !important;">{{ Requisitioner }}</td>
@@ -49,7 +49,7 @@
                                 </div>
                             </td>
                         </tr>  
-                @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>

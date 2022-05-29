@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="container py-2 rounded-2 shadow-lg overflow-hidden">
+                    <div class="container py-4 rounded-2 shadow-lg overflow-hidden">
                         <table id="purchase-request-list__purchase-request-list-table" class="table table-striped w-100">
                             <thead>
                                 <tr>

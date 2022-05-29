@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 use App\Models\PrItem;
+use App\Models\JoItem;
 use App\Models\FormRequiredPersonel;
 
 class BOController extends Controller
@@ -63,7 +64,7 @@ class BOController extends Controller
     public function JoIndex() 
     {
 
-        if  (!Auth::check())
+        if (!Auth::check())
             return redirect()->to("/login");
 
         if (!Auth::user()->isBudgetOfficer())
@@ -72,12 +73,34 @@ class BOController extends Controller
         return view("Budgetofficer.budget-officer-job-order");
     }
 
-    public function JoEdit(){
+    public function JoEdit(String $joformid)
+    {
         if  (!Auth::check())
             return redirect()->to("/login");
 
-        if (!isValidAccess(Auth::user()->accesslevel_id, ["11"]))
-            return redirect()->to("/logout");
+        if (!Auth::user()->isBudgetOfficer())
+            return redirect()->to("/dashboard");
+        
+        $form_id = $joformid;
+
+        #==============================
+        # Decypt form id. If invalid, =
+        # redirect to dashboard.      =
+        #==============================
+        try 
+        { $form_id = (Int) Crypt::decrypt($form_id); } 
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+        { return redirect()->to("/dashboard"); }
+
+        $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
+
+        $data["jo_items"] = JoItem::getItemsByFormId($form_id)->toArray();
+        $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
+        
+        $data["requester_data"]    = $frp[0]->toArray();
+        $data["authofficial_data"] = $frp[1]->toArray();
+
+        return view("app.job-order.job-order-form-info", $data);
 
         return view("Budgetofficer.edit-job-order");
     }
