@@ -30,7 +30,7 @@ button[aria-owns="bs-select-1"]
   background-color: $PR-INPUT-ICON-BG  !important; 
 }
 
-.pr-form__add-new-item-btn
+.pr-form__add-new-item-btn, .jo-form__add-new-item-btn
 {
   position: fixed;
   right: 15px;
@@ -56,7 +56,7 @@ button[aria-owns="bs-select-1"]
   }
 }
 
-.pr-form__generate-pr-form-btn
+.pr-form__generate-pr-form-btn, .jo-form__generate-jo-form-btn
 {
   position: fixed;
   right: 15px;
@@ -84,13 +84,13 @@ button[aria-owns="bs-select-1"]
 
 @media screen and (min-width:0px) and (max-width: 991px) 
 {
-  .pr-form__add-new-item-btn
+  .pr-form__add-new-item-btn, .jo-form__add-new-item-btn
   { 
     margin: initial !important;
     border-radius: 1000px !important; 
   }
 
-  .pr-form__generate-pr-form-btn
+  .pr-form__generate-pr-form-btn, .jo-form__generate-jo-form-btn
   { border-radius: 1000px !important; }
 }
 

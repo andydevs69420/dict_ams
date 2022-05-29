@@ -1,0 +1,20 @@
+
+
+@import '../../global/appcolor';
+
+// @deprecated
+.new-job-order__card-header
+{ background-color: $NPR-CARD-HEADER !important; }
+
+.new-job-order__purhcase-request-header-label
+{ font-size: 1.6em; }
+
+.new-job-order__upload-files-btn,
+.new-job-order__upload-files-btn * {
+  color: #0020EC !important;
+  border-color: #0020EC !important;
+}
+
+.new-job-order__submit-btn {
+  background-color: #0020EC !important;
+}

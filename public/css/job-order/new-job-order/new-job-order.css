@@ -4,10 +4,17 @@
 /* ================= DASHBOARD COLORS =============== */
 /* ================= PROGRESSBAR COLORS ============= */
 /* ================= NEW PR FORM COLORS ============= */
+/* ================= VIEW PR LIST COLORS ============ */
 /* ================= PR FORM COLORS ================= */
 /* ================= USER LIST COLORS =============== */
 /* ================= REQUISITIONER LIST COLORS ====== */
-/* ================= ITEM LIST COLORS =============== */
+.new-job-order__card-header {
+  background-color: #0020EC !important;
+}
+
+.new-job-order__purhcase-request-header-label {
+  font-size: 1.6em;
+}
 
 .new-job-order__upload-files-btn,
 .new-job-order__upload-files-btn * {
@@ -18,4 +25,4 @@
 .new-job-order__submit-btn {
   background-color: #0020EC !important;
 }
-/*# sourceMappingURL=new-purchase-request.css.map */
+/*# sourceMappingURL=new-job-order.css.map */

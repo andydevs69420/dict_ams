@@ -1,11 +1,15 @@
 (function() {
     jQuery(() => {
+
+        window.progressBar = new Progressbar("#pr-progress");
         autoResizeTextArea();
+
         $("[data-bs-toggle='tooltip']").tooltip();
         $("[data-bs-toggle='popover']").popover();
         $("select").selectpicker({
             search : true
         });
+
     });
 
 })();
@@ -60,7 +64,10 @@ function add__item()
 
     $('[data-bs-toggle="tooltip"]').tooltip();
     $('[data-bs-toggle="popover"]').popover();
+
+    progressBar.update();
     autoResizeTextArea();
+
 }
 
 
@@ -68,19 +75,17 @@ function autoResizeTextArea() {
 
     textareas_00 = $("textarea");
     textareas_00.each((index, txtarea) => {
-        textareas = $(txtarea);
-        textareas.keyup(() => {
+        txtarea = $(txtarea);
+        txtarea.keyup(() => {
 
-            textareas.css("height", (textareas.prop("scrollHeight") > textareas.height()) ? (textareas.prop('scrollHeight'))+"px" : "auto");
-
-            console.log("\""+textareas.val()+"\"")
-
-            if (textareas.val().length <= 0)
-                textareas.css("height", "auto");
+            txtarea.css("height", (txtarea.prop("scrollHeight") > txtarea.height()) ? (txtarea.prop('scrollHeight'))+"px" : "auto");
             
-            rows = textareas.val().toString().split("\n").length;
+            if (txtarea.val().toString().length <= 0)
+                txtarea.css("height", "auto");
+
+            rows = txtarea.val().split("\n").length;
             rows = (rows <= 0)? 1 : rows;
-            textareas.attr("rows", rows);
+            txtarea.attr("rows", rows);
 
         });
     });
@@ -129,6 +134,8 @@ function remove__item(id_query_selector)
     $(id_query_selector)
     .attr("id", `item-${id[1]}-id-delete`)
     .remove();
+
+    progressBar.update();
 }
 
 
@@ -222,7 +229,7 @@ function generate__jo_form()
         if(invalid)
             return $('#jo-form__on-error-modal').modal('show');
         else
-            return window.open(`/newjoborder/viewjoform?data=${JSON.stringify(form_data)}`);
+            return window.open(`/joborder/viewjoform?data=${JSON.stringify(form_data)}`);
     })();
     
 }

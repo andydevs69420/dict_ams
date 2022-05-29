@@ -113,17 +113,17 @@
 
         textareas_00 = $("textarea");
         textareas_00.each((index, txtarea) => {
-            textareas = $(txtarea);
-            textareas.keyup(() => {
+            txtarea = $(txtarea);
+            txtarea.keyup(() => {
 
-                textareas.css("height", (textareas.prop("scrollHeight") > textareas.height()) ? (textareas.prop('scrollHeight'))+"px" : "auto");
+                txtarea.css("height", (txtarea.prop("scrollHeight") > txtarea.height()) ? (txtarea.prop('scrollHeight'))+"px" : "auto");
                 
-                if (textareas.val().length <= 0)
-                    textareas.css("height", "auto");
+                if (txtarea.val().toString().length <= 0)
+                    txtarea.css("height", "auto");
     
-                rows = textareas.val().toString().split("\n").length;
+                rows = txtarea.val().split("\n").length;
                 rows = (rows <= 0)? 1 : rows;
-                textareas.attr("rows", rows);
+                txtarea.attr("rows", rows);
     
             });
         });

@@ -1,8 +1,13 @@
-@import '../global/sizing';
-@import '../global/appcolor';
 
-.users__users-header-label
+
+@import '../../global/sizing';
+@import '../../global/appcolor';
+
+.job-order-list__joborder-list-header-label
 { font-size: 1.6em; }
+
+
+
 
 .dataTables_length
 { 
@@ -37,3 +42,5 @@
     { width: auto !important; }
   }
 }
+
+

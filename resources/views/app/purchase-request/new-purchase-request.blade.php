@@ -7,14 +7,14 @@
     {{-- bootstrap-select css  --}}
     <link rel="stylesheet" href="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.css") }}">
 
+    {{-- PROGRESS BAR css --}}
+    <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
+
     {{-- NEW PURCHASE REQUEST css --}}
     <link rel="stylesheet" href="{{ asset("css/purchase-request/new-purchase-request/new-purchase-request.css") }}">
 
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
-
-    {{-- PROGRESS BAR css --}}
-    <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
 @stop
 
@@ -107,14 +107,14 @@
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
+    {{-- PROGRESS BAR js --}}
+    <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
+
     {{-- NEW PURCHASE REQUEST js --}}
     <script type="text/javascript" src="{{ asset("js/purchase-request/new-purchase-request.js") }}"></script>
 
-    {{-- PR js --}}
+    {{-- PR FORM js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
-
-    {{-- PROGRESS BAR js --}}
-    <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
     @if (Session::has("info"))
         <script>

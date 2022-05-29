@@ -366,7 +366,7 @@ class AppController extends Controller
                         "updatedat"                  => null
                     ]);
 
-                    return redirect()->to("/purchaserequest/viewprforminfo?prform=" . Crypt::encrypt($form_id));
+                    return redirect()->to("/purchaserequest/viewprforminfo/" . Crypt::encrypt($form_id) . "/view");
                 }
 
                 /**
@@ -619,7 +619,7 @@ class AppController extends Controller
                         "updatedat"                  => null
                     ]);
 
-                    return redirect()->to("/joborder/viewjoforminfo?joform=" . Crypt::encrypt($form_id));
+                    return redirect()->to("/joborder/viewjoforminfo/" . Crypt::encrypt($form_id) . "/view");
                     
                 }
 

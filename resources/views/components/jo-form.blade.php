@@ -20,8 +20,10 @@
 </div>
 {{-- JO FORM --}}
 <div class="card border-0 shadow-lg">
-    <div class="jo-form__card-header card-header mt-3 mb-0 pb-0 border-0 bg-white">
-        <p>&nbspItem Information</p>
+    <div class="card-header py-3 border-0 bg-white">
+        <div class="d-block px-2">
+            <x-progressbar id="pr-progress"></x-progressbar>
+        </div>
     </div>
     <div class="card-body p-0">
         <div class="container-fluid">
@@ -43,7 +45,7 @@
 
                             <li id="jo-form__jo-item-template" class="list-group-item bg-transparent border-0 rounded-0 p-0">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <span class="item-header" role="text">Item 1</span>
+                                    <span class="fw-bold" role="text">Item {{ $idx+1 }}</span>
                                     <button class="btn rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Remove item 1">&times;</button>
                                 </div>
                                 <div class="container-fluid p-0 mt-2">

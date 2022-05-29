@@ -12,15 +12,13 @@ class BOController extends Controller
 {
     public function PrIndex() {
 
-        if  (!Auth::check())
+        if (!Auth::check())
             return redirect()->to("/login");
         
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
-        
-        
 
-        return view('Budgetofficer.BO');
+        return view('Budgetofficer.BO-purchaserequest');
     }
 
 

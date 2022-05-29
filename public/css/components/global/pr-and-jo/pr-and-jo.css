@@ -4,10 +4,10 @@
 /* ================= DASHBOARD COLORS =============== */
 /* ================= PROGRESSBAR COLORS ============= */
 /* ================= NEW PR FORM COLORS ============= */
+/* ================= VIEW PR LIST COLORS ============ */
 /* ================= PR FORM COLORS ================= */
 /* ================= USER LIST COLORS =============== */
 /* ================= REQUISITIONER LIST COLORS ====== */
-/* ================= ITEM LIST COLORS =============== */
 /* Based on bootstrap breakpoints */
 /* on small devices and above */
 /* on medium devices and above */
@@ -45,7 +45,7 @@ button[aria-owns="bs-select-1"] {
   background-color: #0020EC !important;
 }
 
-.pr-form__add-new-item-btn {
+.pr-form__add-new-item-btn, .jo-form__add-new-item-btn {
   position: fixed;
   right: 15px;
   bottom: 75px;
@@ -57,12 +57,12 @@ button[aria-owns="bs-select-1"] {
           box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
 }
 
-.pr-form__add-new-item-btn > span {
+.pr-form__add-new-item-btn > span, .jo-form__add-new-item-btn > span {
   display: none;
 }
 
 @media screen and (min-width: 992px) {
-  .pr-form__add-new-item-btn {
+  .pr-form__add-new-item-btn, .jo-form__add-new-item-btn {
     position: initial;
     inset: initial;
     width: 100%;
@@ -71,12 +71,12 @@ button[aria-owns="bs-select-1"] {
     -webkit-box-shadow: initial;
             box-shadow: initial;
   }
-  .pr-form__add-new-item-btn > span {
+  .pr-form__add-new-item-btn > span, .jo-form__add-new-item-btn > span {
     display: initial;
   }
 }
 
-.pr-form__generate-pr-form-btn {
+.pr-form__generate-pr-form-btn, .jo-form__generate-jo-form-btn {
   position: fixed;
   right: 15px;
   bottom: 15px;
@@ -88,12 +88,12 @@ button[aria-owns="bs-select-1"] {
           box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
 }
 
-.pr-form__generate-pr-form-btn > span {
+.pr-form__generate-pr-form-btn > span, .jo-form__generate-jo-form-btn > span {
   display: none;
 }
 
 @media screen and (min-width: 992px) {
-  .pr-form__generate-pr-form-btn {
+  .pr-form__generate-pr-form-btn, .jo-form__generate-jo-form-btn {
     position: initial;
     inset: initial;
     width: auto;
@@ -102,104 +102,20 @@ button[aria-owns="bs-select-1"] {
     -webkit-box-shadow: initial;
             box-shadow: initial;
   }
-  .pr-form__generate-pr-form-btn > span {
+  .pr-form__generate-pr-form-btn > span, .jo-form__generate-jo-form-btn > span {
     display: initial;
   }
 }
 
 @media screen and (min-width: 0px) and (max-width: 991px) {
-  .pr-form__add-new-item-btn {
+  .pr-form__add-new-item-btn, .jo-form__add-new-item-btn {
     margin: initial !important;
     border-radius: 1000px !important;
   }
-  .pr-form__generate-pr-form-btn {
+  .pr-form__generate-pr-form-btn, .jo-form__generate-jo-form-btn {
     border-radius: 1000px !important;
   }
 }
 
 /* ====================== Job Order ====================== */
 /*# sourceMappingURL=pr-and-jo.css.map */
-
-.jo-form__card-header p{
-  font-size: 23px;
-  color: #606565;
-  font-weight: bold;
-}
-
-.item-header {
-  font-size: 15px;
-  color: #606565;
-  font-weight: bold;
-}
-
-.jo-form__add-new-item-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 75px;
-  width: 45px;
-  height: 45px;
-  z-index: 3;
-  background-color: #0020EC !important;
-  -webkit-box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
-          box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
-}
-
-.jo-form__add-new-item-btn > span {
-  display: none;
-}
-
-@media screen and (min-width: 992px) {
-  .jo-form__add-new-item-btn {
-    position: initial;
-    inset: initial;
-    width: 100%;
-    height: auto;
-    z-index: initial;
-    -webkit-box-shadow: initial;
-            box-shadow: initial;
-  }
-  .jo-form__add-new-item-btn > span {
-    display: initial;
-  }
-}
-
-.jo-form__generate-jo-form-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 15px;
-  width: 45px;
-  height: 45px;
-  z-index: 2;
-  background-color: #0020EC !important;
-  -webkit-box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
-          box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
-}
-
-.jo-form__generate-jo-form-btn > span {
-  display: none;
-}
-
-@media screen and (min-width: 992px) {
-  .jo-form__generate-jo-form-btn {
-    position: initial;
-    inset: initial;
-    width: auto;
-    height: auto;
-    z-index: initial;
-    -webkit-box-shadow: initial;
-            box-shadow: initial;
-  }
-  .jo-form__generate-jo-form-btn > span {
-    display: initial;
-  }
-}
-
-@media screen and (min-width: 0px) and (max-width: 991px) {
-  .jo-form__add-new-item-btn {
-    margin: initial !important;
-    border-radius: 1000px !important;
-  }
-  .jo-form__generate-jo-form-btn {
-    border-radius: 1000px !important;
-  }
-}

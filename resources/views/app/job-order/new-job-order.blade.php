@@ -6,11 +6,15 @@
     {{-- bootstrap-select css  --}}
     <link rel="stylesheet" href="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.css") }}">
 
-    {{-- NEW JO STYLESHEET --}}
-    <link rel="stylesheet" href="{{ asset("css/new-job-order/new-job-order/new-job-order.css") }}">
+    {{-- PROGRESS BAR css --}}
+    <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- PR/JO STYLESHEET --}}
-    <link rel="stylesheet" href="{{ asset('css/components/global/pr-and-jo/pr-and-jo.css') }}">
+    {{-- NEW JO STYLESHEET --}}
+    <link rel="stylesheet" href="{{ asset("css/job-order/new-job-order/new-job-order.css") }}">
+
+    {{-- PR & JO css --}}
+    <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
+
 @stop
 
 @section('content')
@@ -39,7 +43,7 @@
         @endif
 
 
-        <form id="request-form" action="{{ url("/newjoborder/uploadjoform") }}" method="POST" enctype="multipart/form-data">
+        <form id="request-form" action="{{ url("/joborder/uploadjoform") }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -92,21 +96,19 @@
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
+    {{-- PROGRESS BAR js --}}
+    <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
+
     {{-- jspdf js --}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    {{-- JO FORM js --}}
-    <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
-    
     {{-- NEW JOB ORDER js --}}
     <script type="text/javascript" src="{{ asset("js/job-order/new-job-order.js") }}"></script>
-    <script>
-        $(document).ready((evt) => {
 
-            $('[data-bs-toggle="tooltip"]').tooltip();
+    {{-- JO FORM js --}}
+    <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
 
-        });
-    </script>
+
 @stop
 
 

@@ -5,7 +5,7 @@
 @section("dependencies")
 
     {{-- purchase request list css  --}}
-    <link rel="stylesheet" href="{{ asset("css/purchase-request/purchase-request-list/purchase-request-list.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/job-order/job-order-list/job-order-list.css") }}">
 
     {{-- datatable css --}}
     <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <span class="purchase-request-list__purchase-request-list-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order List") }}</span>
+                    <span class="job-order-list__joborder-list-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order List") }}</span>
                 </div>
             </div>
         </div>

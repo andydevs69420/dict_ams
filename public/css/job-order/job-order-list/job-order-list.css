@@ -14,7 +14,7 @@
 /* ================= PR FORM COLORS ================= */
 /* ================= USER LIST COLORS =============== */
 /* ================= REQUISITIONER LIST COLORS ====== */
-.purchase-request-list__purchase-request-list-header-label {
+.job-order-list__joborder-list-header-label {
   font-size: 1.6em;
 }
 
@@ -56,4 +56,4 @@
     width: auto !important;
   }
 }
-/*# sourceMappingURL=purchase-request-list.css.map */
+/*# sourceMappingURL=job-order-list.css.map */

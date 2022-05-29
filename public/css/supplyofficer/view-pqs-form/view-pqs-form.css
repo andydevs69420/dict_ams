@@ -44,10 +44,6 @@ tbody {
   width: 100%;
 }
 
-.first-row td{
-  font-size: 15px;
-}
-
 .xl119 {
   font-family: Calibri, sans-serif;
   text-align: right;
@@ -62,7 +58,7 @@ tbody {
   font-family: Calibri, sans-serif;
 }
 
-.x-jo-number-slot {
+.x-pr-number-slot {
   font-family: Calibri, sans-serif;
   text-align: center;
   text-decoration: underline;
@@ -81,15 +77,6 @@ tbody {
   border-right: none;
   border-bottom: none;
   border-left: 2.0pt double black;
-  vertical-align: top;
-}
-
-.xl297-b {
-  font-family: Calibri, sans-serif;
-  border-top: 2.0pt double black;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
   vertical-align: top;
 }
 
@@ -162,14 +149,13 @@ tbody {
   border-left: none;
 }
 
-
-
 .xl304 {
   font-size: 12.0pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
   border-bottom: 2.0pt double black;
+  border-left: 2.0pt double black;
 }
 
 .xl305 {
@@ -214,7 +200,7 @@ tbody {
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
-  border-right: none;
+  border-right: 2.0pt double black;
   border-bottom: 2.0pt double black;
   border-left: none;
 }
@@ -228,10 +214,6 @@ tbody {
   border-right: none;
   border-bottom: 2.0pt double black;
   border-left: 2.0pt double black;
-}
-
-.all-border{
-  border: 2.0pt double black;
 }
 
 .xl311 {
@@ -463,38 +445,11 @@ tbody {
   text-align: center;
 }
 
-.xl181-b {
-  font-size: 12.0pt;
-  font-weight: 400;
-  font-family: Calibri, sans-serif;
-  text-align: center;
-}
-
 .x-office-slot {
   font-size: 12.0pt;
   text-decoration: underline;
   font-family: Calibri, sans-serif;
   text-align: center;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.x-placeofdelivery-slot {
-  font-size: 12.0pt;
-  text-decoration: underline;
-  font-family: Calibri, sans-serif;
-  text-align: center;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.x-deliveryterm-slot {
-  font-size: 12.0pt;
-  text-decoration: underline;
-  font-family: Calibri, sans-serif;
-  text-align: start;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -523,58 +478,6 @@ tbody {
   overflow-wrap: break-word;
 }
 
-.x-authorizedofficial-slot {
-  font-family: Calibri, sans-serif;
-  text-decoration: underline;
-  text-align: center;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.x-req-slot {
-  font-family: Calibri, sans-serif;
-  text-decoration: underline;
-  text-align: center;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: 2.0pt double black;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.x-conforme-slot {
-  font-family: Calibri, sans-serif;
-  text-decoration: underline;
-  text-align: center;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: 2.0pt double black;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.x-bottomdate-slot {
-  font-family: Calibri, sans-serif;
-  text-decoration: underline;
-  text-align: start;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
 .xl1240 {
   font-size: 8.0pt;
   font-style: italic;
@@ -588,18 +491,6 @@ tbody {
 
 .x-personel-slot {
   font-weight: 700;
-  font-family: Calibri, sans-serif;
-  text-align: center;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: .5pt solid black;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.x-amount-slot {
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
@@ -722,37 +613,4 @@ tbody {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-
-/* ================================================= */
-td {
-  font-family: Calibri, sans-serif;
-}
-
-.spacer {
-  height: 10px;
-}
-
-#notice-1 {
-  font-family: Calibri, sans-serif;
-  font-size: 25;
-  font-weight: 700;
-}
-
-#notice-2 {
-  font-family: Calibri, sans-serif;
-  text-align: justify;
-}
-
-.name, .name-label {
-  font-family: Calibri, sans-serif;
-}
-
-.name {
-  font-weight: 700;
-  text-decoration: underline;
-}
-
-.after-lastitem-notice {
-  height: 70px;
-}
-/*# sourceMappingURL=view-jo-form.css.map */
+/*# sourceMappingURL=view-pqs-form.css.map */
