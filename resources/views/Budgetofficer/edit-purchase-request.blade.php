@@ -50,7 +50,7 @@
                             <div class="card-body px-1 py-2">
 
                                 {{-- files --}}
-                                <span class="d-block px-2 py-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILE</span>
+                                <span class="d-block px-2 py-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("ATTACHED FILE") }}</span>
 
                                 <div class="d-block px-2 mb-2">
                                     <a class="btn btn-sm text-truncate rounded-pill w-100 border-success text-success" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
@@ -60,9 +60,19 @@
                                     <hr class="bg-info">
                                 </div>
 
-                                {{-- tracking --}}
+                                {{-- action --}}
+                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("REQUIRED ACTION") }}</span>
+                                <div class="d-flex flex-row justify-content-around mb-2 px-2">
+                                    <button class="btn btn-sm btn-primary" type="button" style="width: 45%;">{{ __("accept") }}</button>
+                                    <button class="btn btn-sm btn-danger" type="button" style="width: 45%;">{{ __("decline") }}</button>
+                                </div>
 
-                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">TRACKING</span>
+                                <div class="d-block px-2">
+                                    <hr class="bg-info">
+                                </div>
+
+                                {{-- tracking --}}
+                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("TRACKING") }}</span>
                                 <div class="container-fluid mb-2">
                                     <div class="row flex-nowrap">
                                         <div class="col-1">

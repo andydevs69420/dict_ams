@@ -8,7 +8,7 @@
             {{ $lastname . ", " . $firstname . " " . $middleinitial }}
         </a>
     </div>
-    <span class="d-block bg-primary text-white small rounded-3 shadow-sm" style="width: calc(100% - 35px); margin-left: 35px; font-size:.8em; white-space: pre-wrap; text-align: left;" role="text">
+    <span class="d-block bg-primary text-white small rounded-3 shadow-sm p-3" style="width: calc(100% - 35px); margin-left: 35px; font-size:.8em; text-align: justify; white-space: pre-wrap;" role="text">
         {{ $comment }}
     </span>
     <span class="d-inline small float-end" style="font-size:.5em;" role="text">{{ $created_at }}</span>
