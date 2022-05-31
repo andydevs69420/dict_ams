@@ -30,6 +30,7 @@
                                     <th class="text-left" scope="col">{{ __("Pr number") }}</th>
                                     <th class="text-left" scope="col">{{ __("Sai number") }}</th>
                                     <th class="text-left" scope="col">{{ __("Purpose") }}</th>
+                                    <th class="text-left" scope="col">{{ __("Status") }}</th>
                                     <th class="text-left" scope="col">{{ __("Actions") }}</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,7 @@
                                         <td style="vertical-align: middle !important;">{{ $form->prnumber }}</td>
                                         <td style="vertical-align: middle !important;">{{ $form->sainumber }}</td>
                                         <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
+                                        <td style="vertical-align: middle !important;">{{ $form->personelstatus }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary shadow" href="{{ url("/budgetofficer/editpurchaserequest/" . \Illuminate\Support\Facades\Crypt::encrypt($form->form_id) . "/review") }}">{{ __("View") }}</a>
                                         </td>

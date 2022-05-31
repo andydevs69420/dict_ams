@@ -176,6 +176,51 @@ class FormRequiredPersonel extends Model
     }
 
 
+    public static function isFormHasStatusFor(Int $formid, Int $statusid, Array $accesslevels)
+    {
+        return self::select(
+            "form_required_personel.*",
+            "form.*",
+            "uvd.*",
+            "personel_status.*"
+        )
+        ->join(
+            "form", "form_required_personel.form_id", "=", "form.form_id"
+        )
+        ->join(
+            DB::raw("
+                (
+                    SELECT 
+                        user_verification_details.userverificationdetails_id,
+                        user_verification_details.verificationstatus_id,
+                        user.*
+                    FROM
+                        user_verification_details 
+                        INNER JOIN user ON user_verification_details.user_id = user.user_id
+                ) AS uvd
+            "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
+        )
+        ->join(
+            "personel_status", "form_required_personel.personelstatus_id", "=", "personel_status.personelstatus_id"
+        )
+        ->where("form.form_id", "=", $formid)
+        ->where("personel_status.personelstatus_id", "=", $statusid)
+        ->whereIn("uvd.accesslevel_id", $accesslevels)
+        ->exists();
+    }
+
+    /**
+     * Check's if budget officer has required action
+     * @param Int $formid form's id
+     * @return bool
+     **/
+    public static function isFormHasActionForBO(Int $formid)
+    {
+        return (
+            self::isFormHasStatusFor($formid, 1, [4, 5, 13]) && 
+            self::isFormHasStatusFor($formid, 2, [11])
+        );
+    }
 
 
 }
