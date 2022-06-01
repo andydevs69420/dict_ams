@@ -14,29 +14,7 @@
 @section("content")
     <div class="d-block py-3">
 
-        @if(Session::has("info"))
-            {{-- on success modal --}}
-            <div class="modal fade" tabindex="-1" aria-hidden="true" style="padding-right: 0 !important;">
-                <div class="modal-dialog border-0">
-                    <div class="modal-content border-0">
-                        <div class="modal-header border-0">
-                            <h5 class="modal-title">Success</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <span class="h5" role="text" style="font-weight: 300;">
-                                {{ session("info") }}
-                            </span>
-                        </div>
-                        <div class="modal-footer border-0">
-                            <div class="mx-auto w-25 shadow">
-                                <button type="button" class="btn w-100 btn-primary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
+        <x-message-modal id="user__user-info-modal"></x-message-modal>
 
         <div class="container">
             <div class="row justify-content-center">
@@ -44,8 +22,8 @@
                     <div class="card border-0 bg-white shadow-lg">
                         <div class="d-block p-3 overflow-hidden position-relative">
 
-                            {{-- add delete profile --}}
-                            @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
+                            {{-- add delete profile if self --}}
+                            @if(strcmp($user->user_id, Auth::user()->user_id) === 0)
                                 <div class="dropdown dropdown-end position-absolute" style="top: 10px; left:10px;">
                                     <button id="user-profile__image-option" class="btn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-v text-muted"></i>
@@ -74,8 +52,8 @@
 
                             <div class="user-profile__avatar-wrapper d-block position-relative mx-auto bg-white shadow">
                                 
-                                {{-- add enable edit if self profile --}}
-                                @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
+                                {{-- add enable edit if self --}}
+                                @if(strcmp($user->user_id, Auth::user()->user_id) === 0)
                                     <div class="d-block position-absolute rounded-circle shadow" style="right: 0;bottom: 15%;transform: translateY(-15%);z-index: 3;">
                                         
                                         <form id="user-profile__image-upload" action="{{ url("/user/uploadprofilepicture") }}" method="POST" enctype="multipart/form-data">
@@ -113,8 +91,8 @@
                                     <span class="text-muted text-truncate" role="text">{{ App\Models\Accesslevel::getAccesslevelById($user->accesslevel_id) }}</span>
                                 </li>
 
-                                {{-- add logout if self profile --}}
-                                @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
+                                {{-- add logout if self --}}
+                                @if(strcmp($user->user_id, Auth::user()->user_id) === 0)
                                     <li class="list-group-item">
                                         <div class="shadow">
                                             <a class="btn btn-success w-100" href="{{ url("/logout") }}">
@@ -134,7 +112,7 @@
                     <div class="card mt-4 mt-lg-0 border-0 bg-white shadow-lg">
 
                         {{-- add edit account if self profile --}}
-                        @if(strcmp($user->user_id,Auth::user()->user_id) === 0)
+                        @if(strcmp($user->user_id, Auth::user()->user_id) === 0)
                             <div class="card-header py-3 border-0 bg-white">
                                 <div class="input-group mb-2">
                                     <input id="user-profile__enable-edit" class="form-check-input rounded-1" type="checkbox" name="enable" value="off" @if($errors->all()) checked @endif>
@@ -312,11 +290,14 @@
 
 @section("javascript")
 
-    {{-- javascript js --}}
+    {{-- MESSAGE MODAL js --}}
+    <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
+
+    {{-- USER PROFILE js --}}
     <script type="text/javascript" src="{{ asset("js/users/user-profile.js") }}"></script>
 
     @if($errors->any())
-        <script defer>
+        <script type="text/javascript">
             jQuery(() => {
                 window.updateFormState("on");
             })
@@ -324,9 +305,9 @@
     @endif
 
     @if (Session::has("info"))
-        <script>
+        <script type="text/javascript">
             jQuery(() => {
-                $(".modal").modal("show");
+                new MessageModal("#user__user-info-modal").show("Info", "{{ session("info") }}");
             });
         </script> 
     @endif

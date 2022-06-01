@@ -204,15 +204,8 @@ function generate__pr_form()
                 message = `<small class="text-danger">${row.attr("placeholder")} is required.</small>`;
                 haystack.push($(message));
 
-                // if item description, move to next parent
-                if (j === 2)
-                {
-                    if ($(rootparent.parent()).children().length <= 1)
-                        $(rootparent.parent()).append(haystack[haystack.length - 1]);
-                }
-                else
-                    if (rootparent.children().length <= 1)
-                        rootparent.append(haystack[haystack.length - 1]);
+                if (rootparent.children().length <= 1)
+                    rootparent.append(haystack[haystack.length - 1]);
             }
 
             item_N.push(row.val());

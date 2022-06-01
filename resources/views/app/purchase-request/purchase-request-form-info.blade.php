@@ -67,12 +67,12 @@
 
                                 @if(\App\Models\FormRequiredPersonel::isFormHasActionForBO($form_id))
 
-                                    {{-- action --}}
+                                    {{-- optional action --}}
                                     <div class="d-block">
                                         <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("OPTIONAL ACTION") }}</span>
                                         <div class="d-block">
                                             <div class="d-flex flex-row justify-content-center mb-2 px-2">
-                                                <input type="file" class="form-control form-control-sm mb-2 border-info shadow" style="width: 95%;">
+                                                <input type="file" class="form-control form-control-sm mb-2 shadow" style="width: 95%;">
                                             </div>
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
                                                 <button class="btn btn-sm btn-primary shadow" type="button" style="width: 45%;">{{ __("UPDATE") }}</button>
