@@ -36,9 +36,11 @@
             </div>
         </div>
 
-        <form action="POST" enctype="multipart/form-data">
+        <form action="{{ url("/purchaserequest/updateprform") }}" method="POST" enctype="multipart/form-data">
 
             @csrf
+
+            <input type="hidden" name="formid" value="{{ \Illuminate\Support\Facades\Crypt::encrypt($form_id) }}">
 
             <div class="container">
                 <div class="row">
@@ -65,17 +67,17 @@
                                     <hr class="bg-info">
                                 </div>
 
-                                @if(\App\Models\FormRequiredPersonel::isFormHasActionForBO($form_id))
+                                @if(\App\Models\FormRequiredPersonel::isFormHasActionForRequisitioner($form_id))
 
                                     {{-- optional action --}}
                                     <div class="d-block">
                                         <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("OPTIONAL ACTION") }}</span>
                                         <div class="d-block">
                                             <div class="d-flex flex-row justify-content-center mb-2 px-2">
-                                                <input type="file" class="form-control form-control-sm mb-2 shadow" style="width: 95%;">
+                                                <input type="file" name="file-upload" class="form-control form-control-sm mb-2 shadow" style="width: 95%;">
                                             </div>
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
-                                                <button class="btn btn-sm btn-primary shadow" type="button" style="width: 45%;">{{ __("UPDATE") }}</button>
+                                                <button class="btn btn-sm btn-primary shadow" type="submit" style="width: 45%;">{{ __("UPDATE") }}</button>
                                                 <button class="btn btn-sm btn-danger shadow" type="button" style="width: 45%;">{{ __("CANCEL") }}</button>
                                             </div>
                                         </div>
@@ -190,6 +192,14 @@
 
     {{-- PURCHASE REQUEST FORM INFO --}}
     <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
+
+    @if(Session::has("info"))
+        <script>
+            jQuery(function() {
+                new MessageModal("#purchase-request-form-info__message-modal").show("Info", "{{ session("info") }}");
+            });
+        </script>
+    @endif
 
 @stop
 

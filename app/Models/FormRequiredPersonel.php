@@ -210,6 +210,19 @@ class FormRequiredPersonel extends Model
     }
 
     /**
+     * Check's if requisitioner has required action
+     * @param Int $formid form's id
+     * @return bool
+     **/
+    public static function isFormHasActionForRequisitioner(Int $formid)
+    {
+        return (
+            self::isFormHasStatusFor($formid, 1, [4, 5, 13]) && 
+            self::isFormHasStatusFor($formid, 2, [11])
+        );
+    }
+
+    /**
      * Check's if budget officer has required action
      * @param Int $formid form's id
      * @return bool

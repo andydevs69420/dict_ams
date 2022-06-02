@@ -219,7 +219,8 @@ class CTRLR_2_ReqisitionerController extends Controller
                  * @param Request $request request
                  * @return View
                  **/
-                function uploadPRForm(Request $request) {
+                function uploadPRForm(Request $request) 
+                {
 
                     #============================
                     # Redirect to login if not  =
@@ -276,29 +277,29 @@ class CTRLR_2_ReqisitionerController extends Controller
                     #=================================
                     # step 1 insert form             =
                     #=================================
-                    $step2_data = [];
-                    $step2_data[ "formtype_id"             ] = 1; # PR := 1
-                    $step2_data[ "createdat"               ] = Carbon::now();
-                    $step2_data[ "prnumber"                ] = "";
-                    $step2_data[ "sainumber"               ] = "";
-                    $step2_data[ "purpose"                 ] = $purpose;
-                    $step2_data[ "fileembedded"            ] = $filepath;
-                    $form_id = Form::create($step2_data)->id;
+                    $step1_data = [];
+                    $step1_data[ "formtype_id"             ] = 1; # PR := 1
+                    $step1_data[ "createdat"               ] = Carbon::now();
+                    $step1_data[ "prnumber"                ] = "";
+                    $step1_data[ "sainumber"               ] = "";
+                    $step1_data[ "purpose"                 ] = $purpose;
+                    $step1_data[ "fileembedded"            ] = $filepath;
+                    $form_id = Form::create($step1_data)->id;
                     
                     #=================================
                     # step 2 insert items to pr form =
                     #=================================
                     for ($idx = 0; $idx < $num_of_rows; $idx++)
                     {
-                        $step3_data = [];
-                        $step3_data[ "form_id"   ] = $form_id;
-                        $step3_data[ "stockno"   ] = $stck_col[$idx];
-                        $step3_data[ "unit"      ] = $unit_col[$idx];
-                        $step3_data[ "item"      ] = $desc_col[$idx];
-                        $step3_data[ "quantity"  ] = $qnty_col[$idx];
-                        $step3_data[ "unitcost"  ] = $unitc_cost_col[$idx];
-                        $step3_data[ "totalcost" ] = $total_cost_col[$idx];
-                        PrItem::create($step3_data);
+                        $step2_data = [];
+                        $step2_data[ "form_id"   ] = $form_id;
+                        $step2_data[ "stockno"   ] = $stck_col[$idx];
+                        $step2_data[ "unit"      ] = $unit_col[$idx];
+                        $step2_data[ "item"      ] = $desc_col[$idx];
+                        $step2_data[ "quantity"  ] = $qnty_col[$idx];
+                        $step2_data[ "unitcost"  ] = $unitc_cost_col[$idx];
+                        $step2_data[ "totalcost" ] = $total_cost_col[$idx];
+                        PrItem::create($step2_data);
                     }
 
                     #=================================
@@ -325,6 +326,136 @@ class CTRLR_2_ReqisitionerController extends Controller
                         "personelstatus_id"          => 2,
                         "updatedat"                  => null
                     ]);
+
+                    return redirect()->to("/purchaserequest/viewprforminfo/" . Crypt::encrypt($form_id) . "/view");
+                }
+
+                /**
+                 * Update pr form
+                 * uses: "POST" request
+                 * @param Request $request request
+                 * @return View
+                 **/
+                function updatePRForm(Request $request) 
+                {
+
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if  (!Auth::check())
+                        return redirect()->to("/login");
+                    
+                    #============================
+                    # Only requisitioner can    =
+                    # upload pr form.           =
+                    #============================
+                    if (!Auth::user()->isRequisitioner())
+                        return redirect()->to("/dashboard");
+
+                    #============================
+                    # Go back to page if        =
+                    # any field has null value. =
+                    #============================
+                    if (hasNull($request, ["formid", "stock", "unit", "description", "qty", "unitcost", "totalcost", "purpose" , "requester" , "budget-officer", "recommending-approval", "file-upload"]) || !request("file-upload")->isValid())
+                        return back()->with(["info" => "Missing required parameter(s)."]);
+
+                    $form_id = $request->input("formid");
+                    try
+                    {
+                        $form_id = (Int) Crypt::decrypt($form_id);
+                    }
+                    catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+                    {
+                        return redirect()->to("/dashboard");
+                    }
+                    
+                    #=======================
+                    # Item fields          =
+                    #=======================
+                    $num_of_rows    = count($request->input("stock"));
+                    $stck_col       = $request->input("stock");
+                    $unit_col       = $request->input("unit");
+                    $desc_col       = $request->input("description");
+                    $qnty_col       = $request->input("qty");
+                    $unitc_cost_col = $request->input("unitcost");
+                    $total_cost_col = $request->input("totalcost");
+
+
+                    #=======================
+                    # Other fields         =
+                    #=======================
+                    $purpose = $request->input("purpose");
+                    $rQ_id   = $request->input("requester");
+                    $bO_id   = $request->input("budget-officer");
+                    $rA_id   = $request->input("recommending-approval");
+                    $file    = $request->file("file-upload");
+
+
+                    #============================================
+                    # Store file first to prevent errors.       =
+                    #============================================
+                    $filename = Carbon::now()->toDateString().".".$file->getClientOriginalExtension();
+                    $truepath = "storage/form-files/".$filename;
+                    $filepath = $file->storeAs("public/form-files", $filename);
+                    if (!$filepath)
+                        return back()->with(["info" => "Something went wrong while uploading file!"]);
+
+                    #=================================
+                    # step 1 update form             =
+                    #=================================
+                    $step1_data = [];
+                    $step1_data[ "formtype_id"             ] = 1; # PR := 1
+                    $step1_data[ "createdat"               ] = Carbon::now();
+                    $step1_data[ "prnumber"                ] = "";
+                    $step1_data[ "sainumber"               ] = "";
+                    $step1_data[ "purpose"                 ] = $purpose;
+                    $step1_data[ "fileembedded"            ] = $filepath;
+                    $res = Form::where("form_id", "=", $form_id)
+                    ->update($step1_data);
+                    error_log(json_encode($step1_data));
+                    if (!$res)
+                        return back()->with(["info" => "Something went wrong while updating form!" ]);
+                    
+                    #==================================
+                    # step 2 update items in pr form. =
+                    #==================================
+                    $prids = PrItem::select("pritem_id")
+                    ->where("form_id", "=", $form_id)
+                    ->orderBy("pritem_id", "asc")
+                    ->get();
+
+                    $idx = 0;
+                    foreach($prids as $pritemid)
+                    {
+                        $step2_data = [];
+                        $step2_data[ "form_id"   ] = $form_id;
+                        $step2_data[ "stockno"   ] = $stck_col[$idx];
+                        $step2_data[ "unit"      ] = $unit_col[$idx];
+                        $step2_data[ "item"      ] = $desc_col[$idx];
+                        $step2_data[ "quantity"  ] = $qnty_col[$idx];
+                        $step2_data[ "unitcost"  ] = $unitc_cost_col[$idx];
+                        $step2_data[ "totalcost" ] = $total_cost_col[$idx];
+                        $res = PrItem::where("pritem_id", "=", $pritemid->pritem_id)
+                        ->where("form_id", "=", $form_id)
+                        ->update($step2_data);
+
+                        $idx++;
+
+                        if (!$res)
+                            return back()->with(["info" => "Something went wrong while updating pr items! at " . $idx]);
+                    }
+
+                    #===================================
+                    # step 3 update required personel. =
+                    #===================================
+                    // requisitioner
+                    $res = FormRequiredPersonel::where("form_id", "=", $form_id)
+                    ->where("userverificationdetails_id", "=", $rQ_id)
+                    ->update([ "updatedat" => Carbon::now() ]);
+
+                    if (!$res)
+                        return back()->with(["info" => "Something went wrong while updating form personel details!"]);
 
                     return redirect()->to("/purchaserequest/viewprforminfo/" . Crypt::encrypt($form_id) . "/view");
                 }
@@ -481,9 +612,13 @@ class CTRLR_2_ReqisitionerController extends Controller
                     # redirect to dashboard.      =
                     #==============================
                     try 
-                    { $form_id = (Int) Crypt::decrypt($form_id); } 
+                    { 
+                        $form_id = (Int) Crypt::decrypt($form_id); 
+                    } 
                     catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-                    { return redirect()->to("/dashboard"); }
+                    { 
+                        return redirect()->to("/dashboard"); 
+                    }
 
                     $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
 

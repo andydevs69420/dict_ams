@@ -65,6 +65,8 @@ Route::controller(CTRLR_2_ReqisitionerController::class)->group(function () {
             Route::post("/purchaserequest/addcomment", "addPrFormInfoComment");
         // upload pr form
             Route::post("/purchaserequest/uploadprform", "uploadPRForm");
+        // update pr form
+            Route::post("/purchaserequest/updateprform", "updatePRForm");
         // view pr form
             Route::get("/purchaserequest/viewprform", "viewPRForm");
         

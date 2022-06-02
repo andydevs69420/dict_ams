@@ -63,9 +63,13 @@ class CTRLR_7_UserController extends Controller
                     #=================================================
                     $decrypt = null;
                     try
-                    { $decrypt = (int) Crypt::decrypt($userid); }
+                    { 
+                        $decrypt = (int) Crypt::decrypt($userid); 
+                    }
                     catch (\Illuminate\Contracts\Encryption\DecryptException $e)
-                    { return redirect()->to("/dashboard"); }
+                    { 
+                        return redirect()->to("/dashboard"); 
+                    }
 
                     #=====================================
                     # Check if user is already verified. =
