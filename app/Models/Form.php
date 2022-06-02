@@ -9,6 +9,7 @@ class Form extends Model
 {
     use HasFactory;
     protected $table = "form";
+    protected $primaryKey = "form_id";
 
 
     public $timestamps = false;
@@ -19,7 +20,6 @@ class Form extends Model
         "prnumber",
         "sainumber",
         "purpose",
-        "formrequiredpersonel_id",
         "fileembedded",
     ];
 

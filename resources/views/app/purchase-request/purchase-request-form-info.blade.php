@@ -71,14 +71,10 @@
 
                                     {{-- optional action --}}
                                     <div class="d-block">
-                                        <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("OPTIONAL ACTION") }}</span>
+                                        <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("FORM ACTION") }}</span>
                                         <div class="d-block">
-                                            <div class="d-flex flex-row justify-content-center mb-2 px-2">
-                                                <input type="file" name="file-upload" class="form-control form-control-sm mb-2 shadow" style="width: 95%;">
-                                            </div>
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
-                                                <button class="btn btn-sm btn-primary shadow" type="submit" style="width: 45%;">{{ __("UPDATE") }}</button>
-                                                <button class="btn btn-sm btn-danger shadow" type="button" style="width: 45%;">{{ __("CANCEL") }}</button>
+                                                <button class="btn btn-sm btn-danger shadow" type="submit" style="width: 95%;">{{ __("CANCEL") }}</button>
                                             </div>
                                         </div>
                                         <div class="d-block px-2">
@@ -87,6 +83,34 @@
                                     </div>
 
                                 @endif
+
+                                {{-- status --}}
+                                <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
+                                    {{ __("FORM STATUS") }}
+
+                                    @switch($personelstatus_id)
+                                        @case(1)
+                                            <span class="badge bg-success rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                        @case(2)
+                                            <span class="badge bg-warning rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                        @default
+                                            <span class="badge bg-danger rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                    @endswitch
+
+                                </span>
+
+                                <div class="d-block px-2">
+                                    <hr class="bg-info">
+                                </div>
 
                                 {{-- tracking --}}
                                 <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("TRACKING") }}</span>

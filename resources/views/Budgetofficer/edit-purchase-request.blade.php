@@ -81,6 +81,34 @@
 
                             @endif
 
+                            {{-- status --}}
+                            <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
+                                {{ __("FORM STATUS") }}
+
+                                @switch($personelstatus_id)
+                                    @case(1)
+                                        <span class="badge bg-success rounded-pill float-end" role="text">
+                                            {{ $personelstatus }}
+                                        </span>
+                                        @break
+                                    @case(2)
+                                        <span class="badge bg-warning rounded-pill float-end" role="text">
+                                            {{ $personelstatus }}
+                                        </span>
+                                        @break
+                                    @default
+                                        <span class="badge bg-danger rounded-pill float-end" role="text">
+                                            {{ $personelstatus }}
+                                        </span>
+                                        @break
+                                @endswitch
+
+                            </span>
+
+                            <div class="d-block px-2">
+                                <hr class="bg-info">
+                            </div>
+
                             {{-- tracking --}}
                             <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("TRACKING") }}</span>
                             <div class="container-fluid mb-2">
