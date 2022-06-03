@@ -57,6 +57,8 @@ class BOController extends Controller
         $data["rQ_data"] = $frp[0]->toArray();
         $data["bO_data"] = $frp[1]->toArray();
         $data["rA_data"] = $frp[2]->toArray();
+
+        // return response("FOOC");
         
         return view("Budgetofficer.edit-purchase-request", $data);
     }

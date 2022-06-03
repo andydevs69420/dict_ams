@@ -74,7 +74,7 @@
                                         <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("FORM ACTION") }}</span>
                                         <div class="d-block">
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
-                                                <button class="btn btn-sm btn-danger shadow" type="submit" style="width: 95%;">{{ __("CANCEL") }}</button>
+                                                <button class="btn btn-sm btn-danger text-white shadow" type="submit" style="width: 95%;">{{ __("CANCEL") }}</button>
                                             </div>
                                         </div>
                                         <div class="d-block px-2">
@@ -202,10 +202,13 @@
 
 @section("javascript")
 
+    {{-- OBSERVER --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
+
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
-    {{-- message modal js --}}
+    {{-- MESSAGE MODAL js --}}
     <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
     {{-- PROGRESS BAR js --}}

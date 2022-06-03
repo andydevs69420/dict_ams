@@ -102,6 +102,9 @@
 
 @section('javascript')
 
+    {{-- OBSERVER --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
+
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
