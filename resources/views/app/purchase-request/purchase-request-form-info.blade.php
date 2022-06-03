@@ -90,12 +90,20 @@
 
                                     @switch($personelstatus_id)
                                         @case(1)
+                                            {{-- signitured --}}
                                             <span class="badge bg-success rounded-pill float-end" role="text">
                                                 {{ $personelstatus }}
                                             </span>
                                             @break
                                         @case(2)
+                                            {{-- unsignitured --}}
                                             <span class="badge bg-warning rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                        @case(3)
+                                            {{-- canceled --}}
+                                            <span class="badge bg-secondary rounded-pill float-end" role="text">
                                                 {{ $personelstatus }}
                                             </span>
                                             @break

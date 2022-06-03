@@ -58,8 +58,60 @@
                                     <hr class="bg-info">
                                 </div>
 
-                                {{-- tracking --}}
+                                @if(\App\Models\FormRequiredPersonel::isFormHasActionForRequisitioner($form_id))
 
+                                    {{-- optional action --}}
+                                    <div class="d-block">
+                                        <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("FORM ACTION") }}</span>
+                                        <div class="d-block">
+                                            <div class="d-flex flex-row justify-content-around mb-2 px-2">
+                                                <button class="btn btn-sm btn-danger text-white shadow" type="submit" style="width: 95%;">{{ __("CANCEL") }}</button>
+                                            </div>
+                                        </div>
+                                        <div class="d-block px-2">
+                                            <hr class="bg-info">
+                                        </div>
+                                    </div>
+
+                                @endif
+
+                                {{-- status --}}
+                                <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
+                                    {{ __("FORM STATUS") }}
+
+                                    @switch($personelstatus_id)
+                                        @case(1)
+                                            {{-- signitured --}}
+                                            <span class="badge bg-success rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                        @case(2)
+                                            {{-- unsignitured --}}
+                                            <span class="badge bg-warning rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                        @case(3)
+                                            {{-- canceled --}}
+                                            <span class="badge bg-secondary rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                        @default
+                                            <span class="badge bg-danger rounded-pill float-end" role="text">
+                                                {{ $personelstatus }}
+                                            </span>
+                                            @break
+                                    @endswitch
+
+                                </span>
+
+                                <div class="d-block px-2">
+                                    <hr class="bg-info">
+                                </div>
+
+                                {{-- tracking --}}
                                 <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">TRACKING</span>
                                 <div class="container-fluid mb-2">
                                     <div class="row flex-nowrap">

@@ -28,6 +28,14 @@ return new class extends Migration
             "personelstatus" => "unsignitured",
         ]);
 
+        PersonelStatus::create([
+            "personelstatus" => "canceled",
+        ]);
+
+        PersonelStatus::create([
+            "personelstatus" => "declined",
+        ]);
+
     }
 
     /**
