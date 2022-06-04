@@ -138,7 +138,7 @@ class UserVerificationDetails extends Model
         ->join(
             "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
         )
-        ->whereIn("user.accesslevel_id", ["4", "5", "13"])
+        ->whereIn("user.accesslevel_id", config("global.VALID_REQUISITIONER"))
         ->orderBy("user_verification_details.verificationstatus_id", "desc")
         ->get();
     }
@@ -161,7 +161,7 @@ class UserVerificationDetails extends Model
         ->join(
             "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
         )
-        ->where("user.accesslevel_id", "=", "11")
+        ->where("user.accesslevel_id", "=", config("global.BUDGET_OFFICER"))
         ->where("verification_status.verificationstatus_id", "=", "2")
         ->get();
     }
@@ -169,12 +169,12 @@ class UserVerificationDetails extends Model
 
 
     /**
-     * Gets all user (verified) which is also a budget officer
+     * Gets all user (verified) which is also a canvasser
      * @return Array
      * @example
      *     accesslevel table
-     *          11 := BUDGET OFFICER
-     *     UserVerificationDetails::getAllBudgetOfficer();
+     *          9 := Canvasser
+     *     UserVerificationDetails::getAllCanvasser();
      * 
      **/ 
     public static function getAllCanvasser()
@@ -185,7 +185,7 @@ class UserVerificationDetails extends Model
         ->join(
             "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
         )
-        ->where("user.accesslevel_id", "=", "9")
+        ->where("user.accesslevel_id", "=", config("global.VALID_CANVASSER"))
         ->where("verification_status.verificationstatus_id", "=", "2")
         ->get();
     }
@@ -210,7 +210,7 @@ class UserVerificationDetails extends Model
         ->join(
             "verification_status", "user_verification_details.verificationstatus_id", "=", "verification_status.verificationstatus_id"
         )
-        ->where("user.accesslevel_id", "=", ($userAccesslevelId === 13)? "4" : "12")
+        ->where("user.accesslevel_id", "=", ($userAccesslevelId === config("global.STAFF"))? config("global.PROVINCIAL_OFFICER") : config("global.CHIEF_TOD"))
         ->where("verification_status.verificationstatus_id", "=", "2")
         ->get();
     }

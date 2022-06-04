@@ -217,8 +217,8 @@ class FormRequiredPersonel extends Model
     public static function isFormHasActionForRequisitioner(Int $formid)
     {
         return (
-            self::isFormHasStatusFor($formid, 1, [4, 5, 13]) && 
-            self::isFormHasStatusFor($formid, 2, [11])
+            self::isFormHasStatusFor($formid, 1, config("global.VALID_REQUISITIONER")) && 
+            self::isFormHasStatusFor($formid, 2, [ config("global.BUDGET_OFFICER") ])
         );
     }
 
@@ -230,10 +230,27 @@ class FormRequiredPersonel extends Model
     public static function isFormHasActionForBO(Int $formid)
     {
         return (
-            self::isFormHasStatusFor($formid, 1, [4, 5, 13]) && 
-            self::isFormHasStatusFor($formid, 2, [11])
+            self::isFormHasStatusFor($formid, 1, config("global.VALID_REQUISITIONER")) && 
+            self::isFormHasStatusFor($formid, 2, [ config("global.BUDGET_OFFICER") ])
         );
     }
 
+    /**
+     * Check's if recommending apporoval has required action
+     * @param Int $formid form's id
+     * @return bool
+     **/
+    public static function isFormHasActionForRA(Int $formid)
+    {
+        return (
+            self::isFormHasStatusFor($formid, 1, config("global.VALID_VALID_BUDGET_OFFICER")) &&
+            self::isFormHasStatusFor($formid, 2, [ config("global.BUDGET_OFFICER") ])
+        );
+    }
+
+    public static function updatePersonelStatus(Int $status)
+    {
+
+    }
 
 }

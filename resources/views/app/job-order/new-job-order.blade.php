@@ -102,7 +102,7 @@
 
 @section('javascript')
 
-    {{-- OBSERVER --}}
+    {{-- observer --}}
     <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
 
     {{-- bootstrap-select js --}}

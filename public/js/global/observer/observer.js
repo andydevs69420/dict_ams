@@ -1,4 +1,11 @@
+/*
 
+    observer.js andydevs69420
+    | June 3 2022
+    | Observes attribute mutation and revert to initial value.
+    ;
+
+*/
 
 (function() {
 
@@ -58,6 +65,5 @@
 
         attachEvent();
     }
-
 
 })();

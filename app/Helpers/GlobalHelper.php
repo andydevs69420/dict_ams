@@ -15,7 +15,6 @@
 
     use App\Models\User;
 
-
     /**
      * Formats lastname
      * @param  $arr user info

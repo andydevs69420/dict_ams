@@ -73,6 +73,11 @@ class CTRLR_2_ReqisitionerController extends Controller
                     return view("app.purchase-request.purchase-request-list");
                 }
 
+                /**
+                 * View pr form.
+                 * @param String $prformid pr form id
+                 * @return View
+                 **/ 
                 function viewPRFormInfo(String $prformid)
                 {
                     #============================
@@ -119,6 +124,57 @@ class CTRLR_2_ReqisitionerController extends Controller
                     $data["rA_data"] = $frp[2]->toArray();
 
                     return response(view("app.purchase-request.purchase-request-form-info", $data));
+                }
+
+                /**
+                 * Cancel pr form.
+                 * @param String $prformid pr form id
+                 * @return View
+                 **/ 
+                public function cancelPRForm(String $prformid)
+                {
+                    #============================
+                    # Redirect to login if not  =
+                    # login or expired.         =
+                    #============================
+                    if (!Auth::check())
+                        return redirect()->to("/login");
+
+                    #==============================
+                    # Only requisitioner can view =
+                    # pr form.                    =
+                    #==============================
+                    if (!Auth::user()->isRequisitioner())
+                        return redirect()->to("/dashboard");
+                    
+                    $form_id = $prformid;
+
+                    #==============================
+                    # Decypt form id. If invalid, =
+                    # redirect to dashboard.      =
+                    #==============================
+                    try 
+                    { 
+                        $form_id = (Int) Crypt::decrypt($form_id);
+                    } 
+                    catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+                    { 
+                        return redirect()->to("/dashboard"); 
+                    }
+
+                    #==================================
+                    # If form is already canceled     =
+                    # or BO has taken his/her action  =
+                    # for the form, MARK as NO ACTION =
+                    # REQUIRED.                       =
+                    #==================================
+                    if (!FormRequiredPersonel::isFormHasActionForRequisitioner($form_id))
+                        return back()->with(["info" => "Form has no required action!"]);
+                    
+                    
+
+                    return back()->with(["info" => "Form was canceled!"]);
+
                 }
                 // pr subroutine ----->
 

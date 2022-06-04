@@ -42,20 +42,20 @@ class User extends Authenticatable
      * @return bool
      **/
     public static function isRequisitioner()
-    { return in_array(Auth::user()->accesslevel_id, [4, 5, 13]); }
+    { return in_array(Auth::user()->accesslevel_id, config("global.VALID_REQUISITIONER")); }
 
     /**
      * Checks if user is budget officer
      * @return bool
      **/
     public static function isBudgetOfficer()
-    { return in_array(Auth::user()->accesslevel_id, [11]); }
+    { return in_array(Auth::user()->accesslevel_id, [ config("global.BUDGET_OFFICER") ]); }
 
     /**
      * Checks if user is admin
      * @return bool
      **/
     public static function isAdmin()
-    { return in_array(Auth::user()->accesslevel_id, [14]); }
+    { return in_array(Auth::user()->accesslevel_id, [ config("global.ADMIN") ]); }
 
 }

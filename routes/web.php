@@ -59,6 +59,8 @@ Route::controller(CTRLR_2_ReqisitionerController::class)->group(function () {
             Route::get("/purchaserequest/viewprlist", "viewPRFormList");
         // view uploaded form
             Route::get("/purchaserequest/viewprforminfo/{prform}/view", "viewPRFormInfo");
+        // cancel uploaded form
+            Route::post("/purchaserequest/viewprforminfo/{prform}/cancel", "cancelPRForm");
             // load comments
             Route::get("/purchaserequest/loadcomment", "loadPrFormInfoComment");
             // upload comment
@@ -95,10 +97,10 @@ Route::get("/budgetofficer/editpurchaserequest/{prform}/review",[BOController::c
 Route::get("/budgetofficer/joborderstatus",[BOController::class,"JoIndex"]);
 Route::get("/budgetofficer/editjoborder/{joform}/review",[BOController::class,"Joedit"]);
 
-//BAC chairman
+// BAC chairman
 Route::get("/BACpricequotation",[BACController::class,"BACIndex"]);
 
-//Canvasser
+// Canvasser
 Route::get("/CanVpricequotation",[BACController::class,"CanvIndex"]);
 
 

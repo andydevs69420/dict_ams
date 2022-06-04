@@ -61,6 +61,9 @@
 
 @section("javascript")
 
+    {{-- observer --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
+
     {{-- LOGIN js --}}
     <script type="text/javascript" src="{{ asset("js/login/login.js") }}"></script>
 
