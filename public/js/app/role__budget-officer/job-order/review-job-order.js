@@ -1,12 +1,12 @@
 
-
 (function(root) {
 
     $.ajaxSetup({
         headers: { "X-CSRF-TOKEN" : $("meta[name=\"csrf-token\"]").attr("content") }
     });
 
-    jQuery(function() {
+    jQuery(() => {
+        root.messageModal = new MessageModal("#purchase-request-form-info__message-modal");
         loadComments();
         addComment();
     });
@@ -16,10 +16,10 @@
      **/
     function loadComments()
     {
-        let ID = "#job-order-form-info__comment-list";
+        let ID = "#purchase-request-form-info__comment-list";
         setInterval(() => {
             element = $(ID);
-            element.load(`/joborder/loadcomment?hash=${element.data("fid")}`);
+            element.load(`/requisitioner/purchaserequest/loadcomment/${element.data("fid")}/load`);
         }, 2000); 
     }
 
@@ -28,29 +28,30 @@
      **/
     function addComment()
     {
-        let ID = "#job-order-form-info__comment-button";
+        let ID = "#purchase-request-form-info__comment-button";
         $(ID)
         .click(() => {
 
-            if ($("#job-order-form-info__comment-field").val().toString().trim().length <= 0)
-                return $("#job-order-form-info__comment-field").val("");
+            if ($("#purchase-request-form-info__comment-field").val().toString().trim().length <= 0)
+                return $("#purchase-request-form-info__comment-field").val("");
 
             $.ajax({
-                url  : "/joborder/addcomment",
+                url  : "/requisitioner/purchaserequest/addcomment",
                 type : "POST",
-                data : { frp : $(ID).data("frp"), comment : $("#job-order-form-info__comment-field").val() },
+                data : { frp : $(ID).data("frp"), comment : $("#purchase-request-form-info__comment-field").val() },
                 dataType : "json",
                 success  : function(response, status, request)
                 {
                     if  (!(status === "success" && (response  == true)))
                         return root.messageModal?.show("Error", "An error has been encountered while inserting comment.");
                     
-                    $("#job-order-form-info__comment-field").val("");
+                    $("#purchase-request-form-info__comment-field").val("");
                 },
                 error : function(response, status, request)
                 { console.log(response.responseText); }
             });
         });
     }
+
 })(window);
 

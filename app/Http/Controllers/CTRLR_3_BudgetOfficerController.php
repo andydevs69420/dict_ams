@@ -10,8 +10,10 @@ use App\Models\PrItem;
 use App\Models\JoItem;
 use App\Models\FormRequiredPersonel;
 
-class BOController extends Controller
+class CTRLR_3_BudgetOfficerController extends Controller
 {
+    // =============================== PURCHASE REQUEST ========================
+
     public function PrIndex() {
 
         if (!Auth::check())
@@ -20,11 +22,11 @@ class BOController extends Controller
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
 
-        return view("Budgetofficer.budget-officer-purchase-request");
+        return view("app.role__budget-officer.purchase-request.requested-purchase-request");
     }
 
 
-    public function Predit(String $prformid) 
+    public function PrReview(String $prformid) 
     {
         
         if (!Auth::check())
@@ -60,8 +62,10 @@ class BOController extends Controller
 
         // return response("FOOC");
         
-        return view("Budgetofficer.edit-purchase-request", $data);
+        return view("app.role__budget-officer.purchase-request.review-purchase-request", $data);
     }
+
+    // =============================== JOB ORDER ===============================
 
     public function JoIndex() 
     {
@@ -72,7 +76,7 @@ class BOController extends Controller
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
 
-        return view("Budgetofficer.budget-officer-job-order");
+        return view("app.role__budget-officer.job-order.requested-job-order");
     }
 
     public function JoEdit(String $joformid)
@@ -90,9 +94,13 @@ class BOController extends Controller
         # redirect to dashboard.      =
         #==============================
         try 
-        { $form_id = (Int) Crypt::decrypt($form_id); } 
+        { 
+            $form_id = (Int) Crypt::decrypt($form_id); 
+        } 
         catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-        { return redirect()->to("/dashboard"); }
+        { 
+            return redirect()->to("/dashboard");
+        }
 
         $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
 
@@ -102,9 +110,7 @@ class BOController extends Controller
         $data["requester_data"]    = $frp[0]->toArray();
         $data["authofficial_data"] = $frp[1]->toArray();
 
-        return view("app.job-order.job-order-form-info", $data);
-
-        return view("Budgetofficer.edit-job-order");
+        return view("app.role__budget-officer.job-order.review-job-order", $data);
     }
 
 }

@@ -187,3 +187,11 @@
         </div>
     </div>
 @stop
+
+
+@section("javascript")
+
+    {{-- observer --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
+
+@stop

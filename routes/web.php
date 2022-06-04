@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\CTRLR_1_DashboardController;
 use App\Http\Controllers\CTRLR_2_ReqisitionerController;
+use App\Http\Controllers\CTRLR_3_BudgetOfficerController;
 use App\Http\Controllers\CTRLR_7_UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
@@ -54,48 +55,52 @@ Route::get("/dashboard", [CTRLR_1_DashboardController::class, "dashboard"]);
 Route::controller(CTRLR_2_ReqisitionerController::class)->group(function () {
 
     // ==================== PURCHASE REQUEST =============
-    Route::get("/purchaserequest/newpurchaserequest", "purchaseRequest");
+    Route::get("/requisitioner/purchaserequest/newpurchaserequest", "purchaseRequest");
         // view pr list
-            Route::get("/purchaserequest/viewprlist", "viewPRFormList");
+            Route::get("/requisitioner/purchaserequest/viewprlist", "viewPRFormList");
         // view uploaded form
-            Route::get("/purchaserequest/viewprforminfo/{prform}/view", "viewPRFormInfo");
+            Route::get("/requisitioner/purchaserequest/viewprforminfo/{prform}/view", "viewPRFormInfo");
         // cancel uploaded form
-            Route::post("/purchaserequest/viewprforminfo/{prform}/cancel", "cancelPRForm");
+            Route::post("/requisitioner/purchaserequest/viewprforminfo/{prform}/cancel", "cancelPRForm");
             // load comments
-            Route::get("/purchaserequest/loadcomment", "loadPrFormInfoComment");
+            Route::get("/requisitioner/purchaserequest/loadcomment/{hashid}/load", "loadPrFormInfoComment");
             // upload comment
-            Route::post("/purchaserequest/addcomment", "addPrFormInfoComment");
+            Route::post("/requisitioner/purchaserequest/addcomment", "addPrFormInfoComment");
         // upload pr form
-            Route::post("/purchaserequest/uploadprform", "uploadPRForm");
-        // update pr form
-            Route::post("/purchaserequest/updateprform", "updatePRForm");
+            Route::post("/requisitioner/purchaserequest/uploadprform", "uploadPRForm");
         // view pr form
-            Route::get("/purchaserequest/viewprform", "viewPRForm");
+            Route::get("/requisitioner/purchaserequest/viewprform", "viewPRForm");
         
     // ==================== JOB ORDER ====================
-    Route::get("/joborder/newjoborder", "jobOrder");
+    Route::get("/requisitioner/joborder/newjoborder", "jobOrder");
         // view jo list
-            Route::get("/joborder/joborderlist", "viewJOFormList");
+            Route::get("/requisitioner/joborder/viewjolist", "viewJOFormList");
         // view jo form
-            Route::get("/joborder/viewjoform", "viewJOForm");
+            Route::get("/requisitioner/joborder/viewjoform", "viewJOForm");
+        // cancel uploaded form
+            Route::post("/requisitioner/joborder/viewjoforminfo/{joform}/cancel", "cancelJOForm");
             // load comments
-            Route::get("/joborder/loadcomment", "loadJoFormInfoComment");
+            Route::get("/requisitioner/joborder/loadcomment/{hashid}/load", "loadJoFormInfoComment");
             // upload comment
-            Route::post("/joborder/addcomment", "addJoFormInfoComment");
+            Route::post("/requisitioner/joborder/addcomment", "addJoFormInfoComment");
         // upload jo form
-            Route::post("/joborder/uploadjoform", "uploadJOForm");
+            Route::post("/requisitioner/joborder/uploadjoform", "uploadJOForm");
         // view uploaded form
-            Route::get("/joborder/viewjoforminfo/{joform}/view", "viewJOFormInfo");
+            Route::get("/requisitioner/joborder/viewjoforminfo/{joform}/view", "viewJOFormInfo");
 
 });
 
-// Budget Officer (Purchase Request)
-Route::get("/budgetofficer/purchaserequeststatus",[BOController::class,"PrIndex"]);
-Route::get("/budgetofficer/editpurchaserequest/{prform}/review",[BOController::class,"Predit"]);
+Route::controller(CTRLR_3_BudgetOfficerController::class)->group(function() {
 
-// Budget Officer (Job Order)
-Route::get("/budgetofficer/joborderstatus",[BOController::class,"JoIndex"]);
-Route::get("/budgetofficer/editjoborder/{joform}/review",[BOController::class,"Joedit"]);
+    // Budget Officer (Purchase Request)
+    Route::get("/budgetofficer/purchaserequeststatus", "PrIndex");
+    Route::get("/budgetofficer/reviewpurchaserequest/{prform}/review", "PrReview");
+
+    // Budget Officer (Job Order)
+    Route::get("/budgetofficer/joborderstatus", "JoIndex");
+    Route::get("/budgetofficer/reviewjoborder/{joform}/review", "Joedit");
+
+});
 
 // BAC chairman
 Route::get("/BACpricequotation",[BACController::class,"BACIndex"]);

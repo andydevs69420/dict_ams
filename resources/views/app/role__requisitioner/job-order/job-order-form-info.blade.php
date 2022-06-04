@@ -1,6 +1,6 @@
 @extends("layout.app-main")
 
-@section("title", "AMS | PR Info")
+@section("title", "AMS | JO Info")
 
 @section("dependencies")
 
@@ -13,38 +13,34 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- STEP PROGRESS css --}}
+    {{-- step progress css --}}
     <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
 
-    {{-- PURCHASE REQUEST FORM INFO css --}}
-    <link rel="stylesheet" href="{{ asset("css/purchase-request/purchase-request-form-info/purchase-request-form-info.css") }}">
+    {{-- JOB ORDER FORM INFO css --}}
+    <link rel="stylesheet" href="{{ asset("css/job-order/job-order-form-info/job-order-form-info.css") }}">
 
 @stop
 
 @section("content")
-
-    {{-- message modal --}}
-    <x-message-modal id="purchase-request-form-info__message-modal"></x-message-modal>
-
     <div class="d-block py-3">
 
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
-                    <span class="purchase-request-form-info__purchase-request-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase Request Preview") }}</span>
+                    <span class="job-order-form-info__job-order-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order Preview") }}</span>
                 </div>
             </div>
         </div>
 
+       
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
-                    <x-pr-form 
-                        :items="$pr_items"
-                        :purpose="$purpose"
-                        :requisitioner="$rQ_data"
-                        :budget-officer="$bO_data"
-                        :recommending-approval="$rA_data"></x-pr-form>
+                    <x-jo-form 
+                        :items="$jo_items"
+                        :conforme="'LOADING..'"
+                        :requisitioner="$requester_data"
+                        :authofficial="$authofficial_data"></x-jo-form>
                 </div>
 
                 <div class="col-12 col-lg-3 mt-4 mt-lg-0">
@@ -67,9 +63,11 @@
                                 <div class="d-block">
                                     <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("FORM ACTION") }}</span>
                                     <div class="d-block">
-                                        <form class="d-flex flex-row flex-nowrap justify-content-center px-2" action="{{ url("/purchaserequest/viewprforminfo/". \Illuminate\Support\Facades\Crypt::encrypt($form_id) ."/cancel") }}" method="post">
+                                        <form class="d-flex flex-row flex-nowrap justify-content-center px-2" action="{{ url("/requisitioner/joborder/viewjoforminfo/". \Illuminate\Support\Facades\Crypt::encrypt($form_id) ."/cancel") }}" method="post">
                                             @csrf
-                                            <button class="btn btn-sm btn-danger text-white shadow" type="submit" style="width: 95%;">{{ __("CANCEL") }}</button>
+                                            <button class="btn btn-sm btn-danger text-white shadow" type="submit" style="width: 95%;">
+                                                {{ __("CANCEL REQUEST") }}
+                                            </button>
                                         </form>
                                     </div>
                                     <div class="d-block px-2">
@@ -81,33 +79,12 @@
 
                             {{-- status --}}
                             <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
+                                
                                 {{ __("FORM STATUS") }}
 
-                                @switch($personelstatus_id)
-                                    @case(1)
-                                        {{-- signitured --}}
-                                        <span class="badge bg-success rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                    @case(2)
-                                        {{-- unsignitured --}}
-                                        <span class="badge bg-warning rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                    @case(3)
-                                        {{-- canceled --}}
-                                        <span class="badge bg-secondary rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                    @default
-                                        <span class="badge bg-danger rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                @endswitch
+                                <x-signiture-status 
+                                    :personelstatusid="$personelstatus_id"
+                                    :personelstatus="$personelstatus"></x-signiture-status>
 
                             </span>
 
@@ -203,31 +180,20 @@
 
 @section("javascript")
 
-    {{-- observer --}}
+    {{-- OBSERVER --}}
     <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
 
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
-    {{-- MESSAGE MODAL js --}}
-    <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
-
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
-    {{-- PR js --}}
-    <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
+    {{-- JO FORM js --}}
+    <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
 
-    {{-- PURCHASE REQUEST FORM INFO --}}
-    <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
-
-    @if(Session::has("info"))
-        <script>
-            jQuery(function() {
-                new MessageModal("#purchase-request-form-info__message-modal").show("Info", "{{ session("info") }}");
-            });
-        </script>
-    @endif
+    {{-- JOB ORDER FORM INFO js --}}
+    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/job-order-form-info.js") }}"></script>
 
 @stop
 

@@ -1,6 +1,6 @@
 @extends("layout.app-main")
 
-@section("title", "AMS | JO Info")
+@section("title", "AMS | Review JO")
 
 @section("dependencies")
 
@@ -13,11 +13,11 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- step progress css --}}
+    {{-- STEP PROGRES css --}}
     <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
 
-    {{-- JOB ORDER FORM INFO css --}}
-    <link rel="stylesheet" href="{{ asset("css/job-order/job-order-form-info/job-order-form-info.css") }}">
+    {{-- EDIT PURCHASE REQUEST css --}}
+    <link rel="stylesheet" href="{{ asset("css/budget-officer/purchase-request/edit-purchase-request/edit-purchase-request.css") }}">
 
 @stop
 
@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
-                    <span class="job-order-form-info__job-order-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order Preview") }}</span>
+                    <span class="edit-purchase-request-form-info__edit-purchase-request-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Job Order Preview") }}</span>
                 </div>
             </div>
         </div>
@@ -36,11 +36,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-9">
+
                         <x-jo-form 
                             :items="$jo_items"
                             :conforme="'LOADING..'"
                             :requisitioner="$requester_data"
                             :authofficial="$authofficial_data"></x-jo-form>
+
                     </div>
 
                     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
@@ -48,25 +50,31 @@
                             <div class="card-body px-1 py-2">
 
                                 {{-- files --}}
-                                <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILE</span>
+                                <span class="d-block px-2 py-2 small text-muted mb-2" role="text" style="font-weight: 400;">ATTACHED FILE</span>
 
                                 <div class="d-block px-2 mb-2">
-                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-success" href="{{url('/')}}{{ Storage::disk('local')->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
+                                    <a class="btn btn-sm text-truncate rounded-pill w-100 border-success text-success" href="{{url("/")}}{{ Storage::disk("local")->url($fileembedded)}}" target="_blank" download>{{ explode("/", $fileembedded)[2] }}</a>
                                 </div>
 
                                 <div class="d-block px-2">
                                     <hr class="bg-info">
                                 </div>
 
-                                @if(\App\Models\FormRequiredPersonel::isFormHasActionForRequisitioner($form_id))
+                                @if(\App\Models\FormRequiredPersonel::isFormHasActionForBO($form_id))
 
-                                    {{-- optional action --}}
+                                    {{-- action --}}
                                     <div class="d-block">
-                                        <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("FORM ACTION") }}</span>
+                                        <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("REQUIRED ACTION") }}</span>
                                         <div class="d-block">
-                                            <div class="d-flex flex-row justify-content-around mb-2 px-2">
-                                                <button class="btn btn-sm btn-danger text-white shadow" type="submit" style="width: 95%;">{{ __("CANCEL") }}</button>
-                                            </div>
+                                            <form action="" method="post">
+                                                <div class="d-flex flex-row justify-content-center mb-2 px-2">
+                                                    <input type="file" class="form-control form-control-sm mb-2 rounded-pill shadow" style="width: 95%;" required>
+                                                </div>
+                                                <div class="d-flex flex-row justify-content-around mb-2 px-2">
+                                                    <input class="btn btn-sm btn-primary rounded-pill shadow" name="accept" type="submit" style="width: 45%;" value="{{ __("ACCEPT") }}">
+                                                    <input class="btn btn-sm btn-danger rounded-pill shadow" name="decline" type="button" style="width: 45%;" value="{{ __("DECLINE") }}">
+                                                </div>
+                                            </form>
                                         </div>
                                         <div class="d-block px-2">
                                             <hr class="bg-info">
@@ -77,33 +85,12 @@
 
                                 {{-- status --}}
                                 <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
+
                                     {{ __("FORM STATUS") }}
 
-                                    @switch($personelstatus_id)
-                                        @case(1)
-                                            {{-- signitured --}}
-                                            <span class="badge bg-success rounded-pill float-end" role="text">
-                                                {{ $personelstatus }}
-                                            </span>
-                                            @break
-                                        @case(2)
-                                            {{-- unsignitured --}}
-                                            <span class="badge bg-warning rounded-pill float-end" role="text">
-                                                {{ $personelstatus }}
-                                            </span>
-                                            @break
-                                        @case(3)
-                                            {{-- canceled --}}
-                                            <span class="badge bg-secondary rounded-pill float-end" role="text">
-                                                {{ $personelstatus }}
-                                            </span>
-                                            @break
-                                        @default
-                                            <span class="badge bg-danger rounded-pill float-end" role="text">
-                                                {{ $personelstatus }}
-                                            </span>
-                                            @break
-                                    @endswitch
+                                    <x-signiture-status 
+                                        :personelstatusid="$personelstatus_id"
+                                        :personelstatus="$personelstatus"></x-signiture-status>
 
                                 </span>
 
@@ -112,6 +99,7 @@
                                 </div>
 
                                 {{-- tracking --}}
+
                                 <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">TRACKING</span>
                                 <div class="container-fluid mb-2">
                                     <div class="row flex-nowrap">
@@ -158,7 +146,7 @@
                                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                             <div class="accordion-body px-2" style="max-height: 350px; overflow-y: auto;">
                                                 <div class="container-fluid">
-                                                    <div id="job-order-form-info__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
+                                                    <div id="purchase-request-form-info__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
                                                         <div class="px-2 py-5 text-center">
                                                             <i class="d-block text-muted fa-solid fa-comment fa-2x"></i>
                                                             <span class="text-muted text-truncate" role="text">loading comments...</span>
@@ -171,10 +159,10 @@
                                     <div class="accordion-item">
                                         <div class="accordion-header p-2">
                                             <div class="input-group mt-2 mb-3">
-                                                <textarea id="job-order-form-info__comment-field" class="form-control" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
+                                                <textarea id="purchase-request-form-info__comment-field" class="form-control" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
                                             </div>
                                             <span class="d-block my-2">
-                                                <button id="job-order-form-info__comment-button" class="btn btn-success w-100" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
+                                                <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
                                                     {{ __("COMMENT") }}
                                                 </button>
                                             </span>
@@ -190,17 +178,17 @@
             </div>
 
         </form>
-    
+
     </div>
 @stop
 
 @section("javascript")
 
-    {{-- OBSERVER --}}
-    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
-
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
+
+    {{-- message modal js --}}
+    <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
@@ -209,21 +197,6 @@
     <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
 
     {{-- JOB ORDER FORM INFO js --}}
-    <script type="text/javascript" src="{{ asset("js/job-order/job-order-form-info.js") }}"></script>
-
-    {{--
-        readonly if admin.
-    --}}
-    @if(Auth::user()->isAdmin())
-        <script>
-            $("form").find("input, textarea, button")
-            .attr("readonly", true)
-            .attr("disabled", true);
-        </script>
-    @endif
+    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/job-order-form-info.js") }}"></script>
 
 @stop
-
-
-
-

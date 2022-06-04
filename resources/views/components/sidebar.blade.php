@@ -32,6 +32,7 @@
 
                 @switch($getAccesslevelId())
                     @case(1)
+                    @case(2)
                         @break
                     @case(4)
                     @case(5)
@@ -54,11 +55,11 @@
                                         </div>
                                         <div id="create-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
                                             <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/newpurchaserequest") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/newpurchaserequest") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("requisitioner/purchaserequest/newpurchaserequest") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/requisitioner/purchaserequest/newpurchaserequest") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("joborder/newjoborder") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/joborder/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("requisitioner/joborder/newjoborder") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/requisitioner/joborder/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -75,11 +76,11 @@
                                         </div>
                                         <div id="form-list-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
                                             <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/viewprlist") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("requisitioner/purchaserequest/viewprlist") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/requisitioner/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                                 </li>
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("joborder/joborderlist") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/joborder/joborderlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("requisitioner/joborder/viewjolist") }}">
+                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/requisitioner/joborder/viewjolist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
                                                 </li>
                                             </ul>
                                         </div>

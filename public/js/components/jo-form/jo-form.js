@@ -229,7 +229,7 @@ function generate__jo_form()
         if(invalid)
             return $('#jo-form__on-error-modal').modal('show');
         else
-            return window.open(`/joborder/viewjoform?data=${JSON.stringify(form_data)}`);
+            return window.open(`/requisitioner/joborder/viewjoform?data=${JSON.stringify(form_data)}`);
     })();
     
 }

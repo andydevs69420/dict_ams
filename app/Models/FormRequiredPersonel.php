@@ -137,6 +137,7 @@ class FormRequiredPersonel extends Model
             "personel_status", "form_required_personel.personelstatus_id", "=", "personel_status.personelstatus_id"
         )
         ->where("form.form_id", "=", $formid)
+        ->orderBy("form_required_personel.formrequiredpersonel_id")
         ->get();
     }
 
@@ -248,9 +249,27 @@ class FormRequiredPersonel extends Model
         );
     }
 
-    public static function updatePersonelStatus(Int $status)
+    public static function updatePersonelStatus(Int $formid, Int $userid, Int $status)
     {
-
+        return self::join(
+            DB::raw("
+                (
+                    SELECT 
+                        user_verification_details.userverificationdetails_id,
+                        user_verification_details.verificationstatus_id,
+                        user.*
+                    FROM
+                        user_verification_details 
+                        INNER JOIN user ON user_verification_details.user_id = user.user_id
+                ) AS uvd
+            "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
+        )
+        ->join(
+            "personel_status", "form_required_personel.personelstatus_id", "=", "personel_status.personelstatus_id"
+        )
+        ->where("form_id", "=", $formid)
+        ->where("user_id", "=", $userid)
+        ->update([ "form_required_personel.personelstatus_id" => $status ]);
     }
 
 }

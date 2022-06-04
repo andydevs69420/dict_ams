@@ -19,7 +19,7 @@
         let ID = "#purchase-request-form-info__comment-list";
         setInterval(() => {
             element = $(ID);
-            element.load(`/purchaserequest/loadcomment?hash=${element.data("fid")}`);
+            element.load(`/requisitioner/purchaserequest/loadcomment/${element.data("fid")}/load`);
         }, 2000); 
     }
 
@@ -36,7 +36,7 @@
                 return $("#purchase-request-form-info__comment-field").val("");
 
             $.ajax({
-                url  : "/purchaserequest/addcomment",
+                url  : "/requisitioner/purchaserequest/addcomment",
                 type : "POST",
                 data : { frp : $(ID).data("frp"), comment : $("#purchase-request-form-info__comment-field").val() },
                 dataType : "json",

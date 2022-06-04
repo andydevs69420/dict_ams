@@ -66,13 +66,15 @@
                                 <div class="d-block">
                                     <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("REQUIRED ACTION") }}</span>
                                     <div class="d-block">
-                                        <div class="d-flex flex-row justify-content-center mb-2 px-2">
-                                            <input type="file" class="form-control form-control-sm mb-2 border-info shadow" style="width: 95%;" required>
-                                        </div>
-                                        <div class="d-flex flex-row justify-content-around mb-2 px-2">
-                                            <button class="btn btn-sm btn-primary shadow" type="button" style="width: 45%;">{{ __("ACCEPT") }}</button>
-                                            <button class="btn btn-sm btn-danger shadow" type="button" style="width: 45%;">{{ __("DECLINE") }}</button>
-                                        </div>
+                                        <form action="" method="post">
+                                            <div class="d-flex flex-row justify-content-center mb-2 px-2">
+                                                <input type="file" class="form-control form-control-sm mb-2 rounded-pill shadow" style="width: 95%;" required>
+                                            </div>
+                                            <div class="d-flex flex-row justify-content-around mb-2 px-2">
+                                                <input class="btn btn-sm btn-primary rounded-pill shadow" name="accept" type="submit" style="width: 45%;" value="{{ __("ACCEPT") }}">
+                                                <input class="btn btn-sm btn-danger rounded-pill shadow" name="decline" type="button" style="width: 45%;" value="{{ __("DECLINE") }}">
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="d-block px-2">
                                         <hr class="bg-info">
@@ -83,25 +85,12 @@
 
                             {{-- status --}}
                             <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
+
                                 {{ __("FORM STATUS") }}
 
-                                @switch($personelstatus_id)
-                                    @case(1)
-                                        <span class="badge bg-success rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                    @case(2)
-                                        <span class="badge bg-warning rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                    @default
-                                        <span class="badge bg-danger rounded-pill float-end" role="text">
-                                            {{ $personelstatus }}
-                                        </span>
-                                        @break
-                                @endswitch
+                                <x-signiture-status 
+                                    :personelstatusid="$personelstatus_id"
+                                    :personelstatus="$personelstatus"></x-signiture-status>
 
                             </span>
 
@@ -198,10 +187,13 @@
 
 @section("javascript")
 
+    {{-- observer --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
+
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
 
-    {{-- message modal js --}}
+    {{-- MESSAGE MODAL js --}}
     <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
     {{-- PROGRESS BAR js --}}
@@ -211,6 +203,6 @@
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
     {{-- PURCHASE REQUEST FORM INFO --}}
-    <script type="text/javascript" src="{{ asset("js/purchase-request/purchase-request-form-info.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/purchase-request/purchase-request-form-info.js") }}"></script>
 
 @stop

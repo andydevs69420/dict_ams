@@ -248,7 +248,7 @@
 @section("javascript")
 
     {{-- DASHBOARD js --}}
-    <script type="text/javascript" src="{{ asset("js/dashboard/dashboard.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/app/dashboard/dashboard.js") }}"></script>
    
 @stop
 
