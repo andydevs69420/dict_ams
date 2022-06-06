@@ -4,7 +4,7 @@
 
 @section("dependencies")
 
-    {{-- bootstrap-select css  --}}
+    {{-- bootstrap-select css --}}
     <link rel="stylesheet" href="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.css") }}">
 
     {{-- PR & JO css --}}
@@ -86,7 +86,7 @@
                                 
                                 {{ __("FORM STATUS") }}
 
-                                <x-signiture-status 
+                                <x-signiture-status class="float-end"
                                     :personelstatusid="$personelstatus_id"
                                     :personelstatus="$personelstatus"></x-signiture-status>
 

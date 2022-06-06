@@ -88,7 +88,7 @@
 
                                 {{ __("FORM STATUS") }}
 
-                                <x-signiture-status 
+                                <x-signiture-status class="float-end"
                                     :personelstatusid="$personelstatus_id"
                                     :personelstatus="$personelstatus"></x-signiture-status>
 

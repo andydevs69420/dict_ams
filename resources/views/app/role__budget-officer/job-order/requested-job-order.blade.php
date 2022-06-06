@@ -35,6 +35,12 @@
                             </thead>
                             <tbody>
                                 @foreach(\App\Models\FormRequiredPersonel::getFormByUserAndFormType(Auth::user()->user_id, 2) as $form)
+                                    
+                                    {{-- list only those items with requisitioners signiture --}}
+                                    @if(!\App\Models\FormRequiredPersonel::isFormHasStatusFor($form->form_id, 1, config("global.VALID_REQUISITIONER")))
+                                        @continue
+                                    @endif
+                                
                                     <tr>
                                         <td data-order="[{{ $form->personelstatus_id }}, {{ $form->createdat }}]" style="vertical-align: middle !important;">{{ $form->createdat }}</td>
                                         <td style="vertical-align: middle !important;">{{ $form->prnumber?  $form->prnumber  : "TBD"  }}</td>

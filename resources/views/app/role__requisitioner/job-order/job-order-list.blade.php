@@ -50,31 +50,9 @@
                                         <td style="vertical-align: middle !important;">{{ $form->sainumber? $form->sainumber : "TBD" }}</td>
                                         <td class="text-center" style="vertical-align: middle !important;">
                                             
-                                            @switch($form->personelstatus_id)
-                                                @case(1)
-                                                    {{-- signitured --}}
-                                                    <span class="badge bg-success rounded-pill shadow" role="text">
-                                                        {{ $form->personelstatus }}
-                                                    </span>
-                                                    @break
-                                                @case(2)
-                                                    {{-- unsignitured --}}
-                                                    <span class="badge bg-warning rounded-pill shadow" role="text">
-                                                        {{ $form->personelstatus }}
-                                                    </span>
-                                                    @break
-                                                @case(3)
-                                                    {{-- canceled --}}
-                                                    <span class="badge bg-secondary rounded-pill shadow" role="text">
-                                                        {{ $form->personelstatus }}
-                                                    </span>
-                                                    @break
-                                                @default
-                                                    <span class="badge bg-danger rounded-pill shadow" role="text">
-                                                        {{ $form->$personelstatus }}
-                                                    </span>
-                                                    @break
-                                            @endswitch
+                                            <x-signiture-status class="clearfix"
+                                                :personelstatusid="$form->personelstatus_id"
+                                                :personelstatus="$form->personelstatus"></x-signiture-status>
 
                                         </td>
                                         <td class="text-center" style="vertical-align: middle !important;">
