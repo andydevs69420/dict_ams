@@ -202,7 +202,7 @@
     {{-- PR js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
-    {{-- PURCHASE REQUEST FORM INFO --}}
-    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/purchase-request/purchase-request-form-info.js") }}"></script>
+    {{-- REVIEW PURCHASE REQUEST js --}}
+    <script type="text/javascript" src="{{ asset("js/app/role__budget-officer/purchase-request/review-purchase-request.js") }}"></script>
 
 @stop

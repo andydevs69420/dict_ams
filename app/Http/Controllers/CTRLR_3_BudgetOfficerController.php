@@ -65,6 +65,51 @@ class CTRLR_3_BudgetOfficerController extends Controller
         return view("app.role__budget-officer.purchase-request.review-purchase-request", $data);
     }
 
+    /**
+     * Loads comment dynamically
+     * @param Request $request request
+     * access: AJAX|POST
+     **/
+    function loadPrFormInfoComment(String $hashid)
+    {
+        #============================
+        # Return false if not       =
+        # login or expired.         =
+        #============================
+        if (!Auth::check())
+            return false;
+        
+        #==============================
+        # Only requisitioner can view =
+        # his/her form comments.      =
+        #==============================
+        if (!Auth::user()->isRequisitioner())
+            return false;
+        
+        $form_id = $hashid;
+
+        #===============================
+        # Decrypt form_id. If invalid, =
+        # return false                 =
+        #===============================
+        try 
+        { 
+            $form_id = (Int) Crypt::decrypt($form_id); 
+        }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        { 
+            return false;
+        }
+
+        $data = FormRequiredPersonelComment::getAllCommentsByFormID($form_id);
+
+        #======================
+        # Return view.        =
+        #======================
+        foreach($data as $comment_data)
+            echo view("components.comment-bubble", $comment_data);
+    }
+
     // =============================== JOB ORDER ===============================
 
     public function JoIndex() 
