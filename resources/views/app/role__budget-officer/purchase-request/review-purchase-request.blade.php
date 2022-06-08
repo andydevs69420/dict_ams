@@ -14,21 +14,25 @@
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
     {{-- STEP PROGRES css --}}
-    <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/components/step-progress/step-progress.css") }}">
 
-    {{-- EDIT PURCHASE REQUEST css --}}
-    <link rel="stylesheet" href="{{ asset("css/budget-officer/purchase-request/edit-purchase-request/edit-purchase-request.css") }}">
+    {{-- REVIEW PURCHASE REQUEST css --}}
+    <link rel="stylesheet" href="{{ asset("css/app/role__budget-officer/purchase-request/review-purchase-request/review-purchase-request.css") }}">
 
 
 @stop
 
 @section("content")
+
+    {{-- message modal --}}
+    <x-message-modal id="review-purchase-request__message-modal"></x-message-modal>
+
     <div class="d-block py-3">
 
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
-                    <span class="edit-purchase-request-form-info__edit-purchase-request-form-info-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase Request Preview") }}</span>
+                    <span class="review-purchase-request__review-purchase-request-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Purchase Request Preview") }}</span>
                 </div>
             </div>
         </div>
@@ -68,7 +72,7 @@
                                     <div class="d-block">
                                         <form action="" method="post">
                                             <div class="d-flex flex-row justify-content-center mb-2 px-2">
-                                                <input type="file" class="form-control form-control-sm mb-2 rounded-pill shadow" style="width: 95%;" required>
+                                                <input class="form-control form-control-sm mb-2 rounded-pill shadow" type="file" name="file-upload" accept=".pdf" style="width: 95%;" required>
                                             </div>
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
                                                 <input class="btn btn-sm btn-primary rounded-pill shadow" name="accept" type="submit" style="width: 45%;" value="{{ __("ACCEPT") }}">
@@ -149,7 +153,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body px-2" style="max-height: 350px; overflow-y: auto;">
                                             <div class="container-fluid">
-                                                <div id="review-purchase-request-form-info__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
+                                                <div id="review-purchase-request__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
                                                     <div class="px-2 py-5 text-center">
                                                         <i class="d-block text-muted fa-solid fa-comment fa-2x"></i>
                                                         <span class="text-muted text-truncate" role="text">loading comments...</span>
@@ -163,10 +167,10 @@
                                     <div class="accordion-header p-2">
                                         <div class="input-group mt-2 mb-3 shadow">
                                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Comment" data-bs-content="Optional comment"><i class="fa-solid fa-paper-plane"></i></a>
-                                            <textarea id="purchase-request-form-info__comment-field" class="form-control border-0 bg-white" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
+                                            <textarea id="review-purchase-request__comment-field" class="form-control border-0 bg-white" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
                                         </div>
                                         <span class="d-block my-2">
-                                            <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100 shadow" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
+                                            <button id="review-purchase-request__comment-button" class="btn btn-success w-100 shadow" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
                                                 {{ __("COMMENT") }}
                                             </button>
                                         </span>

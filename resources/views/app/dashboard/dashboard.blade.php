@@ -5,7 +5,7 @@
 @section("dependencies")
 
     {{-- DASHBOARD css --}}
-    <link rel="stylesheet" href="{{ asset("css/dashboard/dashboard.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/app/dashboard/dashboard.css") }}">
 
 @stop
 

@@ -77,7 +77,7 @@ class CTRLR_7_UserController extends Controller
                     if (!(UserVerificationDetails::isVerified($decrypt)))
                         return redirect()->intended("/dashboard");
 
-                    return view("app.users.user-profile", ["user" => UserVerificationDetails::getUserByID($decrypt)]);
+                    return view("app.user-profile.user-profile", ["user" => UserVerificationDetails::getUserByID($decrypt)]);
                 }
                 
                 /**

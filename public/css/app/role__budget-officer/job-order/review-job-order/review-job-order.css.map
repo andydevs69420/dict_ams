@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,gDAAgD,CAChD;EAAE,SAAS,EAAE,KAAK;CAAI",
+    "sources": [
+        "review-job-order.scss"
+    ],
+    "names": [],
+    "file": "review-job-order.css"
+}

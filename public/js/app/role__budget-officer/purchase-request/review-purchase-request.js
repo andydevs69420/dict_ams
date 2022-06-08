@@ -7,7 +7,7 @@
     });
 
     jQuery(() => {
-        root.messageModal = new MessageModal("#review-purchase-request-form-info__message-modal");
+        root.messageModal = new MessageModal("#review-purchase-request__message-modal");
         loadComments();
         addComment();
     });
@@ -17,7 +17,7 @@
      **/
     function loadComments()
     {
-        let ID = "#review-purchase-request-form-info__comment-list";
+        let ID = "#review-purchase-request__comment-list";
         setInterval(() => {
             element = $(ID);
             element.load(`/budgetofficer/reviewpurchaserequest/loadcomment/${element.data("fid")}/load`);
@@ -29,24 +29,24 @@
      **/
     function addComment()
     {
-        let ID = "#purchase-request-form-info__comment-button";
+        let ID = "#review-purchase-request__comment-button";
         $(ID)
         .click(() => {
 
-            if ($("#purchase-request-form-info__comment-field").val().toString().trim().length <= 0)
-                return $("#purchase-request-form-info__comment-field").val("");
+            if ($("#review-purchase-request__comment-field").val().toString().trim().length <= 0)
+                return $("#review-purchase-request__comment-field").val("");
 
             $.ajax({
-                url  : "/requisitioner/purchaserequest/addcomment",
+                url  : "/budgetofficer/reviewpurchaserequest/addcomment",
                 type : "POST",
-                data : { frp : $(ID).data("frp"), comment : $("#purchase-request-form-info__comment-field").val() },
+                data : { frp : $(ID).data("frp"), comment : $("#review-purchase-request__comment-field").val() },
                 dataType : "json",
                 success  : function(response, status, request)
                 {
                     if  (!(status === "success" && (response  == true)))
                         return root.messageModal?.show("Error", "An error has been encountered while inserting comment.");
                     
-                    $("#purchase-request-form-info__comment-field").val("");
+                    $("#review-purchase-request__comment-field").val("");
                 },
                 error : function(response, status, request)
                 { console.log(response.responseText); }

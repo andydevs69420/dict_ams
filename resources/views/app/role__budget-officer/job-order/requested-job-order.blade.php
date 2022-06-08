@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
 
     {{-- JO STATUS css --}}
-    <link rel="stylesheet" href="{{ asset("css/budget-officer/job-order/jo-status-list/jo-status-list.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/app/role__budget-officer/job-order/jo-status-list/jo-status-list.css") }}">
 
 @stop
 

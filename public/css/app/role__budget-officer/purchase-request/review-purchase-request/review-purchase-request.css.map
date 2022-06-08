@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,8DAA8D,CAC9D;EAAE,SAAS,EAAE,KAAK;CAAI",
+    "sources": [
+        "review-purchase-request.scss"
+    ],
+    "names": [],
+    "file": "review-purchase-request.css"
+}

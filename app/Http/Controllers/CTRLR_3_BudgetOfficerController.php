@@ -71,7 +71,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
      * @param Request $request request
      * access: AJAX|POST
      **/
-    function loadPrFormInfoComment(String $hashid)
+    function loadPrFormReviewComment(String $hashid)
     {
         #============================
         # Return false if not       =
@@ -109,6 +109,54 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #======================
         foreach($data as $comment_data)
             echo view("components.comment-bubble", $comment_data);
+    }
+
+
+    public function addPrFormReviewComment(Request $request) 
+    {
+        #============================
+        # Return false if not       =
+        # login or expired.         =
+        #============================
+        if (!Auth::check())
+            return false;
+        
+        #==============================
+        # Only requisitioner can add  =
+        # his/her form comments.      =
+        #==============================
+        if (!Auth::user()->isBudgetOfficer())
+            return false;
+
+        #==============================
+        # Return false if any of      =
+        # these field has null value. =
+        #==============================
+        if (hasNull($request, ["frp", "comment"]))
+            return false;
+        
+        $form_required_personel = $request->input("frp");
+        $comment                = $request->input("comment");
+
+        #==============================
+        # Decypt frp_id. If invalid,  =
+        # return false                =
+        #==============================
+        try 
+        { 
+            $form_required_personel = (Int) Crypt::decrypt($form_required_personel);
+        } 
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+        { 
+            return false;
+        }
+
+        $signal = FormRequiredPersonelComment::create([
+            "formrequiredpersonel_id" => $form_required_personel,
+            "comment"                 => $comment
+        ]);
+        
+        return (bool) $signal;
     }
 
     // =============================== JOB ORDER ===============================
