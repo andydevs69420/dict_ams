@@ -6,7 +6,7 @@
     });
 
     jQuery(() => {
-        root.messageModal = new MessageModal("#purchase-request-form-info__message-modal");
+        root.messageModal = new MessageModal("#review-job-order__message-modal");
         loadComments();
         addComment();
     });
@@ -16,10 +16,10 @@
      **/
     function loadComments()
     {
-        let ID = "#purchase-request-form-info__comment-list";
+        let ID = "#review-job-order__comment-list";
         setInterval(() => {
             element = $(ID);
-            element.load(`/requisitioner/purchaserequest/loadcomment/${element.data("fid")}/load`);
+            element.load(`/budgetofficer/reviewjoborder/loadcomment/${element.data("fid")}/load`);
         }, 2000); 
     }
 
@@ -28,24 +28,24 @@
      **/
     function addComment()
     {
-        let ID = "#purchase-request-form-info__comment-button";
+        let ID = "#review-job-order__comment-button";
         $(ID)
         .click(() => {
 
-            if ($("#purchase-request-form-info__comment-field").val().toString().trim().length <= 0)
-                return $("#purchase-request-form-info__comment-field").val("");
+            if ($("#review-job-order__comment-field").val().toString().trim().length <= 0)
+                return $("#review-job-order__comment-field").val("");
 
             $.ajax({
-                url  : "/requisitioner/purchaserequest/addcomment",
+                url  : "/budgetofficer/reviewjoborder/addcomment",
                 type : "POST",
-                data : { frp : $(ID).data("frp"), comment : $("#purchase-request-form-info__comment-field").val() },
+                data : { frp : $(ID).data("frp"), comment : $("#review-job-order__comment-field").val() },
                 dataType : "json",
                 success  : function(response, status, request)
                 {
                     if  (!(status === "success" && (response  == true)))
                         return root.messageModal?.show("Error", "An error has been encountered while inserting comment.");
                     
-                    $("#purchase-request-form-info__comment-field").val("");
+                    $("#review-job-order__comment-field").val("");
                 },
                 error : function(response, status, request)
                 { console.log(response.responseText); }

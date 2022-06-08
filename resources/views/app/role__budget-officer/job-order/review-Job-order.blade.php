@@ -193,7 +193,7 @@
     {{-- JO FORM js --}}
     <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
 
-    {{-- JOB ORDER FORM INFO js --}}
-    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/job-order-form-info.js") }}"></script>
+    {{-- REVIEW JOB ORDER js --}}
+    <script type="text/javascript" src="{{ asset("js/app/role__budget-officer/job-order/review-job-order.js") }}"></script>
 
 @stop
