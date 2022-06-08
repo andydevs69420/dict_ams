@@ -7,7 +7,7 @@
     });
 
     jQuery(() => {
-        root.messageModal = new MessageModal("#purchase-request-form-info__message-modal");
+        root.messageModal = new MessageModal("#review-purchase-request-form-info__message-modal");
         loadComments();
         addComment();
     });
@@ -17,10 +17,10 @@
      **/
     function loadComments()
     {
-        let ID = "#purchase-request-form-info__comment-list";
+        let ID = "#review-purchase-request-form-info__comment-list";
         setInterval(() => {
             element = $(ID);
-            element.load(`/requisitioner/purchaserequest/loadcomment/${element.data("fid")}/load`);
+            element.load(`/budgetofficer/reviewpurchaserequest/loadcomment/${element.data("fid")}/load`);
         }, 2000); 
     }
 

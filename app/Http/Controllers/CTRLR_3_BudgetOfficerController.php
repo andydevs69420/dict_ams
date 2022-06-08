@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\PrItem;
 use App\Models\JoItem;
 use App\Models\FormRequiredPersonel;
+use App\Models\FormRequiredPersonelComment;
 
 class CTRLR_3_BudgetOfficerController extends Controller
 {
@@ -83,7 +84,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         # Only requisitioner can view =
         # his/her form comments.      =
         #==============================
-        if (!Auth::user()->isRequisitioner())
+        if (!Auth::user()->isBudgetOfficer())
             return false;
         
         $form_id = $hashid;
