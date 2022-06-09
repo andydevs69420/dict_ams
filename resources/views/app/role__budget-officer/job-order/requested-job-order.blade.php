@@ -47,7 +47,7 @@
                                         <td style="vertical-align: middle !important;">{{ $form->sainumber? $form->sainumber : "TBD" }}</td>
                                         <td class="text-center" style="vertical-align: middle !important;">
                                                 
-                                            <x-signiture-status
+                                            <x-signiture-status class="w-75"
                                                 :personelstatusid="$form->personelstatus_id"
                                                 :personelstatus="$form->personelstatus"></x-signiture-status>
 

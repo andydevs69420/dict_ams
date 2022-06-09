@@ -5,7 +5,7 @@
 @section("dependencies")
 
     {{-- user profile css --}}
-    <link rel="stylesheet" href="{{ asset("css/users/user-profile.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/app/user-profile/user-profile.css") }}">
 
 @stop
 
@@ -295,7 +295,7 @@
     <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
     {{-- USER PROFILE js --}}
-    <script type="text/javascript" src="{{ asset("js/users/user-profile.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/app/user-profile/user-profile.js") }}"></script>
 
     @if($errors->any())
         <script type="text/javascript">

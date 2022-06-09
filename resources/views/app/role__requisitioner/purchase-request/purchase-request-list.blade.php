@@ -52,7 +52,7 @@
                                         <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                         <td class="text-center" style="vertical-align: middle !important;">
 
-                                            <x-signiture-status class="clearfix"
+                                            <x-signiture-status class="w-75"
                                                 :personelstatusid="$form->personelstatus_id"
                                                 :personelstatus="$form->personelstatus"></x-signiture-status>
 
