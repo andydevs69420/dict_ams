@@ -207,4 +207,97 @@ class CTRLR_3_BudgetOfficerController extends Controller
         return view("app.role__budget-officer.job-order.review-job-order", $data);
     }
 
+    /**
+     * Loads comment dynamically
+     * @param Request $request request
+     * access: AJAX|POST
+     **/
+    function loadJoFormReviewComment(String $hashid)
+    {
+        #============================
+        # Return false if not       =
+        # login or expired.         =
+        #============================
+        if (!Auth::check())
+            return false;
+        
+        #==============================
+        # Only requisitioner can view =
+        # his/her form comments.      =
+        #==============================
+        if (!Auth::user()->isBudgetOfficer())
+            return false;
+        
+        $form_id = $hashid;
+
+        #===============================
+        # Decrypt form_id. If invalid, =
+        # return false                 =
+        #===============================
+        try 
+        { 
+            $form_id = (Int) Crypt::decrypt($form_id); 
+        }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        { 
+            return false;
+        }
+
+        $data = FormRequiredPersonelComment::getAllCommentsByFormID($form_id);
+
+        #======================
+        # Return view.        =
+        #======================
+        foreach($data as $comment_data)
+            echo view("components.comment-bubble", $comment_data);
+    }
+
+
+    public function addJoFormReviewComment(Request $request) 
+    {
+        #============================
+        # Return false if not       =
+        # login or expired.         =
+        #============================
+        if (!Auth::check())
+            return false;
+        
+        #==============================
+        # Only requisitioner can add  =
+        # his/her form comments.      =
+        #==============================
+        if (!Auth::user()->isBudgetOfficer())
+            return false;
+
+        #==============================
+        # Return false if any of      =
+        # these field has null value. =
+        #==============================
+        if (hasNull($request, ["frp", "comment"]))
+            return false;
+        
+        $form_required_personel = $request->input("frp");
+        $comment                = $request->input("comment");
+
+        #==============================
+        # Decypt frp_id. If invalid,  =
+        # return false                =
+        #==============================
+        try 
+        { 
+            $form_required_personel = (Int) Crypt::decrypt($form_required_personel);
+        } 
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+        { 
+            return false;
+        }
+
+        $signal = FormRequiredPersonelComment::create([
+            "formrequiredpersonel_id" => $form_required_personel,
+            "comment"                 => $comment
+        ]);
+        
+        return (bool) $signal;
+    }
+
 }

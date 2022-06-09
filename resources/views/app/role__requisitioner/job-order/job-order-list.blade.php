@@ -4,11 +4,11 @@
 
 @section("dependencies")
 
-    {{-- purchase request list css  --}}
-    <link rel="stylesheet" href="{{ asset("css/job-order/job-order-list/job-order-list.css") }}">
-
     {{-- datatable css --}}
     <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
+
+    {{-- purchase request list css  --}}
+    <link rel="stylesheet" href="{{ asset("css/app/role__requisitioner/job-order/job-order-list/job-order-list.css") }}">
 
 @stop
 

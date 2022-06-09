@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PR | FORM</title>
-        <link rel="stylesheet" href="{{ asset('css/purchase-request/view-pr-form/view-pr-form.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app/role__requisitioner/purchase-request/view-pr-form/view-pr-form.css') }}">
     </head>
 
     <body>

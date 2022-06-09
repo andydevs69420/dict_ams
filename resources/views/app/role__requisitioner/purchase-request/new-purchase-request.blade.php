@@ -10,39 +10,19 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- NEW PURCHASE REQUEST css --}}
-    <link rel="stylesheet" href="{{ asset("css/purchase-request/new-purchase-request/new-purchase-request.css") }}">
-
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
+
+    {{-- NEW PURCHASE REQUEST css --}}
+    <link rel="stylesheet" href="{{ asset("css/app/role__requisitioner/purchase-request/new-purchase-request/new-purchase-request.css") }}">
 
 @stop
 
 @section("content")
     <div class="d-block py-3">
 
-        @if (Session::has("info"))
-            <div class="modal fade" tabindex="-1" aria-hidden="true" style="padding-right: 0 !important;">
-                <div class="modal-dialog border-0">
-                    <div class="modal-content border-0">
-                        <div class="modal-header border-0">
-                            <h5 class="modal-title">Success</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <span class="h5" role="text" style="font-weight: 300;">
-                                {{ session("info") }}
-                            </span>
-                        </div>
-                        <div class="modal-footer border-0">
-                            <div class="mx-auto w-25 shadow">
-                                <button type="button" class="btn w-100 btn-primary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
+        {{-- message modal --}}
+        <x-message-modal id="new-purchase-request__new-pr-modal"></x-message-modal>
 
         <div class="container">
             <div class="row">
@@ -104,25 +84,25 @@
 
 @section("javascript")
 
-    {{-- observer --}}
-    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
-
     {{-- bootstrap-select js --}}
     <script type="text/javascript" src="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.js") }}"></script>
+
+    {{-- observer --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
 
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
-    {{-- NEW PURCHASE REQUEST js --}}
-    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/purchase-request/new-purchase-request.js") }}"></script>
-
     {{-- PR FORM js --}}
     <script type="text/javascript" src="{{ asset("js/components/pr-form/pr-form.js") }}"></script>
 
+    {{-- NEW PURCHASE REQUEST js --}}
+    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/purchase-request/new-purchase-request.js") }}"></script>
+
     @if (Session::has("info"))
-        <script>
+        <script type="text/javascript">
             jQuery(() => {
-                $(".modal").modal("show");
+                new MessageModal("#new-purchase-request__new-pr-modal").show("Info", "{{ session("info") }}");
             });
         </script> 
     @endif

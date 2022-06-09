@@ -9,11 +9,11 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- NEW JO STYLESHEET --}}
-    <link rel="stylesheet" href="{{ asset("css/job-order/new-job-order/new-job-order.css") }}">
-
     {{-- PR & JO css --}}
     <link rel="stylesheet" href="{{ asset("css/components/global/pr-and-jo/pr-and-jo.css") }}">
+
+    {{-- NEW JO STYLESHEET --}}
+    <link rel="stylesheet" href="{{ asset("css/app/role__requisitioner/job-order/new-job-order/new-job-order.css") }}">
 
 @stop
 
@@ -111,12 +111,11 @@
     {{-- PROGRESS BAR js --}}
     <script type="text/javascript" src="{{ asset("js/components/progressbar/progressbar.js") }}"></script>
 
-    {{-- NEW JOB ORDER js --}}
-    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/new-job-order.js") }}"></script>
-
     {{-- JO FORM js --}}
     <script type="text/javascript" src="{{ asset('js/components/jo-form/jo-form.js') }}"></script>
 
+    {{-- NEW JOB ORDER js --}}
+    <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/new-job-order.js") }}"></script>
 
 @stop
 

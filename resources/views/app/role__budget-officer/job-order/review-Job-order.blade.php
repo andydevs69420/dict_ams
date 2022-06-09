@@ -4,6 +4,9 @@
 
 @section("dependencies")
 
+    {{-- observer --}}
+    <script type="text/javascript" src="{{ asset("js/global/observer/observer.js") }}"></script>
+
     {{-- bootstrap-select css  --}}
     <link rel="stylesheet" href="{{ asset("extra/bs5-select/bs5-select-1.14.0.min.css") }}">
 

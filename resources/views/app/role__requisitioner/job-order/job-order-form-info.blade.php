@@ -13,16 +13,19 @@
     {{-- PROGRESS BAR css --}}
     <link rel="stylesheet" href="{{ asset("css/components/progressbar/progressbar.css") }}">
 
-    {{-- step progress css --}}
-    <link rel="stylesheet" href="{{ asset("css/step-progress/step-progress.css") }}">
+    {{-- STEP PROGRESS css --}}
+    <link rel="stylesheet" href="{{ asset("css/components/step-progress/step-progress.css") }}">
 
     {{-- JOB ORDER FORM INFO css --}}
-    <link rel="stylesheet" href="{{ asset("css/job-order/job-order-form-info/job-order-form-info.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/app/role__requisitioner/job-order/job-order-form-info/job-order-form-info.css") }}">
 
 @stop
 
 @section("content")
     <div class="d-block py-3">
+
+        {{-- message modal --}}
+        <x-message-modal id="job-order-form-info__message-modal"></x-message-modal>
 
         <div class="container">
             <div class="row">
@@ -32,7 +35,6 @@
             </div>
         </div>
 
-       
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
@@ -143,7 +145,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body px-2" style="max-height: 350px; overflow-y: auto;">
                                             <div class="container-fluid">
-                                                <div id="purchase-request-form-info__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
+                                                <div id="job-order-form-info__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
                                                     <div class="px-2 py-5 text-center">
                                                         <i class="d-block text-muted fa-solid fa-comment fa-2x"></i>
                                                         <span class="text-muted text-truncate" role="text">loading comments...</span>
@@ -157,10 +159,10 @@
                                     <div class="accordion-header p-2">
                                         <div class="input-group mt-2 mb-3 shadow">
                                         <a tabindex="0" class="input-group-text text-decoration-none text-white border-0" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" title="Comment" data-bs-content="Optional comment"><i class="fa-solid fa-paper-plane"></i></a>
-                                            <textarea id="purchase-request-form-info__comment-field" class="form-control border-0 bg-white" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
+                                            <textarea id="job-order-form-info__comment-field" class="form-control border-0 bg-white" rows="1" placeholder="{{ __("write a comment.") }}"></textarea>
                                         </div>
                                         <span class="d-block my-2">
-                                            <button id="purchase-request-form-info__comment-button" class="btn btn-success w-100 shadow" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
+                                            <button id="job-order-form-info__comment-button" class="btn btn-success w-100 shadow" type="button" data-frp="{{ \Illuminate\Support\Facades\Crypt::encrypt($formrequiredpersonel_id) }}">
                                                 {{ __("COMMENT") }}
                                             </button>
                                         </span>
@@ -195,6 +197,14 @@
     {{-- JOB ORDER FORM INFO js --}}
     <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/job-order-form-info.js") }}"></script>
 
+    @if(Session::has("info"))
+        <script>
+            jQuery(function() {
+                new MessageModal("#job-order-form-info__message-modal").show("Info", "{{ session("info") }}");
+            });
+        </script>
+    @endif
+    
 @stop
 
 

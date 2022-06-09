@@ -14,6 +14,7 @@
 @section("content")
     <div class="d-block py-3">
 
+        {{-- message modal --}}
         <x-message-modal id="user__user-info-modal"></x-message-modal>
 
         <div class="container">
