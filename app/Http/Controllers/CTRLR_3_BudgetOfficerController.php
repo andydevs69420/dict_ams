@@ -66,6 +66,75 @@ class CTRLR_3_BudgetOfficerController extends Controller
         return view("app.role__budget-officer.purchase-request.review-purchase-request", $data);
     }
 
+    public function takePrActions(Request $request)
+    {
+
+        #============================
+        # Redirect to login if not  =
+        # login or expired.         =
+        #============================
+        if (!Auth::check())
+            return redirect()->to("/login");
+
+        #==============================
+        # Only requisitioner can view =
+        # pr form.                    =
+        #==============================
+        if (!Auth::user()->isBudgetOfficer())
+            return redirect()->to("/dashboard");
+        
+        $form_id = $request->input("formid");
+
+        #==============================
+        # Decypt form id. If invalid, =
+        # redirect to dashboard.      =
+        #==============================
+        try 
+        { 
+            $form_id = (Int) Crypt::decrypt($form_id);
+        } 
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        { 
+            return redirect()->to("/dashboard"); 
+        }
+
+        if ($request->has("accept"))
+        {
+            #==================================
+            # If form is already cancelled    =
+            # or BO has taken his/her action  =
+            # for the form, MARK as NO ACTION =
+            # REQUIRED.                       =
+            #==================================
+            if (!FormRequiredPersonel::isFormHasActionForBO($form_id))
+                return back()->with(["info" => "Form has no required action!"]);
+            
+            if (!FormRequiredPersonel::updatePersonelStatus($form_id, Auth::user()->user_id, 1))
+                return back()->with(["info" => "Something went wrong while declining!"]);
+
+            return back()->with(["info" => "Purchase request approved."]);
+        }
+        else if ($request->has("decline"))
+        {   
+            #==================================
+            # If form is already cancelled    =
+            # or BO has taken his/her action  =
+            # for the form, MARK as NO ACTION =
+            # REQUIRED.                       =
+            #==================================
+            if (!FormRequiredPersonel::isFormHasActionForBO($form_id))
+                return back()->with(["info" => "Form has no required action!"]);
+            
+            if (!FormRequiredPersonel::updatePersonelStatus($form_id, Auth::user()->user_id, 4))
+                return back()->with(["info" => "Something went wrong while declining!"]);
+
+            return back()->with(["info" => "You have declined this paper."]);
+        }
+        else {
+            return back()->with(["info" => "Invalid actions."]);
+        }
+    }
+
     /**
      * Loads comment dynamically
      * @param Request $request request

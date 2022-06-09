@@ -94,7 +94,10 @@ Route::controller(CTRLR_3_BudgetOfficerController::class)->group(function() {
 
     // Budget Officer (Purchase Request)
     Route::get("/budgetofficer/purchaserequeststatus", "PrIndex");
+    // Review pr form
     Route::get("/budgetofficer/reviewpurchaserequest/{prform}/review", "PrReview");
+    // Take actions
+    Route::post("/budgetofficer/reviewpurchaserequest/takeaction", "takePrActions");
         // load comments
         Route::get("/budgetofficer/reviewpurchaserequest/loadcomment/{hashid}/load", "loadPrFormReviewComment");
         // add comments

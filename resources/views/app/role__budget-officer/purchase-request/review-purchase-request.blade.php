@@ -70,13 +70,15 @@
                                 <div class="d-block">
                                     <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("REQUIRED ACTION") }}</span>
                                     <div class="d-block">
-                                        <form action="" method="post">
+                                        <form action="{{ url("/budgetofficer/reviewpurchaserequest/takeaction") }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="formid" value="{{ \Illuminate\Support\Facades\Crypt::encrypt($form_id) }}">
                                             <div class="d-flex flex-row justify-content-center mb-2 px-2">
                                                 <input class="form-control form-control-sm mb-2 rounded-pill shadow" type="file" name="file-upload" accept=".pdf" style="width: 95%;" required>
                                             </div>
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
                                                 <input class="btn btn-sm btn-primary rounded-pill shadow" name="accept" type="submit" style="width: 45%;" value="{{ __("ACCEPT") }}">
-                                                <input class="btn btn-sm btn-danger rounded-pill shadow" name="decline" type="button" style="width: 45%;" value="{{ __("DECLINE") }}">
+                                                <input class="btn btn-sm btn-danger rounded-pill shadow" name="decline" type="submit" style="width: 45%;" value="{{ __("DECLINE") }}" onclick='javascript: $("input[name=\"file-upload\"]").attr("required", false)'>
                                             </div>
                                         </form>
                                     </div>
@@ -153,7 +155,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body px-2" style="max-height: 350px; overflow-y: auto;">
                                             <div class="container-fluid">
-                                                <div id="review-purchase-request__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
+                                                <div id="review-purchase-request__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($form_id) }}">
                                                     <div class="px-2 py-5 text-center">
                                                         <i class="d-block text-muted fa-solid fa-comment fa-2x"></i>
                                                         <span class="text-muted text-truncate" role="text">loading comments...</span>
@@ -209,4 +211,12 @@
     {{-- REVIEW PURCHASE REQUEST js --}}
     <script type="text/javascript" src="{{ asset("js/app/role__budget-officer/purchase-request/review-purchase-request.js") }}"></script>
 
+    @if(Session::has("info"))
+        <script>
+            jQuery(function() {
+                new MessageModal("#review-purchase-request__message-modal").show("Info", "{{ session("info") }}");
+            });
+        </script>
+    @endif
+        
 @stop

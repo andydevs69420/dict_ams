@@ -148,7 +148,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body px-2" style="max-height: 350px; overflow-y: auto;">
                                             <div class="container-fluid">
-                                                <div id="review-job-order__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($frp->form_id) }}">
+                                                <div id="review-job-order__comment-list" class="row" data-fid="{{ \Illuminate\Support\Facades\Crypt::encrypt($form_id) }}">
                                                     <div class="px-2 py-5 text-center">
                                                         <i class="d-block text-muted fa-solid fa-comment fa-2x"></i>
                                                         <span class="text-muted text-truncate" role="text">loading comments...</span>
