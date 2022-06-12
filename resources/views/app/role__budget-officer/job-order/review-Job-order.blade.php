@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-12 col-lg-9">
 
-                    <x-jo-form 
+                    <x-jo-form
                         :items="$jo_items"
                         :conforme="'LOADING..'"
                         :requisitioner="$requester_data"
@@ -68,13 +68,15 @@
                                 <div class="d-block">
                                     <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("REQUIRED ACTION") }}</span>
                                     <div class="d-block">
-                                        <form action="" method="post">
+                                        <form action="{{ url("/budgetofficer/reviewjoborder/takeaction") }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="formid" value="{{ \Illuminate\Support\Facades\Crypt::encrypt($form_id) }}">
                                             <div class="d-flex flex-row justify-content-center mb-2 px-2">
-                                                <input type="file" class="form-control form-control-sm mb-2 rounded-pill shadow" style="width: 95%;" required>
+                                                <input class="form-control form-control-sm mb-2 rounded-pill shadow" type="file" name="file-upload" accept=".pdf" style="width: 95%;" required>
                                             </div>
                                             <div class="d-flex flex-row justify-content-around mb-2 px-2">
                                                 <input class="btn btn-sm btn-primary rounded-pill shadow" name="accept" type="submit" style="width: 45%;" value="{{ __("ACCEPT") }}">
-                                                <input class="btn btn-sm btn-danger rounded-pill shadow" name="decline" type="button" style="width: 45%;" value="{{ __("DECLINE") }}">
+                                                <input class="btn btn-sm btn-danger rounded-pill shadow" name="decline" type="submit" style="width: 45%;" value="{{ __("DECLINE") }}" onclick='javascript: $("input[name=\"file-upload\"]").attr("required", false)'>
                                             </div>
                                         </form>
                                     </div>
@@ -106,23 +108,10 @@
                             <div class="container-fluid mb-2">
                                 <div class="row flex-nowrap">
                                     <div class="col-1">
-                                        <ol class="step-progress">
 
-                                            @foreach(\App\Models\FormRequiredPersonel::getFormByFormID($form_id) as $frp)
-                                                
-                                                @if(strcmp($frp->personelstatus, "signitured") === 0)
-                                                    <li class="progress-step ok">
-                                                        <i class="fa fa-check fa-2xs"></i>
-                                                    </li>
-                                                @else
-                                                    <li class="progress-step not-ok">
-                                                        <i class="fa fa-times fa-2xs"></i>
-                                                    </li>
-                                                @endif
+                                      <x-step-progress :frp=\App\Models\FormRequiredPersonel::getFormByFormID($form_id)>
+                                        </x-step-progress>
 
-                                            @endforeach
-
-                                        </ol>
                                     </div>
                                     <div class="col-11 pl-0">
                                         <div class="progress-label">

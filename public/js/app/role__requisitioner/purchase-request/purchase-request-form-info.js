@@ -7,6 +7,7 @@
 
     jQuery(() => {
         root.messageModal = new MessageModal("#purchase-request-form-info__message-modal");
+        $("[data-bs-toggle=\"tooltip\"]").tooltip();
         loadComments();
         addComment();
     });

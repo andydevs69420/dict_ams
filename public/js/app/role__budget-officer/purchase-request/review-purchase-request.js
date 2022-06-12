@@ -8,6 +8,7 @@
 
     jQuery(() => {
         root.messageModal = new MessageModal("#review-purchase-request__message-modal");
+        $("[data-bs-toggle=\"tooltip\"]").tooltip();
         loadComments();
         addComment();
     });
@@ -21,7 +22,7 @@
         setInterval(() => {
             element = $(ID);
             element.load(`/budgetofficer/reviewpurchaserequest/loadcomment/${element.data("fid")}/load`);
-        }, 2000); 
+        }, 2000);
     }
 
     /**
@@ -45,7 +46,7 @@
                 {
                     if  (!(status === "success" && (response  == true)))
                         return root.messageModal?.show("Error", "An error has been encountered while inserting comment.");
-                    
+
                     $("#review-purchase-request__comment-field").val("");
                 },
                 error : function(response, status, request)
@@ -55,5 +56,3 @@
     }
 
 })(window);
-
-

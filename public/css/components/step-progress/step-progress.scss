@@ -15,14 +15,14 @@
 }
 
 .step-progress > .progress-step
-{ 
-    list-style-type: none; 
+{
+    list-style-type: none;
     width: max-content;
     display: block;
     overflow-x: visible;
     text-overflow: clip;
     white-space: nowrap;
-    
+
 }
 
 .step-progress > .progress-step:nth-child(even)
@@ -62,7 +62,7 @@
 { margin-bottom: 0px; }
 
 .step-progress > .progress-step.ok
-{ color: white; }
+{ color: rgb(25, 223, 114); }
 
 .step-progress > .progress-step.not-ok
-{ color: rgb(72, 255, 0); }
+{ color: rgb(25, 223, 114); }

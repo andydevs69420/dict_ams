@@ -19,7 +19,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
 
         if (!Auth::check())
             return redirect()->to("/login");
-        
+
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
 
@@ -27,24 +27,24 @@ class CTRLR_3_BudgetOfficerController extends Controller
     }
 
 
-    public function PrReview(String $prformid) 
+    public function PrReview(String $prformid)
     {
-        
+
         if (!Auth::check())
             return redirect()->to("/login");
 
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
-        
+
         $form_id = $prformid;
 
         #==============================
         # Decypt form id. If invalid, =
         # redirect to dashboard.      =
         #==============================
-        try 
-        { $form_id = (Int) Crypt::decrypt($form_id); } 
-        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
+        try
+        { $form_id = (Int) Crypt::decrypt($form_id); }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
         { return redirect()->to("/dashboard"); }
 
         $data = FormRequiredPersonel::getFormByFormAndUserID($form_id, Auth::user()->user_id)->toArray();
@@ -62,10 +62,14 @@ class CTRLR_3_BudgetOfficerController extends Controller
         $data["rA_data"] = $frp[2]->toArray();
 
         // return response("FOOC");
-        
+
         return view("app.role__budget-officer.purchase-request.review-purchase-request", $data);
     }
 
+    /**
+     * Take pr actions
+     * @param Request $request request
+     **/
     public function takePrActions(Request $request)
     {
 
@@ -82,20 +86,20 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #==============================
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
-        
+
         $form_id = $request->input("formid");
 
         #==============================
         # Decypt form id. If invalid, =
         # redirect to dashboard.      =
         #==============================
-        try 
-        { 
+        try
+        {
             $form_id = (Int) Crypt::decrypt($form_id);
-        } 
+        }
         catch(\Illuminate\Contracts\Encryption\DecryptException $e)
-        { 
-            return redirect()->to("/dashboard"); 
+        {
+            return redirect()->to("/dashboard");
         }
 
         if ($request->has("accept"))
@@ -108,14 +112,14 @@ class CTRLR_3_BudgetOfficerController extends Controller
             #==================================
             if (!FormRequiredPersonel::isFormHasActionForBO($form_id))
                 return back()->with(["info" => "Form has no required action!"]);
-            
+
             if (!FormRequiredPersonel::updatePersonelStatus($form_id, Auth::user()->user_id, 1))
-                return back()->with(["info" => "Something went wrong while declining!"]);
+                return back()->with(["info" => "Something went wrong while accepting!"]);
 
             return back()->with(["info" => "Purchase request approved."]);
         }
         else if ($request->has("decline"))
-        {   
+        {
             #==================================
             # If form is already cancelled    =
             # or BO has taken his/her action  =
@@ -124,7 +128,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
             #==================================
             if (!FormRequiredPersonel::isFormHasActionForBO($form_id))
                 return back()->with(["info" => "Form has no required action!"]);
-            
+
             if (!FormRequiredPersonel::updatePersonelStatus($form_id, Auth::user()->user_id, 4))
                 return back()->with(["info" => "Something went wrong while declining!"]);
 
@@ -148,26 +152,26 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #============================
         if (!Auth::check())
             return false;
-        
+
         #==============================
         # Only requisitioner can view =
         # his/her form comments.      =
         #==============================
         if (!Auth::user()->isBudgetOfficer())
             return false;
-        
+
         $form_id = $hashid;
 
         #===============================
         # Decrypt form_id. If invalid, =
         # return false                 =
         #===============================
-        try 
-        { 
-            $form_id = (Int) Crypt::decrypt($form_id); 
+        try
+        {
+            $form_id = (Int) Crypt::decrypt($form_id);
         }
         catch(\Illuminate\Contracts\Encryption\DecryptException $e)
-        { 
+        {
             return false;
         }
 
@@ -181,7 +185,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
     }
 
 
-    public function addPrFormReviewComment(Request $request) 
+    public function addPrFormReviewComment(Request $request)
     {
         #============================
         # Return false if not       =
@@ -189,7 +193,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #============================
         if (!Auth::check())
             return false;
-        
+
         #==============================
         # Only requisitioner can add  =
         # his/her form comments.      =
@@ -203,7 +207,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #==============================
         if (hasNull($request, ["frp", "comment"]))
             return false;
-        
+
         $form_required_personel = $request->input("frp");
         $comment                = $request->input("comment");
 
@@ -211,12 +215,12 @@ class CTRLR_3_BudgetOfficerController extends Controller
         # Decypt frp_id. If invalid,  =
         # return false                =
         #==============================
-        try 
-        { 
+        try
+        {
             $form_required_personel = (Int) Crypt::decrypt($form_required_personel);
-        } 
-        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-        { 
+        }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        {
             return false;
         }
 
@@ -224,13 +228,13 @@ class CTRLR_3_BudgetOfficerController extends Controller
             "formrequiredpersonel_id" => $form_required_personel,
             "comment"                 => $comment
         ]);
-        
+
         return (bool) $signal;
     }
 
     // =============================== JOB ORDER ===============================
 
-    public function JoIndex() 
+    public function JoIndex()
     {
 
         if (!Auth::check())
@@ -249,19 +253,19 @@ class CTRLR_3_BudgetOfficerController extends Controller
 
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
-        
+
         $form_id = $joformid;
 
         #==============================
         # Decypt form id. If invalid, =
         # redirect to dashboard.      =
         #==============================
-        try 
-        { 
-            $form_id = (Int) Crypt::decrypt($form_id); 
-        } 
-        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-        { 
+        try
+        {
+            $form_id = (Int) Crypt::decrypt($form_id);
+        }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        {
             return redirect()->to("/dashboard");
         }
 
@@ -269,11 +273,84 @@ class CTRLR_3_BudgetOfficerController extends Controller
 
         $data["jo_items"] = JoItem::getItemsByFormId($form_id)->toArray();
         $frp = FormRequiredPersonel::getRequiredPersonelsByFormID($form_id);
-        
+
         $data["requester_data"]    = $frp[0]->toArray();
         $data["authofficial_data"] = $frp[1]->toArray();
 
         return view("app.role__budget-officer.job-order.review-job-order", $data);
+    }
+
+    /**
+     * Take jo actions
+     * @param Request $request request
+     **/
+    public function takeJoActions(Request $request)
+    {
+
+        #============================
+        # Redirect to login if not  =
+        # login or expired.         =
+        #============================
+        if (!Auth::check())
+            return redirect()->to("/login");
+
+        #==============================
+        # Only requisitioner can view =
+        # pr form.                    =
+        #==============================
+        if (!Auth::user()->isBudgetOfficer())
+            return redirect()->to("/dashboard");
+
+        $form_id = $request->input("formid");
+
+        #==============================
+        # Decypt form id. If invalid, =
+        # redirect to dashboard.      =
+        #==============================
+        try
+        {
+            $form_id = (Int) Crypt::decrypt($form_id);
+        }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        {
+            return redirect()->to("/dashboard");
+        }
+
+        if ($request->has("accept"))
+        {
+            #==================================
+            # If form is already cancelled    =
+            # or BO has taken his/her action  =
+            # for the form, MARK as NO ACTION =
+            # REQUIRED.                       =
+            #==================================
+            if (!FormRequiredPersonel::isFormHasActionForBO($form_id))
+                return back()->with(["info" => "Form has no required action!"]);
+
+            if (!FormRequiredPersonel::updatePersonelStatus($form_id, Auth::user()->user_id, 1))
+                return back()->with(["info" => "Something went wrong while accepting!"]);
+
+            return back()->with(["info" => "Purchase request approved."]);
+        }
+        else if ($request->has("decline"))
+        {
+            #==================================
+            # If form is already cancelled    =
+            # or BO has taken his/her action  =
+            # for the form, MARK as NO ACTION =
+            # REQUIRED.                       =
+            #==================================
+            if (!FormRequiredPersonel::isFormHasActionForBO($form_id))
+                return back()->with(["info" => "Form has no required action!"]);
+
+            if (!FormRequiredPersonel::updatePersonelStatus($form_id, Auth::user()->user_id, 4))
+                return back()->with(["info" => "Something went wrong while declining!"]);
+
+            return back()->with(["info" => "You have declined this paper."]);
+        }
+        else {
+            return back()->with(["info" => "Invalid actions."]);
+        }
     }
 
     /**
@@ -289,26 +366,26 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #============================
         if (!Auth::check())
             return false;
-        
+
         #==============================
         # Only requisitioner can view =
         # his/her form comments.      =
         #==============================
         if (!Auth::user()->isBudgetOfficer())
             return false;
-        
+
         $form_id = $hashid;
 
         #===============================
         # Decrypt form_id. If invalid, =
         # return false                 =
         #===============================
-        try 
-        { 
-            $form_id = (Int) Crypt::decrypt($form_id); 
+        try
+        {
+            $form_id = (Int) Crypt::decrypt($form_id);
         }
         catch(\Illuminate\Contracts\Encryption\DecryptException $e)
-        { 
+        {
             return false;
         }
 
@@ -322,7 +399,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
     }
 
 
-    public function addJoFormReviewComment(Request $request) 
+    public function addJoFormReviewComment(Request $request)
     {
         #============================
         # Return false if not       =
@@ -330,7 +407,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #============================
         if (!Auth::check())
             return false;
-        
+
         #==============================
         # Only requisitioner can add  =
         # his/her form comments.      =
@@ -344,7 +421,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         #==============================
         if (hasNull($request, ["frp", "comment"]))
             return false;
-        
+
         $form_required_personel = $request->input("frp");
         $comment                = $request->input("comment");
 
@@ -352,12 +429,12 @@ class CTRLR_3_BudgetOfficerController extends Controller
         # Decypt frp_id. If invalid,  =
         # return false                =
         #==============================
-        try 
-        { 
+        try
+        {
             $form_required_personel = (Int) Crypt::decrypt($form_required_personel);
-        } 
-        catch(\Illuminate\Contracts\Encryption\DecryptException $e) 
-        { 
+        }
+        catch(\Illuminate\Contracts\Encryption\DecryptException $e)
+        {
             return false;
         }
 
@@ -365,7 +442,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
             "formrequiredpersonel_id" => $form_required_personel,
             "comment"                 => $comment
         ]);
-        
+
         return (bool) $signal;
     }
 

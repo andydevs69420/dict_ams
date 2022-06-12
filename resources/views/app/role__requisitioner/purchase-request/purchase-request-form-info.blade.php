@@ -38,7 +38,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-9">
-                    <x-pr-form 
+                    <x-pr-form
                         :items="$pr_items"
                         :purpose="$purpose"
                         :requisitioner="$rQ_data"
@@ -82,7 +82,7 @@
 
                             {{-- status --}}
                             <span class="d-block px-2 small text-muted my-2" role="text" style="font-weight: 400;">
-                                
+
                                 {{ __("FORM STATUS") }}
 
                                 <x-signiture-status class="float-end"
@@ -100,23 +100,10 @@
                             <div class="container-fluid mb-2">
                                 <div class="row flex-nowrap">
                                     <div class="col-1">
-                                        <ol class="step-progress">
 
-                                            @foreach(\App\Models\FormRequiredPersonel::getFormByFormID($form_id) as $frp)
-                                                
-                                                @if(strcmp($frp->personelstatus, "signitured") === 0)
-                                                    <li class="progress-step ok">
-                                                        <i class="fa fa-check fa-2xs"></i>
-                                                    </li>
-                                                @else
-                                                    <li class="progress-step not-ok">
-                                                        <i class="fa fa-times fa-2xs"></i>
-                                                    </li>
-                                                @endif
+                                      <x-step-progress :frp=\App\Models\FormRequiredPersonel::getFormByFormID($form_id)>
+                                        </x-step-progress>
 
-                                            @endforeach
-
-                                        </ol>
                                     </div>
                                     <div class="col-11 pl-0">
                                         <div class="progress-label">
@@ -177,7 +164,7 @@
 
             </div>
         </div>
-    
+
     </div>
 @stop
 
@@ -210,7 +197,3 @@
     @endif
 
 @stop
-
-
-
-

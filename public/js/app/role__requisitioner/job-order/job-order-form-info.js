@@ -7,6 +7,8 @@
     });
 
     jQuery(function() {
+        root.messageModal = new MessageModal("#job-order-form-info__message-modal");
+        $("[data-bs-toggle=\"tooltip\"]").tooltip();
         loadComments();
         addComment();
     });

@@ -106,6 +106,8 @@ Route::controller(CTRLR_3_BudgetOfficerController::class)->group(function() {
     // Budget Officer (Job Order)
     Route::get("/budgetofficer/joborderstatus", "JoIndex");
     Route::get("/budgetofficer/reviewjoborder/{joform}/review", "Joedit");
+    // Take actions
+    Route::post("/budgetofficer/reviewjoborder/takeaction", "takeJoActions");
         // load comments
         Route::get("/budgetofficer/reviewjoborder/loadcomment/{hashid}/load", "loadJoFormReviewComment");
         // add comments

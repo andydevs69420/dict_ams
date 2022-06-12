@@ -80,10 +80,10 @@
 }
 
 .step-progress > .progress-step.ok {
-  color: white;
+  color: #19df72;
 }
 
 .step-progress > .progress-step.not-ok {
-  color: #48ff00;
+  color: #19df72;
 }
 /*# sourceMappingURL=step-progress.css.map */

@@ -7,6 +7,7 @@
 
     jQuery(() => {
         root.messageModal = new MessageModal("#review-job-order__message-modal");
+        $("[data-bs-toggle=\"tooltip\"]").tooltip();
         loadComments();
         addComment();
     });

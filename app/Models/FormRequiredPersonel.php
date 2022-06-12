@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;  
+use Illuminate\Support\Facades\DB;
 
 class FormRequiredPersonel extends Model
 {
@@ -12,7 +14,7 @@ class FormRequiredPersonel extends Model
     protected $table = "form_required_personel";
 
     public $timestamps = false;
-    
+
     protected $fillable = [
         "form_id",
         "userverificationdetails_id",
@@ -42,12 +44,12 @@ class FormRequiredPersonel extends Model
         ->join(
             DB::raw("
                 (
-                    SELECT 
+                    SELECT
                         user_verification_details.userverificationdetails_id,
                         user_verification_details.verificationstatus_id,
                         user.*
                     FROM
-                        user_verification_details 
+                        user_verification_details
                         INNER JOIN user ON user_verification_details.user_id = user.user_id
                 ) AS uvd
             "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
@@ -84,12 +86,12 @@ class FormRequiredPersonel extends Model
         ->join(
             DB::raw("
                 (
-                    SELECT 
+                    SELECT
                         user_verification_details.userverificationdetails_id,
                         user_verification_details.verificationstatus_id,
                         user.*
                     FROM
-                        user_verification_details 
+                        user_verification_details
                         INNER JOIN user ON user_verification_details.user_id = user.user_id
                 ) AS uvd
             "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
@@ -123,12 +125,12 @@ class FormRequiredPersonel extends Model
         ->join(
             DB::raw("
                 (
-                    SELECT 
+                    SELECT
                         user_verification_details.userverificationdetails_id,
                         user_verification_details.verificationstatus_id,
                         user.*
                     FROM
-                        user_verification_details 
+                        user_verification_details
                         INNER JOIN user ON user_verification_details.user_id = user.user_id
                 ) AS uvd
             "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
@@ -158,12 +160,12 @@ class FormRequiredPersonel extends Model
         ->join(
             DB::raw("
                 (
-                    SELECT 
+                    SELECT
                         user_verification_details.userverificationdetails_id,
                         user_verification_details.verificationstatus_id,
                         user.*
                     FROM
-                        user_verification_details 
+                        user_verification_details
                         INNER JOIN user ON user_verification_details.user_id = user.user_id
                 ) AS uvd
             "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
@@ -191,12 +193,12 @@ class FormRequiredPersonel extends Model
         ->join(
             DB::raw("
                 (
-                    SELECT 
+                    SELECT
                         user_verification_details.userverificationdetails_id,
                         user_verification_details.verificationstatus_id,
                         user.*
                     FROM
-                        user_verification_details 
+                        user_verification_details
                         INNER JOIN user ON user_verification_details.user_id = user.user_id
                 ) AS uvd
             "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
@@ -218,7 +220,7 @@ class FormRequiredPersonel extends Model
     public static function isFormHasActionForRequisitioner(Int $formid)
     {
         return (
-            self::isFormHasStatusFor($formid, 1, config("global.VALID_REQUISITIONER")) && 
+            self::isFormHasStatusFor($formid, 1, config("global.VALID_REQUISITIONER")) &&
             self::isFormHasStatusFor($formid, 2, [ config("global.BUDGET_OFFICER") ])
         );
     }
@@ -231,7 +233,7 @@ class FormRequiredPersonel extends Model
     public static function isFormHasActionForBO(Int $formid)
     {
         return (
-            self::isFormHasStatusFor($formid, 1, config("global.VALID_REQUISITIONER")) && 
+            self::isFormHasStatusFor($formid, 1, config("global.VALID_REQUISITIONER")) &&
             self::isFormHasStatusFor($formid, 2, [ config("global.BUDGET_OFFICER") ])
         );
     }
@@ -254,12 +256,12 @@ class FormRequiredPersonel extends Model
         return self::join(
             DB::raw("
                 (
-                    SELECT 
+                    SELECT
                         user_verification_details.userverificationdetails_id,
                         user_verification_details.verificationstatus_id,
                         user.*
                     FROM
-                        user_verification_details 
+                        user_verification_details
                         INNER JOIN user ON user_verification_details.user_id = user.user_id
                 ) AS uvd
             "), "form_required_personel.userverificationdetails_id", "=", "uvd.userverificationdetails_id"
@@ -269,7 +271,7 @@ class FormRequiredPersonel extends Model
         )
         ->where("form_id", "=", $formid)
         ->where("user_id", "=", $userid)
-        ->update([ "form_required_personel.personelstatus_id" => $status ]);
+        ->update([ "form_required_personel.personelstatus_id" => $status, "updatedat" => Carbon::now() ]);
     }
 
 }
