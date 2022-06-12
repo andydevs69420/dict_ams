@@ -90,6 +90,7 @@ Route::controller(CTRLR_2_ReqisitionerController::class)->group(function () {
 
 });
 
+// budget officer
 Route::controller(CTRLR_3_BudgetOfficerController::class)->group(function() {
 
     // Budget Officer (Purchase Request)

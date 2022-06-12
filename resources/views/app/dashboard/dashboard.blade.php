@@ -125,7 +125,7 @@
                                                     <span class="dashboard__dashboard-tile-title d-block w-100 text-center text-lg-start" role="text">{{ __("APPROVED FORMS") }}</span>
                                                     <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center justify-content-lg-between w-100">
                                                         <span class="dashboard__dashboard-tile-value d-block w-100 text-truncate text-center text-lg-start" role="text">
-                                                            {{ App\Models\UserVerificationDetails::countVerifiedUsers() }}
+                                                            TBD
                                                         </span>
                                                         <i class="dashboard__tile-icon text-muted opacity-25 fa-solid fa-file-circle-check"></i>
                                                     </div>

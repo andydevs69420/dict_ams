@@ -97,24 +97,10 @@
                             {{-- tracking --}}
                             <span class="d-block px-2 small text-muted mb-2" role="text" style="font-weight: 400;">{{ __("TRACKING") }}</span>
                             <div class="container-fluid mb-2">
-                                <div class="row flex-nowrap">
-                                    <div class="col-1">
 
-                                      <x-step-progress :frp=\App\Models\FormRequiredPersonel::getFormByFormID($form_id)>
-                                        </x-step-progress>
+                                <x-step-progress :frp=\App\Models\FormRequiredPersonel::getFormByFormID($form_id)>
+                                    </x-step-progress>
 
-                                    </div>
-                                    <div class="col-11 pl-0">
-                                        <div class="progress-label">
-                                            @foreach(\App\Models\FormRequiredPersonel::getFormByFormID($form_id) as $frp)
-                                                <div class="d-block small text-truncate @if(strcmp($frp->personelstatus, "unsignitured") === 0) text-muted @endif" role="text">
-                                                    <span class="d-block" role="text">{{ \App\Models\Accesslevel::getAccesslevelById($frp->accesslevel_id) }}</span>
-                                                    <span class="d-block small" role="text" style="font-size: .5em">{{ $frp->updatedat? $frp->updatedat : "----:--:--" }}</span>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="d-block px-2">
@@ -186,9 +172,9 @@
 
     {{-- JOB ORDER FORM INFO js --}}
     <script type="text/javascript" src="{{ asset("js/app/role__requisitioner/job-order/job-order-form-info.js") }}"></script>
-
+    
     @if(Session::has("info"))
-        <script>
+        <script defer>
             jQuery(function() {
                 new MessageModal("#job-order-form-info__message-modal").show("Info", "{{ session("info") }}");
             });

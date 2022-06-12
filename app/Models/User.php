@@ -52,6 +52,13 @@ class User extends Authenticatable
     { return in_array(Auth::user()->accesslevel_id, [ config("global.BUDGET_OFFICER") ]); }
 
     /**
+     * Checks if user is recommending approval
+     * @return bool
+     **/
+    public static function isRecommendingApproval()
+    { return in_array(Auth::user()->accesslevel_id, config("global.VALID_RECOMMENDING_APPROVAL") ); }
+
+    /**
      * Checks if user is admin
      * @return bool
      **/
