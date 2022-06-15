@@ -26,7 +26,7 @@
         headers: { "X-CSRF-TOKEN" : $("meta[name=\"csrf-token\"]").attr("content") }
     });
 
-    
+
     /**
      * Update user verification status
      * @param user_id "String | Number"  user's id
@@ -34,10 +34,10 @@
      * @return null
      * @example
      *     status_id
-     *         1 := PENDING 
-     *         2 := ACCEPTED 
-     *         3 := DECLINE 
-     * 
+     *         1 := PENDING
+     *         2 := ACCEPTED
+     *         3 := DECLINE
+     *
      *     window.updateUserVerificationStatus("69", "3");
      **/
     window.updateUserVerificationStatus = async function(user_id,status_id)
@@ -45,17 +45,17 @@
         await $.ajax({
             url  : "/user/updateverificationstatus",
             type : "POST",
-            data : 
+            data :
             {
                 "user_id"   : user_id,
                 "status_id" : status_id
             },
             dataType: "json",
-            success: function(response, status, request) 
+            success: function(response, status, request)
             {
                 if  (!(status === "success" && (response  == true)))
                     return somethingWentWrong();
-                
+
                 switch (parseInt(status_id))
                 {
                     case 2:// ACCEPTED
@@ -70,7 +70,7 @@
                         throw `Invalid status_id "${status_id}" for this context..`;
                 }
             },
-            error: function(response, status, request) 
+            error: function(response, status, request)
             { somethingWentWrong(); }
         });
     };
@@ -78,31 +78,31 @@
 
     /**
      * Deletes current row from table based on id
-     * @param user_id "String | Number" user's id 
+     * @param user_id "String | Number" user's id
      * @return null
      * @example
      *     window.deleteUser("69");
      **/
-    window.deleteUser = async function(user_id) 
+    window.deleteUser = async function(user_id)
     {
         await $.ajax({
             url  : "/user/deleteuser",
             type : "POST",
             data : { "user_id": user_id },
             dataType: "json",
-            success: function(response, status, request) 
+            success: function(response, status, request)
             {
                 if  (!(status === "success" && (response  == true)))
                     return somethingWentWrong();
-                
+
                 window.messageModal.show("Info", "User deleted successfully!");
-                
+
                 window.userTable?.row($("#user-row__user-"+user_id))
                 .remove()
                 .draw();
-                
+
             },
-            error: function(response, status, request) 
+            error: function(response, status, request)
             { somethingWentWrong(); }
         });
     };
@@ -154,7 +154,7 @@
                     .append(
                         $("<li>")
                         .append(
-                            $(`<a class="dropdown-item" href="/user/userprofile?user=${response['hashid']}">`)
+                            $(`<a class="dropdown-item" href="/user/userprofile/${response['hashid']}/view">`)
                             .text("view profile")
                         )
                     );
@@ -175,7 +175,7 @@
                 )
             );
         }
-       
+
     }
 
 })();

@@ -7,15 +7,14 @@ body {
   body {
     background-color: #FFFFFF;
   }
-  div[class="form__view"], * {
+
+  div[class=form__view], * {
     visibility: visible;
     width: 100vw;
-    -webkit-box-shadow: initial !important;
-            box-shadow: initial !important;
+    box-shadow: initial !important;
   }
 }
-
-div[class="form__view"] {
+div[class=form__view] {
   display: block;
   margin: auto;
   width: 640px;
@@ -23,11 +22,10 @@ div[class="form__view"] {
   min-height: 768px;
   padding: 35px 15px;
   background-color: #FFFFFF;
-  -webkit-box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
-img[alt="form-header"] {
+img[alt=form-header] {
   display: block;
   margin: auto;
   width: 60%;
@@ -54,7 +52,7 @@ tbody {
 }
 
 .xl67 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
 }
 
@@ -73,10 +71,10 @@ tbody {
 
 .xl297 {
   font-family: Calibri, sans-serif;
-  border-top: 2.0pt double black;
+  border-top: 2pt double black;
   border-right: none;
   border-bottom: none;
-  border-left: 2.0pt double black;
+  border-left: 2pt double black;
   vertical-align: top;
 }
 
@@ -95,7 +93,7 @@ tbody {
 
 .xl298 {
   font-family: Calibri, sans-serif;
-  border-top: 2.0pt double black;
+  border-top: 2pt double black;
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -103,8 +101,8 @@ tbody {
 
 .xl299 {
   font-family: Calibri, sans-serif;
-  border-top: 2.0pt double black;
-  border-right: 2.0pt double black;
+  border-top: 2pt double black;
+  border-right: 2pt double black;
   border-bottom: none;
   border-left: none;
 }
@@ -114,7 +112,7 @@ tbody {
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: 2.0pt double black;
+  border-left: 2pt double black;
 }
 
 .x-date-slot {
@@ -122,7 +120,7 @@ tbody {
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
-  border-right: 2.0pt double black;
+  border-right: 2pt double black;
   border-bottom: none;
   border-left: none;
   white-space: normal;
@@ -131,50 +129,50 @@ tbody {
 }
 
 .xl302 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: 2.0pt double black;
+  border-left: 2pt double black;
 }
 
 .xl303 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
-  border-right: 2.0pt double black;
+  border-right: 2pt double black;
   border-bottom: none;
   border-left: none;
 }
 
 .xl304 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
-  border-bottom: 2.0pt double black;
-  border-left: 2.0pt double black;
+  border-bottom: 2pt double black;
+  border-left: 2pt double black;
 }
 
 .xl305 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
   border-right: none;
-  border-bottom: 2.0pt double black;
+  border-bottom: 2pt double black;
   border-left: none;
 }
 
 .xl306 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
-  border-right: 2.0pt double black;
-  border-bottom: 2.0pt double black;
+  border-right: 2pt double black;
+  border-bottom: 2pt double black;
   border-left: none;
 }
 
@@ -182,204 +180,204 @@ tbody {
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
-  border-bottom: 2.0pt double black;
+  border-bottom: 2pt double black;
   border-left: none;
 }
 
 .xl308 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
-  border-bottom: 2.0pt double black;
+  border-bottom: 2pt double black;
   border-left: none;
 }
 
 .xl309 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
-  border-right: 2.0pt double black;
-  border-bottom: 2.0pt double black;
+  border-right: 2pt double black;
+  border-bottom: 2pt double black;
   border-left: none;
 }
 
 .xl310 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: 2.0pt double black;
+  border-top: 2pt double black;
   border-right: none;
-  border-bottom: 2.0pt double black;
-  border-left: 2.0pt double black;
+  border-bottom: 2pt double black;
+  border-left: 2pt double black;
 }
 
 .xl311 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: 2.0pt double black;
-  border-right: .5pt solid black;
-  border-bottom: 2.0pt double black;
-  border-left: .5pt solid black;
+  border-top: 2pt double black;
+  border-right: 0.5pt solid black;
+  border-bottom: 2pt double black;
+  border-left: 0.5pt solid black;
   white-space: normal;
 }
 
 .xl312 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: 2.0pt double black;
-  border-right: .5pt solid black;
-  border-bottom: 2.0pt double black;
-  border-left: .5pt solid black;
+  border-top: 2pt double black;
+  border-right: 0.5pt solid black;
+  border-bottom: 2pt double black;
+  border-left: 0.5pt solid black;
 }
 
 .xl313 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: 2.0pt double black;
-  border-right: 2.0pt double black;
-  border-bottom: 2.0pt double black;
+  border-top: 2pt double black;
+  border-right: 2pt double black;
+  border-bottom: 2pt double black;
   border-left: none;
 }
 
 .xl319 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: 2.0pt double black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 2pt double black;
 }
 
 .xl332 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: 2.0pt double black;
-  border-left: 2.0pt double black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 2pt double black;
+  border-left: 2pt double black;
 }
 
 .xl338 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: 2.0pt double black;
+  border-left: 2pt double black;
 }
 
 .xl339 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
-  border-bottom: .5pt solid black;
-  border-left: 2.0pt double black;
+  border-bottom: 0.5pt solid black;
+  border-left: 2pt double black;
 }
 
 .xl340 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
-  border-bottom: .5pt solid black;
+  border-bottom: 0.5pt solid black;
   border-left: none;
 }
 
 .xl341 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
   border-top: none;
-  border-right: 2.0pt double black;
+  border-right: 2pt double black;
   border-bottom: none;
   border-left: none;
 }
 
 .xl342 {
-  font-size: 12.0pt;
+  font-size: 12pt;
   font-family: Calibri, sans-serif;
-  border-top: .5pt solid black;
+  border-top: 0.5pt solid black;
   border-right: none;
   border-bottom: none;
-  border-left: 2.0pt double black;
+  border-left: 2pt double black;
 }
 
 .xl343 {
-  font-size: 8.0pt;
+  font-size: 8pt;
   font-style: italic;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: .5pt solid black;
+  border-left: 0.5pt solid black;
 }
 
 .xl344 {
-  font-size: 8.0pt;
+  font-size: 8pt;
   font-style: italic;
   font-family: Calibri, sans-serif;
   text-align: center;
 }
 
 .xl345 {
-  font-size: 8.0pt;
+  font-size: 8pt;
   font-style: italic;
   font-family: Calibri, sans-serif;
   text-align: center;
   border-top: none;
-  border-right: 2.0pt double black;
+  border-right: 2pt double black;
   border-bottom: none;
   border-left: none;
 }
 
 .xl346 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-family: Calibri, sans-serif;
   text-align: left;
   border-top: none;
-  border-right: .5pt solid black;
+  border-right: 0.5pt solid black;
   border-bottom: none;
-  border-left: 2.0pt double black;
+  border-left: 2pt double black;
 }
 
 .xl347 {
-  font-size: 8.0pt;
+  font-size: 8pt;
   font-family: Calibri, sans-serif;
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: .5pt solid black;
+  border-left: 0.5pt solid black;
 }
 
 .xl348 {
-  font-size: 8.0pt;
+  font-size: 8pt;
   font-family: Calibri, sans-serif;
   border-top: none;
-  border-right: 2.0pt double black;
+  border-right: 2pt double black;
   border-bottom: none;
   border-left: none;
 }
 
 .xl349 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-family: Calibri, sans-serif;
   text-align: left;
   border-top: none;
-  border-right: .5pt solid black;
-  border-bottom: 2.0pt double black;
-  border-left: 2.0pt double black;
+  border-right: 0.5pt solid black;
+  border-bottom: 2pt double black;
+  border-left: 2pt double black;
 }
 
 .xl351 {
@@ -387,10 +385,10 @@ tbody {
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
 }
 
 .xl352 {
@@ -398,33 +396,33 @@ tbody {
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-top: 2.0pt double black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-top: 2pt double black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
 }
 
 .xl353 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-top: 2.0pt double black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-top: 2pt double black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
 }
 
 .xl354 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-top: 2.0pt double black;
-  border-right: 2.0pt double black;
-  border-bottom: .5pt hairline black;
+  border-top: 2pt double black;
+  border-right: 2pt double black;
+  border-bottom: 0.5pt hairline black;
   border-left: none;
 }
 
@@ -439,14 +437,14 @@ tbody {
 
 /* PURCHASE REQUEST LABEL */
 .xl181 {
-  font-size: 14.0pt;
+  font-size: 14pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
 }
 
 .x-office-slot {
-  font-size: 12.0pt;
+  font-size: 12pt;
   text-decoration: underline;
   font-family: Calibri, sans-serif;
   text-align: center;
@@ -456,14 +454,14 @@ tbody {
 }
 
 .xl1225 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: 2.0pt double black;
+  border-top: 2pt double black;
   border-right: none;
-  border-bottom: 2.0pt double black;
-  border-left: .5pt solid black;
+  border-bottom: 2pt double black;
+  border-left: 0.5pt solid black;
 }
 
 .x-designation-slot {
@@ -471,22 +469,22 @@ tbody {
   text-align: center;
   border-top: none;
   border-right: none;
-  border-bottom: 2.0pt double black;
-  border-left: .5pt solid black;
+  border-bottom: 2pt double black;
+  border-left: 0.5pt solid black;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .xl1240 {
-  font-size: 8.0pt;
+  font-size: 8pt;
   font-style: italic;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: .5pt solid black;
+  border-top: 0.5pt solid black;
   border-right: none;
   border-bottom: none;
-  border-left: .5pt solid black;
+  border-left: 0.5pt solid black;
 }
 
 .x-personel-slot {
@@ -496,7 +494,7 @@ tbody {
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: .5pt solid black;
+  border-left: 0.5pt solid black;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -507,17 +505,17 @@ tbody {
   font-weight: 700;
   font-family: Calibri, sans-serif;
   vertical-align: top;
-  border-top: 2.0pt double black;
+  border-top: 2pt double black;
   border-right: none;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
   white-space: normal;
 }
 
 .x-purpose-slot {
   font-family: Calibri, sans-serif;
   vertical-align: middle;
-  border-top: 2.0pt double black;
+  border-top: 2pt double black;
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -528,14 +526,14 @@ tbody {
 
 /* ===================== ITEMS ===================== */
 .x-col-1 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: 2.0pt double black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 2pt double black;
   vertical-align: top;
   white-space: normal;
   word-wrap: break-word;
@@ -546,10 +544,10 @@ tbody {
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
   vertical-align: top;
   white-space: normal;
   word-wrap: break-word;
@@ -560,9 +558,9 @@ tbody {
   font-weight: 700;
   font-family: Calibri, sans-serif;
   vertical-align: top;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
   border-left: none;
   white-space: normal;
   word-wrap: break-word;
@@ -574,43 +572,44 @@ tbody {
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
-  border-top: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
+  border-top: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .x-col-5 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-top: .5pt hairline black;
-  border-right: .5pt solid black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-top: 0.5pt hairline black;
+  border-right: 0.5pt solid black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .x-col-6 {
-  font-size: 10.0pt;
+  font-size: 10pt;
   font-weight: 700;
   font-family: Calibri, sans-serif;
   text-align: center;
   vertical-align: top;
-  border-top: .5pt hairline black;
-  border-right: 2.0pt double black;
-  border-bottom: .5pt hairline black;
-  border-left: .5pt solid black;
+  border-top: 0.5pt hairline black;
+  border-right: 2pt double black;
+  border-bottom: 0.5pt hairline black;
+  border-left: 0.5pt solid black;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-/*# sourceMappingURL=view-pqs-form.css.map */
+
+/*# sourceMappingURL=table.css.map *//*# sourceMappingURL=view-pqs-form.css.map */

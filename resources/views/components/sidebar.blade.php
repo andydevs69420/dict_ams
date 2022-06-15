@@ -15,11 +15,11 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="sidebar__scrollable-wrapper d-block">
 
                 {{-- shared ra sa tanan access level ang dashboard na link --}}
-                
+
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
                 <ul class="sidebar__ul list-group list-group-flush mx-auto">
                     <li class="sidebar__li-item list-group-item {{ $isPathMatch("dashboard") }}">
@@ -34,7 +34,7 @@
 
                     {{-- Requisitioner --}}
                     @if(Auth::user()->isRequisitioner())
-                        
+
                         <li class="sidebar__li-item list-group-item">
                             <div class="sidebar__accordion accordion accordion-flush">
                                 <div class="sidebar__accordion-item accordion-item">
@@ -60,11 +60,11 @@
                             <div class="sidebar__accordion accordion accordion-flush">
                                 <div class="sidebar__accordion-item accordion-item">
                                     <div class="sidebar__accordion-header accordion-header">
-                                        <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#form-list-accordion-collapse-id">
+                                        <button class="sidebar__accordion-button accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#form-list-accordion-collapse-id">
                                             <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-list"></i> {{ __("Form List") }}</span>
                                         </button>
                                     </div>
-                                    <div id="form-list-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                    <div id="form-list-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse">
                                         <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
                                             <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("requisitioner/purchaserequest/viewprlist") }}">
                                                 <a class="sidebar__accordon-body-item-label" href="{{ url("/requisitioner/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
@@ -79,18 +79,18 @@
                         </li>
 
                     @endif
-                    
+
                     {{-- Budget officer --}}
                     @if(Auth::user()->isBudgetOfficer())
                         <li class="sidebar__li-item list-group-item">
                             <div class="sidebar__accordion accordion accordion-flush">
                                 <div class="sidebar__accordion-item accordion-item">
                                     <div class="sidebar__accordion-header accordion-header">
-                                        <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#create-form-accordion-collapse-id">
+                                        <button class="sidebar__accordion-button accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#bo-requested-form-accordion-collapse-id">
                                             <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Requested Form") }}</span>
                                         </button>
                                     </div>
-                                    <div id="create-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                    <div id="bo-requested-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse">
                                         <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
                                             <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/purchaserequeststatus") }}">
                                                 <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
@@ -104,10 +104,68 @@
                             </div>
                         </li>
                     @endif
-                    
+
                     {{-- Recommending approval --}}
                     @if(Auth::user()->isRecommendingApproval())
-                        foc
+                        <li class="sidebar__li-item list-group-item">
+                            <div class="sidebar__accordion accordion accordion-flush">
+                                <div class="sidebar__accordion-item accordion-item">
+                                    <div class="sidebar__accordion-header accordion-header">
+                                        <button class="sidebar__accordion-button accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ra-requested-form-accordion-collapse-id">
+                                            <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Approval") }}</span>
+                                        </button>
+                                    </div>
+                                    <div id="ra-requested-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse">
+                                        <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/purchaserequeststatus") }}">
+                                                <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                            </li>
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/joborderstatus") }}">
+                                                <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/joborderstatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    @endif
+
+                    {{-- Admin --}}
+                    @if(Auth::user()->isAdmin())
+                        <li class="sidebar__li-item list-group-item {{ $isPathMatch("users") }}">
+                            <a class="sidebar__list-label" href="{{ url("/users") }}">
+                                <i class="sidebar__list-icon fa fa-users"></i>
+                                {{ __("Users") }}
+                                @if (($result = App\Models\UserVerificationDetails::countUserByVerificationStatusId("1")) > 0)
+                                    <span class="badge bg-danger float-end">
+                                        +{{ $result }}
+                                    </span>
+                                @endif
+                            </a>
+                        <li class="sidebar__li-item list-group-item {{ $isPathMatch("requisitioner") }}">
+                            <a class="sidebar__list-label" href="{{ url("/requisitioner") }}"> <i class="sidebar__list-icon fa fa-user"></i> {{ __("Requisitioner") }}</a>
+                        </li>
+                        <li class="sidebar__li-item list-group-item">
+                            <div class="sidebar__accordion accordion accordion-flush">
+                                <div class="sidebar__accordion-item accordion-item">
+                                    <div class="sidebar__accordion-header accordion-header">
+                                        <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
+                                            <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Forms List") }}</span>
+                                        </button>
+                                    </div>
+                                    <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
+                                        <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/viewprlist") }}">
+                                                <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                            </li>
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
+                                                <a class="sidebar__accordon-body-item-label" href="{{ url("/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     @endif
 
                 </ul>
@@ -117,7 +175,7 @@
                     @case(2)
                         @break
                     @case(8)
-                        {{-- 
+                        {{--
                             NOTE: tanawa sa accesslevel table unsay id
                                  8 := BAC chairman
                         --}}
@@ -143,7 +201,7 @@
                             </li>
                         @break
                         @case(9)
-                        {{-- 
+                        {{--
                             NOTE: tanawa sa accesslevel table unsay id
                                  9 := Canvasser
                         --}}
@@ -170,7 +228,7 @@
                         </ul>
                         @break
                     @case(10)
-                        {{-- 
+                        {{--
                             NOTE: tanawa sa accesslevel table unsay id sa admin
                                 10 := SUPPLY OFFICER
                         --}}
@@ -183,55 +241,11 @@
 
                         </ul>
                         @break
-                    @case(14)
-                        {{-- 
-                            NOTE: tanawa sa accesslevel table unsay id sa admin
-                                14 := ADMIN
-                        --}}
-                        <ul class="sidebar__ul list-group list-group-flush mx-auto">
-                            <span class="sidebar__ul-label d-block w-100 py-3 text-info fw-bold" role="text">{{ __("COMPONENTS") }}</span>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("users") }}">
-                                <a class="sidebar__list-label" href="{{ url("/users") }}">
-                                    <i class="sidebar__list-icon fa fa-users"></i>
-                                    {{ __("Users") }}
-                                    @if (($result = App\Models\UserVerificationDetails::countUserByVerificationStatusId("1")) > 0)
-                                        <span class="badge bg-danger float-end">
-                                            +{{ $result }}
-                                        </span>
-                                    @endif
-                                </a>
-                            <li class="sidebar__li-item list-group-item {{ $isPathMatch("requisitioner") }}">
-                                <a class="sidebar__list-label" href="{{ url("/requisitioner") }}"> <i class="sidebar__list-icon fa fa-user"></i> {{ __("Requisitioner") }}</a>
-                            </li>
-                            <li class="sidebar__li-item list-group-item">
-                                <div class="sidebar__accordion accordion accordion-flush">
-                                    <div class="sidebar__accordion-item accordion-item">
-                                        <div class="sidebar__accordion-header accordion-header">
-                                            <button class="sidebar__accordion-button accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-id">
-                                                <span class="sidebar__accordion-button-label" role="text"> <i class="sidebar__accordion-button-icon fa fa-file"></i> {{ __("Forms List") }}</span>
-                                            </button>
-                                        </div>
-                                        <div id="accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse show">
-                                            <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("purchaserequest/viewprlist") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/purchaserequest/viewprlist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
-                                                </li>
-                                                <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("newjoborder") }}">
-                                                    <a class="sidebar__accordon-body-item-label" href="{{ url("/newjoborder") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        @break
-
                     @default
                         {{-- debug: pag walay access level --}}
                         <h3 class="d-block mx-auto lead">Invalid Accesslevel => "{{ $getAccesslevelId() }}"</h3>
                         @break
-                        
+
                 @endswitch
 
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
@@ -242,7 +256,7 @@
                     </li>
                 </ul>
                 <hr class="sidebar__sidebar-separator d-block mx-auto my-1 bg-light">
-                
+
             </div>
         </div>
     </div>

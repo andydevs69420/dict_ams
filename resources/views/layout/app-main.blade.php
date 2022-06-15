@@ -17,7 +17,10 @@
     {{-- TOPBAR & SIDEBAR css --}}
     <link rel="stylesheet" href="{{ asset('css/components/topbar/topbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/sidebar/sidebar.css') }}">
-    
+
+    {{-- ACCESS NAME --}}
+    <link rel="stylesheet" href="{{ asset("css/components/access-name/access-name.css") }}">
+
     {{-- OTHER CSS|JS dependencies (from extended) --}}
     @yield("dependencies")
 
@@ -41,9 +44,9 @@
         </style>
 
     </noscript>
-    
+
     <main class="d-flex flex-row flex-nowrap w-100 h-100 overflow-hidden">
-        
+
         <x-sidebar access-level-id="{{ Auth::user()->accesslevel_id }}"></x-sidebar>
 
         <div class="app-main__content-root d-block w-100 h-100 bg-light">
@@ -53,10 +56,13 @@
             <div class="app-main__content-wrapper d-block w-100">
                 @yield("content")
             </div>
-            
+
         </div>
+
+        <x-access-name :accesslevel="\App\Models\Accesslevel::getAccesslevelById(Auth::user()->accesslevel_id)"
+            ></x-access-name>
     </main>
-    
+
     {{-- APP-MAIN layout js --}}
     <script type="text/javascript" src="{{ asset('js/webpack/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/global/app-main/app-main.js') }}"></script>

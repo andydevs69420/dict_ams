@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AACA,AAAA,uCAAuC,CACvC;EAAE,SAAS,EAAE,KAAK;CAAI",
-    "sources": [
-        "jo-status-list.scss"
-    ],
-    "names": [],
-    "file": "jo-status-list.css"
-}
+{"version":3,"sources":["jo-status-list.scss","jo-status-list.css"],"names":[],"mappings":"AACA;EACE,gBAAA;ACAF","file":"jo-status-list.css"}

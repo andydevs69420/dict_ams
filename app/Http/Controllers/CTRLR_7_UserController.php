@@ -38,7 +38,7 @@ class CTRLR_7_UserController extends Controller
         if (!Auth::user()->isAdmin())
             return redirect()->to("/dashboard");
 
-        return view("app.users.users");
+        return view("app.role__admin.users.users");
     }
 
     /* user subdir ----> */
@@ -63,12 +63,12 @@ class CTRLR_7_UserController extends Controller
                     #=================================================
                     $decrypt = null;
                     try
-                    { 
-                        $decrypt = (int) Crypt::decrypt($userid); 
+                    {
+                        $decrypt = (int) Crypt::decrypt($userid);
                     }
                     catch (\Illuminate\Contracts\Encryption\DecryptException $e)
-                    { 
-                        return redirect()->to("/dashboard"); 
+                    {
+                        return redirect()->to("/dashboard");
                     }
 
                     #=====================================
@@ -79,7 +79,7 @@ class CTRLR_7_UserController extends Controller
 
                     return view("app.user-profile.user-profile", ["user" => UserVerificationDetails::getUserByID($decrypt)]);
                 }
-                
+
                 /**
                  * Uploads image -> user/uploadprofilepicture
                  * @param Request $request request
@@ -92,18 +92,18 @@ class CTRLR_7_UserController extends Controller
                     #=================================
                     if (!Auth::check())
                         return abort(403);
-                    
+
                     #=================================
                     # Return 403 if no images found. =
                     #=================================
                     if (!($request->hasFile("user-image-upload")) || !request("user-image-upload")->isValid())
                         return abort(403);
-                    
+
                     #================================
                     # Get uploaded file if success. =
                     #================================
                     $file = $request->file("user-image-upload");
-                    
+
                     #============================================
                     # Sets filename.                            =
                     # fmt: user_id + '-' + time_delta.extension =
@@ -148,7 +148,7 @@ class CTRLR_7_UserController extends Controller
                     #============================
                     if (!Auth::check())
                         return redirect()->to("/login");
-                    
+
                     $decrypt = null;
                     try
                     { $decrypt = (int) Crypt::decrypt($request->input("user")); }
@@ -158,7 +158,7 @@ class CTRLR_7_UserController extends Controller
                     $result = UserProfileImages::deleteUserProfileImageByUserID((Int) $decrypt);
                     if (!$result)
                         return back()->with("info", "Profile image deletetion error!");
-                        
+
                     return back()->with("info", "Successfully deleted profile image.");
                 }
 
@@ -167,7 +167,7 @@ class CTRLR_7_UserController extends Controller
                  * uses: "POST" request
                  * @param Request $request request
                  * @return View
-                 **/ 
+                 **/
                 public function edit_profile(Request $request)
                 {
                     #============================
@@ -176,7 +176,7 @@ class CTRLR_7_UserController extends Controller
                     #============================
                     if (!Auth::check())
                         return redirect()->to("/login");
-                    
+
 
                     #============================
                     # Validation rules.         =
@@ -210,21 +210,21 @@ class CTRLR_7_UserController extends Controller
                     $update_data[ "middleinitial"  ] = $request->input("middleinitial");
                     $update_data[ "designation_id" ] = $request->input("designation");
                     $update_data[ "accesslevel_id" ] = $request->input("accesslevel");
-                    
-                    
+
+
                     #===================================
                     # Include password if field value  =
                     # is not "********".               =
                     #===================================
                     if (strcmp($request->input("password"), "********") !== 0)
                     $update_data["password"] = Hash::make($request->input("password"));
-                    
+
                     #================================
                     # Update info based on user_id. =
                     #================================
                     $updated = User::where("user_id", "=", Auth::user()->user_id)
                     ->update($update_data);
-                    
+
                     #==================================
                     # Return information about update =
                     # ex: success | failure           =

@@ -21,18 +21,18 @@
                 <div class="col-12">
                     <!-- dahboard main content -->
                     <div class="container p-0">
-                        
+
                         <div class="row row-cols-2 row-cols-sm-0 g-3">
-                            
+
                             {{-- TODO: Implement!! --}}
-                            
+
                             @switch($id = Auth::user()->accesslevel_id)
                                 @case(1)
                                     @break
                                 @case(4)
                                 @case(5)
                                 @case(13)   {{-- ================= REQUISITIONER ========= --}}
-                                    {{-- 
+                                    {{--
                                         NOTE: tanawa sa accesslevel table unsay id
                                             4 := PROVINCIAL OFFICER
                                             5 := FOCAL
@@ -73,7 +73,7 @@
                                     </div>
                                     @break
                                 @case(8)   {{-- ================= BAC CHAIRMAN ================= --}}
-                                    {{-- 
+                                    {{--
                                         NOTE: tanawa sa accesslevel table unsay id
                                             8 := BAC CHAIRMAN
                                     --}}
@@ -95,7 +95,7 @@
                                     </div>
                                     @break
                                 @case(10)   {{-- ================= SUPPLY OFFICER ================= --}}
-                                    {{-- 
+                                    {{--
                                         NOTE: tanawa sa accesslevel table unsay id
                                             10 := SUPPLY OFFICER
                                     --}}
@@ -151,11 +151,11 @@
                                     </div>
                                     @break
                                 @case(14)   {{-- ================= ADMIN ================= --}}
-                                    {{-- 
+                                    {{--
                                         NOTE: tanawa sa accesslevel table unsay id
                                             14 := ADMIN
                                     --}}
-                                
+
                                     <div class="col col-sm-auto col-md-3">
                                         {{-- users --}}
                                         <div class="dashboard__dashboard-tile dashboard__tile-blue d-block position-relative shadow-lg">
@@ -249,7 +249,7 @@
 
     {{-- DASHBOARD js --}}
     <script type="text/javascript" src="{{ asset("js/app/dashboard/dashboard.js") }}"></script>
-   
+
 @stop
 
 

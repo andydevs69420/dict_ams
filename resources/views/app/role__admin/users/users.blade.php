@@ -5,11 +5,11 @@
 @section("dependencies")
 
     {{-- users css --}}
-    <link rel="stylesheet" href="{{ asset("css/users/users.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/app/role__admin/users/users.css") }}">
 
     {{-- datatable css --}}
     <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
-    
+
 @stop
 
 @section("content")
@@ -41,13 +41,13 @@
                             </thead>
                             <tbody>
                                 @foreach(App\Models\UserVerificationDetails::getAllUsers() as $user)
-    
+
                                     <tr id="user-row__user-{{ $user["user_id"] }}">
                                         <td data-order="{{ $user["verificationstatus_id"] }}" style="vertical-align: middle !important;">{{ $user["lastname"] .", " . $user["firstname"] . " " .$user["middleinitial"] }}</td>
                                         <td style="vertical-align: middle !important;">{{ App\Models\Designation::getDesignationById($user["designation_id"]) }}</td>
                                         <td style="vertical-align: middle !important;">{{ App\Models\Accesslevel::getAccesslevelById($user["accesslevel_id"]) }}</td>
                                         <td class="text-center" style="vertical-align: middle !important;">
-                                            
+
                                             <div class="dropdown">
                                                 <button id="action-user-{{ $user["user_id"] }}" class="btn btn-sm shadow @if(strcmp($user["verificationstatus_id"], "1") === 0) btn-danger @elseif (strcmp($user["verificationstatus_id"], "2") === 0) btn-primary @else btn-success  @endif dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __("action") }}</button>
                                                 <ul class="dropdown-menu" aria-labelledby="action-user-{{ $user["user_id"] }}">
@@ -66,7 +66,7 @@
                                                     @endswitch
                                                 </ul>
                                             </div>
-                                            
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -74,7 +74,7 @@
                         </table>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -90,8 +90,8 @@
     <script type="text/javascript" src="{{ asset("js/components/message-modal/message-modal.js") }}"></script>
 
     {{-- users js --}}
-    <script type="text/javascript" src="{{ asset("js/users/users.js") }}"></script>
-    
+    <script type="text/javascript" src="{{ asset("js/app/role__admin/users/users.js") }}"></script>
+
 @stop
 
 

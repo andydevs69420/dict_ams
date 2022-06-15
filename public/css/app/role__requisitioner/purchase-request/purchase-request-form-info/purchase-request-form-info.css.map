@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAEA,AAAA,oEAAoE,CACpE;EAAE,SAAS,EAAE,KAAK;CAAI",
-    "sources": [
-        "purchase-request-form-info.scss"
-    ],
-    "names": [],
-    "file": "purchase-request-form-info.css"
-}
+{"version":3,"sources":["purchase-request-form-info.scss","purchase-request-form-info.css"],"names":[],"mappings":"AAEA;EACE,gBAAA;ACDF","file":"purchase-request-form-info.css"}
