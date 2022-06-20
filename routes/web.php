@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\CTRLR_1_DashboardController;
 use App\Http\Controllers\CTRLR_2_ReqisitionerController;
 use App\Http\Controllers\CTRLR_3_BudgetOfficerController;
+use App\Http\Controllers\CTRLR_4_RecommendingApprovalController;
 use App\Http\Controllers\CTRLR_7_UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
@@ -113,6 +114,16 @@ Route::controller(CTRLR_3_BudgetOfficerController::class)->group(function() {
         Route::get("/budgetofficer/reviewjoborder/loadcomment/{hashid}/load", "loadJoFormReviewComment");
         // add comments
         Route::post("/budgetofficer/reviewjoborder/addcomment", "addJoFormReviewComment");
+
+});
+
+// Recommending approval
+Route::controller(CTRLR_4_RecommendingApprovalController::class)->group(function() {
+
+    // Purchase request approval index
+    Route::get("/recommendingapproval/purchaserequest/approvallist", "PrIndex");
+    
+    
 
 });
 

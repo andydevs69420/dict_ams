@@ -1,11 +1,14 @@
 @extends("layout.app-main")
 
-@section("title", "AMS | Purchase Request Approval list")
+@section("title", "AMS | Purchase Request Status")
 
 @section("dependencies")
 
     {{-- datatable css --}}
     <link rel="stylesheet" href="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.css") }}">
+
+    {{-- PR STATUS css --}}
+    <link rel="stylesheet" href="{{ asset("css/app/role__budget-officer/purchase-request/pr-status-list/pr-status-list.css") }}">
 
 @stop
 
@@ -13,7 +16,7 @@
     <div class="d-block py-3">
 
         <div class="container">
-            <span class="budget-officer__pr-status-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Requested Purchase Request List") }}</span>
+            <span class="budget-officer__pr-status-header-label d-block px-0 py-3 text-muted" role="text">{{ __("Requested Purchase Request List") }}</span>    
         </div>
 
         <div class="container">
@@ -34,7 +37,7 @@
                             <tbody>
 
                                 @foreach(\App\Models\FormRequiredPersonel::getFormByUserAndFormType(Auth::user()->user_id, 1) as $form)
-
+                                    
                                     {{-- list only those items with requisitioners signiture --}}
                                     @if(!\App\Models\FormRequiredPersonel::isFormHasStatusFor($form->form_id, 1, config("global.VALID_REQUISITIONER")))
                                         @continue
@@ -46,7 +49,7 @@
                                         <td style="vertical-align: middle !important;">{{ $form->sainumber? $form->sainumber : "TBD" }}</td>
                                         <td style="vertical-align: middle !important;">{{ $form->purpose }}</td>
                                         <td class="text-center" style="vertical-align: middle !important;">
-
+                                                
                                             <x-signiture-status class="w-75"
                                                 :personelstatusid="$form->personelstatus_id"
                                                 :personelstatus="$form->personelstatus"></x-signiture-status>
@@ -73,6 +76,8 @@
     {{-- datatable js --}}
     <script type="text/javascript" src="{{ asset("extra/dataTable/jQuery-dataTable-bs5-1.11.5.min.js") }}"></script>
     <script type="text/javascript" src="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.js") }}"></script>
-
+    
+    {{-- BUDGET OFFICER PURCHASE REQUEST js --}}
+    <script type="text/javascript" src="{{ asset("js/app/role__budget-officer/purchase-request/requested-purchase-request-list.js") }}"></script>
 
 @stop

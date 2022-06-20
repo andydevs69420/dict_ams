@@ -27,13 +27,15 @@ body {
   min-width: 100%;
   height: 100%;
 }
+
 @media screen and (min-width: 768px) {
   .login__center-panel {
     width: 26.25%;
     min-width: 420px;
     height: auto;
-    border-radius: 0.3em;
-    box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.4);
+    border-radius: .3em;
+    -webkit-box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -41,14 +43,17 @@ body {
   position: absolute;
   top: 2em;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 80%;
 }
+
 @media screen and (min-width: 768px) {
   .login__app-brand {
     position: initial;
     inset: initial;
-    transform: initial;
+    -webkit-transform: initial;
+            transform: initial;
   }
 }
 
@@ -61,6 +66,7 @@ body {
   width: 80%;
   height: 100%;
 }
+
 @media screen and (min-width: 768px) {
   .login__page-form-0 {
     height: auto;
@@ -79,4 +85,5 @@ body {
   display: block !important;
   min-width: 3em !important;
   background-color: #0020EC !important;
-}/*# sourceMappingURL=login.css.map */
+}
+/*# sourceMappingURL=login.css.map */

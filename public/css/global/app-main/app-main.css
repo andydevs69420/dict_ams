@@ -16,7 +16,8 @@
 /* ================= REQUISITIONER LIST COLORS ====== */
 * {
   margin: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html {
@@ -32,26 +33,31 @@ body {
   min-width: 280px;
   min-height: 600px;
 }
+
 @media screen and (min-width: 576px) {
   body {
     min-width: 576px;
   }
 }
+
 @media screen and (min-width: 768px) {
   body {
     min-width: 768px;
   }
 }
+
 @media screen and (min-width: 992px) {
   body {
     min-width: 992px;
   }
 }
+
 @media screen and (min-width: 1200px) {
   body {
     min-width: 1200px;
   }
 }
+
 @media screen and (min-width: 1400px) {
   body {
     min-width: 1400px;
@@ -76,6 +82,7 @@ body.modal-open .modal {
   min-width: 280px !important;
   min-width: 100vw !important;
 }
+
 @media screen and (min-width: 576px) {
   .app-main__content-root {
     min-width: 280px !important;
@@ -84,4 +91,5 @@ body.modal-open .modal {
 
 .app-main__content-wrapper {
   overflow: hidden auto !important;
-}/*# sourceMappingURL=app-main.css.map */
+}
+/*# sourceMappingURL=app-main.css.map */

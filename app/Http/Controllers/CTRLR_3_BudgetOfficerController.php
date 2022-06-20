@@ -23,7 +23,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
 
-        return view("app.role__budget-officer.purchase-request.requested-purchase-request");
+        return view("app.role__budget-officer.purchase-request.requested-purchase-request-list");
     }
 
 
@@ -243,7 +243,7 @@ class CTRLR_3_BudgetOfficerController extends Controller
         if (!Auth::user()->isBudgetOfficer())
             return redirect()->to("/dashboard");
 
-        return view("app.role__budget-officer.job-order.requested-job-order");
+        return view("app.role__budget-officer.job-order.requested-job-order-list");
     }
 
     public function JoEdit(String $joformid)

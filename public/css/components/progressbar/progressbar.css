@@ -12,6 +12,8 @@
   background-color: #E9ECEF !important;
 }
 
-.progressbar__progressbar > .progressbar__progress-bar {
+.progressbar__progressbar >
+.progressbar__progress-bar {
   background-color: #0020EC !important;
-}/*# sourceMappingURL=progressbar.css.map */
+}
+/*# sourceMappingURL=progressbar.css.map */

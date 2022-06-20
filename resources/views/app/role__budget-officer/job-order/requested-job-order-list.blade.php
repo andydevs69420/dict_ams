@@ -74,6 +74,6 @@
     <script type="text/javascript" src="{{ asset("extra/dataTable/dataTable-bs5-1.11.5.min.js") }}"></script>
 
     {{-- BUDGET OFFICER JOB ORDER --}}
-    <script type="text/javascript" src="{{ asset("js/app/role__budget-officer/job-order/requested-job-order.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/app/role__budget-officer/job-order/requested-job-order-list.js") }}"></script>
 
 @stop

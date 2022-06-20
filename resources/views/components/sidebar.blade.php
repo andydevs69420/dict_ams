@@ -117,8 +117,8 @@
                                     </div>
                                     <div id="ra-requested-form-accordion-collapse-id" class="sidebar__accordion-collapse accordion-collapse collapse">
                                         <ul class="sidebar__accordion-body accordion-body list-group list-group-flush">
-                                            <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/purchaserequeststatus") }}">
-                                                <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/purchaserequeststatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
+                                            <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("recommendingapproval/purchaserequest/approvallist") }}">
+                                                <a class="sidebar__accordon-body-item-label" href="{{ url("/recommendingapproval/purchaserequest/approvallist") }}"> <i class="sidebar__accordon-body-item-icon fa fa-rectangle-list"></i> {{ __("Purchase Request") }}</a>
                                             </li>
                                             <li class="sidebar__accordion-body-item list-group-item {{ $isPathMatch("budgetofficer/joborderstatus") }}">
                                                 <a class="sidebar__accordon-body-item-label" href="{{ url("/budgetofficer/joborderstatus") }}"> <i class="sidebar__accordon-body-item-icon fa fa-helmet-safety"></i> {{ __("Job Order") }}</a>
